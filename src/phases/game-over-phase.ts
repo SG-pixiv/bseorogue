@@ -6,6 +6,7 @@ import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { bypassLogin } from "#constants/app-constants";
+import { offerRanking } from "#data/bseorogue/ranking";
 import { modifierTypes } from "#data/data-lists";
 import { getCharVariantFromDialogue } from "#data/dialogue";
 import type { PokemonSpecies } from "#data/pokemon-species";
@@ -148,7 +149,15 @@ export class GameOverPhase extends BattlePhase {
     }
   }
 
+  /** 블서로그: 무명섬 랭킹 올리기를 한 번만 물어봐요 */
+  private bseoRankingAsked = false;
+
   handleGameOver(): void {
+    if (!this.bseoRankingAsked) {
+      this.bseoRankingAsked = true;
+      offerRanking(this.isVictory).finally(() => this.handleGameOver());
+      return;
+    }
     const doGameOver = (newClear: boolean) => {
       globalScene.disableMenu = true;
       globalScene.time.delayedCall(1000, () => {

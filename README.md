@@ -48,6 +48,11 @@ pnpm build         # dist/ 에 배포용 파일
 ### 이터널 리턴 데이터 받기
 `scripts/er-data/fetch.mjs` 가 ER 공식 API에서 실험체 스탯 · 아이템 · 이름을 받아요.
 키는 `er-key.txt` 에 적어 두고(깃허브에 올리지 않아요) `node scripts/er-data/fetch.mjs` 로 실행해요.
+받은 `er-data` 폴더로 `node scripts/er-data/build.mjs <er-data 폴더>` 를 실행하면 `src/data/bseorogue/er-data.ts` 가 새로 만들어져요.
+
+### 무명섬 연결 (랭킹 · KEL 팀)
+배포 환경 변수에 무명섬과 같은 `VITE_SUPABASE_URL` · `VITE_SUPABASE_ANON_KEY` (공개 키) 를 넣으면,
+판이 끝날 때 닉네임을 적고 무명섬 랭킹에 올릴 수 있어요. 키가 없으면 랭킹 올리기만 건너뛰어요.
 
 ## 라이선스
 - 코드: AGPL-3.0-only ([LICENSE](LICENSE))

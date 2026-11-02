@@ -21,6 +21,8 @@ interface ImportMetaEnv {
   readonly VITE_DISCORD_URL: string;
   readonly VITE_GITHUB_URL: string;
   readonly VITE_MUMEI_URL: string;
+  readonly VITE_SUPABASE_URL?: string;
+  readonly VITE_SUPABASE_ANON_KEY?: string;
   readonly VITE_REDDIT_URL: string;
   readonly VITE_DONATE_URL: string;
 }

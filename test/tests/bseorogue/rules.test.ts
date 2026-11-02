@@ -10,7 +10,7 @@ import { getGameMode } from "#app/game-mode";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { bseoBossSpecies, bseoWildSpecies } from "#data/bseorogue/hooks";
 import { bseoTypeMultiplier, Role } from "#data/bseorogue/roles";
-import { BSEO_STARTER_IDS } from "#data/bseorogue/roster";
+import { BSEO_STARTER_IDS, BSEO_STARTERS, BSEO_WILD } from "#data/bseorogue/roster";
 import { GameModes } from "#enums/game-modes";
 import { MoveId } from "#enums/move-id";
 import { SpeciesId } from "#enums/species-id";
@@ -48,6 +48,22 @@ describe("블서로그 데이터 (임시 숫자)", () => {
 
   it("시작 실험체는 블서로그 6명만", () => {
     expect([...speciesDataRegistry.getAllStarters()].sort()).toEqual([...BSEO_STARTER_IDS].sort());
+  });
+
+  it("ER 데이터: 실험체 이름 · 스킬 이름 · 스킨 · 스탯 환산", () => {
+    const eleven = BSEO_STARTERS.find(c => c.erCode === 30)!;
+    expect(eleven.name).toBe("일레븐");
+    expect(eleven.skills.map(s => s.name)).toEqual(["방해하지마!", "자~ 집중!", "나 불렀어?", "다 덤벼보라구!"]);
+    expect(eleven.skins[0]).toBe("일레븐");
+    for (const c of [...BSEO_STARTERS, ...BSEO_WILD]) {
+      expect(c.stats.every(v => v >= 20 && v <= 200)).toBe(true);
+    }
+    console.log(
+      BSEO_STARTERS.map(c => `${c.name} ${c.stats.join("/")} 합 ${c.stats.reduce((a, b) => a + b, 0)}`).join("\n"),
+    );
+    console.log(
+      BSEO_WILD.map(c => `${c.name} ${c.stats.join("/")} 합 ${c.stats.reduce((a, b) => a + b, 0)}`).join("\n"),
+    );
   });
 
   it("야생은 블서로그 동물, 10웨이브마다 보스", () => {
