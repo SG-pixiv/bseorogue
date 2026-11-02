@@ -1,5 +1,6 @@
 import { pokerogueApi } from "#api/api";
 import { loggedInUser, updateUserInfo } from "#app/account";
+import { BSEO } from "#app/bseorogue";
 import { audioManager } from "#app/global-audio-manager";
 import { globalScene } from "#app/global-scene";
 import { handleTutorial, Tutorial } from "#app/tutorial";
@@ -52,9 +53,6 @@ enum MenuOptions {
   LOG_OUT,
 }
 
-let wikiUrl = import.meta.env.VITE_WIKI_URL;
-const { VITE_DISCORD_URL, VITE_GITHUB_URL, VITE_REDDIT_URL, VITE_DONATE_URL } = import.meta.env;
-
 export class MenuUiHandler extends OptionSelectUiHandler {
   private readonly textPadding = 8;
 
@@ -94,12 +92,6 @@ export class MenuUiHandler extends OptionSelectUiHandler {
     super.setup();
 
     const { ui } = globalScene;
-    // wiki url directs based on languges available on wiki
-    const lang = (i18next.resolvedLanguage ?? "en").slice(0, 2);
-    if (["de", "fr", "ko", "zh"].includes(lang)) {
-      wikiUrl = `https://wiki.pokerogue.net/${lang}:start`;
-    }
-
     this.bgmBar = new BgmBar();
     this.bgmBar.setup();
 
@@ -441,49 +433,22 @@ export class MenuUiHandler extends OptionSelectUiHandler {
   private initCommunityMenuOptions(): void {
     const ui = this.getUi();
 
+    // 블서로그: 무명섬(랭킹 · 소식 · 피드백)과 소스 코드(AGPL)
+    const open = (url: string) => () => {
+      window.open(url, "_blank", "noopener")?.focus();
+      return true;
+    };
     const communityOptions: OptionSelectItem[] = [
+      { label: i18next.t("menuUiHandler:bseoRanking"), handler: open(`${BSEO.mumeiUrl}/rogue`), keepOpen: true },
       {
-        label: "Wiki",
-        handler: () => {
-          window.open(wikiUrl, "_blank")?.focus();
-          return true;
-        },
+        label: i18next.t("menuUiHandler:bseoFeedback"),
+        handler: open(`${BSEO.mumeiUrl}/rogue#feedback`),
         keepOpen: true,
       },
-      {
-        label: "Discord",
-        handler: () => {
-          window.open(VITE_DISCORD_URL, "_blank")?.focus();
-          return true;
-        },
-        keepOpen: true,
-      },
-      {
-        label: "GitHub",
-        handler: () => {
-          window.open(VITE_GITHUB_URL, "_blank")?.focus();
-          return true;
-        },
-        keepOpen: true,
-      },
-      {
-        label: "Reddit",
-        handler: () => {
-          window.open(VITE_REDDIT_URL, "_blank")?.focus();
-          return true;
-        },
-        keepOpen: true,
-      },
-      {
-        label: i18next.t("menuUiHandler:donate"),
-        handler: () => {
-          window.open(VITE_DONATE_URL, "_blank")?.focus();
-          return true;
-        },
-        keepOpen: true,
-      },
+      { label: i18next.t("menuUiHandler:bseoSource"), handler: open(BSEO.sourceUrl), keepOpen: true },
     ];
-    if (bypassLogin || loggedInUser?.hasAdminRole) {
+    // 블서로그: 포켓로그 서버 관리자 메뉴는 쓰지 않아요
+    if (!bypassLogin && loggedInUser?.hasAdminRole) {
       communityOptions.push({
         label: "Admin",
         handler: () => {

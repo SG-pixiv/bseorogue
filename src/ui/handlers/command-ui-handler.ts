@@ -1,3 +1,4 @@
+import { BSEO } from "#app/bseorogue";
 import { MAX_TERAS_PER_ARENA } from "#app/constants";
 import { globalScene } from "#app/global-scene";
 import { getTypeRgb } from "#data/type";
@@ -123,6 +124,23 @@ export class CommandUiHandler extends UiHandler {
             break;
           // Ball
           case Command.BALL:
+            // 블서로그: 판 중 영입 없음 → 공 고르는 창 대신 안내만
+            if (!BSEO.allowCatch) {
+              const fieldIndex = (globalScene.phaseManager.getCurrentPhase() as CommandPhase).getFieldIndex();
+              ui.setMode(UiMode.MESSAGE);
+              ui.showText(
+                i18next.t("battle:bseoNoCatch"),
+                null,
+                () => {
+                  ui.showText("", 0);
+                  ui.setMode(UiMode.COMMAND, fieldIndex);
+                },
+                null,
+                true,
+              );
+              success = true;
+              break;
+            }
             ui.setModeWithoutClear(UiMode.BALL);
             success = true;
             break;

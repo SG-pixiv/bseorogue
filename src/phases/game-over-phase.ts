@@ -1,5 +1,6 @@
 import { pokerogueApi } from "#api/api";
 import { clientSessionId } from "#app/account";
+import { BSEO } from "#app/bseorogue";
 import { audioManager } from "#app/global-audio-manager";
 import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
@@ -50,8 +51,8 @@ export class GameOverPhase extends BattlePhase {
 
     globalScene.phaseManager.hideAbilityBar();
 
-    // Failsafe if players somehow skip floor 200 in classic mode
-    if (globalScene.gameMode.isClassic && globalScene.currentBattle.waveIndex > 200) {
+    // Failsafe if players somehow skip the final floor in classic mode (블서로그: 50)
+    if (globalScene.gameMode.isClassic && globalScene.currentBattle.waveIndex > BSEO.classicFinalWave) {
       this.isVictory = true;
     }
 

@@ -1,4 +1,5 @@
 import { FixedBattleConfig } from "#app/battle";
+import { BSEO } from "#app/bseorogue";
 import { CHALLENGE_MODE_MYSTERY_ENCOUNTER_WAVES, CLASSIC_MODE_MYSTERY_ENCOUNTER_WAVES } from "#app/constants";
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
@@ -297,7 +298,7 @@ export class GameMode implements GameModeConfig {
     switch (modeId) {
       case GameModes.CLASSIC:
       case GameModes.CHALLENGE:
-        return waveIndex === 200;
+        return waveIndex === BSEO.classicFinalWave; // 블서로그: 50 (포켓로그 200)
       case GameModes.ENDLESS:
       case GameModes.SPLICED_ENDLESS:
         return waveIndex % 250 === 0;

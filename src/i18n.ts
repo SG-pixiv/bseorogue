@@ -20,81 +20,8 @@ interface LoadingFontFaceProperty {
 
 // #region Constants
 
-const unicodeRanges = {
-  fullwidth: "U+FF00-FFEF",
-  CJKCommon: "U+2E80-2EFF,U+3000-303F,U+31C0-31EF,U+3200-32FF,U+3400-4DBF,U+F900-FAFF,U+FE30-FE4F",
-  CJKIdeograph: "U+4E00-9FFF",
-  devanagari: "U+0900-097F",
-  thai: "U+0E00-0E7F",
-  specialCharacters: "U+266A,U+2605,U+2665,U+2663", // ♪, ★, ♥, ♣
-};
-
-const rangesByLanguage = {
-  chinese: [unicodeRanges.CJKCommon, unicodeRanges.fullwidth, unicodeRanges.CJKIdeograph].join(","),
-};
-
-const fonts: LoadingFontFaceProperty[] = [
-  // unicode (special characters)
-  {
-    face: new FontFace("pkmnems", `url(${getCachedUrl("./fonts/pokemon-emerald-pro.ttf")})`, {
-      unicodeRange: unicodeRanges.specialCharacters,
-    }),
-    extraOptions: { sizeAdjust: "133%" },
-  },
-  // unicode (chinese)
-  {
-    face: new FontFace("pkmnems", `url(${getCachedUrl("./fonts/pokemon-emerald-pro.ttf")})`, {
-      unicodeRange: rangesByLanguage.chinese,
-    }),
-    extraOptions: { sizeAdjust: "133%" },
-    only: [
-      "en",
-      "es",
-      "fr",
-      "it",
-      "de",
-      "pt",
-      "ko",
-      "ja",
-      "ca",
-      "da",
-      "tr",
-      "th",
-      "ru",
-      "uk",
-      "id",
-      "hi",
-      "tl",
-      "sv",
-      "eu",
-      "zh",
-    ],
-  },
-  // devanagari
-  {
-    face: new FontFace("emerald", `url(${getCachedUrl("./fonts/8-bit-devanagari.ttf")})`, {
-      unicodeRange: unicodeRanges.devanagari,
-    }),
-  },
-  {
-    face: new FontFace("pkmnems", `url(${getCachedUrl("./fonts/8-bit-devanagari.ttf")})`, {
-      unicodeRange: unicodeRanges.devanagari,
-    }),
-  },
-  // thai
-  {
-    face: new FontFace("emerald", `url(${getCachedUrl("./fonts/rogue-thai.ttf")})`, {
-      unicodeRange: unicodeRanges.thai,
-    }),
-    extraOptions: { sizeAdjust: "40%" },
-  },
-  {
-    face: new FontFace("pkmnems", `url(${getCachedUrl("./fonts/terrible-thaifix.ttf")})`, {
-      unicodeRange: unicodeRanges.thai,
-    }),
-    extraOptions: { sizeAdjust: "133%" },
-  },
-];
+// 블서로그: 한국어만 써서 글꼴은 index.html 의 갈무리11 하나로 충분해요
+const fonts: LoadingFontFaceProperty[] = [];
 
 // #endregion Constants
 
@@ -158,10 +85,9 @@ await i18next
   .use(new KoreanPostpositionProcessor())
   .init(
     {
-      fallbackLng: {
-        "es-419": ["es-ES", "en"],
-        default: ["en"],
-      },
+      // 블서로그: 한국어만
+      lng: "ko",
+      fallbackLng: "ko",
       supportedLngs: SUPPORTED_LANGUAGES,
       backend: {
         loadPath(lng: string, [ns]: string[]) {
@@ -181,8 +107,8 @@ await i18next
       defaultNS: "menu",
       detection: {
         lookupLocalStorage: "prLang",
-        caches: ["localStorage"],
-        order: ["localStorage", "navigator"],
+        caches: [],
+        order: [],
       },
       ns: nsEn,
       debug: import.meta.env.VITE_I18N_DEBUG === "1",

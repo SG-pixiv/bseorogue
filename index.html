@@ -3,60 +3,35 @@ SPDX-FileCopyrightText: 2025 Pagefault Games
 SPDX-License-Identifier: AGPL-3.0-only
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 	<meta charset="UTF-8" />
-	<title>PokéRogue</title>
-	<meta name="title" content="PokéRogue" />
-	<meta name="description" content="A Pokémon fangame heavily inspired by the roguelite genre. Battle endlessly while gathering stacking items, exploring many different biomes, and reaching Pokémon stats you never thought possible." />
-	<meta name="theme-color" content="#da3838" />
-	<meta name="keywords" content="pokerogue, pokemon, roguelite" />
-	<meta name="news_keywords" content="pokerogue, pokemon, roguelite" />
-	<meta name="distribution" content="Global">
-	<meta http-equiv="audience" content="General">
-	<meta property="og:title" content="PokéRogue" />
+	<title>블서로그</title>
+	<meta name="title" content="블서로그" />
+	<meta name="description" content="이터널 리턴 실험체로 즐기는 로그라이트 웹게임 · 큐 잡는 동안 한 판! (이터널 리턴 2차 창작 · 포켓로그 기반 AGPL)" />
+	<meta name="theme-color" content="#241E3A" />
+	<meta property="og:title" content="블서로그" />
 	<meta property="og:type" content="website" />
-	<meta property="og:description" content="A Pokémon fangame heavily inspired by the roguelite genre. Battle endlessly while gathering stacking items, exploring many different biomes, and reaching Pokémon stats you never thought possible." />
-	<meta property="og:image" content="https://pokerogue.net/logo512.png" />
-	<meta property="og:url" content="https://pokerogue.net" />
-	<meta property="og:site_name" content="PokéRogue" />
-	<meta property="twitter:title" content="PokéRogue" />
-	<meta property="twitter:description" content="A Pokémon fangame heavily inspired by the roguelite genre. Battle endlessly while gathering stacking items, exploring many different biomes, and reaching Pokémon stats you never thought possible." />
-	<meta property="twitter:image" content="https://pokerogue.net/logo512.png" />
-	<meta property="twitter:card" content="summary" />
-	<meta property="twitter:url" content="https://pokerogue.net" />
-	<link rel="apple-touch-icon" href="./logo512.png" />
-	<link rel="shortcut icon" type="image/png" href="./logo512.png" />
-	<link rel="canonical" href="https://pokerogue.net" />
+	<meta property="og:description" content="이터널 리턴 실험체로 즐기는 로그라이트 웹게임 · 큐 잡는 동안 한 판!" />
+	<meta property="og:site_name" content="블서로그" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
 	<style type="text/css">
+		/* 블서로그: 갈무리11 (OFL, quiple). 나중에 이터널 리턴 공식 폰트로 바꿔요 */
 		@font-face {
 			font-family: 'emerald';
-			src: url('./fonts/pokemon-emerald-pro.ttf') format('truetype');
+			src: url('./fonts/Galmuri11.woff2') format('woff2');
+			size-adjust: 72%;
 		}
 
 		@font-face {
 			font-family: 'pkmnems';
-			src: url('./fonts/pkmnems.ttf') format('truetype');
+			src: url('./fonts/Galmuri11.woff2') format('woff2');
+			size-adjust: 72%;
 		}
 	</style>
 	<link rel="stylesheet" type="text/css" href="./index.css" />
-	<link rel="manifest" href="./manifest.webmanifest">
   <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./service-worker.js").then(
-          function (registration) {
-            console.log("ServiceWorker registration successful");
-          },
-          function (err) {
-            console.log("ServiceWorker registration failed: ", err);
-          },
-        );
-      });
-    }
-
     window.addEventListener('beforeinstallprompt', e => {
       // Prevent invasive install prompt (users are still able to install as an app)
       e.preventDefault();

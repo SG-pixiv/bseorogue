@@ -1,5 +1,6 @@
 import { pokerogueApi } from "#api/api";
 import { loggedInUser } from "#app/account";
+import { BSEO } from "#app/bseorogue";
 import { GameMode, getGameMode } from "#app/game-mode";
 import { audioManager } from "#app/global-audio-manager";
 import { timedEventManager } from "#app/global-event-manager";
@@ -104,6 +105,11 @@ export class TitlePhase extends Phase {
             ui.clearText();
             this.end();
           };
+          // 블서로그: 지금은 클래식만 (데일리 런은 서버가 필요하고, 무한 모드는 나중에) → 모드 고르기 없이 바로 시작
+          if (BSEO.classicOnly) {
+            setModeAndEnd(GameModes.CLASSIC);
+            return true;
+          }
           const newGameOptions: OptionSelectItem[] = [];
           newGameOptions.push({
             label: GameMode.getModeName(GameModes.CLASSIC),

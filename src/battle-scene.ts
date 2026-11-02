@@ -1,6 +1,7 @@
 import { applyAbAttrs } from "#abilities/apply-ab-attrs";
 import { Animation } from "#app/animations";
 import { Battle } from "#app/battle";
+import { BSEO } from "#app/bseorogue";
 import {
   ANTI_VARIANCE_WEIGHT_MODIFIER,
   AVERAGE_ENCOUNTERS_PER_RUN_TARGET,
@@ -394,6 +395,10 @@ export class BattleScene extends SceneBase {
    * Called by Phaser on new game start.
    */
   public create(): void {
+    // 블서로그: 개발 서버에서만 브라우저 검사용으로 씬을 꺼내 둬요
+    if (import.meta.env.DEV) {
+      (window as unknown as { __bseoScene: BattleScene }).__bseoScene = this;
+    }
     this.scene.remove(LoadingScene.KEY);
     initGameSpeed(this);
     this.inputController = new InputsController();
@@ -1485,7 +1490,8 @@ export class BattleScene extends SceneBase {
     ) {
       doubleTrainer = false;
     } else {
-      doubleTrainer = randSeedInt(this.getDoubleBattleChance(waveIndex)) === 0;
+      // 블서로그: 1:1 싱글 배틀만이라 2인 트레이너도 없어요
+      doubleTrainer = !BSEO.singleBattlesOnly && randSeedInt(this.getDoubleBattleChance(waveIndex)) === 0;
     }
 
     const overrideVariant = doubleTrainer
@@ -1502,6 +1508,10 @@ export class BattleScene extends SceneBase {
    * @returns Whether the battle should be a double battle.
    */
   private checkIsDouble({ double: forcedDouble, battleType, waveIndex, trainer }: NewBattleConstructedProps): boolean {
+    // 블서로그: 1:1 싱글 배틀만
+    if (BSEO.singleBattlesOnly) {
+      return false;
+    }
     // TODO: enforce using the proper override depending on whether it's a trainer or a wild battle
     const doubleBattleOverride = this.doCheckDoubleOverride(waveIndex);
     if (doubleBattleOverride != null) {
@@ -3434,6 +3444,10 @@ export class BattleScene extends SceneBase {
    * @returns Whether a Mystery Encounter should be generated.
    */
   private isWaveMysteryEncounter(battleType: BattleType, waveIndex: number): boolean {
+    // 블서로그: 미스터리 인카운터 끔
+    if (!BSEO.mysteryEncounters) {
+      return false;
+    }
     if (getDailyMysteryEncounter(waveIndex) != null) {
       return true;
     }

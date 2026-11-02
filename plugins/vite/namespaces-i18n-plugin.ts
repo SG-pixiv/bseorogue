@@ -55,7 +55,7 @@ function processJsonFile(file: string, namespace: string[]) {
 
 export function LocaleNamespace(): VitePlugin {
   const nsRelativePath = "./locales";
-  const nsEn = nsRelativePath + "/en"; // Default namespace
+  const nsEn = nsRelativePath + "/ko"; // 블서로그: 한국어만 (Default namespace)
   let namespaces = getNameSpaces(nsEn);
   const nsAbsolutePath = path.resolve(process.cwd(), nsRelativePath);
 

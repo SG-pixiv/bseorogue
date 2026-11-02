@@ -1,3 +1,4 @@
+import { BSEO } from "#app/bseorogue";
 import { timedEventManager } from "#app/global-event-manager";
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
@@ -854,5 +855,9 @@ function lureWeightFunc(maxBattles: number, weight: number): WeightedModifierTyp
  * @returns boolean: true if the player has the maximum of a given ball type
  */
 function hasMaximumBalls(ballType: PokeballType): boolean {
+  // 블서로그: 판 중 영입이 없어서 공은 보상으로 안 나와요 (가중치 0)
+  if (!BSEO.allowCatch) {
+    return true;
+  }
   return globalScene.gameMode.isClassic && globalScene.pokeballCounts[ballType] >= MAX_PER_TYPE_POKEBALLS;
 }

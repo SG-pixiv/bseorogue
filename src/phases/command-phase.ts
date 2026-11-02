@@ -1,4 +1,5 @@
 import type { TurnCommand } from "#app/battle";
+import { BSEO } from "#app/bseorogue";
 import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
@@ -354,6 +355,11 @@ export class CommandPhase extends FieldPhase {
    * @returns Whether a pokeball can be thrown
    */
   private checkCanUseBall(): boolean {
+    // 블서로그: 판 중 영입 없음 (보급 상자로만)
+    if (!BSEO.allowCatch) {
+      this.queueShowText("battle:bseoNoCatch");
+      return false;
+    }
     const { arena, currentBattle, gameData, gameMode } = globalScene;
     const { battleType } = currentBattle;
     const { biomeId } = arena;

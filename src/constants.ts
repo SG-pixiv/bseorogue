@@ -1,8 +1,9 @@
+import { BSEO } from "#app/bseorogue";
 import { SpeciesId } from "#enums/species-id";
 import type { StarterSpeciesId } from "#types/starter-species-id";
 
 /** The maximum size of the player's party */
-export const PLAYER_PARTY_MAX_SIZE: number = 6;
+export const PLAYER_PARTY_MAX_SIZE: number = BSEO.partyMax; // 블서로그: 3 (포켓로그 6)
 
 /** Whether to use seasonal splash messages in general */
 export const USE_SEASONAL_SPLASH_MESSAGES: boolean = true;

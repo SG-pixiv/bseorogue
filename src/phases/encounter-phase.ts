@@ -1,4 +1,5 @@
 import { applyAbAttrs } from "#abilities/apply-ab-attrs";
+import { BSEO } from "#app/bseorogue";
 import { PLAYER_PARTY_MAX_SIZE, WEIGHT_INCREMENT_ON_SPAWN_MISS } from "#app/constants";
 import { audioManager } from "#app/global-audio-manager";
 import { globalScene } from "#app/global-scene";
@@ -60,8 +61,8 @@ export class EncounterPhase extends BattlePhase {
 
     globalScene.eventTarget.dispatchEvent(new EncounterPhaseEvent());
 
-    // Failsafe if players somehow skip floor 200 in classic mode
-    if (globalScene.gameMode.isClassic && globalScene.currentBattle.waveIndex > 200) {
+    // Failsafe if players somehow skip the final floor in classic mode (블서로그: 50)
+    if (globalScene.gameMode.isClassic && globalScene.currentBattle.waveIndex > BSEO.classicFinalWave) {
       globalScene.phaseManager.unshiftNew("GameOverPhase");
     }
 

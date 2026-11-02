@@ -80,3 +80,23 @@ SPDX-License-Identifier = "LicenseRef-NimbleNeuron"
 path = ["docs/기획.md", "scripts/er-data/**", "assets/README.md", "locales/README.md"]
 SPDX-FileCopyrightText = "2026 SG"
 SPDX-License-Identifier = "AGPL-3.0-only"
+
+# 임시 그림 · 소리 (scripts/placeholder-assets/make.py 가 새로 그린 것) + 포켓로그 assets 에서
+# AGPL-3.0 · CC0 로 적힌 JSON(기술 연출 · 색 목록 등)만 그대로 가져온 것
+[[annotations]]
+path = ["assets/**"]
+SPDX-FileCopyrightText = ["2024-2026 Pagefault Games", "2026 SG"]
+SPDX-License-Identifier = "AGPL-3.0-only"
+
+# 갈무리 글꼴 (나중에 이터널 리턴 공식 글꼴로 바꿔요)
+[[annotations]]
+path = ["assets/fonts/Galmuri*"]
+precedence = "override"
+SPDX-FileCopyrightText = "2019-2025 Lee Minseo (quiple)"
+SPDX-License-Identifier = "OFL-1.1"
+
+# 한국어 글자: 포켓로그 번역 저장소(pokerogue-locales, AGPL-3.0) ko 를 바탕으로 블서로그에 맞게 고쳐 써요
+[[annotations]]
+path = ["locales/ko/**"]
+SPDX-FileCopyrightText = ["2024-2026 Pagefault Games", "2026 SG"]
+SPDX-License-Identifier = "AGPL-3.0-only"

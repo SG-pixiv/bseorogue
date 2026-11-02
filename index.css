@@ -549,3 +549,6 @@ a {
   -ms-animation: blink normal 4s infinite ease-in-out; /* IE */
   animation: blink normal 4s infinite ease-in-out; /* Opera and prob css3 final iteration */
 }
+
+/* 블서로그: PC 전용이라 터치 버튼은 숨겨요 */
+#touchControls { display: none !important; }
