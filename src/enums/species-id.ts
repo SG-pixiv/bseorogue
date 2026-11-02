@@ -2167,4 +2167,23 @@ export enum SpeciesId {
   PALDEA_WOOPER = 8194,
   /**{@link https://bulbapedia.bulbagarden.net/wiki/Ursaluna_(Pokémon) | Source} */
   BLOODMOON_URSALUNA = 8901,
+
+  // ── 블서로그 (1501~): 실험체 · 야생동물 · 보스 (src/data/bseorogue/roster.ts)
+  BSEO_ELEVEN = 1501,
+  BSEO_YUKI = 1502,
+  BSEO_SHOICHI = 1503,
+  BSEO_NADINE = 1504,
+  BSEO_HYEJIN = 1505,
+  BSEO_LENI = 1506,
+  BSEO_CHICKEN = 1601,
+  BSEO_BAT = 1602,
+  BSEO_BOAR = 1603,
+  BSEO_WILD_DOG = 1604,
+  BSEO_WOLF = 1605,
+  BSEO_BEAR = 1606,
+  BSEO_ALPHA = 1701,
+  BSEO_OMEGA = 1702,
+  BSEO_GAMMA = 1703,
+  BSEO_WICKELINE = 1704,
+  BSEO_LUMI = 1705,
 }

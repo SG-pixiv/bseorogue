@@ -1,3 +1,4 @@
+import { initBseorogue } from "#data/bseorogue/hooks";
 import "#app/extensions"; // Setup Phaser extension methods/etc
 
 import { initAbilities } from "#abilities/init-abilities";
@@ -36,6 +37,7 @@ export async function initializeGame(): Promise<void> {
   initTrainerTypeDialogue();
   initMoves();
   initAbilities();
+  initBseorogue(); // 블서로그: 실험체 스킬 이름 · 역할군
   initChallenges();
   initMysteryEncounters();
 }

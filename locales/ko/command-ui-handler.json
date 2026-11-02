@@ -1,8 +1,8 @@
 {
-  "fight": "싸운다",
+  "fight": "스킬",
   "ball": "영입",
-  "pokemon": "포켓몬",
-  "run": "도망간다",
+  "pokemon": "실험체",
+  "run": "도망",
   "actionMessage": "{{pokemonName}}[[는]]\n무엇을 할까?",
   "ballCancel": "취소"
 }

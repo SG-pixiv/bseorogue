@@ -20,7 +20,7 @@ interface LoadingFontFaceProperty {
 
 // #region Constants
 
-// 블서로그: 한국어만 써서 글꼴은 index.html 의 갈무리11 하나로 충분해요
+// 블서로그: 한국어만 써서 글꼴은 index.html 의 갈무리9 하나로 충분해요
 const fonts: LoadingFontFaceProperty[] = [];
 
 // #endregion Constants

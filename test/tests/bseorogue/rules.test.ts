@@ -7,6 +7,10 @@
 import { BSEO } from "#app/bseorogue";
 import { PLAYER_PARTY_MAX_SIZE } from "#app/constants";
 import { getGameMode } from "#app/game-mode";
+import { speciesDataRegistry } from "#app/global-species-data-registry";
+import { bseoBossSpecies, bseoWildSpecies } from "#data/bseorogue/hooks";
+import { bseoTypeMultiplier, Role } from "#data/bseorogue/roles";
+import { BSEO_STARTER_IDS } from "#data/bseorogue/roster";
 import { GameModes } from "#enums/game-modes";
 import { MoveId } from "#enums/move-id";
 import { SpeciesId } from "#enums/species-id";
@@ -37,6 +41,29 @@ describe("블서로그 규칙", () => {
   });
 });
 
+describe("블서로그 데이터 (임시 숫자)", () => {
+  beforeAll(() => {
+    new Phaser.Game({ type: Phaser.HEADLESS }); // 종 데이터 준비
+  });
+
+  it("시작 실험체는 블서로그 6명만", () => {
+    expect([...speciesDataRegistry.getAllStarters()].sort()).toEqual([...BSEO_STARTER_IDS].sort());
+  });
+
+  it("야생은 블서로그 동물, 10웨이브마다 보스", () => {
+    expect(bseoWildSpecies(1)?.speciesId).toBeGreaterThanOrEqual(1601);
+    expect(bseoBossSpecies(10)?.speciesId).toBe(1701); // 알파
+    expect(bseoBossSpecies(50)?.speciesId).toBe(1705); // 루미
+    expect(bseoBossSpecies(15)).toBeNull();
+  });
+
+  it("역할군 상성: 암살자 → 평원딜 2배, 탱커 → 브루저 0.5배, 그 밖 1배", () => {
+    expect(bseoTypeMultiplier(Role.ASSASSIN, Role.MARKSMAN)).toBe(2);
+    expect(bseoTypeMultiplier(Role.TANK, Role.BRUISER)).toBe(0.5);
+    expect(bseoTypeMultiplier(Role.SUPPORT, Role.TANK)).toBe(1);
+  });
+});
+
 describe("블서로그 규칙 - 전투", () => {
   let phaserGame: Phaser.Game;
   let game: GameManager;
@@ -51,8 +78,8 @@ describe("블서로그 규칙 - 전투", () => {
   });
 
   it("야생 전투는 늘 1:1 이에요", async () => {
-    game.override.enemySpecies(SpeciesId.RATTATA);
-    await game.classicMode.startBattle(SpeciesId.BULBASAUR);
+    game.override.enemySpecies(SpeciesId.BSEO_CHICKEN);
+    await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
     expect(game.scene.currentBattle.double).toBe(false);
     expect(game.scene.getEnemyField().length).toBe(1);
   });

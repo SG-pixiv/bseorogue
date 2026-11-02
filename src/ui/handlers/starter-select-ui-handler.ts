@@ -284,9 +284,11 @@ export class StarterSelectUiHandler extends MessageUiHandler {
 
     starterBoxContainer.add(this.cursorObj);
 
-    for (let i = 0; i < 81; i++) {
+    // 블서로그: 시작 실험체 수만큼만 칸을 만들어요 (포켓로그는 81칸을 꽉 채워요)
+    const allStarters = speciesDataRegistry.getAllStarters();
+    for (let i = 0; i < Math.min(81, allStarters.length); i++) {
       const pos = calcStarterContainerPosition(i);
-      const starterContainer = new StarterContainer(speciesDataRegistry.getAllStarters()[i]) //
+      const starterContainer = new StarterContainer(allStarters[i]) //
         .setVisible(false)
         .setPosition(pos.x, pos.y);
       this.iconAnimHandler.addOrUpdate(starterContainer.icon, PokemonIconAnimMode.NONE);
@@ -544,7 +546,8 @@ export class StarterSelectUiHandler extends MessageUiHandler {
       .setOrigin(0);
 
     this.partyIcons = [];
-    for (let i = 0; i < 6; i++) {
+    // 블서로그: 파티 최대 인원만큼만 칸을 그려요 (포켓로그 6칸)
+    for (let i = 0; i < PLAYER_PARTY_MAX_SIZE; i++) {
       const icon = globalScene.add
         .sprite(teamWindowX + 7, calcStarterIconY(i), "pokemon_icons_0")
         .setScale(0.5)

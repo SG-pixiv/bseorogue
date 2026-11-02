@@ -6,7 +6,7 @@
     "name": "미완료"
   },
   "moneyAchv": {
-    "description": "누적 소지금 ₽{{moneyAmount}} 달성"
+    "description": "누적 소지금 {{moneyAmount}}크레딧 달성"
   },
   "10KMoney": {
     "name": "돈 좀 있나?",

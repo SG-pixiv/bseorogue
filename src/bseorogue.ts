@@ -20,6 +20,10 @@ export const BSEO = {
   allowCatch: false,
   /** 클래식만 (새 게임에서 모드 고르기 없이 바로 클래식) */
   classicOnly: true,
+  /** 포켓로그 최종 보스(무한다이노) 2단계 연출. 블서로그는 루미 연출을 따로 만들 때까지 끔 */
+  pokerogueFinale: false,
+  /** 적 팀(트레이너) 전투. KEL 팀을 넣을 때까지 꺼 둬요 */
+  trainers: false,
   /** 미스터리 인카운터 (포켓몬 이야기라 꺼 둬요) */
   mysteryEncounters: false,
   /** 무명섬 (랭킹 · 소식 · 피드백) */

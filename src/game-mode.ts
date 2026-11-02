@@ -4,6 +4,7 @@ import { CHALLENGE_MODE_MYSTERY_ENCOUNTER_WAVES, CLASSIC_MODE_MYSTERY_ENCOUNTER_
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { activeOverrides } from "#app/overrides";
+import { bseoBossSpecies } from "#data/bseorogue/hooks";
 import { allChallenges, type Challenge, copyChallenge } from "#data/challenge";
 import {
   getDailyEventSeedBoss,
@@ -205,6 +206,10 @@ export class GameMode implements GameModeConfig {
    * @returns Whether a trainer should be generated
    */
   public isWaveTrainer(waveIndex: number): boolean {
+    // 블서로그: 적 팀(KEL 팀)은 다음 단계에서 넣어요. 그 전까지 트레이너 전투는 없어요
+    if (!BSEO.trainers) {
+      return false;
+    }
     const { arena, offsetGym } = globalScene;
 
     // Daily spawns trainers on floors 5, 15, 20, 25, 30, 35, 40, and 45
@@ -267,6 +272,11 @@ export class GameMode implements GameModeConfig {
   }
 
   getOverrideSpecies(waveIndex: number): PokemonSpecies | null {
+    // 블서로그: 10웨이브마다 보스 (알파 → 오메가 → 감마 → 위클라인 → 루미)
+    const bseoBoss = this.isClassic ? bseoBossSpecies(waveIndex) : null;
+    if (bseoBoss) {
+      return bseoBoss;
+    }
     if (this.isDaily && this.isWaveFinal(waveIndex)) {
       const eventBoss = getDailyEventSeedBoss();
       if (eventBoss?.speciesId != null) {
@@ -356,6 +366,10 @@ export class GameMode implements GameModeConfig {
    * @returns If this game mode has a fixed battle on this wave
    */
   isFixedBattle(waveIndex: number): boolean {
+    // 블서로그: 포켓몬 라이벌 · 관장 같은 고정 전투는 없어요
+    if (!BSEO.trainers) {
+      return false;
+    }
     const dummyConfig = new FixedBattleConfig();
     return (
       Object.hasOwn(this.battleConfig, waveIndex)

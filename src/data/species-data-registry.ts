@@ -1,5 +1,6 @@
 import { defaultStarterSpecies } from "#app/constants";
 import { setSpeciesDataRegistry } from "#app/global-species-data-registry";
+import { initBseorogueSpecies } from "#balance/bseorogue";
 import { initGenerationOne } from "#balance/generation-01";
 import { initGenerationTwo } from "#balance/generation-02";
 import { initGenerationThree } from "#balance/generation-03";
@@ -11,6 +12,7 @@ import { initGenerationEight } from "#balance/generation-08";
 import { initGenerationNine } from "#balance/generation-09";
 import type { SpeciesFormEvolution } from "#balance/pokemon-evolutions";
 import type { StarterCost } from "#balance/starters";
+import { isBseoSpecies } from "#data/bseorogue/hooks";
 import { SpeciesFormChangeItemTrigger } from "#data/form-change-triggers";
 import { SpeciesFormChange } from "#data/pokemon-forms";
 import type { PokemonSpecies, PokemonSpeciesForm } from "#data/pokemon-species";
@@ -46,6 +48,7 @@ export class SpeciesDataRegistry {
       initGenerationSeven(),
       initGenerationEight(),
       initGenerationNine(),
+      initBseorogueSpecies(), // 블서로그 실험체 · 야생동물 · 보스
     );
 
     this.initPreEvolutions();
@@ -293,7 +296,8 @@ export class SpeciesDataRegistry {
   public getAllStarters(getSpecies = false): StarterSpeciesId[] | PokemonSpecies[] {
     const ret: (StarterSpeciesId | PokemonSpecies)[] = [];
     for (const speciesData of Object.values(this._data)) {
-      if (this.isStarter(speciesData.species.speciesId)) {
+      // 블서로그: 시작 실험체는 블서로그 실험체만 (포켓몬은 고를 수 없어요)
+      if (this.isStarter(speciesData.species.speciesId) && isBseoSpecies(speciesData.species.speciesId)) {
         ret.push(getSpecies ? speciesData.species : (speciesData.species.speciesId as StarterSpeciesId));
       }
     }

@@ -1,3 +1,4 @@
+import { bseoTypeMultiplier } from "#data/bseorogue/roles";
 import { ChallengeType } from "#enums/challenge-type";
 import { PokemonType } from "#enums/pokemon-type";
 import { applyChallenges } from "#utils/challenge-utils";
@@ -24,6 +25,11 @@ export function getTypeDamageMultiplier(attackType: PokemonType, defType: Pokemo
 
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: This simulates the Pokemon type chart with nested `switch case`s
 function getTypeChartMultiplier(attackType: PokemonType, defType: PokemonType): SingleTypeDamageMultiplier {
+  // 블서로그: 역할군 상성 (src/data/bseorogue/roles.ts)
+  const bseo = bseoTypeMultiplier(attackType, defType);
+  if (bseo != null) {
+    return bseo as SingleTypeDamageMultiplier;
+  }
   if (attackType === PokemonType.UNKNOWN || defType === PokemonType.UNKNOWN) {
     return 1;
   }

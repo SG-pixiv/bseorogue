@@ -7,6 +7,7 @@ import { NIGHT_TIME } from "#constants/game-constants";
 import type { ArenaTag, ArenaTagTypeMap } from "#data/arena-tag";
 import { getArenaTag } from "#data/arena-tag";
 import { biomeBgmLoopPoints } from "#data/biome-bgm-loop-points";
+import { bseoWildSpecies } from "#data/bseorogue/hooks";
 import { getDailyForcedWaveBiomePoolTier } from "#data/daily-run";
 import { allBiomes } from "#data/data-lists";
 import { SpeciesFormChangeRevertWeatherFormTrigger, SpeciesFormChangeWeatherTrigger } from "#data/form-change-triggers";
@@ -574,6 +575,11 @@ export class Arena {
     const overrideSpecies = globalScene.gameMode.getOverrideSpecies(waveIndex);
     if (overrideSpecies) {
       return overrideSpecies;
+    }
+    // 블서로그: 야생은 블서로그 동물만 (웨이브가 올라갈수록 센 동물이 섞여요)
+    const bseoWild = bseoWildSpecies(waveIndex);
+    if (bseoWild) {
+      return bseoWild;
     }
 
     // Boss pool is 0-63, non Boss pool is 0-512

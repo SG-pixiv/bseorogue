@@ -63,8 +63,9 @@ export class LoginPhase extends Phase {
   public override async end(): Promise<void> {
     globalScene.ui.setMode(UiMode.MESSAGE);
 
+    // 블서로그: 남자/여자 묻지 않아요 (플레이어 캐릭터가 없어요)
     if (settings.general.playerGender === PlayerGender.UNSET) {
-      globalScene.phaseManager.unshiftNew("SelectGenderPhase");
+      settings.update("general", "playerGender", PlayerGender.MALE);
     }
 
     await handleTutorial(Tutorial.INTRO);

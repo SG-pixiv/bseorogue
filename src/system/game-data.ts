@@ -14,6 +14,7 @@ import { speciesEggMoves } from "#balance/egg-moves";
 import { bypassLogin, isBeta, isDev, systemSaveShortKeyMap } from "#constants/app-constants";
 import { MAX_STARTER_CANDY_COUNT } from "#constants/game-constants";
 import { EntryHazardTag } from "#data/arena-tag";
+import { BSEO_NON_STARTER_IDS } from "#data/bseorogue/roster";
 import { getSerializedDailyRunConfig, parseDailySeed } from "#data/daily-seed-utils";
 import { allMoves } from "#data/data-lists";
 import type { Egg } from "#data/egg";
@@ -1548,7 +1549,11 @@ export class GameData {
   private initStarterData(): void {
     const starterData = {} as StarterData;
 
-    const starterSpeciesIds = speciesDataRegistry.getAllStarters();
+    // 블서로그: 야생동물 · 보스도 기록 칸이 있어야 전투 화면이 안 멈춰요 (고를 수는 없어요)
+    const starterSpeciesIds = [
+      ...speciesDataRegistry.getAllStarters(),
+      ...(BSEO_NON_STARTER_IDS as StarterSpeciesId[]),
+    ];
     for (const speciesId of starterSpeciesIds) {
       starterData[speciesId] = {
         moveset: null,

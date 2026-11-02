@@ -1,3 +1,4 @@
+import { BSEO } from "#app/bseorogue";
 import { DAILY_BOSS_LEVEL } from "#app/constants";
 import type { GameMode } from "#app/game-mode";
 import { globalScene } from "#app/global-scene";
@@ -128,6 +129,10 @@ export class Battle {
   }
 
   public get isClassicFinalBoss(): boolean {
+    // 블서로그: 루미(경계 모드) 전용 연출은 나중에. 지금은 보통 보스처럼 싸워요
+    if (!BSEO.pokerogueFinale) {
+      return false;
+    }
     return this.gameMode.isClassic && this.gameMode.isWaveFinal(this.waveIndex);
   }
 

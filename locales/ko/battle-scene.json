@@ -1,5 +1,5 @@
 {
-  "moneyOwned": "₽{{formattedMoney}}",
+  "moneyOwned": "{{formattedMoney}}크레딧",
   "score": "점수: {{score}}",
   "levelUp": "레벨 업!",
   "levelUpWithLevel": "레벨 업! Lv.{{level}}"

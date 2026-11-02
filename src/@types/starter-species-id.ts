@@ -1,6 +1,13 @@
 import type { SpeciesId } from "#enums/species-id";
 
 export type StarterSpeciesId =
+  // 블서로그 시작 실험체
+  | SpeciesId.BSEO_ELEVEN
+  | SpeciesId.BSEO_YUKI
+  | SpeciesId.BSEO_SHOICHI
+  | SpeciesId.BSEO_NADINE
+  | SpeciesId.BSEO_HYEJIN
+  | SpeciesId.BSEO_LENI
   | SpeciesId.BULBASAUR
   | SpeciesId.CHARMANDER
   | SpeciesId.SQUIRTLE
