@@ -596,9 +596,9 @@ export const speciesEggMoves = {
   [SpeciesId.BLOODMOON_URSALUNA]: [MoveId.NASTY_PLOT, MoveId.ROCK_POLISH, MoveId.SANDSEAR_STORM, MoveId.BOOMBURST],
   // 블서로그 (임시: 보급 상자에서 얻는 추가 스킬. 기획이 정해지면 바꿔요)
   [SpeciesId.BSEO_ELEVEN]: [MoveId.HEAVY_SLAM, MoveId.BODY_PRESS, MoveId.SLACK_OFF, MoveId.HEAD_SMASH],
-  [SpeciesId.BSEO_YUKI]: [MoveId.SECRET_SWORD, MoveId.SACRED_SWORD, MoveId.BULK_UP, MoveId.CLOSE_COMBAT],
-  [SpeciesId.BSEO_SHOICHI]: [MoveId.KNOCK_OFF, MoveId.U_TURN, MoveId.NASTY_PLOT, MoveId.WICKED_BLOW],
-  [SpeciesId.BSEO_NADINE]: [MoveId.DRAGON_DARTS, MoveId.HONE_CLAWS, MoveId.FOCUS_BLAST, MoveId.DRACO_METEOR],
-  [SpeciesId.BSEO_HYEJIN]: [MoveId.PSYSHOCK, MoveId.CALM_MIND, MoveId.POLTERGEIST, MoveId.ASTRAL_BARRAGE],
+  [SpeciesId.BSEO_YUKI]: [MoveId.BEHEMOTH_BLADE, MoveId.SMART_STRIKE, MoveId.BULK_UP, MoveId.CLOSE_COMBAT],
+  [SpeciesId.BSEO_SHOICHI]: [MoveId.KNOCK_OFF, MoveId.U_TURN, MoveId.DRAGON_DANCE, MoveId.WICKED_BLOW],
+  [SpeciesId.BSEO_NADINE]: [MoveId.DRAGON_DARTS, MoveId.HONE_CLAWS, MoveId.SPIRIT_SHACKLE, MoveId.GUNK_SHOT],
+  [SpeciesId.BSEO_HYEJIN]: [MoveId.PSYSHOCK, MoveId.CALM_MIND, MoveId.MOONGEIST_BEAM, MoveId.ASTRAL_BARRAGE],
   [SpeciesId.BSEO_LENI]: [MoveId.DAZZLING_GLEAM, MoveId.WISH, MoveId.ROOST, MoveId.FLEUR_CANNON],
 } as const satisfies Record<Exclude<StarterSpeciesId, SpeciesId.PIKACHU>, [MoveId, MoveId, MoveId, MoveId]>;

@@ -683,10 +683,13 @@ export class MovePhase extends PokemonPhase {
 
     // TODO: This should be done by the move...
     globalScene.phaseManager.queueMessage(
-      i18next.t(isReflected(this.useMode) ? "battle:magicCoatActivated" : "battle:useMove", {
-        pokemonNameWithAffix: getPokemonNameWithAffix(pokemon),
-        moveName: pokemonMove.getName(),
-      }),
+      i18next
+        .t(isReflected(this.useMode) ? "battle:magicCoatActivated" : "battle:useMove", {
+          pokemonNameWithAffix: getPokemonNameWithAffix(pokemon),
+          moveName: pokemonMove.getName(),
+        })
+        // 블서로그: 스킬 이름이 ! ? ~ 로 끝나면 (예: 방해하지마!) 느낌표를 또 붙이지 않아요
+        .replace(/([!?~])!$/u, "$1"),
       500,
     );
 

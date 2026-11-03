@@ -8,9 +8,11 @@ import { BSEO } from "#app/bseorogue";
 import { PLAYER_PARTY_MAX_SIZE } from "#app/constants";
 import { getGameMode } from "#app/game-mode";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
+import { speciesEggMoves } from "#balance/moves/egg-moves";
 import { bseoBossSpecies, bseoWildSpecies } from "#data/bseorogue/hooks";
 import { bseoTypeMultiplier, Role } from "#data/bseorogue/roles";
-import { BSEO_STARTER_IDS, BSEO_STARTERS, BSEO_WILD } from "#data/bseorogue/roster";
+import { BSEO_BOSSES, BSEO_STARTER_IDS, BSEO_STARTERS, BSEO_WILD } from "#data/bseorogue/roster";
+import { COST_TOTALS } from "#data/bseorogue/stats";
 import { GameModes } from "#enums/game-modes";
 import { MoveId } from "#enums/move-id";
 import { SpeciesId } from "#enums/species-id";
@@ -41,7 +43,7 @@ describe("블서로그 규칙", () => {
   });
 });
 
-describe("블서로그 데이터 (임시 숫자)", () => {
+describe("블서로그 데이터", () => {
   beforeAll(() => {
     new Phaser.Game({ type: Phaser.HEADLESS }); // 종 데이터 준비
   });
@@ -50,20 +52,50 @@ describe("블서로그 데이터 (임시 숫자)", () => {
     expect([...speciesDataRegistry.getAllStarters()].sort()).toEqual([...BSEO_STARTER_IDS].sort());
   });
 
-  it("ER 데이터: 실험체 이름 · 스킬 이름 · 스킨 · 스탯 환산", () => {
+  it("ER 데이터: 실험체 이름 · 스킬 이름 · 스킨", () => {
     const eleven = BSEO_STARTERS.find(c => c.erCode === 30)!;
     expect(eleven.name).toBe("일레븐");
     expect(eleven.skills.map(s => s.name)).toEqual(["방해하지마!", "자~ 집중!", "나 불렀어?", "다 덤벼보라구!"]);
     expect(eleven.skins[0]).toBe("일레븐");
-    for (const c of [...BSEO_STARTERS, ...BSEO_WILD]) {
-      expect(c.stats.every(v => v >= 20 && v <= 200)).toBe(true);
+  });
+
+  it("종족값: 같은 코스트면 합이 같고, 기본 → 스킨 진화 1 → 2 로 커져요", () => {
+    const sum = (s: readonly number[]) => s.reduce((a, b) => a + b, 0);
+    for (const c of BSEO_STARTERS) {
+      expect(c.stages.map(sum)).toEqual([...COST_TOTALS[c.cost]]);
+      expect(c.stats).toEqual(c.stages[0]);
+      expect(c.stats.every(v => v >= 10 && v <= 255)).toBe(true);
     }
+    expect(BSEO_STARTERS[0].stages.map(sum)).toEqual([320, 410, 500]);
+    // 동물은 뒤에 나올수록, 보스는 알파 → 루미 순서로 세져요
+    const wild = BSEO_WILD.map(w => sum(w.stats));
+    expect(wild).toEqual([...wild].sort((a, b) => a - b));
+    const boss = BSEO_BOSSES.map(b => sum(b.stats));
+    expect(boss).toEqual([420, 480, 540, 600, 680]);
     console.log(
-      BSEO_STARTERS.map(c => `${c.name} ${c.stats.join("/")} 합 ${c.stats.reduce((a, b) => a + b, 0)}`).join("\n"),
+      BSEO_STARTERS.map(c => `${c.name}(${c.focus}) ${c.stages.map(s => s.join("/")).join(" → ")}`).join("\n"),
     );
-    console.log(
-      BSEO_WILD.map(c => `${c.name} ${c.stats.join("/")} 합 ${c.stats.reduce((a, b) => a + b, 0)}`).join("\n"),
-    );
+    console.log(BSEO_WILD.map(w => `${w.name} ${w.stats.join("/")} 합 ${sum(w.stats)}`).join("\n"));
+  });
+
+  it("실험체 스킬은 다른 실험체 · 동물 · 보스 · 추가 스킬과 겹치지 않아요 (이름이 바뀌니까)", () => {
+    const owner = new Map<MoveId, string>();
+    for (const c of BSEO_STARTERS) {
+      for (const s of c.skills) {
+        expect(owner.get(s.move), `${c.name} ${s.name}`).toBeUndefined();
+        owner.set(s.move, c.name);
+      }
+    }
+    for (const x of [...BSEO_WILD, ...BSEO_BOSSES]) {
+      for (const m of x.moves) {
+        expect(owner.get(m), `${x.name} ${MoveId[m]}`).toBeUndefined();
+      }
+    }
+    for (const c of BSEO_STARTERS) {
+      for (const m of speciesEggMoves[c.id] ?? []) {
+        expect(owner.get(m), `${c.name} 추가 스킬 ${MoveId[m]}`).toBeUndefined();
+      }
+    }
   });
 
   it("야생은 블서로그 동물, 10웨이브마다 보스", () => {

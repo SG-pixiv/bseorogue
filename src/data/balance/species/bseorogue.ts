@@ -52,6 +52,9 @@ function makeSpecies(
 }
 
 const levelMoves = (moves: readonly MoveId[]): [number, MoveId][] => moves.map(m => [1, m]);
+const total = (s: Stats6) => s.reduce((a, b) => a + b, 0);
+/** 쓰러뜨리면 받는 경험치: 센 동물일수록 많이 (포켓로그도 종족값이 높을수록 많아요) */
+const expFor = (s: Stats6, rate: number) => Math.round(total(s) * rate);
 
 export function initBseorogueSpecies(): SpeciesDataMapConfig {
   const data = {} as SpeciesDataMapConfig;
@@ -69,7 +72,7 @@ export function initBseorogueSpecies(): SpeciesDataMapConfig {
   }
   for (const w of BSEO_WILD) {
     data[w.id] = {
-      species: makeSpecies(w.id, WILD_TYPE, w.stats, { catchRate: 0, baseExp: 60 }),
+      species: makeSpecies(w.id, WILD_TYPE, w.stats, { catchRate: 0, baseExp: expFor(w.stats, 0.25) }),
       starter: w.id as unknown as StarterSpeciesId,
       evolutions: [],
       passives: AbilityId.NONE,
@@ -79,7 +82,11 @@ export function initBseorogueSpecies(): SpeciesDataMapConfig {
   }
   for (const b of BSEO_BOSSES) {
     data[b.id] = {
-      species: makeSpecies(b.id, BOSS_TYPE, b.stats, { catchRate: 0, baseExp: 200, subLegendary: true }),
+      species: makeSpecies(b.id, BOSS_TYPE, b.stats, {
+        catchRate: 0,
+        baseExp: expFor(b.stats, 0.4),
+        subLegendary: true,
+      }),
       starter: b.id as unknown as StarterSpeciesId,
       evolutions: [],
       passives: AbilityId.NONE,
