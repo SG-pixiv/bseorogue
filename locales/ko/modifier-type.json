@@ -370,11 +370,11 @@
     },
     "SHINY_CHARM": {
       "name": "빛나는 부적",
-      "description": "야생 실험체가 색이 다른 실험체로 등장할 확률을 급격히 높인다."
+      "description": "적 실험체가 색이 다른 실험체로 등장할 확률을 급격히 높인다."
     },
     "ABILITY_CHARM": {
       "name": "특성부적",
-      "description": "야생 실험체가 숨겨진 특성을 가지고 등장할 확률을 급격히 높인다."
+      "description": "적 실험체가 숨겨진 특성을 가지고 등장할 확률을 급격히 높인다."
     },
     "CATCHING_CHARM": {
       "name": "흔들림없는부적",
@@ -382,7 +382,7 @@
     },
     "IV_SCANNER": {
       "name": "실험체 분석기",
-      "description": "야생 실험체의 개체값을 확인 가능하다."
+      "description": "적 실험체의 개체값을 확인 가능하다."
     },
     "DNA_SPLICERS": {
       "name": "유전자쐐기"
@@ -424,7 +424,7 @@
     },
     "ENEMY_FUSED_CHANCE": {
       "name": "합체 토큰",
-      "description": "야생 실험체가 합체되어 등장할 확률이 1% 추가된다."
+      "description": "적 실험체가 합체되어 등장할 확률이 1% 추가된다."
     },
     "MYSTERY_ENCOUNTER_SHUCKLE_JUICE_GOOD": {
       "name": "달콤한 단단지 주스",

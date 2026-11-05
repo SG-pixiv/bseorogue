@@ -429,7 +429,8 @@ export class EncounterPhase extends BattlePhase {
         }
       }
       globalScene.updateFieldScale();
-      if (showEncounterMessage) {
+      // 블서로그: "야생 ~가 튀어나왔다!" 문구 없이 바로 시작해요
+      if (showEncounterMessage && !BSEO.classicOnly) {
         globalScene.ui.showText(this.getEncounterMessage(), null, () => this.end(), 1500);
       } else {
         this.end();
