@@ -30,7 +30,9 @@ import { STARTING_WAVE } from "#balance/misc";
 import { FRIENDSHIP_GAIN_FROM_BATTLE } from "#balance/starters";
 import { initCommonAnims, initMoveAnim, loadCommonAnimAssets, loadMoveAnimAssets } from "#data/battle-anims";
 import { isBseoSpecies } from "#data/bseorogue/hooks";
+import { leagueForWave } from "#data/bseorogue/league";
 import { ensureBseoSprite } from "#data/bseorogue/placeholder-art";
+import { tierName } from "#data/bseorogue/tiers";
 import { getDailyMysteryEncounter } from "#data/daily-run";
 import { allMoves, biomeDepths, modifierTypes } from "#data/data-lists";
 import { classicFinalBossDialogue } from "#data/dialogue";
@@ -2182,8 +2184,12 @@ export class BattleScene extends SceneBase {
     const isBoss = !(this.currentBattle.waveIndex % 10);
     const biomeString: string = getBiomeName(this.arena.biomeId);
     this.fieldUI.moveAbove(this.biomeWaveText, this.luckText);
+    // 블서로그: 티어 · 리그도 같이 (예: 골드 · KEL · 골목길 - 25)
+    const bseoPrefix = this.gameMode.isClassic
+      ? `${tierName()} · ${leagueForWave(this.currentBattle.waveIndex).name} · `
+      : "";
     this.biomeWaveText
-      .setText(biomeString + " - " + this.currentBattle.waveIndex.toString())
+      .setText(bseoPrefix + biomeString + " - " + this.currentBattle.waveIndex.toString())
       .setColor(isBoss ? "#f89890" : "#ffffff")
       .setShadowColor(isBoss ? "#984038" : "#636363")
       .setVisible(true);

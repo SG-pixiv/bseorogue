@@ -15,6 +15,7 @@ import { bypassLogin, isBeta, isDev, systemSaveShortKeyMap } from "#constants/ap
 import { MAX_STARTER_CANDY_COUNT } from "#constants/game-constants";
 import { EntryHazardTag } from "#data/arena-tag";
 import { BSEO_NON_STARTER_IDS } from "#data/bseorogue/roster";
+import { getRunTier, setRunTier } from "#data/bseorogue/tiers";
 import { getSerializedDailyRunConfig, parseDailySeed } from "#data/daily-seed-utils";
 import { allMoves } from "#data/data-lists";
 import type { Egg } from "#data/egg";
@@ -762,6 +763,7 @@ export class GameData {
     return {
       seed: globalScene.seed,
       playTime: globalScene.sessionPlayTime,
+      bseoTier: getRunTier(),
       gameMode: globalScene.gameMode.modeId,
       dailyConfig: getSerializedDailyRunConfig(),
       party: globalScene.getPlayerParty().map(p => new PokemonData(p)),
@@ -898,6 +900,7 @@ export class GameData {
 
     globalScene.sessionPlayTime = fromSession.playTime || 0;
     globalScene.lastSavePlayTime = 0;
+    setRunTier(fromSession.bseoTier ?? 0);
 
     const loadPokemonAssets: Promise<void>[] = [];
 

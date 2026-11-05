@@ -368,7 +368,7 @@ export class GameMode implements GameModeConfig {
    * @returns If this game mode has a fixed battle on this wave
    */
   isFixedBattle(waveIndex: number): boolean {
-    // 블서로그: 포켓몬 라이벌 · 관장 같은 고정 전투 대신 KEL 팀 전투 (BSEO.kelWaves)
+    // 블서로그: 포켓몬 라이벌 · 관장 같은 고정 전투 대신 마스터즈 · KEL 팀 전투 (BSEO.teamWaves) · 역할군 관장 (BSEO.leaderWaves)
     if (BSEO.classicOnly) {
       return this.isClassic && (isKelWave(waveIndex) || isLeaderWave(waveIndex));
     }

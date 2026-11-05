@@ -11,9 +11,11 @@ import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { speciesEggMoves } from "#balance/moves/egg-moves";
 import { ER_CHARACTERS } from "#data/bseorogue/er-data";
 import { bseoBossSpecies } from "#data/bseorogue/hooks";
+import { leagueForWave, promotionMessage, teamLeagueForWave } from "#data/bseorogue/league";
 import { bseoTypeMultiplier, Role } from "#data/bseorogue/roles";
 import { BSEO_BOSSES, BSEO_CHARACTERS, BSEO_STARTER_IDS, BSEO_STARTERS, BSEO_WILD } from "#data/bseorogue/roster";
 import { COST_TOTALS } from "#data/bseorogue/stats";
+import { setRunTier, TIERS, tierLevelMultiplier, tierName, unlockedTier, unlockNextTier } from "#data/bseorogue/tiers";
 import { GameModes } from "#enums/game-modes";
 import { MoveId } from "#enums/move-id";
 import { SpeciesId } from "#enums/species-id";
@@ -161,5 +163,34 @@ describe("블서로그 규칙 - 전투", () => {
     await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
     expect(game.scene.currentBattle.double).toBe(false);
     expect(game.scene.getEnemyField().length).toBe(1);
+  });
+
+  it("판 안 승단: 마스터즈 → KEL → KEL 결승, 바뀌는 웨이브에 안내", () => {
+    expect(leagueForWave(1).key).toBe("masters");
+    expect(leagueForWave(20).key).toBe("masters");
+    expect(leagueForWave(21).key).toBe("kel");
+    expect(leagueForWave(41).key).toBe("final");
+    expect(teamLeagueForWave(15)).toBe("masters");
+    expect(teamLeagueForWave(45)).toBe("kel");
+    expect(promotionMessage(21)).toContain("KEL");
+    expect(promotionMessage(22)).toBeNull();
+  });
+
+  it("판 밖 티어: 아이언부터, 깨면 다음 티어가 열려요 (승급만)", () => {
+    expect(TIERS.length).toBe(10);
+    expect(tierName(0)).toBe("아이언");
+    expect(tierName(9)).toBe("이터니티");
+    expect(tierLevelMultiplier(9)).toBeCloseTo(1.27);
+    localStorage.removeItem("bseo.tier.unlocked");
+    expect(unlockedTier()).toBe(0);
+    setRunTier(0);
+    expect(unlockNextTier()).toBe(1);
+    expect(unlockedTier()).toBe(1);
+    // 낮은 티어를 다시 깨도 그대로
+    expect(unlockNextTier()).toBeNull();
+    setRunTier(9);
+    expect(unlockNextTier()).toBeNull();
+    setRunTier(0);
+    localStorage.removeItem("bseo.tier.unlocked");
   });
 });

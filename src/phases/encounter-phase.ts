@@ -8,6 +8,7 @@ import { getPokemonNameWithAffix } from "#app/messages";
 import { activeOverrides } from "#app/overrides";
 import { handleTutorial, Tutorial } from "#app/tutorial";
 import { initEncounterAnims, loadEncounterAnimAssets } from "#data/battle-anims";
+import { promotionMessage } from "#data/bseorogue/league";
 import { getCharVariantFromDialogue } from "#data/dialogue";
 import { getNatureName } from "#data/nature";
 import { BattleType } from "#enums/battle-type";
@@ -547,6 +548,12 @@ export class EncounterPhase extends BattlePhase {
 
   end() {
     const enemyField = globalScene.getEnemyField();
+
+    // 블서로그: 리그가 바뀌는 웨이브면 루미가 알려 줘요 (마스터즈 참가 · KEL 승격 · 결승 진출)
+    const promotion = globalScene.gameMode.isClassic ? promotionMessage(globalScene.currentBattle.waveIndex) : null;
+    if (promotion) {
+      globalScene.phaseManager.queueMessage(promotion, null, true);
+    }
 
     enemyField.forEach((enemyPokemon, e) => {
       if (enemyPokemon.isShiny(true)) {

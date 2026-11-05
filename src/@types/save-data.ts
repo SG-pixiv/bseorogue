@@ -49,6 +49,8 @@ export interface SystemSaveData {
 export interface SessionSaveData {
   seed: string;
   playTime: number;
+  /** 블서로그: 이 판의 티어 (0 아이언 ~ 9 이터니티) */
+  bseoTier?: number;
   gameMode: GameModes;
   dailyConfig?: SerializedDailyRunConfig;
   party: PokemonData[];

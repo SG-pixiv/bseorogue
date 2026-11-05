@@ -9,6 +9,7 @@ import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { activeOverrides } from "#app/overrides";
 import { Phase } from "#app/phase";
 import { bypassLogin } from "#constants/app-constants";
+import { setRunTier, TIER_LEVEL_BONUS, tierName, unlockedTier } from "#data/bseorogue/tiers";
 import { getDailyRunStarters, startDailyEventChallenges } from "#data/daily-run";
 import { modifierTypes } from "#data/data-lists";
 import { Gender } from "#data/gender";
@@ -107,7 +108,36 @@ export class TitlePhase extends Phase {
           };
           // 블서로그: 지금은 클래식만 (데일리 런은 서버가 필요하고, 무한 모드는 나중에) → 모드 고르기 없이 바로 시작
           if (BSEO.classicOnly) {
-            setModeAndEnd(GameModes.CLASSIC);
+            // 블서로그: 열린 티어 중에서 골라요 (아이언만 열려 있으면 바로 시작)
+            const top = unlockedTier();
+            if (top === 0) {
+              setRunTier(0);
+              setModeAndEnd(GameModes.CLASSIC);
+              return true;
+            }
+            const tierOptions: OptionSelectItem[] = [];
+            for (let t = top; t >= 0; t--) {
+              tierOptions.push({
+                label: t === 0 ? tierName(t) : `${tierName(t)} (적 레벨 +${Math.round(TIER_LEVEL_BONUS * t * 100)}%)`,
+                handler: () => {
+                  setRunTier(t);
+                  setModeAndEnd(GameModes.CLASSIC);
+                  return true;
+                },
+              });
+            }
+            tierOptions.push({
+              label: i18next.t("menu:cancel"),
+              handler: () => {
+                globalScene.phaseManager.toTitleScreen();
+                super.end();
+                return true;
+              },
+            });
+            ui.showText("어느 티어로 도전할까요?", null, () => {
+              const config: OptionSelectModeConfig = { options: tierOptions, yOffset: 48, maxOptions: 7 };
+              ui.setOverlayMode(UiMode.OPTION_SELECT, config);
+            });
             return true;
           }
           const newGameOptions: OptionSelectItem[] = [];

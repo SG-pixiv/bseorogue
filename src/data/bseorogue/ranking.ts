@@ -8,6 +8,7 @@ import { BSEO } from "#app/bseorogue";
 import { mumeiConnected, submitScore } from "#app/bseorogue-api";
 import { globalScene } from "#app/global-scene";
 import { erCodeOfSpecies } from "#data/bseorogue/roster";
+import { getRunTier, tierName, unlockNextTier } from "#data/bseorogue/tiers";
 import { UiMode } from "#enums/ui-mode";
 
 const NICK_KEY = "bseo.nickname";
@@ -35,9 +36,21 @@ function say(text: string): Promise<void> {
   });
 }
 
-/** 클래식 판이 끝났을 때 한 번 불러요. 무명섬과 연결 안 돼 있거나 건너뛰면 바로 끝나요 */
+/**
+ * 클래식 판이 끝났을 때 한 번 불러요.
+ * 깼으면 다음 티어를 열고, 무명섬과 연결돼 있으면 랭킹에 올릴지 물어봐요 (건너뛰면 바로 끝나요)
+ */
 export async function offerRanking(isVictory: boolean): Promise<void> {
-  if (!mumeiConnected || !globalScene.gameMode.isClassic) {
+  if (!globalScene.gameMode.isClassic) {
+    return;
+  }
+  if (isVictory) {
+    const next = unlockNextTier();
+    if (next != null) {
+      await say(`${tierName(getRunTier())} 클리어!\n다음 티어 「${tierName(next)}」가 열렸어요!`);
+    }
+  }
+  if (!mumeiConnected) {
     return;
   }
   const wave = Math.min(globalScene.currentBattle?.waveIndex ?? 1, BSEO.classicFinalWave);
@@ -70,6 +83,7 @@ export async function offerRanking(isVictory: boolean): Promise<void> {
       party,
       version: BSEO.version,
       runId: `bseo-${globalScene.seed}`,
+      tier: getRunTier(),
     });
     await say(
       res.duplicate

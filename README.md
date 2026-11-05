@@ -45,14 +45,16 @@ pnpm build         # dist/ 에 배포용 파일
 ### 블서로그 규칙 · 데이터 (고칠 곳)
 | 고치고 싶은 것 | 파일 |
 |---|---|
-| 파티 인원 · 클래식 길이 · KEL 팀 · 관장 웨이브 | `src/bseorogue.ts` |
+| 파티 인원 · 클래식 길이 · 팀 전투 · 관장 웨이브 · 리그 구간 | `src/bseorogue.ts` |
+| 승격 안내 문구 | `src/data/bseorogue/league.ts` |
+| 티어 이름 · 티어별 적 레벨 | `src/data/bseorogue/tiers.ts` |
 | 고를 수 있는 실험체 · 코스트 · 종족값 · 무기 | `src/data/bseorogue/roster.ts` 의 `BSEO_PLAYABLE` |
 | 스킨 진화 순서 · 레벨 · 역할군 변화 | `src/data/bseorogue/skin-evolution.ts` |
 | 스킬 효과(빌려 쓰는 포켓로그 기술) | `src/data/bseorogue/skill-moves.ts` |
 | 역할군 상성 | `src/data/bseorogue/roles.ts` |
 | 코스트별 종족값 합 · 역할군 기본 모양 | `src/data/bseorogue/stats.ts` |
 | 야생동물 · 보스 | `src/data/bseorogue/roster.ts` |
-| KEL 팀 (실험체 · 로고) | 무명섬 관리 화면 → 블서로그 → KEL 팀 (오프라인 기본 팀은 `kel.ts`) |
+| 마스터즈 · KEL 팀 (리그 · 실험체 · 로고) | 무명섬 관리 화면 → 블서로그 → 팀 (오프라인 기본 팀은 `kel.ts`) |
 | 역할군 관장 · 대사 | `src/data/bseorogue/leaders.ts` |
 | 지역마다 많이 나오는 역할군 · 동물 비율 | `src/data/bseorogue/regions.ts`, `src/bseorogue.ts` 의 `wildAnimalRate` |
 | 임시 그림 | `src/data/bseorogue/placeholder-art.ts` (진짜 그림을 넣으면 `REAL_ART` 에 종 번호 추가) |
@@ -64,7 +66,7 @@ pnpm build         # dist/ 에 배포용 파일
 키는 `er-key.txt` 에 적어 두고(깃허브에 올리지 않아요) `node scripts/er-data/fetch.mjs` 로 실행해요.
 받은 `er-data` 폴더로 `node scripts/er-data/build.mjs <er-data 폴더>` 를 실행하면 `src/data/bseorogue/er-data.ts` 가 새로 만들어져요.
 
-### 무명섬 연결 (랭킹 · KEL 팀)
+### 무명섬 연결 (랭킹 · 팀)
 배포 환경 변수에 무명섬과 같은 `VITE_SUPABASE_URL` · `VITE_SUPABASE_ANON_KEY` (공개 키) 를 넣으면,
 판이 끝날 때 닉네임을 적고 무명섬 랭킹에 올릴 수 있어요. 키가 없으면 랭킹 올리기만 건너뛰어요.
 

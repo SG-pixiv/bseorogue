@@ -22,8 +22,20 @@ export const BSEO = {
   classicOnly: true,
   /** 포켓로그 최종 보스(무한다이노) 2단계 연출. 블서로그는 루미 연출을 따로 만들 때까지 끔 */
   pokerogueFinale: false,
-  /** KEL 팀 전투가 나오는 웨이브 (팀마다 실험체 3명, 무명섬 관리 화면에서 정해요) */
-  kelWaves: [5, 15, 25, 35, 45],
+  /**
+   * 팀 전투가 나오는 웨이브 (팀마다 실험체 3명, 무명섬 관리 화면에서 정해요).
+   * 그 웨이브가 어느 리그인지에 따라 마스터즈 팀 또는 KEL 팀이 나와요 (leagues)
+   */
+  teamWaves: [5, 15, 25, 35, 45],
+  /**
+   * 판 안 승단: fromWave 부터 그 리그예요. 마스터즈 구간의 팀 전투는 마스터즈 팀, 그다음은 KEL 팀
+   * (src/data/bseorogue/league.ts)
+   */
+  leagues: [
+    { key: "masters", name: "마스터즈", fromWave: 1 },
+    { key: "kel", name: "KEL", fromWave: 21 },
+    { key: "final", name: "KEL 결승", fromWave: 41 },
+  ],
   /** 역할군 관장이 나오는 웨이브 (src/data/bseorogue/leaders.ts) */
   leaderWaves: [8, 18, 28, 38, 48],
   /** 일반 웨이브에서 동물이 나올 확률 (나머지는 실험체) */

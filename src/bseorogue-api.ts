@@ -42,19 +42,28 @@ export function submitScore(args: {
   party: number[];
   version: string;
   runId: string;
+  /** 티어 (0 아이언 ~ 9 이터니티) */
+  tier: number;
 }): Promise<SubmitResult> {
+  const body = {
+    p_nickname: args.nickname,
+    p_wave: args.wave,
+    p_seconds: args.seconds,
+    p_cleared: args.cleared,
+    p_party: args.party,
+    p_version: args.version,
+    p_mode: "classic",
+    p_run: args.runId,
+  };
   return call<SubmitResult>("rpc/rogue_submit", {
     method: "POST",
-    body: JSON.stringify({
-      p_nickname: args.nickname,
-      p_wave: args.wave,
-      p_seconds: args.seconds,
-      p_cleared: args.cleared,
-      p_party: args.party,
-      p_version: args.version,
-      p_mode: "classic",
-      p_run: args.runId,
-    }),
+    body: JSON.stringify({ ...body, p_tier: args.tier }),
+  }).catch((e: Error) => {
+    // 무명섬 14단계 SQL 전이면 티어 없이 다시 올려요
+    if (/p_tier|function|could not find/i.test(e.message)) {
+      return call<SubmitResult>("rpc/rogue_submit", { method: "POST", body: JSON.stringify(body) });
+    }
+    throw e;
   });
 }
 
@@ -63,9 +72,15 @@ export interface KelTeam {
   region: string;
   logo_url: string;
   members: number[];
+  /** 리그 (무명섬 14단계부터. 없으면 KEL) */
+  league?: "kel" | "masters";
 }
 
-/** KEL 팀 (무명섬 관리 화면에서 정한 실험체 3명) */
-export function fetchKelTeams(): Promise<KelTeam[]> {
-  return call<KelTeam[]>("rogue_teams?select=name,region,logo_url,members&active=eq.true&order=sort");
+/** 팀 (무명섬 관리 화면에서 정한 리그 · 실험체 3명). 14단계 SQL 전이면 리그 없이 불러와요 */
+export async function fetchTeams(): Promise<KelTeam[]> {
+  try {
+    return await call<KelTeam[]>("rogue_teams?select=name,region,logo_url,members,league&active=eq.true&order=sort");
+  } catch {
+    return call<KelTeam[]>("rogue_teams?select=name,region,logo_url,members&active=eq.true&order=sort");
+  }
 }

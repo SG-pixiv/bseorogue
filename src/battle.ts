@@ -3,6 +3,7 @@ import { DAILY_BOSS_LEVEL } from "#app/constants";
 import type { GameMode } from "#app/game-mode";
 import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
+import { applyTierToLevel } from "#data/bseorogue/tiers";
 import { isDailyFinalBoss } from "#data/daily-seed-utils";
 import { ArenaTagType } from "#enums/arena-tag-type";
 import { BattleType } from "#enums/battle-type";
@@ -137,6 +138,12 @@ export class Battle {
   }
 
   public getLevelForWave(): number {
+    // 블서로그: 티어가 높을수록 적 레벨이 올라가요 (src/data/bseorogue/tiers.ts)
+    const level = this.getBaseLevelForWave();
+    return this.gameMode.isClassic ? applyTierToLevel(level) : level;
+  }
+
+  private getBaseLevelForWave(): number {
     if (isDailyFinalBoss(this.waveIndex)) {
       return DAILY_BOSS_LEVEL;
     }

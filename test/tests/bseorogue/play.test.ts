@@ -6,6 +6,7 @@
 // 블서로그 한 판 흐름: 스킨 진화 · 최종 보스 승리 · 전멸 패배
 import { LEADERS } from "#data/bseorogue/leaders";
 import { BSEO_STARTER_IDS, bseoCharacter, erCodeOfSpecies } from "#data/bseorogue/roster";
+import { setRunTier } from "#data/bseorogue/tiers";
 import { Egg } from "#data/egg";
 import { BattleType } from "#enums/battle-type";
 import { BattlerIndex } from "#enums/battler-index";
@@ -53,14 +54,14 @@ describe("블서로그 한 판 흐름", () => {
     expect(eleven.getMoveset().map(m => m.moveId)).toContain(MoveId.HAMMER_ARM);
   });
 
-  it("5웨이브는 KEL 팀 전투 (실험체 3명)", async () => {
+  it("5웨이브는 마스터즈 팀 전투 (실험체 3명)", async () => {
     game.override.moveset([MoveId.HAMMER_ARM]).startingWave(5);
     await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
 
     const battle = game.scene.currentBattle;
     expect(battle.battleType).toBe(BattleType.TRAINER);
     expect(battle.trainer?.config.trainerType).toBe(TrainerType.BSEO_KEL);
-    expect(battle.trainer?.getName().length).toBeGreaterThan(0);
+    expect(battle.trainer?.getName().startsWith("마스터즈 ")).toBe(true);
     const party = game.scene.getEnemyParty();
     expect(party.length).toBe(3);
     for (const p of party) {
@@ -130,6 +131,8 @@ describe("블서로그 한 판 흐름", () => {
           } else {
             expect(type).toBe(TrainerType.BSEO_KEL);
             expect(game.scene.getEnemyParty().length).toBe(3);
+            // 판 안 승단: 20웨이브까지는 마스터즈 팀, 그다음은 KEL 팀
+            expect(battle.trainer?.getName().startsWith(wave <= 20 ? "마스터즈 " : "KEL ")).toBe(true);
             seen.kel++;
           }
         } else if (enemy.isBoss()) {
@@ -176,6 +179,19 @@ describe("블서로그 한 판 흐름", () => {
         }
       }
     }
+  });
+
+  it("티어가 높으면 같은 웨이브의 적 레벨이 높아요", async () => {
+    game.override.startingWave(30);
+    await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
+    const battle = game.scene.currentBattle;
+    setRunTier(0);
+    const iron = Array.from({ length: 20 }, () => battle.getLevelForWave());
+    setRunTier(9);
+    const eternity = Array.from({ length: 20 }, () => battle.getLevelForWave());
+    setRunTier(0);
+    const avg = (a: number[]) => a.reduce((x, y) => x + y, 0) / a.length;
+    expect(avg(eternity)).toBeGreaterThan(avg(iron) * 1.2);
   });
 
   it("전멸하면 게임 오버", async () => {
