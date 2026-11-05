@@ -11,6 +11,7 @@ import { CacheBustedLoaderPlugin } from "#plugins/cache-busted-loader-plugin";
 import { getWindowVariantSuffix, WindowVariant } from "#ui/ui-theme";
 import { hasAllLocalizedSprites, localPing } from "#utils/common";
 import { enumValueToKey, getEnumValues } from "#utils/enums";
+import { getCachedUrl } from "#utils/fetch-utils";
 import i18next from "i18next";
 import type { GameObjects } from "phaser";
 import Phaser from "phaser";
@@ -33,6 +34,8 @@ export class LoadingScene extends SceneBase {
     // I'm 99.9% sure the order doesn't matter here,
     // so we should organize these based on type more strongly
     // Load menu images
+    // 블서로그: 팬키트 실험체 아이콘 한 장 (placeholder-art.ts 가 아이콘 칸을 그릴 때 써요)
+    this.load.image("bseo_char_icons", getCachedUrl("er/char-icons.png"));
     this.loadImage("loading_bg", "arenas")
       .loadImage("logo", "")
       .loadImage("logo_fake", "")

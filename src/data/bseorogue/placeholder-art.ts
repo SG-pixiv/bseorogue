@@ -4,17 +4,21 @@
  */
 
 /**
- * 임시 그림 (진짜 일러스트가 오기 전까지)
+ * 실험체 · 동물 · 보스 그림
  *
- * 블서로그 실험체 · 동물 · 보스와 KEL 팀은 그림 파일이 아직 없어서, 게임 안에서 역할군 색 카드에 이름을 적어 그려요.
- * 진짜 그림을 넣으면 REAL_ART 에 종 번호를 적고 assets/images/pokemon/<번호>.png(.json) 에 두면 그 그림을 써요.
+ * 팬키트 그림이 있으면 그 그림을 쓰고(scripts/fankit/build_art.py 가 assets/er/ 에 만들어요),
+ * 없으면 게임 안에서 역할군 색 카드에 이름을 적어 그려요 (보스 · KEL 팀 · 관장 그림도 아직 카드).
+ * 스킨 진화한 모습은 그 스킨 그림, 없으면 기본 모습 그림을 써요.
  */
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
+import { BSEO_ART_SKINS, BSEO_ICON_FRAMES } from "#data/bseorogue/art-manifest";
 import { BOSS_TYPE, Role, WILD_TYPE } from "#data/bseorogue/roles";
-import { BSEO_ALL_IDS } from "#data/bseorogue/roster";
+import { BSEO_ALL_IDS, erCodeOfSpecies } from "#data/bseorogue/roster";
+import { skinEvolutionOf } from "#data/bseorogue/skin-evolution";
 import type { PokemonType } from "#enums/pokemon-type";
-import type { SpeciesId } from "#enums/species-id";
+import { SpeciesId } from "#enums/species-id";
+import { getCachedUrl } from "#utils/fetch-utils";
 
 /** 진짜 그림이 있는 종 번호 (지금은 없음) */
 export const REAL_ART: ReadonlySet<number> = new Set<number>([]);
@@ -122,7 +126,74 @@ function drawCard(
   lines.forEach((l, i) => ctx.fillText(l, w / 2, top + i * lh));
 }
 
-/** 실험체 · 동물 · 보스 전투 그림 (앞 · 뒤). 그림 파일이 있으면 false */
+/** 팬키트 그림 열쇠: 실험체는 ER 번호와 스킨 번호, 야생동물은 이름 */
+function artKeyOf(speciesId: SpeciesId): { key: string; skin: number } | null {
+  const code = erCodeOfSpecies(speciesId);
+  if (code != null) {
+    const stage = (speciesId - 1030) % 3;
+    const want = stage === 0 ? 0 : (skinEvolutionOf(code).skins[stage - 1] ?? 0);
+    return { key: String(code), skin: want };
+  }
+  const name = SpeciesId[speciesId]?.replace(/^BSEO_/, "");
+  return name ? { key: `wild:${name}`, skin: 0 } : null;
+}
+
+/** 있는 그림 중 고르기: 원하는 스킨 → 기본 모습 → 다른 스킨 → 랭크 보상 스킨 */
+function pickSkin(have: readonly number[] | undefined, want: number): number | null {
+  if (!have?.length) {
+    return null;
+  }
+  if (have.includes(want)) {
+    return want;
+  }
+  if (have.includes(0)) {
+    return 0;
+  }
+  return [...have].sort((a, b) => a - b)[0];
+}
+
+/** 전투 그림 파일 (없으면 null) */
+export function bseoArtFile(speciesId: SpeciesId): string | null {
+  const a = artKeyOf(speciesId);
+  const skin = a && pickSkin(BSEO_ART_SKINS[a.key], a.skin);
+  if (a == null || skin == null) {
+    return null;
+  }
+  return `er/char/${a.key.replace("wild:", "wild_")}_${skin}.png`;
+}
+
+/** 아이콘 자리 (er/char-icons.png 안). 없으면 null */
+function bseoIconFrame(speciesId: SpeciesId): readonly [number, number] | null {
+  const a = artKeyOf(speciesId);
+  const frames = a ? BSEO_ICON_FRAMES[a.key] : undefined;
+  const skin = a && pickSkin(frames ? Object.keys(frames).map(Number) : undefined, a.skin);
+  return frames && skin != null ? (frames[skin] ?? null) : null;
+}
+
+/** 팬키트 아이콘 한 장 (로딩 화면 loading-scene.ts 에서 미리 받아요) */
+const BSEO_ICON_SHEET_KEY = "bseo_char_icons";
+
+const ART_SIZE = 96;
+
+/** 그림을 캔버스 아래 가운데에 (뒷모습은 좌우를 뒤집어서) */
+function drawArt(
+  tex: Phaser.Textures.CanvasTexture,
+  img: CanvasImageSource & { width: number; height: number },
+  back: boolean,
+): void {
+  const ctx = tex.getContext();
+  ctx.clearRect(0, 0, tex.width, tex.height);
+  ctx.save();
+  if (back) {
+    ctx.translate(tex.width, 0);
+    ctx.scale(-1, 1);
+  }
+  ctx.drawImage(img, Math.round((tex.width - img.width) / 2), tex.height - img.height);
+  ctx.restore();
+  tex.refresh();
+}
+
+/** 실험체 · 동물 · 보스 전투 그림 (앞 · 뒤). 포켓로그 그림 파일을 쓰는 종이면 false */
 export function ensureBseoSprite(spriteKey: string, speciesId: SpeciesId, back: boolean): boolean {
   if (REAL_ART.has(speciesId)) {
     return false;
@@ -134,18 +205,44 @@ export function ensureBseoSprite(spriteKey: string, speciesId: SpeciesId, back: 
   if (!textures.exists(spriteKey)) {
     const species = speciesDataRegistry.getSpecies(speciesId);
     const isBoss = species.subLegendary;
-    const size = isBoss ? 88 : 64;
+    const file = bseoArtFile(speciesId);
+    const card = isBoss ? 88 : 64;
+    const size = file ? ART_SIZE : card;
     const tex = textures.createCanvas(spriteKey, size, size);
     if (!tex) {
       return true;
     }
     try {
-      drawCard(tex.getContext(), size, size, species.name, colorOf(speciesId), back);
+      // 그림을 받기 전까지는 카드
+      const ctx = tex.getContext();
+      ctx.save();
+      ctx.translate((size - card) / 2, size - card);
+      drawCard(ctx, card, card, species.name, colorOf(speciesId), back);
+      ctx.restore();
     } catch {
       // 검사 환경(가짜 캔버스)에서는 그리기를 건너뛰어요
     }
     tex.add("0001.png", 0, 0, 0, size, size);
     tex.refresh();
+    if (file) {
+      const artKey = `bseo_art_${file}`;
+      const draw = () => {
+        try {
+          drawArt(tex, textures.get(artKey).getSourceImage() as HTMLImageElement, back);
+        } catch {
+          // 그림을 못 그리면 카드 그대로
+        }
+      };
+      if (textures.exists(artKey)) {
+        draw();
+      } else {
+        globalScene.load.once(`filecomplete-image-${artKey}`, draw);
+        globalScene.load.image(artKey, getCachedUrl(file));
+        if (!globalScene.load.isLoading()) {
+          globalScene.load.start();
+        }
+      }
+    }
   }
   if (!globalScene.anims.exists(spriteKey)) {
     globalScene.anims.create({
@@ -175,12 +272,25 @@ export function ensureBseoIcons(): string {
     return ICON_ATLAS_KEY;
   }
   const ctx = tex.getContext();
+  const sheet = textures.exists(BSEO_ICON_SHEET_KEY)
+    ? (textures.get(BSEO_ICON_SHEET_KEY).getSourceImage() as HTMLImageElement)
+    : null;
   ids.forEach((id, i) => {
     const species = speciesDataRegistry.getSpecies(id);
     const color = colorOf(id);
+    const frame = sheet ? bseoIconFrame(id) : null;
     for (const shiny of [false, true]) {
       const x = (i % cols) * ICON_W;
       const y = (Math.floor(i / cols) * 2 + (shiny ? 1 : 0)) * ICON_H;
+      if (sheet && frame) {
+        try {
+          ctx.drawImage(sheet, frame[0], frame[1], ICON_W, ICON_H, x, y, ICON_W, ICON_H);
+        } catch {
+          // 검사 환경(가짜 캔버스)
+        }
+        tex.add(`${id}${shiny ? "s" : ""}`, 0, x, y, ICON_W, ICON_H);
+        continue;
+      }
       try {
         ctx.font = `12px ${FONT}`;
         ctx.textAlign = "center";
