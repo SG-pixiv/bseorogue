@@ -3,8 +3,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { BSEO } from "#app/bseorogue";
+import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { loadKelTeams } from "#data/bseorogue/kel";
+import { REGION_ROLES } from "#data/bseorogue/regions";
+import { Role } from "#data/bseorogue/roles";
 import { BSEO_ALL_IDS, BSEO_BOSSES, BSEO_CHARACTERS, BSEO_WILD, ENEMY_MOVE_NAMES } from "#data/bseorogue/roster";
 /**
  * 블서로그가 포켓로그 엔진에 끼어드는 곳들 (야생 · 보스 · 스킬 이름 · 역할군)
@@ -14,7 +18,7 @@ import type { PokemonSpecies } from "#data/pokemon-species";
 import { MoveId } from "#enums/move-id";
 import type { PokemonType } from "#enums/pokemon-type";
 import type { SpeciesId } from "#enums/species-id";
-import { randSeedItem } from "#utils/common";
+import { randSeedInt, randSeedItem } from "#utils/common";
 import { toCamelCase } from "#utils/strings";
 import i18next from "i18next";
 
@@ -25,15 +29,25 @@ export function isBseoSpecies(id: SpeciesId): boolean {
   return BSEO_ID_SET.has(id);
 }
 
-/** 이 웨이브에 나올 수 있는 야생동물 중 하나 (보스 웨이브는 따로) */
-export function bseoWildSpecies(waveIndex: number): PokemonSpecies | null {
-  const pool = BSEO_WILD.filter(w => w.fromWave <= waveIndex);
-  if (pool.length === 0) {
-    return null;
+/**
+ * 일반 웨이브의 적 하나
+ * 대부분 실험체이고 (그 지역의 역할군이 3배 더 자주, regions.ts), BSEO.wildAnimalRate 확률로 동물이 나와요.
+ * 실험체는 레벨에 맞춰 스킨 진화한 모습으로 나와요. 보스 웨이브는 따로예요.
+ */
+export function bseoWildSpecies(waveIndex: number, level: number): PokemonSpecies | null {
+  const animals = BSEO_WILD.filter(w => w.fromWave <= waveIndex);
+  if (animals.length > 0 && randSeedInt(1000) < BSEO.wildAnimalRate * 1000) {
+    // 최근에 열린 동물이 조금 더 자주 나와요
+    const weighted = animals.flatMap((w, i) => new Array(i + 1).fill(w.id) as SpeciesId[]);
+    return speciesDataRegistry.getSpecies(randSeedItem(weighted));
   }
-  // 최근에 열린 동물이 조금 더 자주 나와요
-  const weighted = pool.flatMap((w, i) => new Array(i + 1).fill(w.id) as SpeciesId[]);
-  return speciesDataRegistry.getSpecies(randSeedItem(weighted));
+  const favored = REGION_ROLES[globalScene.arena?.biomeId] ?? [];
+  const pool = BSEO_CHARACTERS.flatMap(c =>
+    new Array(favored.some(r => Role[r] === c.role) ? 3 : 1).fill(c.id),
+  ) as SpeciesId[];
+  const base = speciesDataRegistry.getSpecies(randSeedItem(pool));
+  const id = base.getWildSpeciesForLevel(level, true, false, globalScene.gameMode);
+  return speciesDataRegistry.getSpecies(id);
 }
 
 /** 10웨이브마다 나오는 보스 */

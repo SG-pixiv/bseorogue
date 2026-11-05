@@ -24,6 +24,10 @@ export const BSEO = {
   pokerogueFinale: false,
   /** KEL 팀 전투가 나오는 웨이브 (팀마다 실험체 3명, 무명섬 관리 화면에서 정해요) */
   kelWaves: [5, 15, 25, 35, 45],
+  /** 역할군 관장이 나오는 웨이브 (src/data/bseorogue/leaders.ts) */
+  leaderWaves: [8, 18, 28, 38, 48],
+  /** 일반 웨이브에서 동물이 나올 확률 (나머지는 실험체) */
+  wildAnimalRate: 0.25,
   /** 미스터리 인카운터 (포켓몬 이야기라 꺼 둬요) */
   mysteryEncounters: false,
   /** 무명섬 (랭킹 · 소식 · 피드백) */

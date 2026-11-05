@@ -323,4 +323,6 @@ export enum TrainerType {
 
   /** 블서로그: KEL 팀 (src/data/bseorogue/kel.ts) */
   BSEO_KEL = 900,
+  /** 블서로그: 역할군 관장 (src/data/bseorogue/leaders.ts) */
+  BSEO_LEADER = 901,
 }

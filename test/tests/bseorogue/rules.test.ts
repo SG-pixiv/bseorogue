@@ -10,7 +10,7 @@ import { getGameMode } from "#app/game-mode";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { speciesEggMoves } from "#balance/moves/egg-moves";
 import { ER_CHARACTERS } from "#data/bseorogue/er-data";
-import { bseoBossSpecies, bseoWildSpecies } from "#data/bseorogue/hooks";
+import { bseoBossSpecies } from "#data/bseorogue/hooks";
 import { bseoTypeMultiplier, Role } from "#data/bseorogue/roles";
 import { BSEO_BOSSES, BSEO_CHARACTERS, BSEO_STARTER_IDS, BSEO_STARTERS, BSEO_WILD } from "#data/bseorogue/roster";
 import { COST_TOTALS } from "#data/bseorogue/stats";
@@ -130,8 +130,7 @@ describe("블서로그 데이터", () => {
     }
   });
 
-  it("야생은 블서로그 동물, 10웨이브마다 보스", () => {
-    expect(bseoWildSpecies(1)?.speciesId).toBeGreaterThanOrEqual(1601);
+  it("10웨이브마다 보스", () => {
     expect(bseoBossSpecies(10)?.speciesId).toBe(1701); // 알파
     expect(bseoBossSpecies(50)?.speciesId).toBe(1705); // 루미
     expect(bseoBossSpecies(15)).toBeNull();

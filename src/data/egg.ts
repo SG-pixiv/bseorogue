@@ -476,7 +476,11 @@ export class Egg {
 
     // If egg variant is set to RARE or EPIC, filter species pool to only include ones with variants.
     if (this.variantTier && (this.variantTier === VariantTier.RARE || this.variantTier === VariantTier.EPIC)) {
-      speciesPool = speciesPool.filter(s => s.hasVariants());
+      // 블서로그: 실험체는 아직 색 변형(variant) 그림이 없어서, 걸러서 비면 그대로 둬요
+      const withVariants = speciesPool.filter(s => s.hasVariants());
+      if (withVariants.length > 0 || !BSEO.classicOnly) {
+        speciesPool = withVariants;
+      }
     }
 
     /**

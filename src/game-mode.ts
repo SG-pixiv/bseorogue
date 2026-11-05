@@ -6,6 +6,7 @@ import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { activeOverrides } from "#app/overrides";
 import { bseoBossSpecies } from "#data/bseorogue/hooks";
 import { isKelWave, kelFixedBattle } from "#data/bseorogue/kel";
+import { isLeaderWave, leaderFixedBattle } from "#data/bseorogue/leaders";
 import { allChallenges, type Challenge, copyChallenge } from "#data/challenge";
 import {
   getDailyEventSeedBoss,
@@ -369,7 +370,7 @@ export class GameMode implements GameModeConfig {
   isFixedBattle(waveIndex: number): boolean {
     // 블서로그: 포켓몬 라이벌 · 관장 같은 고정 전투 대신 KEL 팀 전투 (BSEO.kelWaves)
     if (BSEO.classicOnly) {
-      return this.isClassic && isKelWave(waveIndex);
+      return this.isClassic && (isKelWave(waveIndex) || isLeaderWave(waveIndex));
     }
     const dummyConfig = new FixedBattleConfig();
     return (
@@ -385,7 +386,13 @@ export class GameMode implements GameModeConfig {
    */
   getFixedBattle(waveIndex: number): FixedBattleConfig | undefined {
     if (BSEO.classicOnly) {
-      return this.isClassic && isKelWave(waveIndex) ? kelFixedBattle(waveIndex) : undefined;
+      if (!this.isClassic) {
+        return;
+      }
+      if (isLeaderWave(waveIndex)) {
+        return leaderFixedBattle(waveIndex);
+      }
+      return isKelWave(waveIndex) ? kelFixedBattle(waveIndex) : undefined;
     }
     const challengeConfig = new FixedBattleConfig();
     if (applyChallenges(ChallengeType.FIXED_BATTLES, waveIndex, challengeConfig)) {

@@ -576,8 +576,8 @@ export class Arena {
     if (overrideSpecies) {
       return overrideSpecies;
     }
-    // 블서로그: 야생은 블서로그 동물만 (웨이브가 올라갈수록 센 동물이 섞여요)
-    const bseoWild = bseoWildSpecies(waveIndex);
+    // 블서로그: 일반 웨이브는 대부분 실험체 (지역마다 많이 나오는 역할군), 가끔 동물
+    const bseoWild = bseoWildSpecies(waveIndex, level);
     if (bseoWild) {
       return bseoWild;
     }

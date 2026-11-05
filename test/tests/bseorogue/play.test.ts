@@ -4,7 +4,8 @@
  */
 
 // 블서로그 한 판 흐름: 스킨 진화 · 최종 보스 승리 · 전멸 패배
-import { BSEO_STARTER_IDS, erCodeOfSpecies } from "#data/bseorogue/roster";
+import { LEADERS } from "#data/bseorogue/leaders";
+import { BSEO_STARTER_IDS, bseoCharacter, erCodeOfSpecies } from "#data/bseorogue/roster";
 import { Egg } from "#data/egg";
 import { BattleType } from "#enums/battle-type";
 import { BattlerIndex } from "#enums/battler-index";
@@ -69,6 +70,20 @@ describe("블서로그 한 판 흐름", () => {
     expect(game.scene.currentBattle.double).toBe(false);
   });
 
+  it("8웨이브는 역할군 관장 (같은 역할군 2명, 마지막이 관장 본인)", async () => {
+    game.override.moveset([MoveId.HAMMER_ARM]).startingWave(8);
+    await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
+
+    const trainer = game.scene.currentBattle.trainer;
+    expect(trainer?.config.trainerType).toBe(TrainerType.BSEO_LEADER);
+    const leader = LEADERS.find(l => trainer?.getName().endsWith(bseoCharacter(l.erCode)?.name ?? "?"));
+    expect(leader).toBeDefined();
+    const party = game.scene.getEnemyParty();
+    expect(party.length).toBe(2);
+    expect(erCodeOfSpecies(party[1].species.speciesId)).toBe(leader?.erCode);
+    expect(new Set(party.map(p => p.species.type1)).size).toBe(1);
+  });
+
   it("50웨이브 루미를 이기면 클래식 클리어", async () => {
     game.override.moveset([MoveId.HAMMER_ARM]).startingWave(50).startingLevel(60);
     await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
@@ -92,21 +107,37 @@ describe("블서로그 한 판 흐름", () => {
     game.override.moveset([MoveId.BODY_SLAM]).startingWave(1).startingLevel(100);
     await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
 
-    const seen = { kel: 0, boss: 0, biomes: new Set<number>() };
+    const seen = { kel: 0, leader: 0, boss: 0, character: 0, animal: 0, biomes: new Set<number>() };
     let lastWave = 0;
     for (let turn = 0; turn < 400; turn++) {
       const battle = game.scene.currentBattle;
       const wave = battle.waveIndex;
+      // 검사에서는 PP가 떨어지지 않게 (한 기술만 계속 쓰니까)
+      for (const m of game.field.getPlayerPokemon().getMoveset()) {
+        m.ppUsed = 0;
+      }
       if (wave !== lastWave) {
         lastWave = wave;
         seen.biomes.add(game.scene.arena.biomeId);
+        const enemy = game.field.getEnemyPokemon();
         if (battle.battleType === BattleType.TRAINER) {
-          expect(battle.trainer?.config.trainerType).toBe(TrainerType.BSEO_KEL);
-          expect(game.scene.getEnemyParty().length).toBe(3);
-          seen.kel++;
-        }
-        if (game.field.getEnemyPokemon().isBoss()) {
+          const type = battle.trainer?.config.trainerType;
+          if (type === TrainerType.BSEO_LEADER) {
+            seen.leader++;
+            expect(battle.trainer?.getName()).toContain("관장");
+            // 관장 팀은 같은 역할군
+            expect(new Set(game.scene.getEnemyParty().map(p => p.species.type1)).size).toBe(1);
+          } else {
+            expect(type).toBe(TrainerType.BSEO_KEL);
+            expect(game.scene.getEnemyParty().length).toBe(3);
+            seen.kel++;
+          }
+        } else if (enemy.isBoss()) {
           seen.boss++;
+        } else if (erCodeOfSpecies(enemy.species.speciesId) == null) {
+          seen.animal++;
+        } else {
+          seen.character++;
         }
         expect(battle.double).toBe(false);
       }
@@ -124,7 +155,13 @@ describe("블서로그 한 판 흐름", () => {
     }
     expect(game.scene.phaseManager.getCurrentPhase()).toBeInstanceOf(GameOverPhase);
     expect(seen.kel).toBe(5);
+    expect(seen.leader).toBe(5);
     expect(seen.boss).toBe(5);
+    // 일반 웨이브는 실험체가 대부분
+    expect(seen.character).toBeGreaterThan(seen.animal * 2);
+    process.stdout.write(
+      `한 판: 실험체 ${seen.character} · 동물 ${seen.animal} · KEL ${seen.kel} · 관장 ${seen.leader} · 보스 ${seen.boss} · 지역 ${seen.biomes.size}\n`,
+    );
     expect(seen.biomes.size).toBeGreaterThan(1);
   }, 240_000);
 

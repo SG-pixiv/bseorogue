@@ -40,6 +40,11 @@ export const ICON_ATLAS_KEY = "bseo_icons";
 const ICON_W = 40;
 const ICON_H = 30;
 
+/** 역할군 색 (관장 그림 테두리 등) */
+export function roleColor(type: PokemonType): string {
+  return COLORS[type] ?? "#9fb4d8";
+}
+
 function colorOf(speciesId: SpeciesId): string {
   const species = speciesDataRegistry.getSpecies(speciesId);
   return COLORS[species.type1] ?? "#666666";
@@ -203,7 +208,8 @@ export function ensureBseoIcons(): string {
 }
 
 /** KEL 팀 그림: 팀 이름 (로고 그림이 불러와졌으면 로고도) */
-export function ensureTeamSprite(spriteKey: string, teamName: string, logoKey?: string): void {
+/** KEL 팀 · 관장 그림. 줄바꿈(\n)으로 줄을 나눌 수 있고, color 는 테두리 색 */
+export function ensureTeamSprite(spriteKey: string, teamName: string, logoKey?: string, color = "#9fb4d8"): void {
   if (!canDraw()) {
     return;
   }
@@ -218,7 +224,7 @@ export function ensureTeamSprite(spriteKey: string, teamName: string, logoKey?: 
     return;
   }
   try {
-    drawTeam(tex.getContext(), w, h, teamName, logoKey);
+    drawTeam(tex.getContext(), w, h, teamName, logoKey, color);
   } catch {
     // 검사 환경(가짜 캔버스)
   }
@@ -235,13 +241,21 @@ export function ensureTeamSprite(spriteKey: string, teamName: string, logoKey?: 
   });
 }
 
-function drawTeam(ctx: CanvasRenderingContext2D, w: number, h: number, teamName: string, logoKey?: string): void {
+// biome-ignore lint/complexity/useMaxParams: 그림 그리기용 내부 함수
+function drawTeam(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  teamName: string,
+  logoKey: string | undefined,
+  color: string,
+): void {
   const textures = globalScene.textures;
   ctx.fillStyle = "#1d2433";
   ctx.beginPath();
   ctx.roundRect(4, 8, w - 8, h - 12, 8);
   ctx.fill();
-  ctx.strokeStyle = "#9fb4d8";
+  ctx.strokeStyle = color;
   ctx.lineWidth = 2;
   ctx.stroke();
   let textTop = h * 0.5;
@@ -255,6 +269,6 @@ function drawTeam(ctx: CanvasRenderingContext2D, w: number, h: number, teamName:
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillStyle = "#ffffff";
-  const lines = wrap(ctx, teamName, w - 16);
+  const lines = teamName.split("\n").flatMap(part => wrap(ctx, part, w - 16));
   lines.forEach((l, i) => ctx.fillText(l, w / 2, textTop + (i - (lines.length - 1) / 2) * 8));
 }
