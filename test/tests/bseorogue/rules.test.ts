@@ -5,7 +5,7 @@
 
 // 블서로그 규칙: 파티 3명 · 클래식 50웨이브 · 1:1 싱글만 · 판 중 영입 없음 · 미스터리 인카운터 없음
 import { BSEO } from "#app/bseorogue";
-import { PLAYER_PARTY_MAX_SIZE } from "#app/constants";
+import { defaultStarterSpecies, PLAYER_PARTY_MAX_SIZE } from "#app/constants";
 import { getGameMode } from "#app/game-mode";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { speciesEggMoves } from "#balance/moves/egg-moves";
@@ -13,7 +13,14 @@ import { ER_CHARACTERS } from "#data/bseorogue/er-data";
 import { bseoBossSpecies } from "#data/bseorogue/hooks";
 import { leagueForWave, promotionMessage, teamLeagueForWave } from "#data/bseorogue/league";
 import { bseoTypeMultiplier, Role } from "#data/bseorogue/roles";
-import { BSEO_BOSSES, BSEO_CHARACTERS, BSEO_STARTER_IDS, BSEO_STARTERS, BSEO_WILD } from "#data/bseorogue/roster";
+import {
+  BSEO_BOSSES,
+  BSEO_CHARACTERS,
+  BSEO_STARTER_IDS,
+  BSEO_STARTERS,
+  BSEO_WILD,
+  bseoCharacter,
+} from "#data/bseorogue/roster";
 import { COST_TOTALS } from "#data/bseorogue/stats";
 import { setRunTier, TIERS, tierLevelMultiplier, tierName, unlockedTier, unlockNextTier } from "#data/bseorogue/tiers";
 import { GameModes } from "#enums/game-modes";
@@ -83,7 +90,11 @@ describe("블서로그 데이터", () => {
 
   it("ER 실험체 전부가 적으로 나올 수 있고, 역할군은 ER 분류를 따라요", () => {
     expect(BSEO_CHARACTERS.length).toBe(Object.keys(ER_CHARACTERS).length);
-    const roles = BSEO_STARTERS.map(c => [c.name, c.role]);
+    // 직접 정한 6명
+    const roles = [30, 11, 18, 6, 12, 69].map(code => {
+      const c = bseoCharacter(code)!;
+      return [c.name, c.role];
+    });
     expect(roles).toEqual([
       ["일레븐", Role.TANK],
       ["유키", Role.BRUISER],
@@ -95,8 +106,15 @@ describe("블서로그 데이터", () => {
     expect(BSEO_CHARACTERS.filter(c => c.playable).length).toBe(BSEO_STARTERS.length);
   });
 
+  it("지금은 실험체 전부를 고를 수 있고 (도감처럼 ER 번호 순서), 처음부터 열려 있어요", () => {
+    expect(BSEO_STARTERS.length).toBe(BSEO_CHARACTERS.length);
+    const codes = BSEO_STARTERS.map(c => c.erCode);
+    expect(codes).toEqual([...codes].sort((a, b) => a - b));
+    expect([...defaultStarterSpecies].sort()).toEqual([...BSEO_STARTER_IDS].sort());
+  });
+
   it("스킨 진화: 기본 → 스킨 진화 1 (Lv12) → 스킨 진화 2 (Lv24)", () => {
-    const eleven = BSEO_STARTERS[0];
+    const eleven = bseoCharacter(30)!;
     expect(eleven.forms.map(f => f.name)).toEqual(["일레븐", "스위트 일레븐", "티타임 래빗 일레븐"]);
     expect(eleven.forms.map(f => f.id)).toEqual([
       SpeciesId.BSEO_ELEVEN,

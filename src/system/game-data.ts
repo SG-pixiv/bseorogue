@@ -397,6 +397,7 @@ export class GameData {
     this.dexData = Object.assign(this.dexData, systemData.dexData);
     this.consolidateDexData(this.dexData);
     this.defaultDexData = null;
+    this.unlockBseoStarters();
 
     // Ensure that the player gender in settings matches the player gender in system data
     if (systemData.gender !== PlayerGender.UNSET && systemData.gender !== settings.general.playerGender) {
@@ -1500,6 +1501,34 @@ export class GameData {
 
     if (!isIos()) {
       saveFile.click();
+    }
+  }
+
+  /**
+   * 블서로그: 시작 실험체는 처음부터 전부 열려 있어요.
+   * 예전 저장 파일(시작 실험체가 6명이던 때)에서 잠겨 있던 실험체도 불러올 때 열어요.
+   */
+  private unlockBseoStarters(): void {
+    const attr = DexAttr.NON_SHINY | DexAttr.MALE | DexAttr.FEMALE | DexAttr.DEFAULT_VARIANT | DexAttr.DEFAULT_FORM;
+    for (const id of defaultStarterSpecies) {
+      const entry = this.dexData[id];
+      if (!entry) {
+        continue;
+      }
+      if (!(entry.caughtAttr & DexAttr.NON_SHINY)) {
+        entry.seenAttr |= attr;
+        entry.caughtAttr |= attr;
+      }
+      if (!entry.natureAttr) {
+        entry.natureAttr = 1 << (Nature.HARDY + 1);
+      }
+      for (const i in entry.ivs) {
+        entry.ivs[i] = Math.max(entry.ivs[i], 15);
+      }
+      const starter = this.starterData[id];
+      if (starter && !starter.abilityAttr) {
+        starter.abilityAttr = AbilityAttr.ABILITY_1;
+      }
     }
   }
 

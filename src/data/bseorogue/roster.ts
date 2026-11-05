@@ -12,8 +12,10 @@ import { MoveId } from "#enums/move-id";
 /**
  * 블서로그 실험체 · 야생동물 · 보스 목록
  *
- * - 실험체는 ER 실험체 전부(er-data.ts)예요. 그중 BSEO_PLAYABLE 에 적은 실험체만 시작 실험체로 고를 수 있고,
- *   나머지는 KEL 팀 같은 적으로만 나와요. 첫 공개 30명은 BSEO_PLAYABLE 에 추가하면 돼요.
+ * - 실험체는 ER 실험체 전부(er-data.ts)이고, 지금은 전부 시작 실험체로 고를 수 있어요 (도감처럼 ER 번호 순서).
+ *   BSEO_PLAYABLE 에 적은 실험체는 무기 · 코스트 · 종족값을 직접 정한 것이고,
+ *   나머지는 역할군 기본 모양 · 1코스트로 임시로 만들어요. 나중에 BSEO_PLAYABLE 에 하나씩 추가하면 돼요.
+ *   다시 일부만 고를 수 있게 하려면 ALL_PLAYABLE 을 false 로 바꿔요.
  * - 이름 · 역할군(ER 분류) · 무기 · 스킬 이름 · 스킨은 ER 공식 데이터에서 가져와요.
  * - 종족값은 포켓로그 진화 라인을 참고해서 정했어요 (stats.ts). 스킬 효과는 임시예요 (skill-moves.ts).
  * - 진화 = 스킨: 기본 모습 → 스킨 진화 1 → 스킨 진화 2 (skin-evolution.ts, 지금은 임시 순서)
@@ -114,8 +116,11 @@ interface PlayableConfig {
   role?: ErRoleKey;
 }
 
+/** 지금은 ER 실험체 전부를 고를 수 있게 (임시). false 면 BSEO_PLAYABLE 에 적은 실험체만 */
+export const ALL_PLAYABLE = true;
+
 /**
- * 고를 수 있는 실험체 (시작 실험체). 적은 순서대로 고르기 화면에 나와요.
+ * 무기 · 코스트 · 종족값을 직접 정한 실험체.
  * 1코스트 → 기본 320 · 스킨 진화 1 410 · 스킨 진화 2 500. 숫자는 다 큰 모습 기준 [체력, 공격력, 방어력, 스킬 증폭, 스킬 저항, 속도]
  */
 export const BSEO_PLAYABLE: readonly PlayableConfig[] = [
@@ -166,7 +171,7 @@ function buildCharacter(erCode: number, cfg: PlayableConfig | undefined): BseoCh
     weapon: cfg?.weapon ?? er.weapons[0] ?? "",
     role,
     cost,
-    playable: !!cfg,
+    playable: ALL_PLAYABLE || !!cfg,
     stats: stages[0],
     stages,
     focus: cfg?.focus ?? "역할군 기본",
@@ -197,10 +202,8 @@ export function bseoCharacter(erCode: number): BseoCharacter | undefined {
   return BY_CODE.get(erCode);
 }
 
-/** 시작 실험체 (BSEO_PLAYABLE 순서) */
-export const BSEO_STARTERS: readonly BseoCharacter[] = BSEO_PLAYABLE.map(c => BY_CODE.get(c.erCode)).filter(
-  (c): c is BseoCharacter => c != null,
-);
+/** 시작 실험체 (도감처럼 ER 번호 순서) */
+export const BSEO_STARTERS: readonly BseoCharacter[] = BSEO_CHARACTERS.filter(c => c.playable);
 
 /**
  * 야생동물 (영입 불가 · 웨이브가 올라갈수록 센 동물이 섞여요)

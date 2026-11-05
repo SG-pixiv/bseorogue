@@ -25,15 +25,13 @@ export const TYPE_BOOST_ITEM_BOOST_PERCENT = 20;
 /**
  * The default species that a new player can choose from
  */
-export const defaultStarterSpecies: readonly StarterSpeciesId[] = [
-  // 블서로그: 처음에는 시작 실험체 6명이 열려 있어요
-  SpeciesId.BSEO_ELEVEN,
-  SpeciesId.BSEO_YUKI,
-  SpeciesId.BSEO_SHOICHI,
-  SpeciesId.BSEO_NADINE,
-  SpeciesId.BSEO_HYEJIN,
-  SpeciesId.BSEO_LENI,
-];
+/**
+ * 블서로그: 실험체(ER 번호마다 기본 모습 1030 + 번호×3)는 처음부터 전부 열려 있어요.
+ * roster.ts 를 여기서 불러오면 순환 참조가 생겨서, 종 번호 범위로 골라요.
+ */
+export const defaultStarterSpecies: readonly StarterSpeciesId[] = (Object.values(SpeciesId) as unknown[]).filter(
+  (id): id is StarterSpeciesId => typeof id === "number" && id >= 1030 && id < 1600 && (id - 1030) % 3 === 0,
+);
 
 export const saveKey = "x0i2O7WRiANTqPmZ"; // Temporary; secure encryption is not yet necessary
 
