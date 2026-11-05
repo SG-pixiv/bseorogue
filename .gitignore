@@ -49,4 +49,5 @@ coverage
 game-data-output/*
 # 블서로그: ER API 키와 받은 원본 데이터는 올리지 않아요
 er-key.txt
-er-data/
+/er-data/
+scripts/er-data/er-data/

@@ -122,6 +122,8 @@ export function minifyPublicJsonFiles(): VitePlugin {
       const assetsDir = resolve("./assets");
       const localesDir = resolve("./locales");
       const outputDir = resolve(options.dir || "dist");
+      // 블서로그: 처음 빌드할 때(Vercel 등) dist 폴더가 아직 없어서 먼저 만들어요
+      mkdirSync(outputDir, { recursive: true });
 
       minifyJsonFiles(assetsDir, outputDir);
       minifyJsonFiles(localesDir, join(outputDir, "locales"));
