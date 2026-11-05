@@ -134,6 +134,7 @@ import { AbilityBar } from "#ui/ability-bar";
 import { ArenaFlyout } from "#ui/arena-flyout";
 import { CandyBar } from "#ui/candy-bar";
 import { CharSprite } from "#ui/char-sprite";
+import { mouseController } from "#ui/mouse-controller";
 import { PartyExpBar } from "#ui/party-exp-bar";
 import { PokeballTray } from "#ui/pokeball-tray";
 import { PokemonInfoContainer } from "#ui/pokemon-info-container";
@@ -406,7 +407,8 @@ export class BattleScene extends SceneBase {
   public create(): void {
     // 블서로그: 개발 서버에서만 브라우저 검사용으로 씬을 꺼내 둬요
     if (import.meta.env.DEV) {
-      (window as unknown as { __bseoScene: BattleScene }).__bseoScene = this;
+      (window as unknown as { __bseoScene: BattleScene; __bseoMouse: typeof mouseController }).__bseoScene = this;
+      (window as unknown as { __bseoMouse: typeof mouseController }).__bseoMouse = mouseController;
     }
     this.scene.remove(LoadingScene.KEY);
     initGameSpeed(this);
@@ -656,6 +658,8 @@ export class BattleScene extends SceneBase {
     this.ui = new UI();
     this.uiContainer.add(this.ui);
     this.ui.setup();
+    // 블서로그: 마우스로도 전부 조작
+    mouseController.init();
 
     this.phaseManager.toTitleScreen(true);
     this.phaseManager.shiftPhase();

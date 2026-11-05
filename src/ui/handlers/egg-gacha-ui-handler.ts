@@ -45,6 +45,8 @@ export class EggGachaUiHandler extends MessageUiHandler {
   private eggDropTweenChain?: Phaser.Tweens.TweenChain | undefined;
 
   private scale = 0.1666666667;
+  /** 뽑기 개수 고르기 글자 (줄 간격을 재려고 들고 있어요) */
+  private optionText: Phaser.GameObjects.Text | null = null;
 
   private readonly legendaryExpiration = addTextObject(0, 0, "", TextStyle.WINDOW_ALT);
   private playTimeTimer: Phaser.Time.TimerEvent | null;
@@ -271,12 +273,13 @@ export class EggGachaUiHandler extends MessageUiHandler {
       .setPositionRelative(this.eggGachaOptionSelectBg, 16, 9);
 
     this.eggGachaOptionsContainer.add(optionText);
+    this.optionText = optionText;
 
     pullOptions.forEach((option, i) => {
       const icon = globalScene.add
         .sprite(0, 0, "items", option.icon)
         .setScale(3 * this.scale)
-        .setPositionRelative(this.eggGachaOptionSelectBg, 20, 9 + (48 + i * 96) * this.scale);
+        .setPositionRelative(this.eggGachaOptionSelectBg, 20, 9 + this.getOptionPitch() * (i + 0.5));
       this.eggGachaOptionsContainer.add(icon);
     });
 
@@ -876,9 +879,28 @@ export class EggGachaUiHandler extends MessageUiHandler {
     }
 
     this.cursorObj.setScale(this.scale * 6);
-    this.cursorObj.setPositionRelative(this.eggGachaOptionSelectBg, 10, 9 + (48 + this.cursor * 96) * this.scale);
+    this.cursorObj.setPositionRelative(
+      this.eggGachaOptionSelectBg,
+      10,
+      9 + this.getOptionPitch() * (this.cursor + 0.5),
+    );
 
     return ret;
+  }
+
+  /**
+   * 블서로그: 고르기 줄 하나의 높이. 글꼴마다 실제 줄 간격이 달라서(한국어 글꼴은 더 좁아요)
+   * 글자 줄 간격에 커서 · 아이콘 · 마우스로 누르는 칸을 맞춰요.
+   */
+  public getOptionPitch(): number {
+    const fallback = 96 * this.scale;
+    const text = this.optionText;
+    const lines = text?.text ? text.text.split("\n").length : 0;
+    if (!text || lines < 2 || !text.displayHeight) {
+      return fallback;
+    }
+    const pitch = text.displayHeight / lines;
+    return pitch > 4 && pitch < fallback * 1.5 ? pitch : fallback;
   }
 
   setGachaCursor(cursor: number): boolean {

@@ -58,6 +58,7 @@ pnpm build         # dist/ 에 배포용 파일
 | 역할군 관장 · 대사 | `src/data/bseorogue/leaders.ts` |
 | 지역마다 많이 나오는 역할군 · 동물 비율 | `src/data/bseorogue/regions.ts`, `src/bseorogue.ts` 의 `wildAnimalRate` |
 | 임시 그림 | `src/data/bseorogue/placeholder-art.ts` (진짜 그림을 넣으면 `REAL_ART` 에 종 번호 추가) |
+| 마우스로 누르는 칸 (화면마다) | `src/ui/mouse/mouse-screens.ts` (조작 규칙은 `mouse-controller.ts`) |
 
 검사: `pnpm test:silent test/tests/bseorogue` (1웨이브부터 50웨이브 클리어까지 자동으로 돌려 봐요)
 

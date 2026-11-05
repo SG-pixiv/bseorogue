@@ -226,8 +226,23 @@ export abstract class BaseOptionSelectUiHandler<T extends OptionSelectItem> exte
     this.cursorObj.setPositionRelative(
       this.optionSelectBg,
       10,
-      102 * this.scale + this.cursor * (114 * this.scale - 3) - 2,
+      102 * this.scale + this.cursor * this.getRowPitch() - 2,
     );
+  }
+
+  /**
+   * 블서로그: 한 줄의 높이. 글꼴마다 실제 줄 간격이 달라서(한국어 글꼴은 더 좁아요)
+   * 글자 줄 간격에 커서 · 아이콘 · 마우스로 누르는 칸을 맞춰요.
+   */
+  public getRowPitch(): number {
+    const fallback = 114 * this.scale - 3;
+    const text = this.optionSelectText;
+    const lines = text?.text ? text.text.split("\n").length : 0;
+    if (lines < 2 || !text.displayHeight) {
+      return fallback;
+    }
+    const pitch = text.displayHeight / lines;
+    return pitch > 4 && pitch < fallback * 1.5 ? pitch : fallback;
   }
 
   /**
@@ -347,7 +362,7 @@ export abstract class BaseOptionSelectUiHandler<T extends OptionSelectItem> exte
     let currentIconIndex = 0;
     currentOptions.forEach((option: UIOptionSelectItem, index: number) => {
       if (option.iconsConfig) {
-        const iconY = 7 + index * (114 * this.scale - 3);
+        const iconY = 7 + index * this.getRowPitch();
         const iconX = Math.floor((option.iconsWidth ?? 0) / 2);
 
         for (const config of option.iconsConfig) {

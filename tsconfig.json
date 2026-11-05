@@ -96,6 +96,7 @@
         "./src/ui/handlers/*.ts",
         "./src/ui/settings/*.ts",
         "./src/ui/utils/*.ts",
+        "./src/ui/mouse/*.ts",
         "./src/ui/*.ts"
       ],
       "#utils/*": ["./src/utils/*.ts"],
