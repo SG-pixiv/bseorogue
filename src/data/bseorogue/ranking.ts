@@ -7,14 +7,11 @@
 import { BSEO } from "#app/bseorogue";
 import { mumeiConnected, submitScore } from "#app/bseorogue-api";
 import { globalScene } from "#app/global-scene";
-import { BSEO_STARTERS } from "#data/bseorogue/roster";
+import { erCodeOfSpecies } from "#data/bseorogue/roster";
 import { UiMode } from "#enums/ui-mode";
 
 const NICK_KEY = "bseo.nickname";
 const NICK_RULE = /^[가-힣A-Za-z0-9_]{2,12}$/;
-const erCodeOf = new Map<number, number>(
-  BSEO_STARTERS.filter(c => c.erCode != null).map(c => [c.id, c.erCode as number]),
-);
 
 function readNick(): string {
   try {
@@ -46,7 +43,7 @@ export async function offerRanking(isVictory: boolean): Promise<void> {
   const wave = Math.min(globalScene.currentBattle?.waveIndex ?? 1, BSEO.classicFinalWave);
   const party = globalScene
     .getPlayerParty()
-    .map(p => erCodeOf.get(p.species.getRootSpeciesId()))
+    .map(p => erCodeOfSpecies(p.species.speciesId))
     .filter((c): c is number => typeof c === "number");
   if (party.length === 0) {
     return;

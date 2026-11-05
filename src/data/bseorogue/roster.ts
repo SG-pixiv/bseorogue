@@ -3,17 +3,20 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { ER_CHARACTERS, ER_MONSTERS } from "#data/bseorogue/er-data";
+import { ER_CHARACTERS, ER_MONSTERS, type ErRoleKey } from "#data/bseorogue/er-data";
 import { Role } from "#data/bseorogue/roles";
-import { characterStages, erMonsterStats, type Stages3, type Stats6 } from "#data/bseorogue/stats";
+import { SKILL_MOVES } from "#data/bseorogue/skill-moves";
+import { skinEvolutionOf } from "#data/bseorogue/skin-evolution";
+import { characterStages, erMonsterStats, ROLE_SHAPE, type Stages3, type Stats6 } from "#data/bseorogue/stats";
 import { MoveId } from "#enums/move-id";
 /**
  * 블서로그 실험체 · 야생동물 · 보스 목록
  *
- * 실험체 이름 · 스킬 이름 · 스킨은 ER 공식 데이터(er-data.ts)에서 가져와요.
- * 종족값은 포켓로그 진화 라인을 참고해서 정했어요 (stats.ts 설명 참고). 스킬 효과는 임시예요.
- * 스킬은 지금은 포켓로그에 있는 기술의 효과를 빌려 쓰고, 이름 · 상성만 블서로그 것으로 바꿔요.
- * 그래서 한 기술은 한 실험체만 써야 해요 (야생동물 · 보스도 실험체 스킬과 겹치면 안 돼요).
+ * - 실험체는 ER 실험체 전부(er-data.ts)예요. 그중 BSEO_PLAYABLE 에 적은 실험체만 시작 실험체로 고를 수 있고,
+ *   나머지는 KEL 팀 같은 적으로만 나와요. 첫 공개 30명은 BSEO_PLAYABLE 에 추가하면 돼요.
+ * - 이름 · 역할군(ER 분류) · 무기 · 스킬 이름 · 스킨은 ER 공식 데이터에서 가져와요.
+ * - 종족값은 포켓로그 진화 라인을 참고해서 정했어요 (stats.ts). 스킬 효과는 임시예요 (skill-moves.ts).
+ * - 진화 = 스킨: 기본 모습 → 스킨 진화 1 → 스킨 진화 2 (skin-evolution.ts, 지금은 임시 순서)
  * 스탯 순서: [체력, 공격력, 방어력, 스킬 증폭, 스킬 저항, 속도] (포켓로그 HP · 공격 · 방어 · 특공 · 특방 · 스피드)
  * 공격력은 물리 스킬(평원딜 · 브루저 등), 스킬 증폭은 특수 스킬(스증딜러 · 서포터)에 쓰여요.
  */
@@ -30,25 +33,41 @@ export interface BseoSkill {
   level: number;
 }
 
-export interface BseoCharacter {
+/** 기본 모습 · 스킨 진화 1 · 스킨 진화 2 */
+export interface BseoForm {
   id: SpeciesId;
-  /** ER 실험체 번호 (무명섬 er_characters.code 와 같아요. 모르면 null) */
-  erCode: number | null;
+  name: string;
+  role: Role;
+  stats: Stats6;
+  /** 이 모습이 되는 레벨 (기본 모습은 0) */
+  level: number;
+}
+
+export interface BseoCharacter {
+  /** 기본 모습의 종 번호 */
+  id: SpeciesId;
+  /** ER 실험체 번호 (무명섬 er_characters.code 와 같아요) */
+  erCode: number;
   name: string;
   weapon: string;
+  /** 기본 모습의 역할군 */
   role: Role;
   cost: number;
-  /** 지금 모습(기본 모습) 종족값 */
+  /** 시작 실험체로 고를 수 있는지 (아니면 KEL 팀 같은 적으로만 나와요) */
+  playable: boolean;
+  /** 기본 모습 종족값 */
   stats: Stats6;
-  /** [기본, 스킨 진화 1, 스킨 진화 2] 종족값 (스킨 진화를 넣으면 써요) */
+  /** [기본, 스킨 진화 1, 스킨 진화 2] 종족값 */
   stages: Stages3;
   /** 어디에 중점을 뒀는지 (설명용) */
   focus: string;
+  /** [기본, 스킨 진화 1, 스킨 진화 2] */
+  forms: readonly [BseoForm, BseoForm, BseoForm];
   /** Q · W · E · R */
   skills: readonly [BseoSkill, BseoSkill, BseoSkill, BseoSkill];
   /** 고유 패시브 이름 (효과는 나중에) */
   passive: string;
-  /** 0번 기본 모습, 1번부터 스킨 (진화 = 스킨) */
+  /** ER 스킨 목록 (0번 기본 모습) */
   skins: readonly string[];
 }
 
@@ -71,117 +90,117 @@ export interface BseoBoss {
 }
 
 /**
- * 실험체 한 명: 이름 · 스킬 이름 · 스킨은 ER 데이터에서
- * final 은 다 큰 모습(스킨 진화 2) 종족값이에요. 기본 모습 · 스킨 진화 1은 같은 모양으로 합만 줄여요 (stats.ts)
- * moves 는 효과를 빌려 쓰는 포켓로그 기술 [Q, W, E, R] (효과는 나중에 블서로그 것으로)
+ * 실험체 종 번호: 1030 + ER 번호 × 3 + 단계 (0 기본 · 1 스킨 진화 1 · 2 스킨 진화 2)
+ * 포켓로그는 2000 이상 번호를 지역 폼(알로라 등)으로 봐서, 포켓몬(~1025)과 야생동물(1601~) 사이 빈 자리를 써요
  */
-function character(
-  id: SpeciesId,
-  erCode: number,
-  weapon: string,
-  role: Role,
-  cost: number,
-  focus: string,
-  final: Stats6,
-  moves: readonly [MoveId, MoveId, MoveId, MoveId],
-): BseoCharacter {
+export function bseoSpeciesId(erCode: number, stage = 0): SpeciesId {
+  return (1030 + erCode * 3 + stage) as SpeciesId;
+}
+
+/** 종 번호 → ER 실험체 번호 (실험체가 아니면 null) */
+export function erCodeOfSpecies(id: SpeciesId): number | null {
+  return id >= 1030 && id < 1600 ? Math.floor((id - 1030) / 3) : null;
+}
+
+interface PlayableConfig {
+  erCode: number;
+  weapon: string;
+  cost: number;
+  /** 어디에 중점을 두는지 (설명용) */
+  focus: string;
+  /** 다 큰 모습(스킨 진화 2) 종족값. 기본 모습 · 스킨 진화 1은 합만 줄여서 같은 모양으로 만들어요 */
+  final: Stats6;
+  /** 역할군을 ER 분류와 다르게 쓰고 싶을 때만 */
+  role?: ErRoleKey;
+}
+
+/**
+ * 고를 수 있는 실험체 (시작 실험체). 적은 순서대로 고르기 화면에 나와요.
+ * 1코스트 → 기본 320 · 스킨 진화 1 410 · 스킨 진화 2 500. 숫자는 다 큰 모습 기준 [체력, 공격력, 방어력, 스킬 증폭, 스킬 저항, 속도]
+ */
+export const BSEO_PLAYABLE: readonly PlayableConfig[] = [
+  // 탱커: 체력이 제일 높고 방어 · 스킬 저항도 높아요. 대신 느려요
+  { erCode: 30, weapon: "망치", cost: 1, focus: "체력", final: [125, 80, 105, 40, 95, 55] }, // 일레븐
+  // 브루저: 공격력과 방어력이 함께 높은 정면 싸움꾼
+  { erCode: 11, weapon: "양손검", cost: 1, focus: "공격력 · 방어력", final: [90, 115, 100, 40, 70, 85] }, // 유키
+  // 암살자: 제일 빨라서 먼저 때리지만, 맞으면 약해요
+  { erCode: 18, weapon: "단검", cost: 1, focus: "속도", final: [65, 120, 60, 50, 60, 145] }, // 쇼이치
+  // 평원딜: 공격력이 제일 높은 원거리 딜러. 방어가 낮아요
+  { erCode: 6, weapon: "석궁", cost: 1, focus: "공격력", final: [65, 135, 55, 55, 70, 120] }, // 나딘
+  // 스증딜러: 스킬 증폭이 제일 높아요. 체력 · 공격력은 낮아요
+  { erCode: 12, weapon: "암기", cost: 1, focus: "스킬 증폭", final: [65, 45, 60, 140, 85, 105] }, // 혜진
+  // 서포터: 스킬 저항이 제일 높고 오래 버텨요. 공격력은 낮아요
+  { erCode: 69, weapon: "권총", cost: 1, focus: "스킬 저항", final: [90, 55, 80, 95, 115, 65] }, // 레니
+];
+
+const SKILL_KEYS = ["Q", "W", "E", "R"] as const;
+const SKILL_LEVELS = [1, 1, 5, 10] as const;
+
+function buildCharacter(erCode: number, cfg: PlayableConfig | undefined): BseoCharacter | null {
   const er = ER_CHARACTERS[erCode];
-  const name = er?.name ?? `실험체 ${erCode}`;
-  const levels = [1, 1, 5, 10];
-  const keys = ["Q", "W", "E", "R"];
-  const stages = characterStages(final, cost);
+  const moves = SKILL_MOVES[erCode];
+  if (!er || !moves) {
+    return null;
+  }
+  const role = Role[cfg?.role ?? er.role];
+  const cost = cfg?.cost ?? 1;
+  const stages = characterStages(cfg?.final ?? ROLE_SHAPE[role], cost);
+  const evo = skinEvolutionOf(erCode);
+  const roles: Role[] = [role];
+  for (const r of evo.roles) {
+    roles.push(r ? Role[r] : (roles.at(-1) ?? role));
+  }
+  const formName = (stage: number) =>
+    stage === 0 ? er.name : (er.skins[evo.skins[stage - 1]] ?? `${er.name}${"★".repeat(stage)}`);
+  const forms = [0, 1, 2].map(stage => ({
+    id: bseoSpeciesId(erCode, stage),
+    name: formName(stage),
+    role: roles[stage],
+    stats: stages[stage],
+    level: stage === 0 ? 0 : evo.levels[stage - 1],
+  })) as unknown as BseoCharacter["forms"];
   return {
-    id,
+    id: forms[0].id,
     erCode,
-    name,
-    weapon,
+    name: er.name,
+    weapon: cfg?.weapon ?? er.weapons[0] ?? "",
     role,
     cost,
+    playable: !!cfg,
     stats: stages[0],
     stages,
-    focus,
-    passive: er?.skills[0] ?? "",
-    skins: er?.skins ?? [name],
+    focus: cfg?.focus ?? "역할군 기본",
+    forms,
+    passive: er.skills[0] ?? "",
+    skins: er.skins,
     skills: moves.map((move, i) => ({
       move,
-      name: er?.skills[i + 1] || `${name} ${keys[i]}`,
-      level: levels[i],
+      name: er.skills[i + 1] || `${er.name} ${SKILL_KEYS[i]}`,
+      level: SKILL_LEVELS[i],
     })) as unknown as BseoCharacter["skills"],
   };
 }
 
-/**
- * 시작 실험체 6명 (모두 1코스트 → 기본 320 · 스킨 진화 1 410 · 스킨 진화 2 500)
- * 숫자는 다 큰 모습 기준 [체력, 공격력, 방어력, 스킬 증폭, 스킬 저항, 속도]
- */
-export const BSEO_STARTERS: readonly BseoCharacter[] = [
-  // 탱커: 체력이 제일 높고 방어 · 스킬 저항도 높아요. 대신 느려요
-  character(
-    SpeciesId.BSEO_ELEVEN,
-    30,
-    "망치",
-    Role.TANK,
-    1,
-    "체력",
-    [125, 80, 105, 40, 95, 55],
-    [MoveId.HAMMER_ARM, MoveId.IRON_DEFENSE, MoveId.BODY_SLAM, MoveId.GIGA_IMPACT],
-  ),
-  // 브루저: 공격력과 방어력이 함께 높은 정면 싸움꾼
-  character(
-    SpeciesId.BSEO_YUKI,
-    11,
-    "양손검",
-    Role.BRUISER,
-    1,
-    "공격력 · 방어력",
-    [90, 115, 100, 40, 70, 85],
-    [MoveId.SLASH, MoveId.SWORDS_DANCE, MoveId.SACRED_SWORD, MoveId.LEAF_BLADE],
-  ),
-  // 암살자: 제일 빨라서 먼저 때리지만, 맞으면 약해요
-  character(
-    SpeciesId.BSEO_SHOICHI,
-    18,
-    "단검",
-    Role.ASSASSIN,
-    1,
-    "속도",
-    [65, 120, 60, 50, 60, 145],
-    [MoveId.NIGHT_SLASH, MoveId.QUICK_ATTACK, MoveId.SUCKER_PUNCH, MoveId.PSYCHO_CUT],
-  ),
-  // 평원딜: 공격력이 제일 높은 원거리 딜러. 방어가 낮아요
-  character(
-    SpeciesId.BSEO_NADINE,
-    6,
-    "석궁",
-    Role.MARKSMAN,
-    1,
-    "공격력",
-    [65, 135, 55, 55, 70, 120],
-    [MoveId.BULLET_SEED, MoveId.FOCUS_ENERGY, MoveId.THOUSAND_ARROWS, MoveId.STONE_EDGE],
-  ),
-  // 스증딜러: 스킬 증폭이 제일 높아요. 체력 · 공격력은 낮아요
-  character(
-    SpeciesId.BSEO_HYEJIN,
-    12,
-    "암기",
-    Role.MAGE,
-    1,
-    "스킬 증폭",
-    [65, 45, 60, 140, 85, 105],
-    [MoveId.SHADOW_BALL, MoveId.HEX, MoveId.CONFUSE_RAY, MoveId.DARK_PULSE],
-  ),
-  // 서포터: 스킬 저항이 제일 높고 오래 버텨요. 공격력은 낮아요
-  character(
-    SpeciesId.BSEO_LENI,
-    69,
-    "권총",
-    Role.SUPPORT,
-    1,
-    "스킬 저항",
-    [90, 55, 80, 95, 115, 65],
-    [MoveId.FLASH_CANNON, MoveId.HEAL_PULSE, MoveId.PROTECT, MoveId.MOONBLAST],
-  ),
-];
+const PLAYABLE_BY_CODE = new Map(BSEO_PLAYABLE.map(c => [c.erCode, c]));
+
+/** ER 실험체 전부 (고를 수 있는 실험체 + 적으로만 나오는 실험체) */
+export const BSEO_CHARACTERS: readonly BseoCharacter[] = Object.keys(ER_CHARACTERS)
+  .map(Number)
+  .sort((a, b) => a - b)
+  .map(code => buildCharacter(code, PLAYABLE_BY_CODE.get(code)))
+  .filter((c): c is BseoCharacter => c != null);
+
+const BY_CODE = new Map(BSEO_CHARACTERS.map(c => [c.erCode, c]));
+
+/** ER 번호 → 실험체 */
+export function bseoCharacter(erCode: number): BseoCharacter | undefined {
+  return BY_CODE.get(erCode);
+}
+
+/** 시작 실험체 (BSEO_PLAYABLE 순서) */
+export const BSEO_STARTERS: readonly BseoCharacter[] = BSEO_PLAYABLE.map(c => BY_CODE.get(c.erCode)).filter(
+  (c): c is BseoCharacter => c != null,
+);
 
 /**
  * 야생동물 (영입 불가 · 웨이브가 올라갈수록 센 동물이 섞여요)
@@ -245,11 +264,50 @@ export const BSEO_BOSSES: readonly BseoBoss[] = [
   },
 ];
 
+/** 야생동물 · 보스 스킬 이름 (효과는 빌려 쓰는 포켓로그 기술 그대로) */
+export const ENEMY_MOVE_NAMES: Readonly<Partial<Record<MoveId, string>>> = {
+  [MoveId.PECK]: "쪼기",
+  [MoveId.GROWL]: "꼬꼬댁",
+  [MoveId.WING_ATTACK]: "날개 치기",
+  [MoveId.LEER]: "초음파",
+  [MoveId.TACKLE]: "들이받기",
+  [MoveId.TAKE_DOWN]: "돌진",
+  [MoveId.BITE]: "물어뜯기",
+  [MoveId.HYPER_FANG]: "송곳니",
+  [MoveId.CRUNCH]: "깨물기",
+  [MoveId.FURY_SWIPES]: "할퀴기",
+  [MoveId.SLAM]: "앞발 내려찍기",
+  [MoveId.SUPERPOWER]: "괴력",
+  [MoveId.IRON_HEAD]: "강철 박치기",
+  [MoveId.HEADBUTT]: "박치기",
+  [MoveId.METEOR_MASH]: "강철 주먹",
+  [MoveId.EXTREME_SPEED]: "순간 가속",
+  [MoveId.MIRROR_SHOT]: "반사 광선",
+  [MoveId.TRI_ATTACK]: "3연속 사격",
+  [MoveId.GYRO_BALL]: "회전 돌격",
+  [MoveId.AURA_SPHERE]: "파동",
+  [MoveId.THUNDERBOLT]: "경계 방전",
+  [MoveId.DAZZLING_GLEAM]: "경고등",
+  [MoveId.PSYCHIC]: "시스템 간섭",
+  [MoveId.CALM_MIND]: "연산 집중",
+};
+
 export const BSEO_STARTER_IDS = BSEO_STARTERS.map(c => c.id);
+/** 실험체의 모든 모습 (기본 · 스킨 진화 1 · 2) */
+export const BSEO_FORM_IDS: readonly SpeciesId[] = BSEO_CHARACTERS.flatMap(c => c.forms.map(f => f.id));
 export const BSEO_ALL_IDS: readonly SpeciesId[] = [
-  ...BSEO_STARTER_IDS,
+  ...BSEO_FORM_IDS,
   ...BSEO_WILD.map(w => w.id),
   ...BSEO_BOSSES.map(b => b.id),
 ];
-/** 고를 수 없는 블서로그 종 (야생동물 · 보스) */
-export const BSEO_NON_STARTER_IDS: readonly SpeciesId[] = [...BSEO_WILD.map(w => w.id), ...BSEO_BOSSES.map(b => b.id)];
+/** 적으로만 나오는 실험체의 기본 모습 */
+export const BSEO_ENEMY_CHARACTER_IDS: readonly SpeciesId[] = BSEO_CHARACTERS.filter(c => !c.playable).map(c => c.id);
+/**
+ * 고를 수는 없지만 기록 칸(starterData)이 필요한 블서로그 종: 적으로만 나오는 실험체 · 야생동물 · 보스
+ * (스킨 진화한 모습은 기본 모습의 기록 칸을 같이 써요)
+ */
+export const BSEO_NON_STARTER_IDS: readonly SpeciesId[] = [
+  ...BSEO_ENEMY_CHARACTER_IDS,
+  ...BSEO_WILD.map(w => w.id),
+  ...BSEO_BOSSES.map(b => b.id),
+];

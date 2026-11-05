@@ -804,7 +804,43 @@ export function initModifierPools() {
   initTrainerModifierPool();
   initEnemyBuffModifierPool();
   initDailyStarterModifierPool();
+
+  // 블서로그: 포켓몬에만 맞는 보상은 빼요
+  for (const tier of Object.keys(modifierPool)) {
+    const pool = modifierPool[tier as unknown as ModifierTier];
+    if (pool) {
+      modifierPool[tier as unknown as ModifierTier] = pool.filter(w => !BSEO_NO_REWARD.has(w.modifierType.id));
+    }
+  }
 }
+
+/**
+ * 블서로그에서 보상으로 안 나오는 것
+ * 기술머신(포켓몬 기술) · 테라스탈 · 메가 · 다이맥스 · 합체 · 특성(실험체는 특성이 없어요) · 더블배틀(1:1만) · 포획 관련
+ */
+const BSEO_NO_REWARD = new Set<string>([
+  "TM_COMMON",
+  "TM_GREAT",
+  "TM_ULTRA",
+  "TERA_SHARD",
+  "TERA_ORB",
+  "MEGA_BRACELET",
+  "DYNAMAX_BAND",
+  "DNA_SPLICERS",
+  "ABILITY_CHARM",
+  "CATCHING_CHARM",
+  "LURE",
+  "SUPER_LURE",
+  "MAX_LURE",
+  "EVOLUTION_ITEM",
+  "RARE_EVOLUTION_ITEM",
+  "FORM_CHANGE_ITEM",
+  "RARE_FORM_CHANGE_ITEM",
+  "SPECIES_STAT_BOOSTER",
+  "RARE_SPECIES_STAT_BOOSTER",
+  "MINI_BLACK_HOLE",
+  "MYSTERY_ENCOUNTER_GOLDEN_BUG_NET",
+]);
 
 /**
  * High order function that returns a WeightedModifierTypeWeightFunc that will only be applied on
@@ -828,7 +864,7 @@ function skipInClassicAfterWave(wave: number, defaultWeight: number): WeightedMo
  * @returns A WeightedModifierTypeWeightFunc
  */
 function skipInLastClassicWaveOrDefault(defaultWeight: number): WeightedModifierTypeWeightFunc {
-  return skipInClassicAfterWave(199, defaultWeight);
+  return skipInClassicAfterWave(BSEO.classicFinalWave - 1, defaultWeight); // 블서로그: 49 (포켓로그 199)
 }
 
 /**
@@ -841,7 +877,7 @@ function skipInLastClassicWaveOrDefault(defaultWeight: number): WeightedModifier
 function lureWeightFunc(maxBattles: number, weight: number): WeightedModifierTypeWeightFunc {
   return () => {
     const lures = globalScene.getModifiers(DoubleBattleChanceBoosterModifier);
-    return !(globalScene.gameMode.isClassic && globalScene.currentBattle.waveIndex === 199)
+    return !(globalScene.gameMode.isClassic && globalScene.currentBattle.waveIndex === BSEO.classicFinalWave - 1)
       && (lures.length === 0
         || lures.filter(m => m.getMaxBattles() === maxBattles && m.getBattleCount() >= maxBattles * 0.6).length === 0)
       ? weight

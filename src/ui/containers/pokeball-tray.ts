@@ -1,3 +1,4 @@
+import { PLAYER_PARTY_MAX_SIZE } from "#app/constants";
 import { audioManager } from "#app/global-audio-manager";
 import { globalScene } from "#app/global-scene";
 import type { Pokemon } from "#field/pokemon";
@@ -23,7 +24,8 @@ export class PokeballTray extends Phaser.GameObjects.Container {
 
     this.add(this.bg);
 
-    this.balls = new Array(6)
+    // 블서로그: 파티 3명이라 공도 3개
+    this.balls = new Array(PLAYER_PARTY_MAX_SIZE)
       .fill(null)
       .map((_, i) =>
         globalScene.add.sprite(

@@ -29,6 +29,8 @@ import { UiInputs } from "#app/ui-inputs";
 import { STARTING_WAVE } from "#balance/misc";
 import { FRIENDSHIP_GAIN_FROM_BATTLE } from "#balance/starters";
 import { initCommonAnims, initMoveAnim, loadCommonAnimAssets, loadMoveAnimAssets } from "#data/battle-anims";
+import { isBseoSpecies } from "#data/bseorogue/hooks";
+import { ensureBseoSprite } from "#data/bseorogue/placeholder-art";
 import { getDailyMysteryEncounter } from "#data/daily-run";
 import { allMoves, biomeDepths, modifierTypes } from "#data/data-lists";
 import { classicFinalBossDialogue } from "#data/dialogue";
@@ -355,6 +357,11 @@ export class BattleScene extends SceneBase {
   }
 
   public loadPokemonAtlas(key: string, atlasPath: string, experimental = settings.expSpritesEnabled): void {
+    // 블서로그: 그림 파일이 아직 없는 실험체 · 동물 · 보스는 임시 그림 (placeholder-art.ts)
+    const bseoId = Number(/(\d+)(?:_\d)?$/.exec(atlasPath)?.[1]);
+    if (isBseoSpecies(bseoId as SpeciesId) && ensureBseoSprite(key, bseoId as SpeciesId, atlasPath.includes("back"))) {
+      return;
+    }
     const variant = atlasPath.includes("variant/") || /_[0-3]$/.test(atlasPath);
     if (experimental) {
       experimental = hasExpSprite(key);

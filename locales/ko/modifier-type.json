@@ -15,55 +15,55 @@
       }
     },
     "PokemonHpRestoreModifierType": {
-      "description": "포켓몬 1마리의 HP를 {{restorePoints}} 또는 {{restorePercent}}% 중\n높은 수치만큼 회복한다.",
+      "description": "실험체 1마리의 HP를 {{restorePoints}} 또는 {{restorePercent}}% 중\n높은 수치만큼 회복한다.",
       "extra": {
-        "fully": "포켓몬 1마리의 HP를 모두 회복한다.",
-        "fullyWithStatus": "포켓몬 1마리의 HP와 상태 이상을 모두 회복한다."
+        "fully": "실험체 1마리의 HP를 모두 회복한다.",
+        "fullyWithStatus": "실험체 1마리의 HP와 상태 이상을 모두 회복한다."
       }
     },
     "PokemonReviveModifierType": {
-      "description": "기절해 버린 포켓몬 1마리의 HP를 {{restorePercent}}%까지 회복한다."
+      "description": "기절해 버린 실험체 1마리의 HP를 {{restorePercent}}%까지 회복한다."
     },
     "PokemonStatusHealModifierType": {
-      "description": "포켓몬 1마리의 상태 이상을 모두 회복한다."
+      "description": "실험체 1마리의 상태 이상을 모두 회복한다."
     },
     "PokemonPpRestoreModifierType": {
-      "description": "포켓몬이 기억하고 있는 기술 중 1개의 PP를 {{restorePoints}}만큼 회복한다.",
+      "description": "실험체가 기억하고 있는 스킬 중 1개의 PP를 {{restorePoints}}만큼 회복한다.",
       "extra": {
-        "fully": "포켓몬이 기억하고 있는 기술 중 1개의 PP를 모두 회복한다."
+        "fully": "실험체가 기억하고 있는 스킬 중 1개의 PP를 모두 회복한다."
       }
     },
     "PokemonAllMovePpRestoreModifierType": {
-      "description": "포켓몬이 기억하고 있는 4개의 기술 PP를 {{restorePoints}}씩 회복한다.",
+      "description": "실험체가 기억하고 있는 4개의 스킬 PP를 {{restorePoints}}씩 회복한다.",
       "extra": {
-        "fully": "포켓몬이 기억하고 있는 4개의 기술 PP를 모두 회복한다."
+        "fully": "실험체가 기억하고 있는 4개의 스킬 PP를 모두 회복한다."
       }
     },
     "PokemonPpUpModifierType": {
-      "description": "포켓몬이 기억하고 있는 기술 중 1개의 PP 최대치를 5마다 {{upPoints}}씩 상승시킨다. (최대 3)"
+      "description": "실험체가 기억하고 있는 스킬 중 1개의 PP 최대치를 5마다 {{upPoints}}씩 상승시킨다. (최대 3)"
     },
     "PokemonNatureChangeModifierType": {
       "name": "{{natureName}}민트",
-      "description": "포켓몬의 성격을 {{natureName}}[[로]] 바꾸고 스타팅에도 등록한다."
+      "description": "실험체의 성격을 {{natureName}}[[로]] 바꾸고 스타팅에도 등록한다."
     },
     "DoubleBattleChanceBoosterModifierType": {
       "description": "{{battleCount}}번의 배틀 동안 더블 배틀이 등장할 확률이 4배가 된다."
     },
     "TempStatStageBoosterModifierType": {
-      "description": "자신의 모든 포켓몬이 5번의 배틀 동안 {{stat}}[[가]] {{amount}} 증가한다.",
+      "description": "자신의 모든 실험체가 5번의 배틀 동안 {{stat}}[[가]] {{amount}} 증가한다.",
       "extra": {
         "stage": "1단계",
         "percentage": "20%"
       }
     },
     "AttackTypeBoosterModifierType": {
-      "description": "지니게 하면 {{moveType}}타입 기술의 위력이 20% 상승한다."
+      "description": "지니게 하면 {{moveType}}타입 스킬의 위력이 20% 상승한다."
     },
     "PokemonLevelIncrementModifierType": {
-      "description": "포켓몬 1마리의 레벨이 {{levels}}만큼 상승한다."
+      "description": "실험체 1마리의 레벨이 {{levels}}만큼 상승한다."
     },
     "AllPokemonLevelIncrementModifierType": {
-      "description": "자신의 모든 포켓몬의 레벨이 {{levels}}만큼 상승한다."
+      "description": "자신의 모든 실험체의 레벨이 {{levels}}만큼 상승한다."
     },
     "BaseStatBoosterModifierType": {
       "description": "지니게 하면 {{stat}} 종족치를 10% 올려준다. 개체값이 높을수록 더 많이 누적시킬 수 있다."
@@ -73,10 +73,10 @@
       "description": "{{stats}} 종족치를 {{statValue}}만큼 올려준다. 이상한 꿈을 꾸고 얻었다."
     },
     "AllPokemonFullHpRestoreModifierType": {
-      "description": "자신의 포켓몬의 HP를 모두 회복한다."
+      "description": "자신의 실험체의 HP를 모두 회복한다."
     },
     "AllPokemonFullReviveModifierType": {
-      "description": "기절해 버린 포켓몬 전원의 HP를 완전히 회복한다."
+      "description": "기절해 버린 실험체 전원의 HP를 완전히 회복한다."
     },
     "MoneyRewardModifierType": {
       "description": "{{moneyMultiplier}} 양의 돈을 획득한다. ({{moneyAmount}}크레딧)",
@@ -87,36 +87,36 @@
       }
     },
     "ExpBoosterModifierType": {
-      "description": "포켓몬이 받는 경험치가 {{boostPercent}}% 증가한다."
+      "description": "실험체가 받는 경험치가 {{boostPercent}}% 증가한다."
     },
     "PokemonExpBoosterModifierType": {
-      "description": "지니게 한 포켓몬은 받는 경험치가 {{boostPercent}}% 증가한다."
+      "description": "지니게 한 실험체는 받는 경험치가 {{boostPercent}}% 증가한다."
     },
     "PokemonFriendshipBoosterModifierType": {
       "description": "획득하는 친밀도가 50% 증가한다."
     },
     "PokemonMoveAccuracyBoosterModifierType": {
-      "description": "기술의 명중률이 {{accuracyAmount}} 증가한다."
+      "description": "스킬의 명중률이 {{accuracyAmount}} 증가한다."
     },
     "PokemonMultiHitModifierType": {
-      "description": "지니게 된 포켓몬은 공격한 데미지의 25%로 한 번 더 공격한다."
+      "description": "지니게 된 실험체는 공격한 데미지의 25%로 한 번 더 공격한다."
     },
     "TmModifierType": {
       "name": "No.{{moveId}} {{moveName}}",
-      "description": "포켓몬에게 {{moveName}}[[를]] 가르침."
+      "description": "실험체에게 {{moveName}}[[를]] 가르침."
     },
     "TmModifierTypeWithInfo": {
       "name": "No.{{moveId}} {{moveName}}",
-      "description": "포켓몬에게 {{moveName}}[[를]] 가르침.\n(C 또는 Shift를 꾹 눌러 정보 확인)"
+      "description": "실험체에게 {{moveName}}[[를]] 가르침.\n(C 또는 Shift를 꾹 눌러 정보 확인)"
     },
     "EvolutionItemModifierType": {
-      "description": "어느 특정 포켓몬을 진화시킨다."
+      "description": "어느 특정 실험체를 진화시킨다."
     },
     "FormChangeItemModifierType": {
-      "description": "어느 특정 포켓몬을 폼 체인지시킨다."
+      "description": "어느 특정 실험체를 폼 체인지시킨다."
     },
     "FusePokemonModifierType": {
-      "description": "두 포켓몬을 결합시킨다. (특성 변환, 종족값과 타입 분배, 기술폭 공유)"
+      "description": "두 실험체를 결합시킨다. (특성 변환, 종족값과 타입 분배, 스킬폭 공유)"
     },
     "TerastallizeModifierType": {
       "name": "테라피스 {{teraType}}",
@@ -126,7 +126,7 @@
       "description": "공격했을 때, {{chancePercent}}%의 확률로 상대의 도구를 도둑질한다."
     },
     "TurnHeldItemTransferModifierType": {
-      "description": "매 턴, 지닌 포켓몬은 상대로부터 도구를 하나 획득한다."
+      "description": "매 턴, 지닌 실험체는 상대로부터 도구를 하나 획득한다."
     },
     "EnemyAttackStatusEffectChanceModifierType": {
       "description": "공격했을 때 {{statusEffect}} 상태로 만들 확률이 {{chancePercent}}% 추가된다."
@@ -135,10 +135,10 @@
       "description": "받은 공격을 버텨낼 확률이 {{chancePercent}}% 추가된다."
     },
     "RARE_CANDY": {
-      "name": "이상한사탕"
+      "name": "VF 혈액 샘플"
     },
     "RARER_CANDY": {
-      "name": "더이상한사탕"
+      "name": "VF 혈액 샘플 세트"
     },
     "MEGA_BRACELET": {
       "name": "메가링",
@@ -150,58 +150,58 @@
     },
     "TERA_ORB": {
       "name": "테라스탈오브",
-      "description": "포켓몬들이 테라스탈할 수 있게 된다. 서서히 충전되며, 테라피스를 사용할 수 있게 된다."
+      "description": "실험체들이 테라스탈할 수 있게 된다. 서서히 충전되며, 테라피스를 사용할 수 있게 된다."
     },
     "MAP": {
-      "name": "지도",
+      "name": "루미아 섬 지도",
       "description": "갈림길에서 목적지를 선택할 수 있다."
     },
     "POTION": {
-      "name": "상처약"
+      "name": "고기"
     },
     "SUPER_POTION": {
-      "name": "좋은상처약"
+      "name": "눈물젖은 빵"
     },
     "HYPER_POTION": {
-      "name": "고급상처약"
+      "name": "민트 초코"
     },
     "MAX_POTION": {
-      "name": "풀회복약"
+      "name": "일레븐 세트"
     },
     "FULL_RESTORE": {
-      "name": "회복약"
+      "name": "만년수프"
     },
     "REVIVE": {
-      "name": "기력의조각"
+      "name": "가젯 에너지 팩"
     },
     "MAX_REVIVE": {
-      "name": "기력의덩어리"
+      "name": "부활 키트"
     },
     "FULL_HEAL": {
-      "name": "만병통치제"
+      "name": "구급상자"
     },
     "SACRED_ASH": {
-      "name": "성스러운분말"
+      "name": "아글라이아의 선물"
     },
     "REVIVER_SEED": {
       "name": "부활의씨앗",
-      "description": "포켓몬이 공격을 받고 쓰러지려 할 때 HP를 절반 회복한다."
+      "description": "실험체가 공격을 받고 쓰러지려 할 때 HP를 절반 회복한다."
     },
     "WHITE_HERB": {
       "name": "하양허브",
-      "description": "지니게 한 포켓몬의 능력이 떨어졌을 때 원래 상태로 돌아온다."
+      "description": "지니게 한 실험체의 능력이 떨어졌을 때 원래 상태로 돌아온다."
     },
     "ETHER": {
-      "name": "PP에이드"
+      "name": "물"
     },
     "MAX_ETHER": {
-      "name": "PP회복"
+      "name": "꿀물"
     },
     "ELIXIR": {
-      "name": "PP에이더"
+      "name": "뜨거운 물"
     },
     "MAX_ELIXIR": {
-      "name": "PP맥스"
+      "name": "백일취"
     },
     "PP_UP": {
       "name": "포인트업"
@@ -220,19 +220,19 @@
     },
     "MEMORY_MUSHROOM": {
       "name": "기억버섯",
-      "description": "포켓몬이 잊어버린 기술을 떠올린다."
+      "description": "실험체가 잊어버린 스킬을 떠올린다."
     },
     "EXP_SHARE": {
-      "name": "학습장치",
+      "name": "관전 학습 장치",
       "description": "배틀에 참여하지 않아도 20%의 경험치를 받을 수 있게 된다."
     },
     "EXP_BALANCE": {
-      "name": "균형학습장치",
-      "description": "레벨이 낮은 포켓몬이 받는 경험치를 가중시킨다."
+      "name": "균형 학습 장치",
+      "description": "레벨이 낮은 실험체가 받는 경험치를 가중시킨다."
     },
     "OVAL_CHARM": {
       "name": "둥근부적",
-      "description": "여러 마리의 포켓몬이 배틀에 참여할 경우, 전체 경험치의 10%씩을 추가로 획득한다."
+      "description": "여러 마리의 실험체가 배틀에 참여할 경우, 전체 경험치의 10%씩을 추가로 획득한다."
     },
     "EXP_CHARM": {
       "name": "경험부적"
@@ -254,37 +254,37 @@
     },
     "SCOPE_LENS": {
       "name": "초점렌즈",
-      "description": "약점이 보이는 렌즈. 지니게 한 포켓몬의 기술이 급소에 맞기 쉬워진다."
+      "description": "약점이 보이는 렌즈. 지니게 한 실험체의 스킬이 급소에 맞기 쉬워진다."
     },
     "DIRE_HIT": {
-      "name": "크리티컬커터",
+      "name": "치명타 강화제",
       "extra": {
         "raises": "급소율"
       }
     },
     "LEEK": {
       "name": "대파",
-      "description": "매우 길고 단단한 줄기. 파오리에게 지니게 하면 기술이 급소에 맞기 쉬워진다."
+      "description": "매우 길고 단단한 줄기. 파오리에게 지니게 하면 스킬이 급소에 맞기 쉬워진다."
     },
     "EVIOLITE": {
       "name": "진화의휘석",
-      "description": "진화의 이상한 덩어리. 지니게 하면 진화 전 포켓몬의 방어와 특수방어가 올라간다."
+      "description": "진화의 이상한 덩어리. 지니게 하면 진화 전 실험체의 방어와 특수방어가 올라간다."
     },
     "SOUL_DEW": {
       "name": "마음의물방울",
-      "description": "지닌 포켓몬의 성격의 효과가 10% 증가한다. (합연산)"
+      "description": "지닌 실험체의 성격의 효과가 10% 증가한다. (합연산)"
     },
     "NUGGET": {
-      "name": "금구슬"
+      "name": "크레딧+"
     },
     "BIG_NUGGET": {
-      "name": "큰금구슬"
+      "name": "크레딧++"
     },
     "RELIC_GOLD": {
-      "name": "고대의금화"
+      "name": "현상금"
     },
     "AMULET_COIN": {
-      "name": "부적금화",
+      "name": "크레딧 부적",
       "description": "받는 돈이 20% 증가한다."
     },
     "GOLDEN_PUNCH": {
@@ -309,8 +309,8 @@
       "name": "멀티렌즈"
     },
     "HEALING_CHARM": {
-      "name": "치유의부적",
-      "description": "HP를 회복하는 기술이나 도구를 썼을 때 효율이 10% 증가한다. (부활 제외)"
+      "name": "치유의 부적",
+      "description": "HP를 회복하는 스킬이나 도구를 썼을 때 효율이 10% 증가한다. (부활 제외)"
     },
     "CANDY_JAR": {
       "name": "사탕단지",
@@ -333,28 +333,28 @@
       "description": "공격해서 데미지를 줄 때 상대를 풀죽일 확률이 10% 추가된다."
     },
     "LEFTOVERS": {
-      "name": "먹다남은음식",
-      "description": "포켓몬의 HP가 매 턴 최대 체력의 1/16씩 회복된다."
+      "name": "먹다 남은 도시락",
+      "description": "실험체의 HP가 매 턴 최대 체력의 1/16씩 회복된다."
     },
     "SHELL_BELL": {
       "name": "조개껍질방울",
-      "description": "포켓몬이 준 데미지의 1/8씩을 회복한다."
+      "description": "실험체가 준 데미지의 1/8씩을 회복한다."
     },
     "TOXIC_ORB": {
       "name": "맹독구슬",
-      "description": "이 도구를 지닌 포켓몬은 턴이 끝나는 시점에 상태이상에 걸리지 않았다면 맹독 상태가 된다."
+      "description": "이 도구를 지닌 실험체는 턴이 끝나는 시점에 상태이상에 걸리지 않았다면 맹독 상태가 된다."
     },
     "FLAME_ORB": {
       "name": "화염구슬",
-      "description": "이 도구를 지닌 포켓몬은 턴이 끝나는 시점에 상태이상에 걸리지 않았다면 화상 상태가 된다."
+      "description": "이 도구를 지닌 실험체는 턴이 끝나는 시점에 상태이상에 걸리지 않았다면 화상 상태가 된다."
     },
     "MYSTICAL_ROCK": {
       "name": "신비한바위",
-      "description": "이 도구를 지닌 포켓몬의 기술이나 특성으로 발생한 날씨, 필드 효과의 지속 시간을 스택 당 2턴 연장한다."
+      "description": "이 도구를 지닌 실험체의 스킬이나 특성으로 발생한 날씨, 필드 효과의 지속 시간을 스택 당 2턴 연장한다."
     },
     "EVOLUTION_TRACKER_GIMMIGHOUL": {
       "name": "보물",
-      "description": "이 포켓몬은 보물을 좋아한다. 보물을 모으다 보면 어떤 일이 일어날 지도 모른다!"
+      "description": "이 실험체는 보물을 좋아한다. 보물을 모으다 보면 어떤 일이 일어날 지도 모른다!"
     },
     "EVOLUTION_TRACKER_PRIMEAPE": {
       "name": "분노의주먹",
@@ -366,23 +366,23 @@
     },
     "BATON": {
       "name": "배턴",
-      "description": "포켓몬을 교체할 때 효과를 넘겨줄 수 있으며, 함정의 영향을 받지 않게 한다."
+      "description": "실험체를 교체할 때 효과를 넘겨줄 수 있으며, 함정의 영향을 받지 않게 한다."
     },
     "SHINY_CHARM": {
-      "name": "빛나는부적",
-      "description": "야생 포켓몬이 색이 다른 포켓몬으로 등장할 확률을 급격히 높인다."
+      "name": "빛나는 부적",
+      "description": "야생 실험체가 색이 다른 실험체로 등장할 확률을 급격히 높인다."
     },
     "ABILITY_CHARM": {
       "name": "특성부적",
-      "description": "야생 포켓몬이 숨겨진 특성을 가지고 등장할 확률을 급격히 높인다."
+      "description": "야생 실험체가 숨겨진 특성을 가지고 등장할 확률을 급격히 높인다."
     },
     "CATCHING_CHARM": {
       "name": "흔들림없는부적",
-      "description": "포켓몬을 포획 시, 포획 크리티컬이 나올 확률이 올라간다."
+      "description": "실험체를 포획 시, 포획 크리티컬이 나올 확률이 올라간다."
     },
     "IV_SCANNER": {
-      "name": "개체값탐지기",
-      "description": "야생 포켓몬의 개체값을 확인 가능하다."
+      "name": "실험체 분석기",
+      "description": "야생 실험체의 개체값을 확인 가능하다."
     },
     "DNA_SPLICERS": {
       "name": "유전자쐐기"
@@ -391,7 +391,7 @@
       "name": "미니 블랙홀"
     },
     "GOLDEN_POKEBALL": {
-      "name": "황금몬스터볼",
+      "name": "황금 보급 상자",
       "description": "전투 후 획득하는 아이템의 선택지가 하나 더 늘어난다."
     },
     "ENEMY_DAMAGE_BOOSTER": {
@@ -424,15 +424,15 @@
     },
     "ENEMY_FUSED_CHANCE": {
       "name": "합체 토큰",
-      "description": "야생 포켓몬이 합체되어 등장할 확률이 1% 추가된다."
+      "description": "야생 실험체가 합체되어 등장할 확률이 1% 추가된다."
     },
     "MYSTERY_ENCOUNTER_SHUCKLE_JUICE_GOOD": {
       "name": "달콤한 단단지 주스",
-      "description": "지니고 있는 포켓몬의 모든 능력치가 올라갑니다. 단단지의 축복을 받았습니다."
+      "description": "지니고 있는 실험체의 모든 능력치가 올라갑니다. 단단지의 축복을 받았습니다."
     },
     "MYSTERY_ENCOUNTER_SHUCKLE_JUICE_BAD": {
       "name": "쓴 단단지 주스",
-      "description": "지니고 있는 포켓몬의 모든 능력치가 내려갑니다. 단단지의 저주를 받았습니다."
+      "description": "지니고 있는 실험체의 모든 능력치가 내려갑니다. 단단지의 저주를 받았습니다."
     },
     "MYSTERY_ENCOUNTER_BLACK_SLUDGE": {
       "name": "검은진흙",
@@ -440,15 +440,15 @@
     },
     "MYSTERY_ENCOUNTER_MACHO_BRACE": {
       "name": "교정깁스",
-      "description": "포켓몬을 쓰러뜨리면 교정깁스 스택을 얻는다. 스택이 올라갈수록 능력치가 약간 올라가고, 최대 스택에서 추가 보너스를 얻는다."
+      "description": "실험체를 쓰러뜨리면 교정깁스 스택을 얻는다. 스택이 올라갈수록 능력치가 약간 올라가고, 최대 스택에서 추가 보너스를 얻는다."
     },
     "MYSTERY_ENCOUNTER_OLD_GATEAU": {
       "name": "숲의양갱",
-      "description": "장착한 포켓몬의 능력치를 약간 올린다."
+      "description": "장착한 실험체의 능력치를 약간 올린다."
     },
     "MYSTERY_ENCOUNTER_GOLDEN_BUG_NET": {
       "name": "황금잠자리채",
-      "description": "벌레 타입 포켓몬을 더 자주 만날 수 있는 행운을 부여한다. 묘한 무게감이 든다."
+      "description": "벌레 타입 실험체를 더 자주 만날 수 있는 행운을 부여한다. 묘한 무게감이 든다."
     }
   },
   "SpeciesBoosterItem": {
@@ -478,40 +478,40 @@
     }
   },
   "TempStatStageBoosterItem": {
-    "x_attack": "플러스파워",
-    "x_defense": "디펜드업",
-    "x_sp_atk": "스페셜업",
-    "x_sp_def": "스페셜가드",
-    "x_speed": "스피드업",
-    "x_accuracy": "잘-맞히기"
+    "x_attack": "공격력 강화제",
+    "x_defense": "방어력 강화제",
+    "x_sp_atk": "스킬 증폭 강화제",
+    "x_sp_def": "스킬 저항 강화제",
+    "x_speed": "속도 강화제",
+    "x_accuracy": "명중 강화제"
   },
   "AttackTypeBoosterItem": {
-    "silk_scarf": "실크스카프",
-    "black_belt": "검은띠",
+    "silk_scarf": "야생 강화 모듈",
+    "black_belt": "브루저 강화 모듈",
     "sharp_beak": "예리한부리",
     "poison_barb": "독바늘",
     "soft_sand": "부드러운모래",
-    "hard_stone": "딱딱한돌",
-    "silver_powder": "은빛가루",
+    "hard_stone": "탱커 강화 모듈",
+    "silver_powder": "보스 강화 모듈",
     "spell_tag": "저주의부적",
     "metal_coat": "금속코트",
     "charcoal": "목탄",
     "mystic_water": "신비의물방울",
     "miracle_seed": "기적의씨",
     "magnet": "자석",
-    "twisted_spoon": "휘어진스푼",
+    "twisted_spoon": "스증딜러 강화 모듈",
     "never_melt_ice": "녹지않는얼음",
-    "dragon_fang": "용의이빨",
-    "black_glasses": "검은안경",
-    "fairy_feather": "요정의깃털"
+    "dragon_fang": "평원딜 강화 모듈",
+    "black_glasses": "암살자 강화 모듈",
+    "fairy_feather": "서포터 강화 모듈"
   },
   "BaseStatBoosterItem": {
-    "hp_up": "맥스업",
-    "protein": "타우린",
-    "iron": "사포닌",
-    "calcium": "리보플라빈",
-    "zinc": "키토산",
-    "carbos": "알칼로이드"
+    "hp_up": "대환단",
+    "protein": "컴뱃 에피네프린",
+    "iron": "성수",
+    "calcium": "셀레네의 눈물",
+    "zinc": "캡슐 - 생명",
+    "carbos": "캡슐 - 우주"
   },
   "EvolutionItem": {
     "NONE": "None",

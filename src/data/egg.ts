@@ -1,4 +1,5 @@
 import type { BattleScene } from "#app/battle-scene";
+import { BSEO } from "#app/bseorogue";
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { activeOverrides } from "#app/overrides";
@@ -222,6 +223,10 @@ export class Egg {
   // #region Public methods
 
   public isManaphyEgg(): boolean {
+    // 블서로그: 포켓몬 마나피 알은 없어요
+    if (BSEO.classicOnly) {
+      return false;
+    }
     return (
       this._species === SpeciesId.PHIONE
       || this._species === SpeciesId.MANAPHY
@@ -418,7 +423,13 @@ export class Egg {
       const rand = randSeedInt(MANAPHY_EGG_MANAPHY_RATE) !== 1;
       return rand ? SpeciesId.PHIONE : SpeciesId.MANAPHY;
     }
-    if (this.tier === EggTier.LEGENDARY && this._sourceType === EggSourceType.GACHA_LEGENDARY && !randSeedInt(2)) {
+    // 블서로그: 포켓몬 전설 · 마나피 알은 없어요
+    if (
+      !BSEO.classicOnly
+      && this.tier === EggTier.LEGENDARY
+      && this._sourceType === EggSourceType.GACHA_LEGENDARY
+      && !randSeedInt(2)
+    ) {
       return getLegendaryGachaSpeciesForTimestamp(this.timestamp);
     }
 

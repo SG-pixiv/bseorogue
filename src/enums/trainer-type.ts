@@ -320,4 +320,7 @@ export enum TrainerType {
   RIVAL_6,
 
   // #endregion Rivals
+
+  /** 블서로그: KEL 팀 (src/data/bseorogue/kel.ts) */
+  BSEO_KEL = 900,
 }

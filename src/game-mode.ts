@@ -5,6 +5,7 @@ import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { activeOverrides } from "#app/overrides";
 import { bseoBossSpecies } from "#data/bseorogue/hooks";
+import { isKelWave, kelFixedBattle } from "#data/bseorogue/kel";
 import { allChallenges, type Challenge, copyChallenge } from "#data/challenge";
 import {
   getDailyEventSeedBoss,
@@ -206,8 +207,8 @@ export class GameMode implements GameModeConfig {
    * @returns Whether a trainer should be generated
    */
   public isWaveTrainer(waveIndex: number): boolean {
-    // 블서로그: 적 팀(KEL 팀)은 다음 단계에서 넣어요. 그 전까지 트레이너 전투는 없어요
-    if (!BSEO.trainers) {
+    // 블서로그: 아무 트레이너나 나오는 전투는 없어요. KEL 팀은 고정 전투(isFixedBattle)로 나와요
+    if (BSEO.classicOnly) {
       return false;
     }
     const { arena, offsetGym } = globalScene;
@@ -366,9 +367,9 @@ export class GameMode implements GameModeConfig {
    * @returns If this game mode has a fixed battle on this wave
    */
   isFixedBattle(waveIndex: number): boolean {
-    // 블서로그: 포켓몬 라이벌 · 관장 같은 고정 전투는 없어요
-    if (!BSEO.trainers) {
-      return false;
+    // 블서로그: 포켓몬 라이벌 · 관장 같은 고정 전투 대신 KEL 팀 전투 (BSEO.kelWaves)
+    if (BSEO.classicOnly) {
+      return this.isClassic && isKelWave(waveIndex);
     }
     const dummyConfig = new FixedBattleConfig();
     return (
@@ -383,6 +384,9 @@ export class GameMode implements GameModeConfig {
    * @returns The fixed battle for this wave.
    */
   getFixedBattle(waveIndex: number): FixedBattleConfig | undefined {
+    if (BSEO.classicOnly) {
+      return this.isClassic && isKelWave(waveIndex) ? kelFixedBattle(waveIndex) : undefined;
+    }
     const challengeConfig = new FixedBattleConfig();
     if (applyChallenges(ChallengeType.FIXED_BATTLES, waveIndex, challengeConfig)) {
       return challengeConfig;

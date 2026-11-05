@@ -43,7 +43,7 @@
     "name_female": "원펀맨"
   },
   "healAchv": {
-    "description": "기술이나 특성, 지닌 도구로 한 번에 {{healAmount}} {{HP}} 회복"
+    "description": "스킬이나 특성, 지닌 도구로 한 번에 {{healAmount}} {{HP}} 회복"
   },
   "250Heal": {
     "name": "견습 힐러",
@@ -62,7 +62,7 @@
     "name_female": "회복 마스터"
   },
   "levelAchv": {
-    "description": "포켓몬 Lv{{level}} 달성"
+    "description": "실험체 Lv{{level}} 달성"
   },
   "lv100": {
     "name": "잠깐, 여기가 끝이 아니라구!"
@@ -78,8 +78,8 @@
     "description": "총 {{ribbonAmount}}개의 리본 획득"
   },
   "10Ribbons": {
-    "name": "포켓몬 리그 챔피언",
-    "name_female": "포켓몬 리그 챔피언"
+    "name": "실험체 리그 챔피언",
+    "name_female": "실험체 리그 챔피언"
   },
   "25Ribbons": {
     "name": "슈퍼 리그 챔피언",
@@ -107,23 +107,23 @@
   },
   "megaEvolve": {
     "name": "메가변환",
-    "description": "포켓몬을 메가진화"
+    "description": "실험체를 메가진화"
   },
   "gigantamax": {
     "name": "엄청난 것",
-    "description": "포켓몬을 다이맥스"
+    "description": "실험체를 다이맥스"
   },
   "terastallize": {
     "name": "반짝반짝",
-    "description": "포켓몬을 테라스탈"
+    "description": "실험체를 테라스탈"
   },
   "stellarTerastallize": {
     "name": "숨겨진 타입",
-    "description": "포켓몬을 스텔라 테라스탈"
+    "description": "실험체를 스텔라 테라스탈"
   },
   "splice": {
     "name": "끝없는 융합",
-    "description": "유전자쐐기로 두 포켓몬을 융합"
+    "description": "유전자쐐기로 두 실험체를 융합"
   },
   "miniBlackHole": {
     "name": "도구가 가득한 구멍",
@@ -131,48 +131,48 @@
   },
   "catchMythical": {
     "name": "환상",
-    "description": "환상의 포켓몬 포획"
+    "description": "환상의 실험체 포획"
   },
   "catchSubLegendary": {
     "name": "(준)전설",
-    "description": "준전설 포켓몬 포획"
+    "description": "준전설 실험체 포획"
   },
   "catchLegendary": {
     "name": "전설",
-    "description": "전설의 포켓몬 포획"
+    "description": "전설의 실험체 포획"
   },
   "seeShiny": {
     "name": "다른 색",
-    "description": "야생의 색이 다른 포켓몬 발견"
+    "description": "야생의 색이 다른 실험체 발견"
   },
   "shinyParty": {
     "name": "찐사랑",
     "name_female": "찐사랑",
-    "description": "색이 다른 포켓몬만으로 파티 구성"
+    "description": "색이 다른 실험체만으로 파티 구성"
   },
   "hatchMythical": {
     "name": "환상의 알",
-    "description": "알에서 환상의 포켓몬이 부화"
+    "description": "알에서 환상의 실험체가 부화"
   },
   "hatchSubLegendary": {
     "name": "준전설 알",
-    "description": "알에서 준전설 포켓몬이 부화"
+    "description": "알에서 준전설 실험체가 부화"
   },
   "hatchLegendary": {
     "name": "전설의 알",
-    "description": "알에서 전설의 포켓몬이 부화"
+    "description": "알에서 전설의 실험체가 부화"
   },
   "hatchShiny": {
     "name": "빛나는 알",
-    "description": "알에서 색이 다른 포켓몬이 부화"
+    "description": "알에서 색이 다른 실험체가 부화"
   },
   "hiddenAbility": {
     "name": "숨은 잠재력",
-    "description": "숨겨진 특성을 지닌 포켓몬을 포획"
+    "description": "숨겨진 특성을 지닌 실험체를 포획"
   },
   "perfectIvs": {
     "name": "진짜배기 증명서",
-    "description": "최고의 개체값을 지닌 포켓몬 획득"
+    "description": "최고의 개체값을 지닌 실험체 획득"
   },
   "classicVictory": {
     "name": "무패",
@@ -181,7 +181,7 @@
   },
   "unevolvedClassicVictory": {
     "name": "우리집 꿈나무",
-    "description": "최종 진화형이 아닌 포켓몬을 데리고 클래식 모드 클리어."
+    "description": "최종 진화형이 아닌 실험체를 데리고 클래식 모드 클리어."
   },
   "monoGenOne": {
     "name": "근본 라이벌",
@@ -208,7 +208,7 @@
     "description": "6세대 챌린지 모드 클리어."
   },
   "monoGenSeven": {
-    "name": "기술적으로는…",
+    "name": "스킬적으로는…",
     "description": "7세대 챌린지 모드 클리어."
   },
   "monoGenEight": {
@@ -298,7 +298,7 @@
   },
   "breedersInSpace": {
     "name": "충격!우주에 브리더 진짜 계심ㄷㄷ",
-    "description": "우주 바이옴에서 포켓몬 브리더에게 승리."
+    "description": "우주 바이옴에서 실험체 브리더에게 승리."
   },
   "dailyVictory": {
     "name": "1일1러닝…",

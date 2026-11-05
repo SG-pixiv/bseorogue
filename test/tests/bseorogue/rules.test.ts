@@ -9,9 +9,10 @@ import { PLAYER_PARTY_MAX_SIZE } from "#app/constants";
 import { getGameMode } from "#app/game-mode";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { speciesEggMoves } from "#balance/moves/egg-moves";
+import { ER_CHARACTERS } from "#data/bseorogue/er-data";
 import { bseoBossSpecies, bseoWildSpecies } from "#data/bseorogue/hooks";
 import { bseoTypeMultiplier, Role } from "#data/bseorogue/roles";
-import { BSEO_BOSSES, BSEO_STARTER_IDS, BSEO_STARTERS, BSEO_WILD } from "#data/bseorogue/roster";
+import { BSEO_BOSSES, BSEO_CHARACTERS, BSEO_STARTER_IDS, BSEO_STARTERS, BSEO_WILD } from "#data/bseorogue/roster";
 import { COST_TOTALS } from "#data/bseorogue/stats";
 import { GameModes } from "#enums/game-modes";
 import { MoveId } from "#enums/move-id";
@@ -78,9 +79,40 @@ describe("블서로그 데이터", () => {
     console.log(BSEO_WILD.map(w => `${w.name} ${w.stats.join("/")} 합 ${sum(w.stats)}`).join("\n"));
   });
 
+  it("ER 실험체 전부가 적으로 나올 수 있고, 역할군은 ER 분류를 따라요", () => {
+    expect(BSEO_CHARACTERS.length).toBe(Object.keys(ER_CHARACTERS).length);
+    const roles = BSEO_STARTERS.map(c => [c.name, c.role]);
+    expect(roles).toEqual([
+      ["일레븐", Role.TANK],
+      ["유키", Role.BRUISER],
+      ["쇼이치", Role.ASSASSIN],
+      ["나딘", Role.MARKSMAN],
+      ["혜진", Role.MAGE],
+      ["레니", Role.SUPPORT],
+    ]);
+    expect(BSEO_CHARACTERS.filter(c => c.playable).length).toBe(BSEO_STARTERS.length);
+  });
+
+  it("스킨 진화: 기본 → 스킨 진화 1 (Lv12) → 스킨 진화 2 (Lv24)", () => {
+    const eleven = BSEO_STARTERS[0];
+    expect(eleven.forms.map(f => f.name)).toEqual(["일레븐", "스위트 일레븐", "티타임 래빗 일레븐"]);
+    expect(eleven.forms.map(f => f.id)).toEqual([
+      SpeciesId.BSEO_ELEVEN,
+      SpeciesId.BSEO_ELEVEN_S1,
+      SpeciesId.BSEO_ELEVEN_S2,
+    ]);
+    const base = speciesDataRegistry.getSpecies(SpeciesId.BSEO_ELEVEN);
+    expect(base.getEvolutionLevels()).toEqual([
+      [SpeciesId.BSEO_ELEVEN_S1, 12],
+      [SpeciesId.BSEO_ELEVEN_S2, 24],
+    ]);
+    expect(speciesDataRegistry.getSpecies(SpeciesId.BSEO_ELEVEN_S2).getRootSpeciesId()).toBe(SpeciesId.BSEO_ELEVEN);
+    expect(speciesDataRegistry.getSpecies(SpeciesId.BSEO_ELEVEN_S2).baseTotal).toBe(500);
+  });
+
   it("실험체 스킬은 다른 실험체 · 동물 · 보스 · 추가 스킬과 겹치지 않아요 (이름이 바뀌니까)", () => {
     const owner = new Map<MoveId, string>();
-    for (const c of BSEO_STARTERS) {
+    for (const c of BSEO_CHARACTERS) {
       for (const s of c.skills) {
         expect(owner.get(s.move), `${c.name} ${s.name}`).toBeUndefined();
         owner.set(s.move, c.name);

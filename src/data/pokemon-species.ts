@@ -7,6 +7,8 @@ import { settings } from "#app/global-settings-manager";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import type { AnySound } from "#audio/audio-manager";
 import { speciesEggMoves } from "#balance/egg-moves";
+import { isBseoSpecies } from "#data/bseorogue/hooks";
+import { ensureBseoIcons, ensureBseoSprite, REAL_ART } from "#data/bseorogue/placeholder-art";
 import type { GrowthRate } from "#data/exp";
 import { Gender } from "#data/gender";
 import { AbilityId } from "#enums/ability-id";
@@ -455,6 +457,10 @@ export abstract class PokemonSpeciesForm {
   }
 
   getIconAtlasKey(formIndex?: number, shiny?: boolean, variant?: number): string {
+    // 블서로그: 임시 아이콘 한 장 (placeholder-art.ts)
+    if (isBseoSpecies(this.speciesId) && !REAL_ART.has(this.speciesId)) {
+      return ensureBseoIcons();
+    }
     const variantDataIndex = this.getVariantDataIndex(formIndex);
     const isVariant =
       shiny && variantData[variantDataIndex] && variant !== undefined && variantData[variantDataIndex][variant];
@@ -712,6 +718,13 @@ export abstract class PokemonSpeciesForm {
   ): Promise<void> {
     // We need to populate the color cache for this species' variant
     const spriteKey = this.getSpriteKey(female, formIndex, shiny, variant, back);
+    // 블서로그: 그림 파일이 아직 없는 실험체 · 동물 · 보스는 게임 안에서 임시 그림을 그려요
+    if (isBseoSpecies(this.speciesId) && ensureBseoSprite(spriteKey, this.speciesId, back)) {
+      if (startLoad && !globalScene.load.isLoading()) {
+        globalScene.load.start();
+      }
+      return;
+    }
     globalScene.loadPokemonAtlas(spriteKey, this.getSpriteAtlasPath(female, formIndex, shiny, variant, back));
     // TODO: this should be routed through audiomanager rather than a raw `load.audio` call
     if (audioManager.isAudioEnabled) {

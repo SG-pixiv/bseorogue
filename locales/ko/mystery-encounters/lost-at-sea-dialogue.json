@@ -8,20 +8,20 @@
       "label": "{{option1PrimaryName}}의 도움",
       "labelDisabled": "{{option1RequiredMove}} 사용 불가",
       "tooltip": "(+) {{option1PrimaryName}}[[가]] 당신을 구함\n(+) {{option1PrimaryName}} 경험치 획득",
-      "tooltipDisabled": "{{option1RequiredMove}}[[를]] 사용할 수 있는 포켓몬이 없다.",
+      "tooltipDisabled": "{{option1RequiredMove}}[[를]] 사용할 수 있는 실험체가 없다.",
       "selected": "{{option1PrimaryName}}[[가]] 앞장서 헤엄치며, 돌아가는 길을 안내했다.${{option1PrimaryName}} 역시 이번 기회로 더 강해진 것 같다!"
     },
     "2": {
       "label": "{{option2PrimaryName}}의 도움",
       "labelDisabled": "{{option2RequiredMove}} 사용 불가",
       "tooltip": "(+) {{option2PrimaryName}}[[가]] 당신을 구함\n(+) {{option2PrimaryName}} 경험치 획득",
-      "tooltipDisabled": "{{option2RequiredMove}}[[를]] 사용할 수 있는 포켓몬이 없다.",
+      "tooltipDisabled": "{{option2RequiredMove}}[[를]] 사용할 수 있는 실험체가 없다.",
       "selected": "{{option2PrimaryName}}[[가]] 보트 앞에서 날아가며, 돌아가는 길을 안내했다.${{option2PrimaryName}} 역시 이번 기회로 더 강해진 것 같다!"
     },
     "3": {
       "label": "정처 없이 방황한다",
-      "tooltip": "(-) 모든 포켓몬 HP {{damagePercentage}}% 감소",
-      "selected": "마침내 기억하는 곳에 다다를 때까지\n정처 없이 배를 타고 떠돌아다닌다.$길고 긴 표류에 포켓몬과 당신 모두 지쳐버렸다."
+      "tooltip": "(-) 모든 실험체 HP {{damagePercentage}}% 감소",
+      "selected": "마침내 기억하는 곳에 다다를 때까지\n정처 없이 배를 타고 떠돌아다닌다.$길고 긴 표류에 실험체와 당신 모두 지쳐버렸다."
     }
   },
   "outro": "다시 여정으로 돌아왔다."

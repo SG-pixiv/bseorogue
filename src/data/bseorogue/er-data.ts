@@ -6,9 +6,15 @@
 // 이 파일은 scripts/er-data/build.mjs 가 만들어요. 직접 고치지 마세요.
 // 출처: 이터널 리턴 공식 API (2026-11-02T22:11:43.384Z 받음) · 이름과 숫자의 권리는 님블뉴런에 있어요.
 
+export type ErRoleKey = "TANK" | "BRUISER" | "ASSASSIN" | "MARKSMAN" | "MAGE" | "SUPPORT";
+
 export interface ErCharacter {
   name: string;
   en: string;
+  /** ER 실험체 분류(charArcheType1)에서 바꾼 역할군 */
+  role: ErRoleKey;
+  /** 쓸 수 있는 무기 (ER 순서) */
+  weapons: readonly string[];
   /** 20레벨 기준 (기본 + 레벨업 × 19) */
   hp20: number;
   ap20: number;
@@ -36,6 +42,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "1": {
     name: "재키",
     en: "Jackie",
+    role: "BRUISER",
+    weapons: ["단검", "양손검", "도끼", "쌍검"],
     hp20: 2745,
     ap20: 125.3,
     def20: 107,
@@ -47,6 +55,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "2": {
     name: "아야",
     en: "Aya",
+    role: "MAGE",
+    weapons: ["권총", "돌격 소총", "저격총"],
     hp20: 2349,
     ap20: 117.9,
     def20: 94.7,
@@ -58,6 +68,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "3": {
     name: "피오라",
     en: "Fiora",
+    role: "BRUISER",
+    weapons: ["레이피어", "양손검", "창"],
     hp20: 2824,
     ap20: 123.6,
     def20: 124.3,
@@ -69,6 +81,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "4": {
     name: "매그너스",
     en: "Magnus",
+    role: "TANK",
+    weapons: ["망치", "방망이"],
     hp20: 2835,
     ap20: 127.6,
     def20: 112.7,
@@ -87,6 +101,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "5": {
     name: "자히르",
     en: "Zahir",
+    role: "MAGE",
+    weapons: ["투척", "암기"],
     hp20: 2384,
     ap20: 102.1,
     def20: 102.3,
@@ -98,6 +114,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "6": {
     name: "나딘",
     en: "Nadine",
+    role: "MARKSMAN",
+    weapons: ["활", "석궁"],
     hp20: 2317,
     ap20: 114.7,
     def20: 103.3,
@@ -109,6 +127,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "7": {
     name: "현우",
     en: "Hyunwoo",
+    role: "BRUISER",
+    weapons: ["글러브", "톤파"],
     hp20: 2708,
     ap20: 136.9,
     def20: 113.7,
@@ -128,6 +148,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "8": {
     name: "하트",
     en: "Hart",
+    role: "MARKSMAN",
+    weapons: ["기타"],
     hp20: 2297,
     ap20: 114.6,
     def20: 102.3,
@@ -148,6 +170,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "9": {
     name: "아이솔",
     en: "Isol",
+    role: "MARKSMAN",
+    weapons: ["돌격 소총", "권총"],
     hp20: 2345,
     ap20: 116.8,
     def20: 102.4,
@@ -159,6 +183,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "10": {
     name: "리 다이린",
     en: "LiDailin",
+    role: "BRUISER",
+    weapons: ["글러브", "쌍절곤"],
     hp20: 2756,
     ap20: 122,
     def20: 116.7,
@@ -179,6 +205,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "11": {
     name: "유키",
     en: "Yuki",
+    role: "BRUISER",
+    weapons: ["양손검", "쌍검"],
     hp20: 2669,
     ap20: 129.1,
     def20: 113.8,
@@ -198,6 +226,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "12": {
     name: "혜진",
     en: "Hyejin",
+    role: "MAGE",
+    weapons: ["활", "암기"],
     hp20: 2327,
     ap20: 115.5,
     def20: 104.2,
@@ -217,6 +247,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "13": {
     name: "쇼우",
     en: "Xiukai",
+    role: "TANK",
+    weapons: ["단검", "창"],
     hp20: 2670,
     ap20: 125.5,
     def20: 111.8,
@@ -228,6 +260,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "14": {
     name: "키아라",
     en: "Chiara",
+    role: "BRUISER",
+    weapons: ["레이피어"],
     hp20: 2414,
     ap20: 125.7,
     def20: 107.2,
@@ -239,6 +273,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "15": {
     name: "시셀라",
     en: "Sissela",
+    role: "MAGE",
+    weapons: ["투척", "암기"],
     hp20: 2231,
     ap20: 114.7,
     def20: 95.6,
@@ -258,6 +294,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "16": {
     name: "실비아",
     en: "Silvia",
+    role: "MAGE",
+    weapons: ["권총"],
     hp20: 2560,
     ap20: 94.6,
     def20: 111.9,
@@ -276,6 +314,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "17": {
     name: "아드리아나",
     en: "Adriana",
+    role: "MAGE",
+    weapons: ["투척"],
     hp20: 2326,
     ap20: 131.1,
     def20: 95.6,
@@ -294,6 +334,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "18": {
     name: "쇼이치",
     en: "Shoichi",
+    role: "ASSASSIN",
+    weapons: ["단검"],
     hp20: 2728,
     ap20: 124,
     def20: 118.5,
@@ -312,6 +354,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "19": {
     name: "엠마",
     en: "Emma",
+    role: "MAGE",
+    weapons: ["암기", "아르카나"],
     hp20: 2325,
     ap20: 111.2,
     def20: 102.3,
@@ -323,6 +367,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "20": {
     name: "레녹스",
     en: "Lenox",
+    role: "TANK",
+    weapons: ["채찍"],
     hp20: 2680,
     ap20: 115.6,
     def20: 111.8,
@@ -334,6 +380,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "21": {
     name: "로지",
     en: "Rozzi",
+    role: "MARKSMAN",
+    weapons: ["권총"],
     hp20: 2411,
     ap20: 123.2,
     def20: 103.2,
@@ -345,6 +393,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "22": {
     name: "루크",
     en: "Luke",
+    role: "BRUISER",
+    weapons: ["방망이"],
     hp20: 2735,
     ap20: 125,
     def20: 110.9,
@@ -356,6 +406,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "23": {
     name: "캐시",
     en: "Cathy",
+    role: "ASSASSIN",
+    weapons: ["단검", "쌍검"],
     hp20: 2642,
     ap20: 110.7,
     def20: 113.8,
@@ -367,6 +419,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "24": {
     name: "아델라",
     en: "Adela",
+    role: "MAGE",
+    weapons: ["레이피어", "방망이"],
     hp20: 2412,
     ap20: 124.7,
     def20: 101.6,
@@ -378,6 +432,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "25": {
     name: "버니스",
     en: "Bernice",
+    role: "MARKSMAN",
+    weapons: ["저격총"],
     hp20: 2536,
     ap20: 127.4,
     def20: 110.9,
@@ -389,6 +445,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "26": {
     name: "바바라",
     en: "Barbara",
+    role: "MAGE",
+    weapons: ["권총"],
     hp20: 2536,
     ap20: 98.8,
     def20: 112.8,
@@ -400,6 +458,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "27": {
     name: "알렉스",
     en: "Alex",
+    role: "BRUISER",
+    weapons: ["톤파", "양손검", "암기", "권총"],
     hp20: 2603,
     ap20: 111.6,
     def20: 104.2,
@@ -411,6 +471,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "28": {
     name: "수아",
     en: "Sua",
+    role: "BRUISER",
+    weapons: ["망치", "방망이"],
     hp20: 2785,
     ap20: 111.2,
     def20: 116.7,
@@ -431,6 +493,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "29": {
     name: "레온",
     en: "Leon",
+    role: "BRUISER",
+    weapons: ["글러브", "톤파"],
     hp20: 2689,
     ap20: 112.7,
     def20: 114.8,
@@ -442,6 +506,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "30": {
     name: "일레븐",
     en: "Eleven",
+    role: "TANK",
+    weapons: ["망치"],
     hp20: 2545,
     ap20: 120.5,
     def20: 101.3,
@@ -460,6 +526,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "31": {
     name: "리오",
     en: "Rio",
+    role: "MARKSMAN",
+    weapons: ["활"],
     hp20: 2306,
     ap20: 109,
     def20: 100.4,
@@ -481,6 +549,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "32": {
     name: "윌리엄",
     en: "William",
+    role: "MARKSMAN",
+    weapons: ["투척"],
     hp20: 2408,
     ap20: 121.7,
     def20: 103.3,
@@ -492,6 +562,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "33": {
     name: "니키",
     en: "Nicky",
+    role: "BRUISER",
+    weapons: ["글러브"],
     hp20: 2805,
     ap20: 111.8,
     def20: 121.5,
@@ -511,6 +583,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "34": {
     name: "나타폰",
     en: "Nathapon",
+    role: "MAGE",
+    weapons: ["카메라"],
     hp20: 2564,
     ap20: 112.9,
     def20: 108.1,
@@ -522,6 +596,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "35": {
     name: "얀",
     en: "Jan",
+    role: "BRUISER",
+    weapons: ["글러브", "톤파"],
     hp20: 2837,
     ap20: 120.6,
     def20: 124.4,
@@ -533,6 +609,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "36": {
     name: "이바",
     en: "Eva",
+    role: "MAGE",
+    weapons: ["투척"],
     hp20: 2422,
     ap20: 102.3,
     def20: 105.2,
@@ -552,6 +630,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "37": {
     name: "다니엘",
     en: "Daniel",
+    role: "ASSASSIN",
+    weapons: ["단검"],
     hp20: 2630,
     ap20: 121.3,
     def20: 108,
@@ -563,6 +643,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "38": {
     name: "제니",
     en: "Jenny",
+    role: "MARKSMAN",
+    weapons: ["권총"],
     hp20: 2341,
     ap20: 120.5,
     def20: 103.3,
@@ -574,6 +656,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "39": {
     name: "카밀로",
     en: "Camilo",
+    role: "BRUISER",
+    weapons: ["쌍검", "레이피어"],
     hp20: 2652,
     ap20: 126,
     def20: 109.9,
@@ -585,6 +669,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "40": {
     name: "클로에",
     en: "Chloe",
+    role: "MARKSMAN",
+    weapons: ["암기"],
     hp20: 2307,
     ap20: 113.7,
     def20: 102.3,
@@ -596,6 +682,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "41": {
     name: "요한",
     en: "Johann",
+    role: "SUPPORT",
+    weapons: ["아르카나"],
     hp20: 2316,
     ap20: 126.4,
     def20: 102.3,
@@ -607,6 +695,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "42": {
     name: "비앙카",
     en: "Bianca",
+    role: "MAGE",
+    weapons: ["아르카나"],
     hp20: 2428,
     ap20: 114.6,
     def20: 104.2,
@@ -625,6 +715,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "43": {
     name: "셀린",
     en: "Celine",
+    role: "MAGE",
+    weapons: ["투척"],
     hp20: 2396,
     ap20: 120.5,
     def20: 107.2,
@@ -643,6 +735,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "44": {
     name: "에키온",
     en: "Echion",
+    role: "BRUISER",
+    weapons: ["VF의수"],
     hp20: 2703,
     ap20: 131.9,
     def20: 110.8,
@@ -654,6 +748,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "45": {
     name: "마이",
     en: "Mai",
+    role: "TANK",
+    weapons: ["채찍"],
     hp20: 2671,
     ap20: 109.8,
     def20: 110.8,
@@ -665,6 +761,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "46": {
     name: "에이든",
     en: "Aiden",
+    role: "BRUISER",
+    weapons: ["양손검"],
     hp20: 2819,
     ap20: 139.7,
     def20: 121.6,
@@ -676,6 +774,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "47": {
     name: "라우라",
     en: "Laura",
+    role: "BRUISER",
+    weapons: ["채찍"],
     hp20: 2670,
     ap20: 121.1,
     def20: 110.9,
@@ -687,6 +787,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "48": {
     name: "띠아",
     en: "Tia",
+    role: "MAGE",
+    weapons: ["방망이"],
     hp20: 2535,
     ap20: 113.1,
     def20: 114,
@@ -705,6 +807,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "49": {
     name: "펠릭스",
     en: "Felix",
+    role: "BRUISER",
+    weapons: ["창"],
     hp20: 2670,
     ap20: 116.7,
     def20: 110,
@@ -723,6 +827,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "50": {
     name: "엘레나",
     en: "Elena",
+    role: "TANK",
+    weapons: ["레이피어"],
     hp20: 2708,
     ap20: 120.6,
     def20: 111.8,
@@ -743,6 +849,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "51": {
     name: "프리야",
     en: "Priya",
+    role: "SUPPORT",
+    weapons: ["기타"],
     hp20: 2435,
     ap20: 125.5,
     def20: 108.2,
@@ -754,6 +862,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "52": {
     name: "아디나",
     en: "Adina",
+    role: "MAGE",
+    weapons: ["아르카나"],
     hp20: 2305,
     ap20: 119.5,
     def20: 101.4,
@@ -765,6 +875,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "53": {
     name: "마커스",
     en: "Markus",
+    role: "TANK",
+    weapons: ["도끼", "망치"],
     hp20: 2736,
     ap20: 127.1,
     def20: 114.7,
@@ -776,6 +888,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "54": {
     name: "칼라",
     en: "Karla",
+    role: "MARKSMAN",
+    weapons: ["석궁"],
     hp20: 2430,
     ap20: 115.7,
     def20: 103.2,
@@ -787,6 +901,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "55": {
     name: "에스텔",
     en: "Estelle",
+    role: "TANK",
+    weapons: ["도끼"],
     hp20: 2690,
     ap20: 121.8,
     def20: 112,
@@ -798,6 +914,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "56": {
     name: "피올로",
     en: "Piolo",
+    role: "BRUISER",
+    weapons: ["쌍절곤"],
     hp20: 2708,
     ap20: 105.1,
     def20: 114.7,
@@ -809,6 +927,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "57": {
     name: "마르티나",
     en: "Martina",
+    role: "MARKSMAN",
+    weapons: ["카메라"],
     hp20: 2644,
     ap20: 80,
     def20: 106.2,
@@ -820,6 +940,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "58": {
     name: "헤이즈",
     en: "Haze",
+    role: "MAGE",
+    weapons: ["돌격 소총"],
     hp20: 2346,
     ap20: 129.4,
     def20: 103.4,
@@ -839,6 +961,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "59": {
     name: "아이작",
     en: "Isaac",
+    role: "BRUISER",
+    weapons: ["톤파"],
     hp20: 2717,
     ap20: 124.1,
     def20: 110.9,
@@ -850,6 +974,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "60": {
     name: "타지아",
     en: "Tazia",
+    role: "MAGE",
+    weapons: ["암기"],
     hp20: 2532,
     ap20: 113.6,
     def20: 110.1,
@@ -861,6 +987,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "61": {
     name: "이렘",
     en: "Irem",
+    role: "MAGE",
+    weapons: ["투척"],
     hp20: 2602,
     ap20: 119.3,
     def20: 109.9,
@@ -872,6 +1000,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "62": {
     name: "테오도르",
     en: "Theodore",
+    role: "MARKSMAN",
+    weapons: ["저격총"],
     hp20: 2517,
     ap20: 115.3,
     def20: 113.8,
@@ -883,6 +1013,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "63": {
     name: "이안",
     en: "Lyanh",
+    role: "BRUISER",
+    weapons: ["단검"],
     hp20: 2642,
     ap20: 125.4,
     def20: 112.8,
@@ -894,6 +1026,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "64": {
     name: "바냐",
     en: "Vanya",
+    role: "BRUISER",
+    weapons: ["아르카나"],
     hp20: 2545,
     ap20: 115.5,
     def20: 105.2,
@@ -911,6 +1045,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "65": {
     name: "데비&마를렌",
     en: "DebiMarlene",
+    role: "BRUISER",
+    weapons: ["양손검"],
     hp20: 2680,
     ap20: 110.9,
     def20: 112.8,
@@ -922,6 +1058,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "66": {
     name: "아르다",
     en: "Arda",
+    role: "SUPPORT",
+    weapons: ["아르카나"],
     hp20: 2384,
     ap20: 124.4,
     def20: 105.3,
@@ -933,6 +1071,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "67": {
     name: "아비게일",
     en: "Abigail",
+    role: "BRUISER",
+    weapons: ["도끼"],
     hp20: 2699,
     ap20: 123.6,
     def20: 110.9,
@@ -944,6 +1084,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "68": {
     name: "알론소",
     en: "Alonso",
+    role: "TANK",
+    weapons: ["글러브"],
     hp20: 2786,
     ap20: 115.8,
     def20: 119.6,
@@ -955,6 +1097,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "69": {
     name: "레니",
     en: "Leni",
+    role: "SUPPORT",
+    weapons: ["권총"],
     hp20: 2509,
     ap20: 112.9,
     def20: 110,
@@ -966,6 +1110,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "70": {
     name: "츠바메",
     en: "Tsubame",
+    role: "MARKSMAN",
+    weapons: ["암기"],
     hp20: 2327,
     ap20: 115.6,
     def20: 103.2,
@@ -977,6 +1123,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "71": {
     name: "케네스",
     en: "Kenneth",
+    role: "BRUISER",
+    weapons: ["도끼"],
     hp20: 2575,
     ap20: 116.8,
     def20: 103.3,
@@ -988,6 +1136,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "72": {
     name: "카티야",
     en: "Katja",
+    role: "MARKSMAN",
+    weapons: ["저격총"],
     hp20: 2410,
     ap20: 125.3,
     def20: 103.3,
@@ -999,6 +1149,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "73": {
     name: "샬럿",
     en: "Charlotte",
+    role: "SUPPORT",
+    weapons: ["아르카나"],
     hp20: 2327,
     ap20: 133.1,
     def20: 100.4,
@@ -1010,6 +1162,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "74": {
     name: "다르코",
     en: "Darko",
+    role: "BRUISER",
+    weapons: ["방망이"],
     hp20: 2784,
     ap20: 127.4,
     def20: 117.5,
@@ -1021,6 +1175,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "75": {
     name: "르노어",
     en: "Lenore",
+    role: "MAGE",
+    weapons: ["기타"],
     hp20: 2401,
     ap20: 112.9,
     def20: 105.2,
@@ -1032,6 +1188,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "76": {
     name: "가넷",
     en: "Garnet",
+    role: "TANK",
+    weapons: ["방망이"],
     hp20: 2680,
     ap20: 112.9,
     def20: 108.9,
@@ -1043,6 +1201,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "77": {
     name: "유민",
     en: "YuMin",
+    role: "MAGE",
+    weapons: ["아르카나"],
     hp20: 2307,
     ap20: 115.9,
     def20: 103.2,
@@ -1054,6 +1214,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "78": {
     name: "히스이",
     en: "Hisui",
+    role: "BRUISER",
+    weapons: ["양손검"],
     hp20: 2804,
     ap20: 110.5,
     def20: 124.3,
@@ -1065,6 +1227,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "79": {
     name: "유스티나",
     en: "Justyna",
+    role: "MAGE",
+    weapons: ["석궁"],
     hp20: 2374,
     ap20: 123.7,
     def20: 105.2,
@@ -1076,6 +1240,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "80": {
     name: "이슈트반",
     en: "Istvan",
+    role: "BRUISER",
+    weapons: ["창"],
     hp20: 2708,
     ap20: 116.8,
     def20: 116.8,
@@ -1087,6 +1253,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "81": {
     name: "니아",
     en: "Niah",
+    role: "MAGE",
+    weapons: ["권총"],
     hp20: 2317,
     ap20: 120.9,
     def20: 101.3,
@@ -1098,6 +1266,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "82": {
     name: "슈린",
     en: "Xuelin",
+    role: "BRUISER",
+    weapons: ["레이피어"],
     hp20: 2632,
     ap20: 122.4,
     def20: 111,
@@ -1109,6 +1279,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "83": {
     name: "헨리",
     en: "Henry",
+    role: "MAGE",
+    weapons: ["암기"],
     hp20: 2365,
     ap20: 123.6,
     def20: 105.2,
@@ -1120,6 +1292,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "84": {
     name: "블레어",
     en: "Blair",
+    role: "BRUISER",
+    weapons: ["쌍검"],
     hp20: 2661,
     ap20: 115.7,
     def20: 107,
@@ -1137,6 +1311,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "85": {
     name: "미르카",
     en: "Mirka",
+    role: "TANK",
+    weapons: ["망치"],
     hp20: 2708,
     ap20: 111.2,
     def20: 110.9,
@@ -1148,6 +1324,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "86": {
     name: "펜리르",
     en: "Fenrir",
+    role: "BRUISER",
+    weapons: ["글러브"],
     hp20: 2766,
     ap20: 124.2,
     def20: 116.7,
@@ -1159,6 +1337,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "87": {
     name: "코렐라인",
     en: "Coraline",
+    role: "MAGE",
+    weapons: ["아르카나"],
     hp20: 2346,
     ap20: 136.9,
     def20: 108,
@@ -1170,6 +1350,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "88": {
     name: "비형",
     en: "Bihyung",
+    role: "BRUISER",
+    weapons: ["방망이"],
     hp20: 2602,
     ap20: 117.4,
     def20: 105.1,
@@ -1181,6 +1363,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "89": {
     name: "크레이버",
     en: "Craver",
+    role: "MAGE",
+    weapons: ["권총"],
     hp20: 2450,
     ap20: 118.6,
     def20: 107,
@@ -1192,6 +1376,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "90": {
     name: "루치아",
     en: "Lucia",
+    role: "MAGE",
+    weapons: ["저격총"],
     hp20: 2449,
     ap20: 114.7,
     def20: 107.1,
@@ -1203,6 +1389,8 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "91": {
     name: "세레스",
     en: "Seres",
+    role: "TANK",
+    weapons: ["양손검"],
     hp20: 2679,
     ap20: 127.2,
     def20: 111.7,

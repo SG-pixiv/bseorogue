@@ -42,8 +42,20 @@ pnpm build         # dist/ 에 배포용 파일
 포켓로그 그림 저장소에서 파일 이름 · 크기 · 칸 위치만 읽어서 새로 그렸고, 원본 그림은 들어 있지 않아요.
 진짜 그림(이터널 리턴 리소스 · SG 그림)을 같은 이름으로 넣으면 그대로 바뀌어요. 다시 만들어도 진짜 그림은 덮어쓰지 않아요.
 
-### 블서로그 규칙
-파티 인원 · 클래식 길이 · 싱글 배틀 같은 규칙은 `src/bseorogue.ts` 한곳에 있어요.
+### 블서로그 규칙 · 데이터 (고칠 곳)
+| 고치고 싶은 것 | 파일 |
+|---|---|
+| 파티 인원 · 클래식 길이 · KEL 팀 웨이브 | `src/bseorogue.ts` |
+| 고를 수 있는 실험체 · 코스트 · 종족값 · 무기 | `src/data/bseorogue/roster.ts` 의 `BSEO_PLAYABLE` |
+| 스킨 진화 순서 · 레벨 · 역할군 변화 | `src/data/bseorogue/skin-evolution.ts` |
+| 스킬 효과(빌려 쓰는 포켓로그 기술) | `src/data/bseorogue/skill-moves.ts` |
+| 역할군 상성 | `src/data/bseorogue/roles.ts` |
+| 코스트별 종족값 합 · 역할군 기본 모양 | `src/data/bseorogue/stats.ts` |
+| 야생동물 · 보스 | `src/data/bseorogue/roster.ts` |
+| KEL 팀 (실험체 · 로고) | 무명섬 관리 화면 → 블서로그 → KEL 팀 (오프라인 기본 팀은 `kel.ts`) |
+| 임시 그림 | `src/data/bseorogue/placeholder-art.ts` (진짜 그림을 넣으면 `REAL_ART` 에 종 번호 추가) |
+
+검사: `pnpm test:silent test/tests/bseorogue` (1웨이브부터 50웨이브 클리어까지 자동으로 돌려 봐요)
 
 ### 이터널 리턴 데이터 받기
 `scripts/er-data/fetch.mjs` 가 ER 공식 API에서 실험체 스탯 · 아이템 · 이름을 받아요.

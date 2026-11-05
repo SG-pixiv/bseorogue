@@ -1,5 +1,6 @@
 import { pokerogueApi } from "#api/api";
 import { loggedInUser } from "#app/account";
+import { BSEO } from "#app/bseorogue";
 import { FAKE_TITLE_LOGO_CHANCE } from "#app/constants";
 import { eventBus } from "#app/event-bus";
 import { timedEventManager } from "#app/global-event-manager";
@@ -90,7 +91,9 @@ export class TitleUiHandler extends OptionSelectUiHandler {
     this.playerCountLabel = addTextObject(labelPosX, 0, `? ${i18next.t("menu:playersOnline")}`, TextStyle.MESSAGE, {
       fontSize: "54px",
     }) //
-      .setOrigin(1, 0);
+      .setOrigin(1, 0)
+      // 블서로그: 포켓로그 서버의 접속자 수는 안 보여요
+      .setVisible(!BSEO.classicOnly);
 
     const logoHeight = logo.y + logo.displayHeight;
 

@@ -9,6 +9,7 @@ import {
   getStarterValueFriendshipCap,
   getValueReductionCandyCounts,
 } from "#balance/starters";
+import { BSEO_STARTER_IDS } from "#data/bseorogue/roster";
 import { AbilityAttr } from "#enums/ability-attr";
 import { CandyUpgradeDisplayMode } from "#enums/candy-upgrade-display-mode";
 import { CandyUpgradeNotificationMode } from "#enums/candy-upgrade-notification-mode";
@@ -35,6 +36,13 @@ import i18next from "i18next";
  * @param gameData - (Default `globalScene.gameData`) Game data to use
  * @returns Whether the user has enough candies and a passive has not been unlocked already
  */
+
+/** 블서로그 시작 실험체 순서 (없으면 종 번호) */
+function bseoOrder(id: number): number {
+  const i = BSEO_STARTER_IDS.indexOf(id as never);
+  return i >= 0 ? i : 1000 + id;
+}
+
 export function isPassiveAvailable(speciesId: number, gameData = globalScene.gameData): boolean {
   // Get this species ID's starter data
   const starterId = speciesDataRegistry.getStarter(speciesId);
@@ -474,7 +482,8 @@ export function sortStarterSpecies(speciesIds: StarterSpeciesId[], sort: SortCri
 
     switch (sort) {
       case SortCriteria.NUMBER:
-        return (a - b) * -dir;
+        // 블서로그: 번호 순 = BSEO_PLAYABLE 에 적은 순서 (탱커 · 브루저 · 암살자 · 평원딜 · 스증딜러 · 서포터)
+        return (bseoOrder(a) - bseoOrder(b)) * -dir;
       case SortCriteria.COST:
         return (gameData.getSpeciesStarterValue(a) - gameData.getSpeciesStarterValue(b)) * -dir;
       case SortCriteria.CANDY: {

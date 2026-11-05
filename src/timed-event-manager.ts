@@ -1,3 +1,4 @@
+import { BSEO } from "#app/bseorogue";
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { SHINY_CATCH_RATE_MULTIPLIER } from "#balance/rates";
@@ -24,7 +25,8 @@ export class TimedEventManager {
   private cachedReplacementMap: Map<number, { speciesId: SpeciesId; formIndex: number }> | null = null;
 
   isActive(event: TimedEvent) {
-    if (this.disabled) {
+    // 블서로그: 포켓로그 기간 이벤트(할로윈 등)는 쓰지 않아요
+    if (this.disabled || BSEO.classicOnly) {
       return false;
     }
     const now = new Date();

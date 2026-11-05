@@ -13,6 +13,7 @@ import { initGenerationNine } from "#balance/generation-09";
 import type { SpeciesFormEvolution } from "#balance/pokemon-evolutions";
 import type { StarterCost } from "#balance/starters";
 import { isBseoSpecies } from "#data/bseorogue/hooks";
+import { BSEO_ENEMY_CHARACTER_IDS, BSEO_STARTER_IDS } from "#data/bseorogue/roster";
 import { SpeciesFormChangeItemTrigger } from "#data/form-change-triggers";
 import { SpeciesFormChange } from "#data/pokemon-forms";
 import type { PokemonSpecies, PokemonSpeciesForm } from "#data/pokemon-species";
@@ -90,6 +91,11 @@ export class SpeciesDataRegistry {
     for (const starterId of this.getAllStarters()) {
       this._data[starterId].prevolution = null;
       setPrevo(starterId);
+    }
+    // 블서로그: 적으로만 나오는 실험체도 스킨 진화 앞 모습을 알아야 해요
+    for (const id of BSEO_ENEMY_CHARACTER_IDS) {
+      this._data[id].prevolution = null;
+      setPrevo(id);
     }
   }
 
@@ -223,11 +229,17 @@ export class SpeciesDataRegistry {
   public getSpeciesForEggTier(tier: EggTier): PokemonSpecies[] {
     const ret: PokemonSpecies[] = [];
     for (const speciesData of Object.values(this._data)) {
-      if (speciesData.eggTier === tier) {
+      // 블서로그: 보급 상자(알)에서는 시작 실험체만 나와요
+      if (
+        speciesData.eggTier === tier
+        && this.isStarter(speciesData.species.speciesId)
+        && isBseoSpecies(speciesData.species.speciesId)
+      ) {
         ret.push(speciesData.species);
       }
     }
-    return ret;
+    // 그 등급 실험체가 아직 없으면 시작 실험체 전부에서 골라요
+    return ret.length > 0 ? ret : this.getAllStarters(true);
   }
 
   /**
@@ -301,6 +313,10 @@ export class SpeciesDataRegistry {
         ret.push(getSpecies ? speciesData.species : (speciesData.species.speciesId as StarterSpeciesId));
       }
     }
+    // 블서로그: 고르기 화면 순서는 BSEO_PLAYABLE 에 적은 순서 (탱커 · 브루저 · 암살자 · 평원딜 · 스증딜러 · 서포터)
+    const order = (x: StarterSpeciesId | PokemonSpecies) =>
+      BSEO_STARTER_IDS.indexOf(typeof x === "number" ? x : x.speciesId);
+    ret.sort((a, b) => order(a) - order(b));
     return ret as StarterSpeciesId[] | PokemonSpecies[];
   }
 

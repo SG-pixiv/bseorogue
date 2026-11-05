@@ -1,3 +1,4 @@
+import { BSEO } from "#app/bseorogue";
 import { USE_SEASONAL_SPLASH_MESSAGES } from "#app/constants";
 import { timedEventManager } from "#app/global-event-manager";
 
@@ -360,6 +361,10 @@ const seasonalSplashMessages: Season[] = [
 // #endregion Seasonal Messages
 
 export function getSplashMessages(): string[] {
+  // 블서로그: 타이틀 화면 한 줄은 블서로그 것만 (locales/ko/splash-texts.json 의 bseo)
+  if (BSEO.classicOnly) {
+    return Array.from({ length: 20 }, (_, i) => `splashMessages:bseo.line${i + 1}`);
+  }
   const splashMessages: string[] = [...commonSplashMessages];
   console.log("use seasonal splash messages", USE_SEASONAL_SPLASH_MESSAGES);
   if (USE_SEASONAL_SPLASH_MESSAGES) {

@@ -22,8 +22,8 @@ export const BSEO = {
   classicOnly: true,
   /** 포켓로그 최종 보스(무한다이노) 2단계 연출. 블서로그는 루미 연출을 따로 만들 때까지 끔 */
   pokerogueFinale: false,
-  /** 적 팀(트레이너) 전투. KEL 팀을 넣을 때까지 꺼 둬요 */
-  trainers: false,
+  /** KEL 팀 전투가 나오는 웨이브 (팀마다 실험체 3명, 무명섬 관리 화면에서 정해요) */
+  kelWaves: [5, 15, 25, 35, 45],
   /** 미스터리 인카운터 (포켓몬 이야기라 꺼 둬요) */
   mysteryEncounters: false,
   /** 무명섬 (랭킹 · 소식 · 피드백) */

@@ -4,7 +4,8 @@
  */
 
 import { speciesDataRegistry } from "#app/global-species-data-registry";
-import { BSEO_ALL_IDS, BSEO_BOSSES, BSEO_STARTERS, BSEO_WILD } from "#data/bseorogue/roster";
+import { loadKelTeams } from "#data/bseorogue/kel";
+import { BSEO_ALL_IDS, BSEO_BOSSES, BSEO_CHARACTERS, BSEO_WILD, ENEMY_MOVE_NAMES } from "#data/bseorogue/roster";
 /**
  * 블서로그가 포켓로그 엔진에 끼어드는 곳들 (야생 · 보스 · 스킬 이름 · 역할군)
  */
@@ -43,7 +44,9 @@ export function bseoBossSpecies(waveIndex: number): PokemonSpecies | null {
 
 /** 실험체 스킬: 빌려 쓰는 기술의 이름 · 상성(역할군)을 블서로그 것으로 */
 export function initBseorogue(): void {
-  for (const c of BSEO_STARTERS) {
+  // KEL 팀 불러오기 (기다리지 않아요. 못 불러오면 기본 팀)
+  void loadKelTeams();
+  for (const c of BSEO_CHARACTERS) {
     for (const s of c.skills) {
       const move = allMoves[s.move] as unknown as { _type: PokemonType; localize(): void } | undefined;
       if (!move) {
@@ -52,6 +55,13 @@ export function initBseorogue(): void {
       // 이름은 글자 묶음(i18n)에 넣어 둬야 다시 불러와도 안 바뀌어요
       i18next.addResource(i18next.resolvedLanguage ?? "ko", "move", `${toCamelCase(MoveId[s.move])}.name`, s.name);
       move._type = c.role as unknown as PokemonType;
+      move.localize();
+    }
+  }
+  for (const [id, name] of Object.entries(ENEMY_MOVE_NAMES)) {
+    const move = allMoves[Number(id)] as unknown as { localize(): void } | undefined;
+    if (move && name) {
+      i18next.addResource(i18next.resolvedLanguage ?? "ko", "move", `${toCamelCase(MoveId[Number(id)])}.name`, name);
       move.localize();
     }
   }
