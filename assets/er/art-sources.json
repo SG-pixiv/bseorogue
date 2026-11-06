@@ -20,49 +20,221 @@
    "kind": "full",
    "file": "001. Jackie/09. Spirit HuntER Jackie/Jackie_Skin_04_Full.png"
   },
+  "2_1": {
+   "kind": "full",
+   "file": "002. Aya/06. On-Duty Aya/Aya_Full_01.png"
+  },
   "3_2": {
+   "kind": "full",
+   "file": "005. Fiora/07. MusketeER Fiora/Fiora_Full_02.png"
+  },
+  "4_0": {
    "kind": "half",
-   "file": "005. Fiora/07. MusketeER Fiora/Fiora_Half_02.png"
+   "file": "004. Magnus/02. Default/Half_Magnus_00.png"
+  },
+  "4_1": {
+   "kind": "full",
+   "file": "004. Magnus/06. Boss Magnus/Magnus_Full_01.png"
+  },
+  "4_2": {
+   "kind": "half",
+   "file": "004. Magnus/07. Tropical Party Magnus/Magnus_Half_02.png"
   },
   "4_900": {
    "kind": "half",
    "file": "9995. Cadet (Ranked Reward)/Season 5 - Magnus/Magnus_Cadet_Half.png"
   },
+  "5_0": {
+   "kind": "full",
+   "file": "007. Zahir/02. Default/Zahir_Full_00.png"
+  },
   "5_1": {
+   "kind": "full",
+   "file": "007. Zahir/06. Gilded ReapER Zahir/Zahir_Full_01.png"
+  },
+  "5_2": {
    "kind": "half",
-   "file": "007. Zahir/06. Gilded ReapER Zahir/Zahir_Half_01.png"
+   "file": "007. Zahir/07. Cobalt Evolution Zahir/Zahir_Half_02.png"
+  },
+  "6_0": {
+   "kind": "full",
+   "file": "006. Nadine/02. Default/Nadine_Full_00.png"
+  },
+  "6_1": {
+   "kind": "full",
+   "file": "006. Nadine/06. Neon Huntress Nadine/Nadine_Full_01.png"
+  },
+  "6_2": {
+   "kind": "full",
+   "file": "006. Nadine/07. Little Nadine Riding Hood/Nadine_Full_02.png"
+  },
+  "7_0": {
+   "kind": "half",
+   "file": "003. Hyunwoo/02. Default/Hyunwoo_Half_00.png"
+  },
+  "7_1": {
+   "kind": "half",
+   "file": "003. Hyunwoo/06. Street Fiend Hyunwoo/Hyunwoo_Half_01.png"
+  },
+  "7_2": {
+   "kind": "full",
+   "file": "003. Hyunwoo/07. Red Devil Hyunwoo/Hyunwoo_Full_02.png"
+  },
+  "8_0": {
+   "kind": "full",
+   "file": "008. Hart/02. Default/Hart_Full_00.png"
+  },
+  "8_1": {
+   "kind": "full",
+   "file": "008. Hart/06. BandleadER Hart/Hart_Full_01.png"
+  },
+  "8_2": {
+   "kind": "full",
+   "file": "008. Hart/07. WintER Carnival Hart/Hart_Full_02.png"
   },
   "8_3": {
    "kind": "half",
    "file": "008. Hart/08. Wonderland Hart/Hart_Half_03.png"
   },
+  "9_1": {
+   "kind": "full",
+   "file": "009. Isol/06. Wasteland Isol/Isol_Full_01.png"
+  },
+  "9_2": {
+   "kind": "full",
+   "file": "009. Isol/07. Spirit HuntER Isol/Isol_Full_02.png"
+  },
+  "10_0": {
+   "kind": "full",
+   "file": "010. Li Dailin/02. Default/Li Dailin_Full_00.png"
+  },
+  "10_1": {
+   "kind": "full",
+   "file": "010. Li Dailin/06. Jade DriftER Li Dailin/Li Dailin_Full_01.png"
+  },
+  "10_2": {
+   "kind": "full",
+   "file": "010. Li Dailin/07. Rebel Li Dailin/Li Dailin_Full_02.png"
+  },
   "10_900": {
    "kind": "half",
    "file": "9995. Cadet (Ranked Reward)/Season 7 - Li Dailin/Li Dailin_Cadet_Half.png"
   },
-  "13_2": {
+  "11_0": {
    "kind": "half",
-   "file": "013. Xiukai/07. Dodgeball King Xiukai/Xiukai_Half_02.png"
+   "file": "011. Yuki/02. Default/Yuki_Half_00.png"
+  },
+  "11_1": {
+   "kind": "full",
+   "file": "011. Yuki/07. Windblade Yuki/Yuki_Full_01.png"
+  },
+  "11_2": {
+   "kind": "full",
+   "file": "011. Yuki/08. Midnight Shinobi Yuki/Yuki_Full_02.png"
+  },
+  "11_3": {
+   "kind": "full",
+   "file": "011. Yuki/09. Bow Wow Yuki/Yuki_Full_03.png"
+  },
+  "12_0": {
+   "kind": "half",
+   "file": "012. Hyejin/02. Default/Hyejin_Half_00.png"
+  },
+  "12_1": {
+   "kind": "full",
+   "file": "012. Hyejin/06. Magnolia Oracle Hyejin/Hyejin_Full_01.png"
+  },
+  "12_2": {
+   "kind": "full",
+   "file": "012. Hyejin/08. Spirit HuntER Hyejin/Hyejin_Full_02.png"
+  },
+  "12_3": {
+   "kind": "full",
+   "file": "012. Hyejin/09. Candy Cane Hyejin/Hyejin_Full_03.png"
+  },
+  "12_6": {
+   "kind": "full",
+   "file": "012. Hyejin/11. Pinkitty Maid Hyejin/Full_Hyejin_006.png"
+  },
+  "13_0": {
+   "kind": "full",
+   "file": "013. Xiukai/02. Default/Xiukai_Full_00.png"
+  },
+  "13_1": {
+   "kind": "full",
+   "file": "013. Xiukai/06. Itamae Xiukai/Xiukai_Full_01.png"
+  },
+  "13_2": {
+   "kind": "full",
+   "file": "013. Xiukai/07. Dodgeball King Xiukai/Xiukai_Full_02.png"
   },
   "14_0": {
+   "kind": "full",
+   "file": "015. Chiara/02. Default/Chiara_Full_00.png"
+  },
+  "14_1": {
    "kind": "half",
-   "file": "015. Chiara/02. Default/Chiara_Half_00.png"
+   "file": "015. Chiara/06. ArbitER Chiara/Chiara_Half_01.png"
+  },
+  "14_2": {
+   "kind": "full",
+   "file": "015. Chiara/07. Spirit HuntER Chiara/Chiara_Full_02.png"
   },
   "14_4": {
    "kind": "full",
    "file": "015. Chiara/09. SummERtime Chiara/Chiara_Full_04.png"
   },
+  "15_0": {
+   "kind": "full",
+   "file": "014. Sissela/02. Default/Sissela_Full_00.png"
+  },
+  "15_1": {
+   "kind": "full",
+   "file": "014. Sissela/06. Frost ClovER Sissela/Sissela_Full_01.png"
+  },
+  "15_2": {
+   "kind": "full",
+   "file": "014. Sissela/07. Noblewoman Sissela/Sissela_Full_02.png"
+  },
   "15_906": {
    "kind": "full",
    "file": "9995. Cadet (Ranked Reward)/Season 10 - Sissela/Full_Sissela_06.png"
+  },
+  "16_0": {
+   "kind": "full",
+   "file": "018. Silvia/02. Default/Silvia_Full_00.png"
+  },
+  "16_1": {
+   "kind": "full",
+   "file": "018. Silvia/06. Geforce Now Silvia/Silvia_Full_01.png"
+  },
+  "16_2": {
+   "kind": "full",
+   "file": "018. Silvia/07. Midnight Breeze Silvia/Silvia_Full_02.png"
+  },
+  "17_0": {
+   "kind": "full",
+   "file": "016. Adriana/02. Default/Adriana_Full_00.png"
   },
   "17_1": {
    "kind": "full",
    "file": "016. Adriana/06. Firebat Adriana/Adriana_Full_01.png"
   },
+  "17_2": {
+   "kind": "full",
+   "file": "016. Adriana/08. Exterminator Adriana/Adriana_Full_02.png"
+  },
+  "18_0": {
+   "kind": "full",
+   "file": "017. Shoichi/02. Default/Shoichi_Full_00.png"
+  },
   "18_1": {
    "kind": "half",
    "file": "017. Shoichi/06. Hitman Shoichi/Shoichi_Half_Mini.png"
+  },
+  "18_2": {
+   "kind": "full",
+   "file": "017. Shoichi/07. WintER Carnival Shoichi/Shochi_Full_02.png"
   },
   "18_5": {
    "kind": "full",
@@ -72,13 +244,25 @@
    "kind": "full",
    "file": "019. Emma/02. Default/Emma_Full_00.png"
   },
+  "20_0": {
+   "kind": "full",
+   "file": "020. Lenox/02. Default/Lenox_Full_00.png"
+  },
   "20_1": {
-   "kind": "half",
-   "file": "020. Lenox/06. Capo Lenox/Lenox_Half_01.png"
+   "kind": "full",
+   "file": "020. Lenox/06. Capo Lenox/Lenox_Full_01.png"
+  },
+  "20_2": {
+   "kind": "full",
+   "file": "020. Lenox/07. Mistletoe Lenox/Lenox_Full_02.png"
   },
   "20_5": {
    "kind": "full",
    "file": "020. Lenox/10. Abyss Empress Lenox/Lenox_Full_05.png"
+  },
+  "21_0": {
+   "kind": "full",
+   "file": "021. Rozzi/02. Default/Rozzi_Full_00.png"
   },
   "21_1": {
    "kind": "full",
@@ -88,53 +272,273 @@
    "kind": "full",
    "file": "021. Rozzi/07. Elite ExecutionER Rozzi/Rozzi_Full_02.png"
   },
+  "22_0": {
+   "kind": "full",
+   "file": "022. Luke/02. Default/Luke_Full_00.png"
+  },
+  "22_1": {
+   "kind": "full",
+   "file": "022. Luke/06. BartendER Luke/Luke_Full_01.png"
+  },
+  "22_2": {
+   "kind": "full",
+   "file": "022. Luke/07. Street Fiend Luke/Luke_Full_02.png"
+  },
   "22_900": {
    "kind": "half",
    "file": "9995. Cadet (Ranked Reward)/EA Season 6 - Luke/Luke_Cadet_Half.png"
   },
+  "23_0": {
+   "kind": "full",
+   "file": "023. Cathy/02. Default/Cathy_Full_00.png"
+  },
   "23_1": {
+   "kind": "full",
+   "file": "023. Cathy/06. Combat Medic Cathy/Cathy_Full_01.png"
+  },
+  "23_2": {
+   "kind": "full",
+   "file": "023. Cathy/07. Android Medic Cathy/Cathy_Full_02.png"
+  },
+  "24_0": {
+   "kind": "full",
+   "file": "024. Adela/02. Default/Adela_Full_00.png"
+  },
+  "24_1": {
    "kind": "half",
-   "file": "023. Cathy/06. Combat Medic Cathy/Cathy_Half_01.png"
+   "file": "024. Adela/06. White Queen Adela/Adela_Half_01.png"
+  },
+  "25_0": {
+   "kind": "full",
+   "file": "025. Bernice/02. Default - 기본/bERnice_Full_00.png"
+  },
+  "25_1": {
+   "kind": "full",
+   "file": "025. Bernice/06. Wasteland Bernice/bERnice_Full_01.png"
+  },
+  "25_2": {
+   "kind": "full",
+   "file": "025. Bernice/07. Demon Hunter Bernice/bERnice_Full_02.png"
+  },
+  "25_3": {
+   "kind": "full",
+   "file": "025. Bernice/08. Housekeeper Corp. Bernice/bERnice_Full_03.png"
+  },
+  "26_0": {
+   "kind": "half",
+   "file": "026. Barbara/02. Default - 기본/Barbara_Half_00.png"
+  },
+  "26_1": {
+   "kind": "full",
+   "file": "026. Barbara/06. Chief Mechanic Barbara/Barbara_Full_01.png"
+  },
+  "26_2": {
+   "kind": "half",
+   "file": "026. Barbara/07. Interstellar Barbara/Barbara_Half_02.png"
+  },
+  "26_3": {
+   "kind": "full",
+   "file": "026. Barbara/08. ResearchER Barbara/Barbara_Full_03.png"
+  },
+  "27_0": {
+   "kind": "half",
+   "file": "027. Alex/02. Default/Alex_Half_00.png"
+  },
+  "27_1": {
+   "kind": "full",
+   "file": "027. Alex/06. Operator Alex/Alex_Full_01.png"
+  },
+  "27_2": {
+   "kind": "half",
+   "file": "027. Alex/07. Private Eye Alex/Alex_Half_02.png"
+  },
+  "28_0": {
+   "kind": "full",
+   "file": "028. Sua/02. Default/Sua_Full_00.png"
+  },
+  "28_2": {
+   "kind": "full",
+   "file": "028. Sua/07. Wistful Heritage Sua/Skin_Full_002.png"
+  },
+  "29_0": {
+   "kind": "half",
+   "file": "029. Leon/02. Default/Leon_Half_00.png"
+  },
+  "29_1": {
+   "kind": "full",
+   "file": "029. Leon/06. Spec Ops Leon/Leon_Full_01.png"
+  },
+  "29_2": {
+   "kind": "full",
+   "file": "029. Leon/07. SummERtime Leon/Leon_Full_02.png"
+  },
+  "30_0": {
+   "kind": "half",
+   "file": "030. Eleven/02. Default/Eleven_Half_00.png"
+  },
+  "30_1": {
+   "kind": "full",
+   "file": "030. Eleven/06. Sugar Rush Eleven/Eleven_Full_01.png"
   },
   "30_3": {
    "kind": "half",
    "file": "030. Eleven/08. Little Sailor Eleven/Eleven_Half_03.png"
   },
   "31_0": {
-   "kind": "half",
-   "file": "031. Rio/02. Default/Rio_Half_00.png"
+   "kind": "full",
+   "file": "031. Rio/02. Default/Rio_Full_00.png"
+  },
+  "31_1": {
+   "kind": "full",
+   "file": "031. Rio/06. Shrine Maiden Rio/Rio_Full_01.png"
   },
   "31_2": {
-   "kind": "half",
-   "file": "031. Rio/09. SummERtime Rio/Rio_Half_02.png"
+   "kind": "full",
+   "file": "031. Rio/09. SummERtime Rio/Rio_Full_02.png"
   },
   "31_8": {
    "kind": "half",
    "file": "031. Rio/13. 3rd Anniversary Rio Dolce/Half_Rio_08.png"
   },
+  "32_1": {
+   "kind": "full",
+   "file": "032. William/06. Snow Game William/William_Full_01.png"
+  },
+  "33_0": {
+   "kind": "full",
+   "file": "033. Nicky/02. Default/Nicky_Full_00.png"
+  },
+  "33_2": {
+   "kind": "full",
+   "file": "033. Nicky/07. Rebellious Nicky/Nicky_Full_02.png"
+  },
+  "34_1": {
+   "kind": "full",
+   "file": "034. Nathapon/06. Arctic Expedition Nathapon/Nathapon_Full_01.png"
+  },
+  "34_2": {
+   "kind": "full",
+   "file": "034. Nathapon/07. AdventurER Nathapon/Nathapon_Full_02.png"
+  },
+  "35_0": {
+   "kind": "full",
+   "file": "035. Jan/02. Default/Jan_Full_00.png"
+  },
+  "35_1": {
+   "kind": "full",
+   "file": "035. Jan/06. Champion Jan/Jan_Full_01.png"
+  },
+  "35_2": {
+   "kind": "full",
+   "file": "035. Jan/07. Death ChallengER Jan/Jan_Full_02.png"
+  },
+  "36_0": {
+   "kind": "full",
+   "file": "036. Eva/02. Default/Eva_Full_00.png"
+  },
+  "36_1": {
+   "kind": "half",
+   "file": "036. Eva/06. Celestial ClocktowER Eva/Eva_Half_01.png"
+  },
+  "36_2": {
+   "kind": "full",
+   "file": "036. Eva/08. Sweet Valentine Eva/Eva_Full_02.png"
+  },
   "36_5": {
    "kind": "half",
    "file": "036. Eva/11. 2nd Anniversary Eva Blossom/Eva_Half_05.png"
+  },
+  "37_0": {
+   "kind": "full",
+   "file": "037. Daniel/02. Default/Daniel_Full_00.png"
+  },
+  "37_1": {
+   "kind": "full",
+   "file": "037. Daniel/06. Plague Doctor Daniel/Daniel_Full_01.png"
   },
   "37_2": {
    "kind": "full",
    "file": "037. Daniel/08. Spring Romance Daniel/Daniel_Full_02.png"
   },
   "38_0": {
+   "kind": "full",
+   "file": "038. Jenny/02. Default/Jenny_Full_00.png"
+  },
+  "38_1": {
+   "kind": "full",
+   "file": "038. Jenny/06. MobstER Jenny/Jenny_Full_01.png"
+  },
+  "39_1": {
+   "kind": "full",
+   "file": "039. Camilo/06. Blue Orchid Camilo/Camilo_Full_01.png"
+  },
+  "39_2": {
+   "kind": "full",
+   "file": "039. Camilo/07. Popstar Camilo/Camilo_Full_02.png"
+  },
+  "40_0": {
+   "kind": "full",
+   "file": "040. Chloe/02. Default/Chloe_Full_00.png"
+  },
+  "40_1": {
+   "kind": "full",
+   "file": "040. Chloe/06. Dutiful Maid Chloe/Chloe_Full_01.png"
+  },
+  "40_2": {
+   "kind": "full",
+   "file": "040. Chloe/07. Lucky Bunny Chloe/Chloe_Full_02.png"
+  },
+  "41_0": {
    "kind": "half",
-   "file": "038. Jenny/02. Default/Jenny_Half_00.png"
+   "file": "041. Johann/02. Default/Johann_Half_00.png"
+  },
+  "41_1": {
+   "kind": "full",
+   "file": "041. Johann/06. High Priest Johann/Johann_Full_01.png"
+  },
+  "42_0": {
+   "kind": "full",
+   "file": "042. Bianca/02. Default/Bianca_Full_00.png"
   },
   "42_1": {
-   "kind": "half",
-   "file": "042. Bianca/06. Comfy Bianca/Bianca_Half_01.png"
+   "kind": "full",
+   "file": "042. Bianca/06. Comfy Bianca/Bianca_Full_01.png"
+  },
+  "42_2": {
+   "kind": "full",
+   "file": "042. Bianca/07. TransfER Student Bianca/Bianca_Full_02.png"
+  },
+  "43_0": {
+   "kind": "full",
+   "file": "043. Celine/02. Default/Celine_Full_00.png"
+  },
+  "43_2": {
+   "kind": "full",
+   "file": "043. Celine/07. Electro Pumpkin Celine/Celine_Full_02.png"
   },
   "43_5": {
    "kind": "half",
    "file": "043. Celine/10. Berryblast Maid Celine/Half_Celine_05.png"
   },
+  "44_0": {
+   "kind": "half",
+   "file": "044. Echion/02. Default/Echion_Half_00.png"
+  },
+  "44_2": {
+   "kind": "full",
+   "file": "044. Echion/07. Underground Org Echion/Echion_Full_02.png"
+  },
   "44_900": {
    "kind": "full",
    "file": "9995. Cadet (Ranked Reward)/EA Season 8 - Echion/Echion_Cadet_Full.png"
+  },
+  "45_0": {
+   "kind": "full",
+   "file": "045. Mai/02. Default/Mai_Full_00.png"
+  },
+  "45_1": {
+   "kind": "full",
+   "file": "045. Mai/06. TransfER Student Mai/Mai_Full_01.png"
   },
   "45_2": {
    "kind": "half",
@@ -144,61 +548,365 @@
    "kind": "full",
    "file": "9995. Cadet (Ranked Reward)/EA Season 7 - Mai/Mai_Cadet_Full.png"
   },
+  "46_0": {
+   "kind": "full",
+   "file": "046. Aiden/02. Default/Aiden_Full_00.png"
+  },
+  "46_1": {
+   "kind": "full",
+   "file": "046. Aiden/06. Spirit HuntER Aiden/Aiden_Full_01.png"
+  },
+  "46_2": {
+   "kind": "full",
+   "file": "046. Aiden/07. Problem SolvER Aiden/Aiden_Full_02.png"
+  },
+  "47_0": {
+   "kind": "full",
+   "file": "047. Laura/02. Default/Laura_Full_00.png"
+  },
   "47_4": {
    "kind": "half",
    "file": "047. Laura/09. Tactics Instructor Laura/Laura_Half_04.png"
+  },
+  "48_0": {
+   "kind": "full",
+   "file": "048. Tia/02. Default/Tia_Full_00.png"
+  },
+  "48_1": {
+   "kind": "full",
+   "file": "048. Tia/06. Street AteliER Tia/Tia_Full_01.png"
+  },
+  "48_2": {
+   "kind": "full",
+   "file": "048. Tia/07. Apprentice Witch Tia/Tia_Full_02.png"
   },
   "49_0": {
    "kind": "full",
    "file": "049. Felix/02. Default/Default_Full.png"
   },
+  "49_1": {
+   "kind": "full",
+   "file": "049. Felix/06. Lumialand Felix/Felix_Full_01.png"
+  },
   "50_0": {
    "kind": "full",
    "file": "050. Elena/02. Default/Elena_Full_00.png"
+  },
+  "51_0": {
+   "kind": "full",
+   "file": "051. Priya/02. Default/Priya_Full_00.png"
+  },
+  "51_2": {
+   "kind": "full",
+   "file": "051. Priya/07. SingER-songwritER Priya/Priya_Full_02.png"
+  },
+  "52_0": {
+   "kind": "half",
+   "file": "052. Adina/02. Default/Adina_Half_00.png"
+  },
+  "52_2": {
+   "kind": "full",
+   "file": "052. Adina/07. Eternal Vow Adina/Adina_Full_02.png"
   },
   "52_3": {
    "kind": "full",
    "file": "052. Adina/08. Ocean Breeze Adina/Adina_Full_03.png"
   },
+  "53_0": {
+   "kind": "full",
+   "file": "053. Markus/02. Default/Markus_Full_00.png"
+  },
+  "53_1": {
+   "kind": "full",
+   "file": "053. Markus/06. Wasteland Markus/Markus_Full_01.png"
+  },
+  "54_0": {
+   "kind": "full",
+   "file": "054. Karla/02. Default/Karla_Full_00.png"
+  },
+  "54_1": {
+   "kind": "half",
+   "file": "054. Karla/06. Lifeguard Karla/Karla_Half_01.png"
+  },
+  "54_3": {
+   "kind": "half",
+   "file": "054. Karla/07. Street Fiend Karla/Karla_Half_03.png"
+  },
+  "56_0": {
+   "kind": "full",
+   "file": "056. Piolo/02. Default/Piolo_Full_00.png"
+  },
+  "56_1": {
+   "kind": "full",
+   "file": "056. Piolo/06. ChallengER Piolo/Piolo_Full_01.png"
+  },
+  "56_2": {
+   "kind": "full",
+   "file": "056. Piolo/07. Street FightER Piolo/Piolo_Full_02.png"
+  },
+  "57_1": {
+   "kind": "half",
+   "file": "057. Martina/06. Steampunk Martina/Martina_Half_01.png"
+  },
   "61_3": {
    "kind": "full",
    "file": "061. Irem/08. Festive Neko Irem/Full_Irem_03.png"
   },
+  "62_1": {
+   "kind": "full",
+   "file": "062. Theodore/06. Special Task Force Theodore/Theodore_Full_01.png"
+  },
   "62_2": {
    "kind": "half",
    "file": "062. Theodore/07. Battle Priest Theodore/Theodore_Half_02.png"
+  },
+  "65_1": {
+   "kind": "half",
+   "file": "065. Debi & Marlene/06. Security EnforcER Debi & Marlene/DebiMarlene_Half_01.png"
+  },
+  "65_2": {
+   "kind": "half",
+   "file": "065. Debi & Marlene/07. Cotton Candy Debi & Marlene/DebiMarlene_Half_02.png"
+  },
+  "65_3": {
+   "kind": "half",
+   "file": "065. Debi & Marlene/08. After School Debi & Marlene/DebiMarlene_Half_03.png"
+  },
+  "66_0": {
+   "kind": "full",
+   "file": "066. Arda/02. Default/Arda_Full_00.png"
+  },
+  "66_1": {
+   "kind": "half",
+   "file": "066. Arda/06. Archaeologist Arda/Arda_Half_01.png"
+  },
+  "67_1": {
+   "kind": "full",
+   "file": "067. Abigail/06. Prison Guard Abigail/Abigail_Full_01.png"
+  },
+  "67_2": {
+   "kind": "half",
+   "file": "067. Abigail/07. Poker Face Abigail/Abigail_Half_02.png"
+  },
+  "68_0": {
+   "kind": "half",
+   "file": "068. Alonso/02. Default/Alonso_Half_00.png"
+  },
+  "68_1": {
+   "kind": "half",
+   "file": "068. Alonso/06. MistER Elegante Alonso/Alonso_Half_01.png"
+  },
+  "68_2": {
+   "kind": "half",
+   "file": "068. Alonso/07. Warden of Hell Alonso/Alonso_Half_02.png"
+  },
+  "69_0": {
+   "kind": "half",
+   "file": "069. Leni/02. Default/Leni_Half_00.png"
+  },
+  "69_1": {
+   "kind": "half",
+   "file": "069. Leni/06. Marching Band Leni/Leni_Half_01.png"
+  },
+  "69_2": {
+   "kind": "half",
+   "file": "069. Leni/07. Sweet Devil Leni/Leni_Half_02.png"
   },
   "69_3": {
    "kind": "half",
    "file": "069. Leni/08. Daisybear Maid Leni/Half_Leni_003.png"
   },
   "70_0": {
+   "kind": "full",
+   "file": "070. Tsubame/02. Default/Tsubame_Full_00.png"
+  },
+  "70_1": {
+   "kind": "full",
+   "file": "070. Tsubame/06. Plum Blossom Tsubame/Tsubame_Full_01.png"
+  },
+  "70_2": {
    "kind": "half",
-   "file": "070. Tsubame/02. Default/Tsubame_Half_00.png"
+   "file": "070. Tsubame/07. Blue Wave Tsubame/Tsubame_Half_02.png"
+  },
+  "71_0": {
+   "kind": "full",
+   "file": "071. Kenneth/02. Default/Kenneth_Full_00.png"
   },
   "71_1": {
    "kind": "full",
    "file": "071. Kenneth/06. Battle Priest Kenneth/Kenneth_Full_01.png"
   },
+  "71_2": {
+   "kind": "full",
+   "file": "071. Kenneth/07. Azure Promise Kenneth/Kenneth_Full_02.png"
+  },
+  "72_0": {
+   "kind": "half",
+   "file": "072. Katja/02. Default/Katja_Half_00.png"
+  },
+  "72_1": {
+   "kind": "full",
+   "file": "072. Katja/06. Ravenwing Katja/Katja_Full_01.png"
+  },
+  "72_2": {
+   "kind": "half",
+   "file": "072. Katja/07. Training Director Katja/Katja_Half_02.png"
+  },
+  "73_0": {
+   "kind": "full",
+   "file": "073. Charlotte/02. Default/Charlotte_Full_00.png"
+  },
+  "73_1": {
+   "kind": "full",
+   "file": "073. Charlotte/06. TransfER Student Charlotte/Charlotte_Full_01.png"
+  },
+  "73_2": {
+   "kind": "full",
+   "file": "073. Charlotte/07. Crimson Curse Charlotte/Charlotte_Full_02.png"
+  },
+  "74_0": {
+   "kind": "full",
+   "file": "074. Darko/02. Default/Darko_Full_00.png"
+  },
+  "74_2": {
+   "kind": "full",
+   "file": "074. Darko/07. SummER Break Darko/Darko_Full_02.png"
+  },
   "75_0": {
    "kind": "full",
    "file": "075. Lenore/02. Default/Lenore_Full_00.png"
   },
-  "76_1": {
+  "75_2": {
    "kind": "half",
-   "file": "076. Garnet/06. Trapped Garnet/Half_Garnet_01.png"
+   "file": "075. Lenore/07. Music Teacher Lenore/Half_Lenore_02.png"
+  },
+  "76_0": {
+   "kind": "half",
+   "file": "076. Garnet/02. Default/Garnet_Half_00.png"
+  },
+  "76_1": {
+   "kind": "full",
+   "file": "076. Garnet/06. Trapped Garnet/Full_Garnet_01.png"
+  },
+  "76_2": {
+   "kind": "full",
+   "file": "076. Garnet/07. Crimson Primise Garnet/Full_Garnet_02.png"
+  },
+  "77_1": {
+   "kind": "full",
+   "file": "077. Yumin/06. White Crane Yumin/Full_YuMin_01.png"
+  },
+  "77_2": {
+   "kind": "full",
+   "file": "077. Yumin/07. Storm Beacon Yumin/Full_Yumin_02.png"
+  },
+  "78_0": {
+   "kind": "half",
+   "file": "078. Hisui/02. Default/Half_Hisui_00.png"
   },
   "78_1": {
+   "kind": "full",
+   "file": "078. Hisui/06. Street Fiend Hisui/Full_Hisui_01.png"
+  },
+  "78_2": {
+   "kind": "full",
+   "file": "078. Hisui/07. Spirit Hunter Hisui/Full_Hisui_02.png"
+  },
+  "79_0": {
+   "kind": "full",
+   "file": "079. Justyna/02. Default/Full_Justyna_00.png"
+  },
+  "79_1": {
    "kind": "half",
-   "file": "078. Hisui/06. Street Fiend Hisui/Half_Hisui_01.png"
+   "file": "079. Justyna/06. Prefect Justyna/Half_Justyna_01.png"
+  },
+  "79_2": {
+   "kind": "full",
+   "file": "079. Justyna/07. Lucky Bunny Justyna/Full_Justyna_02.png"
+  },
+  "80_0": {
+   "kind": "full",
+   "file": "080. István/02. Default/Full_Istvan_00.png"
+  },
+  "80_1": {
+   "kind": "full",
+   "file": "080. István/06. Butler István/Full_Istvan_S01.png"
   },
   "81_0": {
    "kind": "full",
    "file": "081. NiaH/02. Default/Full_NiaH_00.png"
   },
+  "81_1": {
+   "kind": "full",
+   "file": "081. NiaH/06. Jersey Maid NiaH/NiaH_Full_01.png"
+  },
+  "82_1": {
+   "kind": "half",
+   "file": "082. Xuelin/06. Master Xuelin/Half_Xuelin_01.png"
+  },
   "82_2": {
    "kind": "half",
    "file": "082. Xuelin/07. Wave Slasher Xuelin/Half_Xuelin_02.png"
+  },
+  "83_0": {
+   "kind": "full",
+   "file": "083. Henry/02. Default/Full_Henry_00.png"
+  },
+  "84_0": {
+   "kind": "full",
+   "file": "084. Blair/02. Default/Full_Blair_00.png"
+  },
+  "84_1": {
+   "kind": "full",
+   "file": "084. Blair/06. Fealess Race Blair/Blair_Full_01.png"
+  },
+  "85_0": {
+   "kind": "full",
+   "file": "085. Mirka/02. Default/Mirka_Full_00.png"
+  },
+  "86_0": {
+   "kind": "full",
+   "file": "086. Fenrir/02. Default/Full_Fenrir_00.png"
+  },
+  "86_1": {
+   "kind": "full",
+   "file": "086. Fenrir/06. Midnight Beast Fenrir/Full_Fenrir_01.png"
+  },
+  "87_0": {
+   "kind": "full",
+   "file": "087. Coraline/02. Default/Full_Coraline_00.png"
+  },
+  "87_1": {
+   "kind": "full",
+   "file": "087. Coraline/06. Lovely Coraline/Full_Coraline_01.png"
+  },
+  "88_0": {
+   "kind": "full",
+   "file": "088. Bihyung/02. Default/Full_Bihyung_00.png"
+  },
+  "88_1": {
+   "kind": "full",
+   "file": "088. Bihyung/06. Teen Spirit Bihyung/Full_Bihyung_01.png"
+  },
+  "90_0": {
+   "kind": "full",
+   "file": "090. Lucia/02. Default/Full_Lucia_00.png"
+  },
+  "wild:BEAR_0": {
+   "kind": "full",
+   "file": "9996. Wild Animal/012. Bear.png"
+  },
+  "wild:BOAR_0": {
+   "kind": "full",
+   "file": "9996. Wild Animal/007. Wild Boar - 멧돼지.png"
+  },
+  "wild:CHICKEN_0": {
+   "kind": "full",
+   "file": "9996. Wild Animal/002. Chicken.png"
+  },
+  "wild:WOLF_0": {
+   "kind": "full",
+   "file": "9996. Wild Animal/010. Wolf.png"
   }
  },
  "icon": {
@@ -230,6 +938,18 @@
    "kind": "half",
    "file": "005. Fiora/07. MusketeER Fiora/Fiora_Half_02.png"
   },
+  "4_0": {
+   "kind": "mini",
+   "file": "004. Magnus/02. Default/Mini_Magnus_00.png"
+  },
+  "4_1": {
+   "kind": "mini",
+   "file": "004. Magnus/06. Boss Magnus/Magnus_Mini_01.png"
+  },
+  "4_2": {
+   "kind": "mini",
+   "file": "004. Magnus/07. Tropical Party Magnus/Magnus_Mini_02.png"
+  },
   "4_900": {
    "kind": "half",
    "file": "9995. Cadet (Ranked Reward)/Season 5 - Magnus/Magnus_Cadet_Half.png"
@@ -239,24 +959,112 @@
    "file": "007. Zahir/02. Default/Zahir_Mini_00.png"
   },
   "5_1": {
-   "kind": "half",
-   "file": "007. Zahir/06. Gilded ReapER Zahir/Zahir_Half_01.png"
+   "kind": "mini",
+   "file": "007. Zahir/06. Gilded ReapER Zahir/Zahir_Mini_01.png"
+  },
+  "5_2": {
+   "kind": "mini",
+   "file": "007. Zahir/07. Cobalt Evolution Zahir/Zahir_Mini_02.png"
+  },
+  "6_0": {
+   "kind": "mini",
+   "file": "006. Nadine/02. Default/Nadine_Mini_00.png"
+  },
+  "6_1": {
+   "kind": "mini",
+   "file": "006. Nadine/06. Neon Huntress Nadine/Nadine_Mini_01.png"
+  },
+  "6_2": {
+   "kind": "mini",
+   "file": "006. Nadine/07. Little Nadine Riding Hood/Nadine_Mini_02.png"
+  },
+  "7_0": {
+   "kind": "mini",
+   "file": "003. Hyunwoo/02. Default/Hyunwoo_Mini_00.png"
   },
   "7_1": {
    "kind": "mini",
    "file": "003. Hyunwoo/06. Street Fiend Hyunwoo/Hyunwoo_Mini_01.png"
   },
+  "7_2": {
+   "kind": "mini",
+   "file": "003. Hyunwoo/07. Red Devil Hyunwoo/Hyunwoo_Mini_02.png"
+  },
   "8_0": {
    "kind": "mini",
    "file": "008. Hart/02. Default/Hart_Mini_00.png"
+  },
+  "8_1": {
+   "kind": "mini",
+   "file": "008. Hart/06. BandleadER Hart/Hart_Mini_01.png"
+  },
+  "8_2": {
+   "kind": "mini",
+   "file": "008. Hart/07. WintER Carnival Hart/Hart_Mini_02.png"
   },
   "8_3": {
    "kind": "half",
    "file": "008. Hart/08. Wonderland Hart/Hart_Half_03.png"
   },
+  "9_1": {
+   "kind": "mini",
+   "file": "009. Isol/06. Wasteland Isol/Isol_Mini_01.png"
+  },
+  "9_2": {
+   "kind": "mini",
+   "file": "009. Isol/07. Spirit HuntER Isol/Isol_Mini_02.png"
+  },
+  "10_0": {
+   "kind": "full",
+   "file": "010. Li Dailin/02. Default/Li Dailin_Full_00.png"
+  },
+  "10_1": {
+   "kind": "mini",
+   "file": "010. Li Dailin/06. Jade DriftER Li Dailin/Li Dailin_Mini_01.png"
+  },
+  "10_2": {
+   "kind": "mini",
+   "file": "010. Li Dailin/07. Rebel Li Dailin/Li Dailin_Mini_02.png"
+  },
   "10_900": {
    "kind": "half",
    "file": "9995. Cadet (Ranked Reward)/Season 7 - Li Dailin/Li Dailin_Cadet_Half.png"
+  },
+  "11_0": {
+   "kind": "mini",
+   "file": "011. Yuki/02. Default/Yuki_Mini_00.png"
+  },
+  "11_1": {
+   "kind": "mini",
+   "file": "011. Yuki/07. Windblade Yuki/Yuki_Mini_01.png"
+  },
+  "11_2": {
+   "kind": "mini",
+   "file": "011. Yuki/08. Midnight Shinobi Yuki/Yuki_Mini_02.png"
+  },
+  "11_3": {
+   "kind": "full",
+   "file": "011. Yuki/09. Bow Wow Yuki/Yuki_Full_03.png"
+  },
+  "12_0": {
+   "kind": "mini",
+   "file": "012. Hyejin/02. Default/Hyejin_Mini_00.png"
+  },
+  "12_1": {
+   "kind": "mini",
+   "file": "012. Hyejin/06. Magnolia Oracle Hyejin/Hyejin_Mini_01.png"
+  },
+  "12_2": {
+   "kind": "mini",
+   "file": "012. Hyejin/08. Spirit HuntER Hyejin/Hyejin_Mini_02.png"
+  },
+  "12_3": {
+   "kind": "mini",
+   "file": "012. Hyejin/09. Candy Cane Hyejin/Hyejin_Mini_03.png"
+  },
+  "12_6": {
+   "kind": "full",
+   "file": "012. Hyejin/11. Pinkitty Maid Hyejin/Full_Hyejin_006.png"
   },
   "13_1": {
    "kind": "mini",
@@ -270,21 +1078,65 @@
    "kind": "mini",
    "file": "015. Chiara/02. Default/Chiara_Mini_00.png"
   },
+  "14_1": {
+   "kind": "mini",
+   "file": "015. Chiara/06. ArbitER Chiara/Chiara_Mini_01.png"
+  },
+  "14_2": {
+   "kind": "mini",
+   "file": "015. Chiara/07. Spirit HuntER Chiara/Chiara_Mini_02.png"
+  },
+  "15_0": {
+   "kind": "mini",
+   "file": "014. Sissela/02. Default/Sissela_Mini_00.png"
+  },
+  "15_1": {
+   "kind": "half",
+   "file": "014. Sissela/06. Frost ClovER Sissela/Sissela_Half_01.png"
+  },
+  "15_2": {
+   "kind": "mini",
+   "file": "014. Sissela/07. Noblewoman Sissela/Sissela_Mini_02.png"
+  },
   "15_906": {
    "kind": "full",
    "file": "9995. Cadet (Ranked Reward)/Season 10 - Sissela/Full_Sissela_06.png"
   },
-  "17_1": {
+  "16_0": {
+   "kind": "mini",
+   "file": "018. Silvia/02. Default/Silvia_Mini_00.png"
+  },
+  "16_1": {
    "kind": "full",
-   "file": "016. Adriana/06. Firebat Adriana/Adriana_Full_01.png"
+   "file": "018. Silvia/06. Geforce Now Silvia/Silvia_Full_01.png"
+  },
+  "16_2": {
+   "kind": "full",
+   "file": "018. Silvia/07. Midnight Breeze Silvia/Silvia_Full_02.png"
+  },
+  "17_0": {
+   "kind": "mini",
+   "file": "016. Adriana/02. Default/Adriana_Mini_00.png"
+  },
+  "17_1": {
+   "kind": "mini",
+   "file": "016. Adriana/06. Firebat Adriana/Adriana_Mini_01.png"
   },
   "17_5": {
    "kind": "mini",
    "file": "016. Adriana/10. Lethal Rose Adriana/Mini_Adriana_05.png"
   },
+  "18_0": {
+   "kind": "mini",
+   "file": "017. Shoichi/02. Default/Shoichi_Mini_00.png"
+  },
   "18_1": {
-   "kind": "half",
-   "file": "017. Shoichi/06. Hitman Shoichi/Shoichi_Half_Mini.png"
+   "kind": "mini",
+   "file": "017. Shoichi/06. Hitman Shoichi/Shoichi_Mini_01.png"
+  },
+  "18_2": {
+   "kind": "mini",
+   "file": "017. Shoichi/07. WintER Carnival Shoichi/Shochi_Mini_02.png"
   },
   "18_5": {
    "kind": "full",
@@ -294,21 +1146,41 @@
    "kind": "mini",
    "file": "019. Emma/02. Default/Emma_Mini_00.png"
   },
+  "20_0": {
+   "kind": "mini",
+   "file": "020. Lenox/02. Default/Lenox_Mini_00.png"
+  },
   "20_1": {
-   "kind": "half",
-   "file": "020. Lenox/06. Capo Lenox/Lenox_Half_01.png"
+   "kind": "mini",
+   "file": "020. Lenox/06. Capo Lenox/Lenox_Mini_01.png"
+  },
+  "20_2": {
+   "kind": "mini",
+   "file": "020. Lenox/07. Mistletoe Lenox/Lenox_Mini_02.png"
   },
   "20_5": {
    "kind": "mini",
    "file": "020. Lenox/10. Abyss Empress Lenox/Lenox_Mini_05.png"
   },
   "21_1": {
-   "kind": "full",
-   "file": "021. Rozzi/06. Black Rose Rozzi/Rozzi_Full_01.png"
+   "kind": "mini",
+   "file": "021. Rozzi/06. Black Rose Rozzi/Rozzi_Mini_01.png"
   },
   "21_2": {
-   "kind": "full",
-   "file": "021. Rozzi/07. Elite ExecutionER Rozzi/Rozzi_Full_02.png"
+   "kind": "mini",
+   "file": "021. Rozzi/07. Elite ExecutionER Rozzi/Rozzi_Mini_02.png"
+  },
+  "22_0": {
+   "kind": "mini",
+   "file": "022. Luke/02. Default/Luke_Mini_00.png"
+  },
+  "22_1": {
+   "kind": "mini",
+   "file": "022. Luke/06. BartendER Luke/Luke_Mini_01.png"
+  },
+  "22_2": {
+   "kind": "mini",
+   "file": "022. Luke/07. Street Fiend Luke/Luke_Mini_02.png"
   },
   "22_3": {
    "kind": "mini",
@@ -322,45 +1194,205 @@
    "kind": "half",
    "file": "9995. Cadet (Ranked Reward)/EA Season 6 - Luke/Luke_Cadet_Half.png"
   },
+  "23_0": {
+   "kind": "mini",
+   "file": "023. Cathy/02. Default/Cathy_Mini_00.png"
+  },
   "23_1": {
-   "kind": "half",
-   "file": "023. Cathy/06. Combat Medic Cathy/Cathy_Half_01.png"
+   "kind": "mini",
+   "file": "023. Cathy/06. Combat Medic Cathy/Cathy_Mini_01.png"
+  },
+  "23_2": {
+   "kind": "mini",
+   "file": "023. Cathy/07. Android Medic Cathy/Cathy_Mini_02.png"
+  },
+  "24_0": {
+   "kind": "mini",
+   "file": "024. Adela/02. Default/Adela_Mini_00.png"
+  },
+  "24_1": {
+   "kind": "mini",
+   "file": "024. Adela/06. White Queen Adela/Adela_Mini_01.png"
+  },
+  "25_0": {
+   "kind": "full",
+   "file": "025. Bernice/02. Default - 기본/bERnice_Full_00.png"
+  },
+  "25_1": {
+   "kind": "mini",
+   "file": "025. Bernice/06. Wasteland Bernice/bERnice_Mini_01.png"
+  },
+  "25_2": {
+   "kind": "mini",
+   "file": "025. Bernice/07. Demon Hunter Bernice/bERnice_Mini_02.png"
+  },
+  "25_3": {
+   "kind": "full",
+   "file": "025. Bernice/08. Housekeeper Corp. Bernice/bERnice_Full_03.png"
+  },
+  "26_0": {
+   "kind": "mini",
+   "file": "026. Barbara/02. Default - 기본/Barbara_Mini_00.png"
+  },
+  "26_1": {
+   "kind": "mini",
+   "file": "026. Barbara/06. Chief Mechanic Barbara/Barbara_Mini_01.png"
+  },
+  "26_2": {
+   "kind": "mini",
+   "file": "026. Barbara/07. Interstellar Barbara/Barbara_Mini_02.png"
+  },
+  "26_3": {
+   "kind": "full",
+   "file": "026. Barbara/08. ResearchER Barbara/Barbara_Full_03.png"
+  },
+  "27_0": {
+   "kind": "mini",
+   "file": "027. Alex/02. Default/Alex_Mini_00.png"
+  },
+  "27_1": {
+   "kind": "mini",
+   "file": "027. Alex/06. Operator Alex/Alex_Mini_01.png"
+  },
+  "27_2": {
+   "kind": "mini",
+   "file": "027. Alex/07. Private Eye Alex/Alex_Mini_02.png"
+  },
+  "28_0": {
+   "kind": "mini",
+   "file": "028. Sua/02. Default/Sua_Mini_00.png"
+  },
+  "28_2": {
+   "kind": "mini",
+   "file": "028. Sua/07. Wistful Heritage Sua/Skin_Mini_002.png"
+  },
+  "29_0": {
+   "kind": "mini",
+   "file": "029. Leon/02. Default/Leon_Mini_00.png"
+  },
+  "29_1": {
+   "kind": "mini",
+   "file": "029. Leon/06. Spec Ops Leon/Leon_Mini_01.png"
+  },
+  "29_2": {
+   "kind": "mini",
+   "file": "029. Leon/07. SummERtime Leon/Leon_Mini_02.png"
+  },
+  "30_1": {
+   "kind": "mini",
+   "file": "030. Eleven/06. Sugar Rush Eleven/Eleven_Mini_01.png"
   },
   "30_3": {
    "kind": "half",
    "file": "030. Eleven/08. Little Sailor Eleven/Eleven_Half_03.png"
   },
   "31_0": {
-   "kind": "half",
-   "file": "031. Rio/02. Default/Rio_Half_00.png"
+   "kind": "mini",
+   "file": "031. Rio/02. Default/Rio_Mini_00.png"
   },
   "31_2": {
-   "kind": "half",
-   "file": "031. Rio/09. SummERtime Rio/Rio_Half_02.png"
+   "kind": "mini",
+   "file": "031. Rio/09. SummERtime Rio/Rio_Mini_02.png"
   },
   "31_8": {
    "kind": "half",
    "file": "031. Rio/13. 3rd Anniversary Rio Dolce/Half_Rio_08.png"
   },
+  "32_1": {
+   "kind": "mini",
+   "file": "032. William/06. Snow Game William/William_Mini_01.png"
+  },
   "33_0": {
    "kind": "mini",
    "file": "033. Nicky/02. Default/Nicky_Mini_00.png"
+  },
+  "33_2": {
+   "kind": "mini",
+   "file": "033. Nicky/07. Rebellious Nicky/Nicky_Mini_02.png"
+  },
+  "34_1": {
+   "kind": "mini",
+   "file": "034. Nathapon/06. Arctic Expedition Nathapon/Nathapon_Mini_01.png"
+  },
+  "34_2": {
+   "kind": "mini",
+   "file": "034. Nathapon/07. AdventurER Nathapon/Nathapon_Mini_02.png"
+  },
+  "35_0": {
+   "kind": "mini",
+   "file": "035. Jan/02. Default/Jan_Mini_00.png"
+  },
+  "35_1": {
+   "kind": "mini",
+   "file": "035. Jan/06. Champion Jan/Jan_Mini_01.png"
+  },
+  "35_2": {
+   "kind": "mini",
+   "file": "035. Jan/07. Death ChallengER Jan/Jan_Mini_02.png"
+  },
+  "36_0": {
+   "kind": "mini",
+   "file": "036. Eva/02. Default/Eva_Mini_00.png"
   },
   "36_1": {
    "kind": "mini",
    "file": "036. Eva/06. Celestial ClocktowER Eva/Eva_Mini_01.png"
   },
+  "36_2": {
+   "kind": "mini",
+   "file": "036. Eva/08. Sweet Valentine Eva/Eva_Mini_02.png"
+  },
   "36_5": {
    "kind": "mini",
    "file": "036. Eva/11. 2nd Anniversary Eva Blossom/Eva_Mini_05.png"
+  },
+  "37_0": {
+   "kind": "mini",
+   "file": "037. Daniel/02. Default/Daniel_Mini_00.png"
+  },
+  "37_1": {
+   "kind": "mini",
+   "file": "037. Daniel/06. Plague Doctor Daniel/Daniel_Mini_01.png"
   },
   "37_2": {
    "kind": "mini",
    "file": "037. Daniel/08. Spring Romance Daniel/Daniel_Mini_02.png"
   },
   "38_0": {
-   "kind": "half",
-   "file": "038. Jenny/02. Default/Jenny_Half_00.png"
+   "kind": "mini",
+   "file": "038. Jenny/02. Default/Jenny_Mini_00.png"
+  },
+  "38_1": {
+   "kind": "mini",
+   "file": "038. Jenny/06. MobstER Jenny/Jenny_Mini_01.png"
+  },
+  "39_1": {
+   "kind": "mini",
+   "file": "039. Camilo/06. Blue Orchid Camilo/Camilo_Mini_01.png"
+  },
+  "39_2": {
+   "kind": "mini",
+   "file": "039. Camilo/07. Popstar Camilo/Camilo_Mini_02.png"
+  },
+  "40_0": {
+   "kind": "mini",
+   "file": "040. Chloe/02. Default/Chloe_Mini_00.png"
+  },
+  "40_1": {
+   "kind": "mini",
+   "file": "040. Chloe/06. Dutiful Maid Chloe/Chloe_Mini_01.png"
+  },
+  "40_2": {
+   "kind": "mini",
+   "file": "040. Chloe/07. Lucky Bunny Chloe/Chloe_Mini_02.png"
+  },
+  "41_0": {
+   "kind": "mini",
+   "file": "041. Johann/02. Default/Johann_Mini_00.png"
+  },
+  "41_1": {
+   "kind": "mini",
+   "file": "041. Johann/06. High Priest Johann/Johann_Mini_01.png"
   },
   "42_0": {
    "kind": "mini",
@@ -370,29 +1402,89 @@
    "kind": "half",
    "file": "042. Bianca/06. Comfy Bianca/Bianca_Half_01.png"
   },
+  "42_2": {
+   "kind": "mini",
+   "file": "042. Bianca/07. TransfER Student Bianca/Bianca_Mini_02.png"
+  },
+  "43_0": {
+   "kind": "full",
+   "file": "043. Celine/02. Default/Celine_Full_00.png"
+  },
+  "43_1": {
+   "kind": "mini",
+   "file": "043. Celine/06. Defusal Agent Celine/Celine_Mini_01.png"
+  },
+  "43_2": {
+   "kind": "mini",
+   "file": "043. Celine/07. Electro Pumpkin Celine/Celine_Mini_02.png"
+  },
   "43_5": {
    "kind": "half",
    "file": "043. Celine/10. Berryblast Maid Celine/Half_Celine_05.png"
+  },
+  "44_0": {
+   "kind": "mini",
+   "file": "044. Echion/02. Default/Echion_Mini_00.png"
+  },
+  "44_2": {
+   "kind": "full",
+   "file": "044. Echion/07. Underground Org Echion/Echion_Full_02.png"
   },
   "44_900": {
    "kind": "full",
    "file": "9995. Cadet (Ranked Reward)/EA Season 8 - Echion/Echion_Cadet_Full.png"
   },
+  "45_0": {
+   "kind": "mini",
+   "file": "045. Mai/02. Default/Mai_Mini_00.png"
+  },
   "45_2": {
-   "kind": "half",
-   "file": "045. Mai/08. Tropical Runway Mai/Mai_Half_02.png"
+   "kind": "mini",
+   "file": "045. Mai/08. Tropical Runway Mai/Mai_Mini_02.png"
   },
   "45_900": {
    "kind": "half",
    "file": "9995. Cadet (Ranked Reward)/EA Season 7 - Mai/Mai_Cadet_Half.png"
   },
+  "46_0": {
+   "kind": "mini",
+   "file": "046. Aiden/02. Default/Aiden_Mini_00.png"
+  },
+  "46_1": {
+   "kind": "mini",
+   "file": "046. Aiden/06. Spirit HuntER Aiden/Aiden_Mini_01.png"
+  },
+  "46_2": {
+   "kind": "mini",
+   "file": "046. Aiden/07. Problem SolvER Aiden/Aiden_Mini_02.png"
+  },
+  "47_0": {
+   "kind": "half",
+   "file": "047. Laura/02. Default/Laura_Half_00.png"
+  },
   "47_4": {
    "kind": "half",
    "file": "047. Laura/09. Tactics Instructor Laura/Laura_Half_04.png"
   },
+  "48_0": {
+   "kind": "mini",
+   "file": "048. Tia/02. Default/Tia_Mini_00.png"
+  },
+  "48_1": {
+   "kind": "mini",
+   "file": "048. Tia/06. Street AteliER Tia/Tia_Mini_01.png"
+  },
+  "48_2": {
+   "kind": "mini",
+   "file": "048. Tia/07. Apprentice Witch Tia/Tia_Mini_02.png"
+  },
   "49_0": {
-   "kind": "full",
-   "file": "049. Felix/02. Default/Default_Full.png"
+   "kind": "mini",
+   "file": "049. Felix/02. Default/Default_Mini.png"
+  },
+  "49_1": {
+   "kind": "mini",
+   "file": "049. Felix/06. Lumialand Felix/Felix_Mini_01.png"
   },
   "49_900": {
    "kind": "mini",
@@ -406,9 +1498,57 @@
    "kind": "mini",
    "file": "051. Priya/02. Default/Priya_Mini_00.png"
   },
+  "51_2": {
+   "kind": "mini",
+   "file": "051. Priya/07. SingER-songwritER Priya/Priya_Mini_02.png"
+  },
+  "52_0": {
+   "kind": "mini",
+   "file": "052. Adina/02. Default/Adina_Mini_00.png"
+  },
+  "52_2": {
+   "kind": "mini",
+   "file": "052. Adina/07. Eternal Vow Adina/Adina_Mini_02.png"
+  },
   "52_3": {
    "kind": "full",
    "file": "052. Adina/08. Ocean Breeze Adina/Adina_Full_03.png"
+  },
+  "53_0": {
+   "kind": "mini",
+   "file": "053. Markus/02. Default/Markus_Mini_00.png"
+  },
+  "54_0": {
+   "kind": "mini",
+   "file": "054. Karla/02. Default/Karla_Mini_00.png"
+  },
+  "54_1": {
+   "kind": "mini",
+   "file": "054. Karla/06. Lifeguard Karla/Karla_Mini_01.png"
+  },
+  "54_3": {
+   "kind": "mini",
+   "file": "054. Karla/07. Street Fiend Karla/Karla_Mini_03.png"
+  },
+  "55_1": {
+   "kind": "mini",
+   "file": "055. Estelle/06. Spec Ops Estelle/Estelle_Mini_01.png"
+  },
+  "56_0": {
+   "kind": "mini",
+   "file": "056. Piolo/02. Default/Piolo_Mini_00.png"
+  },
+  "56_1": {
+   "kind": "mini",
+   "file": "056. Piolo/06. ChallengER Piolo/Piolo_Mini_01.png"
+  },
+  "56_2": {
+   "kind": "mini",
+   "file": "056. Piolo/07. Street FightER Piolo/Piolo_Mini_02.png"
+  },
+  "57_1": {
+   "kind": "half",
+   "file": "057. Martina/06. Steampunk Martina/Martina_Half_01.png"
   },
   "60_0": {
    "kind": "mini",
@@ -426,9 +1566,65 @@
    "kind": "mini",
    "file": "062. Theodore/06. Special Task Force Theodore/Theodore_Mini_01.png"
   },
+  "63_1": {
+   "kind": "mini",
+   "file": "063. Ly anh/06. Trapped Ly Anh/Ly anh_Mini_01.png"
+  },
+  "65_0": {
+   "kind": "mini",
+   "file": "065. Debi & Marlene/02. Default/DebiMarlene_Mini_00.png"
+  },
+  "65_1": {
+   "kind": "mini",
+   "file": "065. Debi & Marlene/06. Security EnforcER Debi & Marlene/DebiMarlene_Mini_01.png"
+  },
+  "65_2": {
+   "kind": "mini",
+   "file": "065. Debi & Marlene/07. Cotton Candy Debi & Marlene/DebiMarlene_Mini_02.png"
+  },
+  "65_3": {
+   "kind": "half",
+   "file": "065. Debi & Marlene/08. After School Debi & Marlene/DebiMarlene_Half_03.png"
+  },
+  "66_0": {
+   "kind": "full",
+   "file": "066. Arda/02. Default/Arda_Full_00.png"
+  },
+  "66_1": {
+   "kind": "mini",
+   "file": "066. Arda/06. Archaeologist Arda/Arda_Mini_01.png"
+  },
+  "67_1": {
+   "kind": "mini",
+   "file": "067. Abigail/06. Prison Guard Abigail/Abigail_Mini_01.png"
+  },
+  "67_2": {
+   "kind": "mini",
+   "file": "067. Abigail/07. Poker Face Abigail/Abigail_Mini_02.png"
+  },
   "67_3": {
    "kind": "mini",
    "file": "067. Abigail/08. Tropical Dimension Abigail/Abigail_Mini_03.png"
+  },
+  "68_0": {
+   "kind": "mini",
+   "file": "068. Alonso/02. Default/Alonso_Mini_00.png"
+  },
+  "68_1": {
+   "kind": "mini",
+   "file": "068. Alonso/06. MistER Elegante Alonso/Alonso_Mini_01.png"
+  },
+  "68_2": {
+   "kind": "mini",
+   "file": "068. Alonso/07. Warden of Hell Alonso/Alonso_Mini_02.png"
+  },
+  "69_0": {
+   "kind": "mini",
+   "file": "069. Leni/02. Default/Leni_Mini_00.png"
+  },
+  "69_1": {
+   "kind": "mini",
+   "file": "069. Leni/06. Marching Band Leni/Leni_Mini_01.png"
   },
   "69_2": {
    "kind": "mini",
@@ -439,48 +1635,188 @@
    "file": "069. Leni/08. Daisybear Maid Leni/Half_Leni_003.png"
   },
   "70_0": {
-   "kind": "half",
-   "file": "070. Tsubame/02. Default/Tsubame_Half_00.png"
+   "kind": "mini",
+   "file": "070. Tsubame/02. Default/Tsubame_Mini_00.png"
   },
   "70_1": {
    "kind": "mini",
    "file": "070. Tsubame/06. Plum Blossom Tsubame/Tsubame_Mini_01.png"
   },
+  "70_2": {
+   "kind": "mini",
+   "file": "070. Tsubame/07. Blue Wave Tsubame/Tsubame_Mini_02.png"
+  },
+  "71_0": {
+   "kind": "mini",
+   "file": "071. Kenneth/02. Default/Kenneth_Mini_00.png"
+  },
   "71_1": {
-   "kind": "full",
-   "file": "071. Kenneth/06. Battle Priest Kenneth/Kenneth_Full_01.png"
+   "kind": "mini",
+   "file": "071. Kenneth/06. Battle Priest Kenneth/Kenneth_Mini_01.png"
+  },
+  "71_2": {
+   "kind": "mini",
+   "file": "071. Kenneth/07. Azure Promise Kenneth/Kenneth_Mini_02.png"
+  },
+  "72_0": {
+   "kind": "mini",
+   "file": "072. Katja/02. Default/Katja_Mini_00.png"
+  },
+  "72_1": {
+   "kind": "mini",
+   "file": "072. Katja/06. Ravenwing Katja/Katja_Mini_01.png"
+  },
+  "72_2": {
+   "kind": "mini",
+   "file": "072. Katja/07. Training Director Katja/Katja_Mini_02.png"
+  },
+  "73_0": {
+   "kind": "mini",
+   "file": "073. Charlotte/02. Default/Charlotte_Mini_00.png"
+  },
+  "73_1": {
+   "kind": "mini",
+   "file": "073. Charlotte/06. TransfER Student Charlotte/Charlotte_Mini_01.png"
+  },
+  "73_2": {
+   "kind": "mini",
+   "file": "073. Charlotte/07. Crimson Curse Charlotte/Charlotte_Mini_02.png"
+  },
+  "74_0": {
+   "kind": "mini",
+   "file": "074. Darko/02. Default/Darko_Mini_00.png"
+  },
+  "74_2": {
+   "kind": "mini",
+   "file": "074. Darko/07. SummER Break Darko/Darko_Mini_02.png"
   },
   "75_0": {
-   "kind": "full",
-   "file": "075. Lenore/02. Default/Lenore_Full_00.png"
+   "kind": "mini",
+   "file": "075. Lenore/02. Default/Lenore_Mini_00.png"
+  },
+  "75_2": {
+   "kind": "mini",
+   "file": "075. Lenore/07. Music Teacher Lenore/Mini_Lenore_02.png"
+  },
+  "76_0": {
+   "kind": "mini",
+   "file": "076. Garnet/02. Default/Garnet_Mini_00.png"
   },
   "76_1": {
    "kind": "half",
    "file": "076. Garnet/06. Trapped Garnet/Half_Garnet_01.png"
   },
+  "77_1": {
+   "kind": "mini",
+   "file": "077. Yumin/06. White Crane Yumin/Mini_YuMin_01.png"
+  },
+  "77_2": {
+   "kind": "mini",
+   "file": "077. Yumin/07. Storm Beacon Yumin/Mini_Yumin_02.png"
+  },
+  "78_0": {
+   "kind": "mini",
+   "file": "078. Hisui/02. Default/Mini_Hisui_00.png"
+  },
   "78_2": {
    "kind": "mini",
    "file": "078. Hisui/07. Spirit Hunter Hisui/Mini_Hisui_02.png"
+  },
+  "79_0": {
+   "kind": "full",
+   "file": "079. Justyna/02. Default/Full_Justyna_00.png"
+  },
+  "79_1": {
+   "kind": "mini",
+   "file": "079. Justyna/06. Prefect Justyna/Mini_Justyna_01.png"
+  },
+  "79_2": {
+   "kind": "mini",
+   "file": "079. Justyna/07. Lucky Bunny Justyna/Mini_Justyna_02.png"
+  },
+  "80_0": {
+   "kind": "mini",
+   "file": "080. István/02. Default/Mini_Istvan_00.png"
   },
   "80_1": {
    "kind": "mini",
    "file": "080. István/06. Butler István/Mini_Istvan_S01.png"
   },
   "81_0": {
-   "kind": "full",
-   "file": "081. NiaH/02. Default/Full_NiaH_00.png"
+   "kind": "mini",
+   "file": "081. NiaH/02. Default/Mini_NiaH_00.png"
+  },
+  "81_1": {
+   "kind": "mini",
+   "file": "081. NiaH/06. Jersey Maid NiaH/NiaH_Mini_01.png"
+  },
+  "82_1": {
+   "kind": "mini",
+   "file": "082. Xuelin/06. Master Xuelin/Mini_Xuelin_01.png"
   },
   "82_2": {
-   "kind": "half",
-   "file": "082. Xuelin/07. Wave Slasher Xuelin/Half_Xuelin_02.png"
+   "kind": "mini",
+   "file": "082. Xuelin/07. Wave Slasher Xuelin/Mini_Xuelin_02.png"
   },
   "83_0": {
    "kind": "mini",
    "file": "083. Henry/02. Default/Mini_Henry_00.png"
   },
+  "84_0": {
+   "kind": "mini",
+   "file": "084. Blair/02. Default/Mini_Blair_00.png"
+  },
+  "84_1": {
+   "kind": "mini",
+   "file": "084. Blair/06. Fealess Race Blair/Blair_Mini_01.png"
+  },
+  "85_0": {
+   "kind": "mini",
+   "file": "085. Mirka/02. Default/Mirka_Mini_00.png"
+  },
+  "86_0": {
+   "kind": "mini",
+   "file": "086. Fenrir/02. Default/Mini_Fenrir_00.png"
+  },
+  "86_1": {
+   "kind": "mini",
+   "file": "086. Fenrir/06. Midnight Beast Fenrir/Mini_Fenrir_01.png"
+  },
+  "87_0": {
+   "kind": "mini",
+   "file": "087. Coraline/02. Default/Mini_Coraline_00.png"
+  },
+  "87_1": {
+   "kind": "mini",
+   "file": "087. Coraline/06. Lovely Coraline/Mini_Coraline_01.png"
+  },
+  "88_0": {
+   "kind": "mini",
+   "file": "088. Bihyung/02. Default/Mini_Bihyung_00.png"
+  },
   "88_1": {
    "kind": "mini",
    "file": "088. Bihyung/06. Teen Spirit Bihyung/Mini_Bihyung_01.png"
+  },
+  "90_0": {
+   "kind": "mini",
+   "file": "090. Lucia/02. Default/Mini_Lucia_00.png"
+  },
+  "wild:BEAR_0": {
+   "kind": "full",
+   "file": "9996. Wild Animal/012. Bear.png"
+  },
+  "wild:BOAR_0": {
+   "kind": "full",
+   "file": "9996. Wild Animal/007. Wild Boar - 멧돼지.png"
+  },
+  "wild:CHICKEN_0": {
+   "kind": "full",
+   "file": "9996. Wild Animal/002. Chicken.png"
+  },
+  "wild:WOLF_0": {
+   "kind": "full",
+   "file": "9996. Wild Animal/010. Wolf.png"
   }
  }
 }

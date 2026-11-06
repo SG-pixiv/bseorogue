@@ -22,21 +22,47 @@
   }
  },
  "3": {
-  "lang": "jpn",
-  "zip": "005. Fiora/05. Voice Line/Fiora_JPN.zip",
+  "lang": "kor",
+  "zip": "005. Fiora/05. Voice Line/Fiora_KOR.zip",
   "files": {
-   "select": "fiora_selected .wav"
+   "q": "fiora_useSkillActive1_1_ko.wav",
+   "w": "fiora_useSkillActive2_1_ko.wav",
+   "e": "fiora_useSkillActive3_1_ko.wav",
+   "r": "fiora_useSkillActive4_1_ko.wav",
+   "select": "fiora_selected_ko_01.wav"
   }
  },
  "4": {
-  "lang": "eng",
-  "zip": "004. Magnus/05. Voice Line/Magnus_ENG.zip",
+  "lang": "kor",
+  "zip": "004. Magnus/05. Voice Line/Magnus_KOR.zip",
   "files": {
-   "q": "magnus_skillQ_1_en.wav",
-   "w": "magnus_skillW_1_en.wav",
-   "e": "magnus_skillE_1_en.wav",
-   "r": "magnus_skillR_1_en.wav",
-   "select": "magnus_selected_en.wav"
+   "q": "magnus_skillQ_1_ko.wav",
+   "w": "magnus_skillW_1_ko.wav",
+   "e": "magnus_skillE_1_ko.wav",
+   "r": "magnus_skillR_1_ko.wav",
+   "select": "magnus_selected_ko_01.wav"
+  }
+ },
+ "6": {
+  "lang": "kor",
+  "zip": "006. Nadine/05. Voice Line/Nadine_KOR.zip",
+  "files": {
+   "q": "nadine_skillQ_1_ko.wav",
+   "w": "nadine_skillW_1_ko.wav",
+   "e": "nadine_skillE_1_ko.wav",
+   "r": "nadine_targetOn_1_ko.wav",
+   "select": "nadine_selected_ko_01.wav"
+  }
+ },
+ "8": {
+  "lang": "kor",
+  "zip": "008. Hart/05. Voice Line/Hart_KOR.zip",
+  "files": {
+   "q": "hart_useSkillActive1Seq0_1_ko.wav",
+   "w": "hart_useSkillActive2Seq0_1_ko.wav",
+   "e": "hart_useSkillActive3Seq0_1_ko.wav",
+   "r": "hart_useSkillActive4Seq0_1_ko.wav",
+   "select": "hart_selected_ko_01.wav"
   }
  },
  "9": {
@@ -50,14 +76,125 @@
    "select": "isol_selected_ko_01.wav"
   }
  },
- "20": {
-  "lang": "jpn",
-  "zip": "020. Lenox/05. Voice Line/Lenox_JPN.zip",
+ "10": {
+  "lang": "kor",
+  "zip": "010. Li Dailin/05. Voice Line/Li Dailin_KOR.zip",
   "files": {
-   "w": "Lenox _skillW1.wav",
-   "e": "Lenox _skillE1.wav",
-   "r": "Lenox _skillR1.wav",
-   "select": "Lenox _selected.wav"
+   "q": "lidailin_useSkillActive1Seq0_1_ko.wav",
+   "w": "lidailin_useSkillActive2Seq0_1_ko.wav",
+   "e": "lidailin_useSkillActive3Seq0_1_ko.wav",
+   "r": "lidailin_useSkillActive4Seq0_1_ko.wav",
+   "select": "lidailin_selected_1_ko.wav"
+  }
+ },
+ "11": {
+  "lang": "kor",
+  "zip": "011. Yuki/05. Voice Line/Yuki_KOR.zip",
+  "files": {
+   "q": "yuki_useSkillActive1Seq1_1_ko.wav",
+   "w": "yuki_useSkillActive2Seq0_1_ko.wav",
+   "e": "yuki_useSkillActive3Seq0_1_ko.wav",
+   "r": "yuki_useSkillActive4Seq0_1_ko.wav",
+   "select": "yuki_selected_1_ko.wav"
+  }
+ },
+ "12": {
+  "lang": "kor",
+  "zip": "012. Hyejin/05. Voice Line/Hyejin_KOR.zip",
+  "files": {
+   "q": "hyejin_useSkillActive1Seq0_1_ko.wav",
+   "w": "hyejin_targetOn_1_ko.wav",
+   "e": "hyejin_targetOn_2_ko.wav",
+   "r": "hyejin_useSkillActive4Seq0_1_ko.wav",
+   "select": "hyejin_selected1_1_ko.wav"
+  }
+ },
+ "13": {
+  "lang": "kor",
+  "zip": "013. Xiukai/05. Voice Line/Xiukai_KOR.zip",
+  "files": {
+   "q": "xiukai_useSkillActive1Seq0_1_ko.wav",
+   "w": "xiukai_useSkillActive2Seq0_1_ko.wav",
+   "e": "xiukai_useSkillActive3Seq0_1_ko.wav",
+   "r": "xiukai_useSkillActive4Seq0_1_ko.wav",
+   "select": "xiukai_selected_1_ko.wav"
+  }
+ },
+ "14": {
+  "lang": "kor",
+  "zip": "015. Chiara/05. Voice Line/Chiara_KOR.zip",
+  "files": {
+   "q": "chiara_useSkillActive1Seq0_1_ko.wav",
+   "w": "chiara_useSkillActive2Seq0_1_ko.wav",
+   "e": "chiara_useSkillActive3Seq0_1_ko.wav",
+   "r": "chiara_useSkillActive4Seq0_1_ko.wav",
+   "select": "chiara_selected_1_ko.wav"
+  }
+ },
+ "16": {
+  "lang": "kor",
+  "zip": "018. Silvia/05. Voice Line/Silvia_KOR.zip",
+  "files": {
+   "q": "silvia_PlaySkill1016200seq0_1_ko.wav",
+   "w": "silvia_PlaySkill1016300seq0_1_ko.wav",
+   "e": "silvia_PlaySkill1016400seq0_1_ko.wav",
+   "r": "silvia_PlaySkill1016500seq0_1_ko.wav",
+   "select": "silvia_selected_1_ko.wav"
+  }
+ },
+ "18": {
+  "lang": "kor",
+  "zip": "017. Shoichi/05. Voice Line/Shoichi_KOR.zip",
+  "files": {
+   "q": "shoichi_targetOn_1_ko.wav",
+   "w": "shoichi_targetOn_2_ko.wav",
+   "e": "shoichi_killMonster_1_ko.wav",
+   "r": "shoichi_killMonster_2_ko.wav",
+   "select": "shoichi_selected_ko.wav"
+  }
+ },
+ "20": {
+  "lang": "kor",
+  "zip": "020. Lenox/05. Voice Line/Lenox_KOR.zip",
+  "files": {
+   "q": "lenox_PlaySkill1020200seq0_1_ko.wav",
+   "w": "lenox_PlaySkill1020300seq0_1_ko.wav",
+   "e": "lenox_PlaySkill1020400seq0_1_ko.wav",
+   "r": "lenox_PlaySkill1020500seq0_1_ko.wav",
+   "select": "lenox_selected_1_ko.wav"
+  }
+ },
+ "21": {
+  "lang": "kor",
+  "zip": "021. Rozzi/05. Voice Line/Rozzi_KOR.zip",
+  "files": {
+   "q": "rozzi_targetOn1_01.wav",
+   "w": "rozzi_targetOn1_02.wav",
+   "e": "rozzi_targetOn2_01.wav",
+   "r": "rozzi_skillR1_01.wav",
+   "select": "rozzi_selected_01.wav"
+  }
+ },
+ "22": {
+  "lang": "kor",
+  "zip": "022. Luke/05. Voice Line/Luke_KOR.zip",
+  "files": {
+   "q": "Luke_PlaySkill1022200seq0_1_ko.wav",
+   "w": "Luke_PlaySkill1022300seq0_1_ko.wav",
+   "e": "Luke_PlaySkill1022400seq0_1_ko.wav",
+   "r": "Luke_PlaySkill1022500seq0_1_ko.wav",
+   "select": "luke_selected_1_ko.wav"
+  }
+ },
+ "24": {
+  "lang": "kor",
+  "zip": "024. Adela/05. Voice Line/Adela_KOR.zip",
+  "files": {
+   "q": "Adela_PlaySkill1024200seq0_1_ko.wav",
+   "w": "Adela_PlaySkill1024300seq0_1_ko.wav",
+   "e": "Adela_PlaySkill1024400seq0_1_ko.wav",
+   "r": "Adela_PlaySkill1024500seq0_1_ko.wav",
+   "select": "Adela_selected_1_ko.wav"
   }
  },
  "25": {
@@ -71,6 +208,171 @@
    "select": "Bernice_selected_1_ko.wav"
   }
  },
+ "26": {
+  "lang": "kor",
+  "zip": "026. Barbara/05. Voice Line - 음성/Barbara_KOR.zip",
+  "files": {
+   "q": "Barbara_PlaySkill1026200seq0_1_ko.wav",
+   "w": "Barbara_PlaySkill1026300seq0_1_ko.wav",
+   "e": "Barbara_PlaySkill1026400seq0_1_ko.wav",
+   "r": "Barbara_skillR1_0_4_ko.wav",
+   "select": "Barbara_selected_1_ko.wav"
+  }
+ },
+ "27": {
+  "lang": "kor",
+  "zip": "027. Alex/05. Voice Line/Alex_KOR.zip",
+  "files": {
+   "q": "Alex_skillQ1.wav",
+   "w": "Alex_skillW1.wav",
+   "e": "Alex_skillE1_1.wav",
+   "r": "Alex_skillR1.wav",
+   "select": "Alex_selected.wav"
+  }
+ },
+ "28": {
+  "lang": "kor",
+  "zip": "028. Sua/05. Voice Line/Sua_KOR.zip",
+  "files": {
+   "q": "Sua_skillQ1.wav",
+   "w": "Sua_skillW1.wav",
+   "e": "Sua_skillE1.wav",
+   "r": "Sua_skillR1.wav",
+   "select": "Sua_selected.wav"
+  }
+ },
+ "29": {
+  "lang": "kor",
+  "zip": "029. Leon/05. Voice Line/Leon_KOR.zip",
+  "files": {
+   "q": "Leon_PlaySkill1029200seq0_1_ko.wav",
+   "w": "Leon_PlaySkill1029300seq0_1_ko.wav",
+   "e": "Leon_PlaySkill1029400seq0_1_ko.wav",
+   "r": "Leon_PlaySkill1029500seq0_1_ko.wav",
+   "select": "Leon_selected_1_ko.wav"
+  }
+ },
+ "30": {
+  "lang": "kor",
+  "zip": "030. Eleven/05. Voice Line/Eleven_KOR.zip",
+  "files": {
+   "q": "Eleven_skillQ1_01.wav",
+   "w": "Eleven_skillW1_01.wav",
+   "e": "Eleven_skillE1_01.wav",
+   "r": "Eleven_skillR1_01.wav",
+   "select": "Eleven_selected_01.wav"
+  }
+ },
+ "32": {
+  "lang": "kor",
+  "zip": "032. William/05. Voice Line/William_KOR.zip",
+  "files": {
+   "q": "William_skillQ1_01.wav",
+   "w": "William_skillW1_01.wav",
+   "e": "William_skillE1_01.wav",
+   "r": "William_skillR1_01.wav",
+   "select": "William_selected_01.wav"
+  }
+ },
+ "33": {
+  "lang": "kor",
+  "zip": "033. Nicky/05. Voice Line/Nicky_KOR.zip",
+  "files": {
+   "q": "Nicky_skillQ_1_01.wav",
+   "w": "Nicky_skillW_1_01.wav",
+   "e": "Nicky_skillE_1_01.wav",
+   "r": "Nicky_skillR_1_01.wav",
+   "select": "Nicky_selected_1_01.wav"
+  }
+ },
+ "34": {
+  "lang": "kor",
+  "zip": "034. Nathapon/05. Voice Line/Nathapon_KOR.zip",
+  "files": {
+   "q": "Nathapon_skillQ_1_01.wav",
+   "w": "Nathapon_skillW_1_01.wav",
+   "e": "Nathapon_skillE_1_01.wav",
+   "r": "Nathapon_skillR_1_01.wav",
+   "select": "Nathapon_selected_1_01.wav"
+  }
+ },
+ "35": {
+  "lang": "kor",
+  "zip": "035. Jan/05. Voice Line/Jan_KOR.zip",
+  "files": {
+   "q": "Jan_skillQ_1_01.wav",
+   "w": "Jan_skillW_1_01.wav",
+   "e": "Jan_skillE_1_01.wav",
+   "r": "Jan_skillR_1_01.wav",
+   "select": "Jan_selected_1_01.wav"
+  }
+ },
+ "36": {
+  "lang": "kor",
+  "zip": "036. Eva/05. Voice Line/Eva_KOR.zip",
+  "files": {
+   "q": "EVA_skillQ1_01.wav",
+   "w": "EVA_skillW1_01.wav",
+   "e": "EVA_skillE1_01.wav",
+   "r": "EVA_skillR1_01.wav",
+   "select": "EVA_selected_1_01.wav"
+  }
+ },
+ "37": {
+  "lang": "kor",
+  "zip": "037. Daniel/05. Voice Line/Daniel_KOR.zip",
+  "files": {
+   "q": "Daniel_skillQ1_01.wav",
+   "w": "Daniel_skillW1_01.wav",
+   "e": "Daniel_skillE_01.wav",
+   "r": "Daniel_skillR1_01.wav",
+   "select": "Daniel_selected_1_01.wav"
+  }
+ },
+ "38": {
+  "lang": "kor",
+  "zip": "038. Jenny/05. Voice Line/Jenny_KOR.zip",
+  "files": {
+   "q": "Jenny_skillQ_1-1_01.wav",
+   "w": "Jenny_skillW_1_01.wav",
+   "e": "Jenny_skillE_1-1_01.wav",
+   "r": "Jenny_skillR_1_01.wav",
+   "select": "Jenny_selected_1_01.wav"
+  }
+ },
+ "39": {
+  "lang": "kor",
+  "zip": "039. Camilo/05. Voice Line/Camilo_KOR.zip",
+  "files": {
+   "q": "Camilo_skillQ1-1_01.wav",
+   "w": "Camilo_skillW1_01.wav",
+   "e": "Camilo_skillE1-1_01.wav",
+   "r": "Camilo_skillR1_01.wav",
+   "select": "Camilo_selected_1_01.wav"
+  }
+ },
+ "40": {
+  "lang": "kor",
+  "zip": "040. Chloe/05. Voice Line/Chloe_KOR.zip",
+  "files": {
+   "q": "Chloe_skillQ1_01.wav",
+   "w": "Chloe_skillW1_1_01.wav",
+   "e": "Chloe_skillE1_01.wav",
+   "r": "Chloe_skillR1_01.wav",
+   "select": "Chloe_selected_1_01.wav"
+  }
+ },
+ "41": {
+  "lang": "kor",
+  "zip": "041. Johann/05. Voice Line/Johann_KOR.zip",
+  "files": {
+   "q": "Johann_skillQ1_01.wav",
+   "w": "Johann_skillW1_01.wav",
+   "e": "Johann_skillE1-1_01.wav",
+   "r": "Johann_skillR1_01.wav",
+   "select": "Johann_selected_1_01.wav"
+  }
+ },
  "42": {
   "lang": "kor",
   "zip": "042. Bianca/05. Voice Line/Bianca_KOR.zip",
@@ -80,6 +382,39 @@
    "e": "Bianca_skillE1_1_01.wav",
    "r": "Bianca_skillR_1_01.wav",
    "select": "Bianca_selected_1_01.wav"
+  }
+ },
+ "43": {
+  "lang": "kor",
+  "zip": "043. Celine/05. Voice Line/Celine_KOR.zip",
+  "files": {
+   "q": "Celine_skillQ1.wav",
+   "w": "Celine_skillW1_01.wav",
+   "e": "Celine_skillE1_01.wav",
+   "r": "Celine_skillR1_01.wav",
+   "select": "Celine_selected_1.wav"
+  }
+ },
+ "44": {
+  "lang": "kor",
+  "zip": "044. Echion/05. Voice Line/Echion_KOR.zip",
+  "files": {
+   "q": "Echion_skillQ1_01.wav",
+   "w": "Echion_skillW1_01.wav",
+   "e": "Echion_skillE1_01.wav",
+   "r": "Echion_skillR_1 (폭주)_01.wav",
+   "select": "Echion_selected_1_01.wav"
+  }
+ },
+ "45": {
+  "lang": "kor",
+  "zip": "045. Mai/05. Voice Line/Mai_KOR.zip",
+  "files": {
+   "q": "Mai_skillQ1_01.wav",
+   "w": "Mai_skillW1_01.wav",
+   "e": "Mai_skillE1_01.wav",
+   "r": "Mai_skillR_laugh_01.wav",
+   "select": "Mai_selected_1_01.wav"
   }
  },
  "46": {
@@ -92,9 +427,86 @@
    "select": "Aiden_selected_1_01.wav"
   }
  },
+ "47": {
+  "lang": "kor",
+  "zip": "047. Laura/05. Voice Line/Laura_KOR.zip",
+  "files": {
+   "q": "Laura_skillQ1_01.wav",
+   "w": "Laura_skillW1_01.wav",
+   "e": "Laura_skillE1_01.wav",
+   "r": "Laura_skillR1_01.wav",
+   "select": "Laura_selected_1_01.wav"
+  }
+ },
+ "48": {
+  "lang": "kor",
+  "zip": "048. Tia/05. Voice Line/Tia_KOR.zip",
+  "files": {
+   "q": "Tia_skillQ1_1_01.wav",
+   "w": "Tia_skillW1_01.wav",
+   "e": "Tia_skillE1_01.wav",
+   "r": "Tia_skillR_1_01.wav",
+   "select": "Tia_selected_1_01.wav"
+  }
+ },
+ "49": {
+  "lang": "kor",
+  "zip": "049. Felix/05. Volce Line/Felix_KOR.zip",
+  "files": {
+   "q": "Felix_skillQ3.wav",
+   "w": "Felix_skillW1.wav",
+   "e": "Felix_skillE3.wav",
+   "r": "Felix_skillR_1.wav",
+   "select": "Felix_selected_1.wav"
+  }
+ },
+ "51": {
+  "lang": "kor",
+  "zip": "051. Priya/05. Voice Line/Priya_KOR.zip",
+  "files": {
+   "q": "Priya_skillQ1_01.wav",
+   "w": "Priya_skillW1_01.wav",
+   "e": "Priya_skillE1_01.wav",
+   "r": "Priya_skillR1_01.wav",
+   "select": "Priya_selected_1_01.wav"
+  }
+ },
+ "52": {
+  "lang": "kor",
+  "zip": "052. Adina/05. Voice Line/Adina_KOR.zip",
+  "files": {
+   "q": "Adina_skillQ1_01.wav",
+   "w": "Adina_skillW1_01.wav",
+   "e": "Adina_skillE1_01.wav",
+   "r": "Adina_skillR1_01.wav",
+   "select": "Adina_selected_1_01.wav"
+  }
+ },
+ "53": {
+  "lang": "kor",
+  "zip": "053. Markus/05. Voice Line/Markus_KOR.zip",
+  "files": {
+   "q": "Markus_skillQ1_01.wav",
+   "w": "Markus_skillW1_01.wav",
+   "e": "Markus_skillE1_01.wav",
+   "r": "Markus_skillR1_01.wav",
+   "select": "Markus_selected_1_01.wav"
+  }
+ },
+ "54": {
+  "lang": "kor",
+  "zip": "054. Karla/05. Voice Line/Karla_KOR.zip",
+  "files": {
+   "q": "Karla_skillQ1-1_01.wav",
+   "w": "Karla_skillW1-1_01.wav",
+   "e": "Karla_skillE1_01.wav",
+   "r": "Karla_skillR1_01.wav",
+   "select": "Karla_selected_1_01.wav"
+  }
+ },
  "56": {
-  "lang": "eng",
-  "zip": "056. Piolo/05. Voice Line/Piolo_ENG.zip",
+  "lang": "kor",
+  "zip": "056. Piolo/05. Voice Line/Piolo_KOR.zip",
   "files": {
    "q": "Piolo_skillQ1-1_01.wav",
    "w": "Piolo_skillW1-1_01.wav",
@@ -125,6 +537,39 @@
    "select": "charlotte_selected_1_01.wav"
   }
  },
+ "80": {
+  "lang": "kor",
+  "zip": "080. István/05. Voice Line/Istvan_KOR.zip",
+  "files": {
+   "q": "Istavan_skillQ1_01.wav",
+   "w": "Istavan_skillW1_01.wav",
+   "e": "Istavan_skillE1_01.wav",
+   "r": "Istavan_skillR1_01.wav",
+   "select": "Istavan_selected_1_01.wav"
+  }
+ },
+ "81": {
+  "lang": "kor",
+  "zip": "081. NiaH/05. Voice Line/NiaH_KOR.zip",
+  "files": {
+   "q": "NiaH_skillQ1_01.wav",
+   "w": "NiaH_skillW1_01.wav",
+   "e": "NiaH_skillE1_1_01.wav",
+   "r": "NiaH_skillR1_01.wav",
+   "select": "NiaH_selected_1_01.wav"
+  }
+ },
+ "82": {
+  "lang": "kor",
+  "zip": "082. Xuelin/05. Voice Line/Xuelin_Voice Line_KOR.zip",
+  "files": {
+   "q": "Xuelin_skillQ1-1__01.wav",
+   "w": "Xuelin_skillW1-1__01.wav",
+   "e": "Xuelin_skillE1__01.wav",
+   "r": "Xuelin_skillR1-1__01.wav",
+   "select": "Xuelin_selected_1__01.wav"
+  }
+ },
  "83": {
   "lang": "kor",
   "zip": "083. Henry/05. Voice Line/Henry_Voice Line_KOR.zip",
@@ -136,15 +581,70 @@
    "select": "Henry_selected_1__01.wav"
   }
  },
- "88": {
-  "lang": "jpn",
-  "zip": "088. Bihyung/05. Voice Line/Bihyung_JPN.zip",
+ "84": {
+  "lang": "kor",
+  "zip": "084. Blair/05. Voice Line/Blair_Voice Line_KOR.zip",
   "files": {
-   "q": "Bihyung_PlaySkill1088200seq0_1_ja.wav",
-   "w": "Bihyung_PlaySkill1088300seq0_1_ja.wav",
-   "e": "Bihyung_PlaySkill1088400seq0_1_ja.wav",
-   "r": "Bihyung_PlaySkill1088500seq0_1_ja.wav",
-   "select": "Bihyung_selected_1_ja.wav"
+   "q": "Blair_skillQ1-1__01.wav",
+   "w": "Blair_skillW1-1__01.wav",
+   "e": "Blair_skillE1-1__01.wav",
+   "r": "Blair_skillR1-1__01.wav",
+   "select": "Blair_selected_1__01.wav"
+  }
+ },
+ "85": {
+  "lang": "kor",
+  "zip": "085. Mirka/05. Voice Line/Mirka_Voice Line_KOR.zip",
+  "files": {
+   "q": "Mirka_skillQ1__01.wav",
+   "w": "Mirka_skillW1__01.wav",
+   "e": "Mirka_skillE1__01.wav",
+   "r": "Mirka_skillR1__01.wav",
+   "select": "Mirka_selected_1__01.wav"
+  }
+ },
+ "86": {
+  "lang": "kor",
+  "zip": "086. Fenrir/05. Voice Line/Fenrir_KOR.zip",
+  "files": {
+   "q": "Fenrir_skillQ1.wav",
+   "w": "Fenrir_skillW1.wav",
+   "e": "Fenrir_skillE1.wav",
+   "r": "Fenrir_skillR1.wav",
+   "select": "Fenrir_selected_1.wav"
+  }
+ },
+ "87": {
+  "lang": "kor",
+  "zip": "087. Coraline/05. Voice Line/Coraline_KOR.zip",
+  "files": {
+   "q": "Coraline_skillQ1__01.wav",
+   "w": "Coraline_skillW1__01.wav",
+   "e": "Coraline_skillE1__01.wav",
+   "r": "Coraline_skillR1__01.wav",
+   "select": "Coraline_selected_1__01.wav"
+  }
+ },
+ "88": {
+  "lang": "kor",
+  "zip": "088. Bihyung/05. Voice Line/Bihyung_KOR.zip",
+  "files": {
+   "q": "Bihyung_PlaySkill1088200seq0_1_ko.wav",
+   "w": "Bihyung_PlaySkill1088300seq0_1_ko.wav",
+   "e": "Bihyung_PlaySkill1088400seq0_1_ko.wav",
+   "r": "Bihyung_PlaySkill1088500seq0_1_ko.wav",
+   "select": "Bihyung_selected_1_ko.wav"
+  }
+ },
+ "89": {
+  "lang": "kor",
+  "zip": "089. CravER/05. Voice Line/CravER_KOR.zip",
+  "files": {
+   "q": "Craver_PlaySkill1089200seq0_1_ko.wav",
+   "w": "Craver_PlaySkill1089300seq0_1_ko.wav",
+   "e": "Craver_PlaySkill1089400seq0_1_ko.wav",
+   "r": "Craver_PlaySkill1089500seq0_1_ko.wav",
+   "select": "Craver_selected_1_ko.wav"
   }
  }
 }

@@ -72,6 +72,31 @@ class VoiceKeyTest(unittest.TestCase):
         got = pick(["x_firstMove_2.wav", "x_firstMove_1.wav", "x_skillQ_1.wav"])
         self.assertEqual(got["select"], "x_firstMove_1.wav")
 
+    def test_old_use_skill_active(self) -> None:
+        # 예전 실험체 (피오라 · 키아라 · 하트 …): useSkillActive1 = Q … 4 = R
+        self.assertEqual(voice_key("fiora_useSkillActive1_1_ko.wav"), "q")
+        self.assertEqual(voice_key("hart_useSkillActive3Seq2_1_ko.wav"), "e")
+        self.assertEqual(voice_key("chiara_useSkillActive4Seq0_1_ko.wav"), "r")
+
+    def test_combat_lines_when_no_skill_lines(self) -> None:
+        # 쇼이치처럼 스킬 대사가 없으면 전투 대사로 채워요 (키마다 다른 대사, 상대 이름 도발은 빼요)
+        got = pick(
+            [
+                "shoichi_selected_ko.wav",
+                "shoichi_taunt_Hyunwoo_ko.wav",
+                "shoichi_taunt_1_ko.wav",
+                "shoichi_targetOn_2_ko.wav",
+                "shoichi_targetOn_1_ko.wav",
+                "shoichi_killMonster_1_ko.wav",
+                "shoichi_skillE_1_ko.wav",
+            ]
+        )
+        self.assertEqual(got["e"], "shoichi_skillE_1_ko.wav")
+        self.assertEqual(got["q"], "shoichi_targetOn_1_ko.wav")
+        self.assertEqual(got["w"], "shoichi_targetOn_2_ko.wav")
+        self.assertEqual(got["r"], "shoichi_killMonster_1_ko.wav")
+        self.assertNotIn("shoichi_taunt_Hyunwoo_ko.wav", got.values())
+
     def test_language(self) -> None:
         self.assertEqual(zip_lang("Jackie_KOR.zip"), "kor")
         self.assertEqual(zip_lang("bERnice_KOR.zip"), "kor")

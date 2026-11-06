@@ -44,6 +44,8 @@ KEYS = ("q", "w", "e", "r", "select")
 LANG_RANK = {"kor": 0, "eng": 1, "jpn": 2}
 LANG_SHORT = {"kor": "ko", "eng": "en", "jpn": "ja"}
 SKILL_DIGIT = {2: "q", 3: "w", 4: "e", 5: "r"}
+# 스킬 대사가 없을 때 대신 쓰는 전투 대사 (앞의 것부터)
+COMBAT = {"targeton": r"targeton", "attack": r"(^|_)attack(_|\d|$)", "killmonster": r"killmonster", "taunt": r"_taunt_?\d"}
 
 
 def zip_lang(zip_name: str, members: list[str] | None = None) -> str | None:
@@ -78,6 +80,9 @@ def voice_key(name: str) -> str | None:
     m = re.search(r"playskill(\d{6,})", stem)
     if m:
         return SKILL_DIGIT.get(int(m.group(1)) // 100 % 10)
+    m = re.search(r"useskillactive([1-4])", stem)  # 예전 실험체: useSkillActive1 = Q … 4 = R
+    if m:
+        return "qwer"[int(m.group(1)) - 1]
     m = re.search(r"skill(q|w|e|r|passive)", stem)
     if m:
         return m.group(1)
@@ -104,7 +109,17 @@ def pick(names: list[str]) -> dict[str, str]:
             groups.setdefault(k, []).append(n)
     if "select" not in groups and "firstmove" in groups:
         groups["select"] = groups["firstmove"]
-    return {k: sorted(groups[k], key=_order)[0] for k in KEYS if k in groups}
+    chosen = {k: sorted(groups[k], key=_order)[0] for k in KEYS if k in groups}
+    # 스킬 대사가 없는 실험체(예: 쇼이치)는 전투 대사로 채워요 (키마다 다른 대사)
+    pool = [n for w in COMBAT for n in sorted((n for n in names if n.lower().endswith((".wav", ".ogg", ".mp3", ".m4a")) and "__macosx" not in n.lower() and re.search(COMBAT[w], clean_stem(n))), key=_order)]
+    used = set(chosen.values())
+    for k in ("q", "w", "e", "r"):
+        if k not in chosen:
+            n = next((n for n in pool if n not in used), None)
+            if n:
+                chosen[k] = n
+                used.add(n)
+    return {k: chosen[k] for k in KEYS if k in chosen}
 
 
 def run(cmd: list[str]) -> str:
@@ -139,7 +154,8 @@ def find_zips(kits: list[str], names: dict[str, int]) -> tuple[dict[int, list[tu
     for kit in kits:
         for path in sorted(Path(kit).rglob("*.zip")):
             rel = path.relative_to(kit)
-            if not any("voice" in p.lower() for p in rel.parts[:-1]):
+            # "Voice Line" 폴더 (팬키트에 "Volce Line" 오타도 있어요) 또는 zip 이름에 언어 표시
+            if not any(w in p.lower() for p in rel.parts[:-1] for w in ("voice", "volce")) and not zip_lang(path.name):
                 continue
             m = re.match(r"\d+\.\s*(.+)", rel.parts[0])
             label = m.group(1) if m else rel.parts[0]

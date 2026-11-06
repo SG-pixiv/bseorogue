@@ -179,6 +179,12 @@ def main(argv: list[str]) -> None:
             if c:
                 found.setdefault(str(code), {}).setdefault(c[1], []).append((c[0], path, str(rel)))
 
+    # 야생동물은 보통 그림을 먼저 (Mutant_ 는 보통 그림이 없을 때만)
+    for key, skins in found.items():
+        if key.startswith("wild:"):
+            for files in skins.values():
+                files.sort(key=lambda f: "mutant" in f[2].lower())
+
     # 2) 지금 있는 것 (더하기 모드)
     old_art, old_frames = ({}, {}) if fresh else read_manifest()
     sources: dict[str, dict[str, dict[str, str]]] = {"battle": {}, "icon": {}}
