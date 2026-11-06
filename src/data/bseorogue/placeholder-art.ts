@@ -174,8 +174,10 @@ function bseoIconFrame(speciesId: SpeciesId): readonly [number, number] | null {
 const BSEO_ICON_SHEET_KEY = "bseo_char_icons";
 
 const ART_SIZE = 96;
+/** 상대 쪽(앞모습) 그림 최대 높이. 상대 자리는 화면 위쪽이라 96 이면 전신 그림 머리가 잘려요 */
+const FRONT_MAX_H = 80;
 
-/** 그림을 캔버스 아래 가운데에 (뒷모습은 좌우를 뒤집어서) */
+/** 그림을 캔버스 아래 가운데에 (뒷모습은 좌우를 뒤집어서, 앞모습은 화면 밖으로 안 나가게 조금 작게) */
 function drawArt(
   tex: Phaser.Textures.CanvasTexture,
   img: CanvasImageSource & { width: number; height: number },
@@ -188,7 +190,10 @@ function drawArt(
     ctx.translate(tex.width, 0);
     ctx.scale(-1, 1);
   }
-  ctx.drawImage(img, Math.round((tex.width - img.width) / 2), tex.height - img.height);
+  const s = back ? 1 : Math.min(1, FRONT_MAX_H / img.height);
+  const w = Math.round(img.width * s);
+  const h = Math.round(img.height * s);
+  ctx.drawImage(img, Math.round((tex.width - w) / 2), tex.height - h, w, h);
   ctx.restore();
   tex.refresh();
 }

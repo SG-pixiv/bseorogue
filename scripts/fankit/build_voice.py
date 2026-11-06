@@ -1,10 +1,11 @@
 # SPDX-FileCopyrightText: 2026 SG
 # SPDX-License-Identifier: AGPL-3.0-only
 """
-이터널 리턴 팬키트 음성 → 블서로그 스킬 · 등장 음성
+이터널 리턴 팬키트 음성 → 블서로그 스킬 · 등장 · 쓰러질 때 음성
 
-팬키트 실험체 폴더의 "05. Voice Line/*.zip" 을 읽어서
-  - 음성:      assets/er/voice/<ER번호>_<q|w|e|r|select>.m4a  (AAC · 모노 · 64kbps, 앞뒤 무음 자르기, 소리 크기 맞추기)
+팬키트 실험체 폴더의 "05. Voice Line/*.zip" (새 실험체는 "05. Voice Line/KOR/*.wav" 낱개) 을 읽어서
+  - 음성:      assets/er/voice/<ER번호>_<q|w|e|r|select|die>_<0|1|2>.m4a  (키마다 최대 3개 · AAC · 모노 · 64kbps,
+               앞뒤 무음 자르기, 소리 크기 맞추기)
   - 목록:      src/data/bseorogue/voice-manifest.ts
   - 출처 기록: assets/er/voice-sources.json  (실험체마다 언어 · zip · 고른 파일)
 를 만들어요.
@@ -13,8 +14,10 @@
 - 스킬 키는 파일 이름에서 찾아요 (실험체마다 이름이 달라요):
     jackie_skillQ_1_ko.wav · aya_skillQ1_01.wav · Piolo_skillQ1-1_01.wav → q
     Bernice_PlaySkill1025200seq0_1_ko.wav → 10XX200 = q · 300 = w · 400 = e · 500 = r
-    *_selected* → select (없으면 *_firstMove* 를 select 로)
-  같은 키가 여러 개면 숫자가 가장 작은 것 (첫 번째 대사).
+    *_selected* → select (모자라면 *_firstMove* 로 채워요)
+    *_die* → die (모자라면 *_killedCommon* · *_lost* 로 채워요, 보스 대사는 빼요)
+  키마다 숫자가 작은 것부터 최대 3개 (게임에서 매번 다른 대사를 골라요).
+  스킬 대사가 3개보다 적으면 전투 대사(targetOn · attack · killMonster · taunt_숫자)로 채워요.
 - 팬키트가 zip 17개로 나뉘어 있어서 기본은 **더하기**예요: 이미 만든 음성은 그대로 두고,
   더 좋은 언어가 생기면 그 실험체만 새로 만들고, 같은 언어면 빠진 키만 채워요.
 
@@ -40,7 +43,13 @@ OUT_DIR = ROOT / "assets/er/voice"
 SOURCES = ROOT / "assets/er/voice-sources.json"
 MANIFEST = ROOT / "src/data/bseorogue/voice-manifest.ts"
 
-KEYS = ("q", "w", "e", "r", "select")
+KEYS = ("q", "w", "e", "r", "select", "die")
+VARIANTS = 3  # 키마다 대사 수
+# 등장: selected 먼저, 모자라면 첫 이동 대사
+SELECT_POOL = (r"selected", r"firstmove")
+# 쓰러질 때: die > killedCommon > 패배(lost). 보스 대사(newboss · 위클라인)는 빼요
+DIE_POOL = (r"(^|_)die(_|\d|$)", r"killedcommon", r"(^|_)lost(_|\d|$)")
+BOSS = r"newboss|wickeline|wickleline"
 LANG_RANK = {"kor": 0, "eng": 1, "jpn": 2}
 LANG_SHORT = {"kor": "ko", "eng": "en", "jpn": "ja"}
 SKILL_DIGIT = {2: "q", 3: "w", 4: "e", 5: "r"}
@@ -98,28 +107,33 @@ def _order(name: str) -> tuple:
     return (tuple(int(n) for n in re.findall(r"\d+", stem)), len(stem), stem)
 
 
-def pick(names: list[str]) -> dict[str, str]:
-    """zip 안 파일 이름들 → {키: 고른 파일}. 키마다 첫 번째 대사(숫자가 가장 작은 것)"""
-    groups: dict[str, list[str]] = {}
-    for n in names:
-        if not n.lower().endswith((".wav", ".ogg", ".mp3", ".m4a")) or "__macosx" in n.lower():
-            continue
-        k = voice_key(n)
-        if k:
-            groups.setdefault(k, []).append(n)
-    if "select" not in groups and "firstmove" in groups:
-        groups["select"] = groups["firstmove"]
-    chosen = {k: sorted(groups[k], key=_order)[0] for k in KEYS if k in groups}
-    # 스킬 대사가 없는 실험체(예: 쇼이치)는 전투 대사로 채워요 (키마다 다른 대사)
-    pool = [n for w in COMBAT for n in sorted((n for n in names if n.lower().endswith((".wav", ".ogg", ".mp3", ".m4a")) and "__macosx" not in n.lower() and re.search(COMBAT[w], clean_stem(n))), key=_order)]
-    used = set(chosen.values())
-    for k in ("q", "w", "e", "r"):
-        if k not in chosen:
-            n = next((n for n in pool if n not in used), None)
-            if n:
-                chosen[k] = n
+def pick(names: list[str]) -> dict[str, list[str]]:
+    """zip 안 파일 이름들 → {키: [고른 파일 최대 3개]} (숫자가 작은 것부터, 키끼리 겹치지 않게)"""
+    audio = sorted(
+        {n for n in names if n.lower().endswith((".wav", ".ogg", ".mp3", ".m4a")) and "__macosx" not in n.lower()},
+        key=_order,
+    )
+    chosen: dict[str, list[str]] = {k: [] for k in KEYS}
+    used: set[str] = set()
+
+    def take(key: str, cands: list[str], limit: int = VARIANTS) -> None:
+        for n in cands:
+            if len(chosen[key]) >= limit:
+                return
+            if n not in used:
+                chosen[key].append(n)
                 used.add(n)
-    return {k: chosen[k] for k in KEYS if k in chosen}
+
+    for k in ("q", "w", "e", "r"):
+        take(k, [n for n in audio if voice_key(n) == k])
+    take("select", [n for pat in SELECT_POOL for n in audio if re.search(pat, clean_stem(n))])
+    take("die", [n for pat in DIE_POOL for n in audio if re.search(pat, clean_stem(n)) and not re.search(BOSS, clean_stem(n))])
+    # 스킬 대사가 모자라면 전투 대사로 (키를 돌아가며 하나씩 → 모든 스킬이 먼저 1개씩)
+    pool = [n for pat in COMBAT.values() for n in audio if re.search(pat, clean_stem(n))]
+    for size in range(1, VARIANTS + 1):
+        for k in ("q", "w", "e", "r"):
+            take(k, pool, size)
+    return {k: chosen[k] for k in KEYS if chosen[k]}
 
 
 def run(cmd: list[str]) -> str:
@@ -147,41 +161,92 @@ def convert(src: Path, dst: Path) -> None:
     run(["ffmpeg", "-nostdin", "-hide_banner", "-v", "error", "-y", "-i", str(src), "-af", f"{TRIM},{norm_filter}", "-ac", "1", "-ar", "44100", "-c:a", "aac", "-b:a", "64k", "-movflags", "+faststart", str(dst)])
 
 
-def find_zips(kits: list[str], names: dict[str, int]) -> tuple[dict[int, list[tuple[str, Path, str]]], set[str]]:
-    """ER 번호 → [(언어, zip 경로, 팬키트 안 상대 경로)]"""
-    found: dict[int, list[tuple[str, Path, str]]] = {}
+AUDIO = (".wav", ".ogg", ".mp3", ".m4a")
+
+
+def find_zips(kits: list[str], names: dict[str, int]) -> tuple[dict[int, list[tuple[str, object, str]]], set[str]]:
+    """ER 번호 → [(언어, 소리 묶음, 팬키트 안 상대 경로)]
+
+    소리 묶음은 zip 경로(Path) 이거나, 낱개 파일 {이름: 경로} (새 실험체는 `05. Voice Line/KOR/*.wav` 처럼
+    언어 폴더에 낱개로 들어 있고, zip 여러 개에 나뉘어 있어요 → 같은 실험체 · 언어는 하나로 모아요)
+    """
+    found: dict[int, list[tuple[str, object, str]]] = {}
+    loose: dict[tuple[int, str], tuple[dict[str, Path], str]] = {}
     unknown: set[str] = set()
+
+    def code_of(rel: Path) -> int | None:
+        m = re.match(r"\d+\.\s*(.+)", rel.parts[0])
+        label = m.group(1) if m else rel.parts[0]
+        code = names.get(norm(label))
+        if code is None:
+            unknown.add(label)
+        return code
+
     for kit in kits:
-        for path in sorted(Path(kit).rglob("*.zip")):
+        for path in sorted(Path(kit).rglob("*")):
+            if not path.is_file():
+                continue
             rel = path.relative_to(kit)
-            # "Voice Line" 폴더 (팬키트에 "Volce Line" 오타도 있어요) 또는 zip 이름에 언어 표시
-            if not any(w in p.lower() for p in rel.parts[:-1] for w in ("voice", "volce")) and not zip_lang(path.name):
-                continue
-            m = re.match(r"\d+\.\s*(.+)", rel.parts[0])
-            label = m.group(1) if m else rel.parts[0]
-            code = names.get(norm(label))
-            if code is None:
-                unknown.add(label)
-                continue
-            with zipfile.ZipFile(path) as z:
-                lang = zip_lang(path.name, z.namelist())
-            if lang:
-                found.setdefault(code, []).append((lang, path, str(rel).replace("\\", "/")))
+            in_voice = any(w in p.lower() for p in rel.parts[:-1] for w in ("voice", "volce"))
+            if path.suffix.lower() == ".zip":
+                # "Voice Line" 폴더 (팬키트에 "Volce Line" 오타도 있어요) 또는 zip 이름에 언어 표시
+                if not in_voice and not zip_lang(path.name):
+                    continue
+                code = code_of(rel)
+                if code is None:
+                    continue
+                with zipfile.ZipFile(path) as z:
+                    lang = zip_lang(path.name, z.namelist())
+                if lang:
+                    found.setdefault(code, []).append((lang, path, str(rel).replace("\\", "/")))
+            elif path.suffix.lower() in AUDIO and in_voice and len(rel.parts) >= 3:
+                lang = zip_lang(rel.parts[-2])  # 바로 위 폴더 이름 = 언어 (KOR · ENG · JPN)
+                code = code_of(rel) if lang else None
+                if code is None:
+                    continue
+                files, _ = loose.setdefault((code, lang), ({}, str(rel.parent).replace("\\", "/") + "/"))
+                files.setdefault(path.name, path)
+    for (code, lang), (files, rel) in sorted(loose.items()):
+        found.setdefault(code, []).append((lang, files, rel))
     return found, unknown
+
+
+class Bundle:
+    """zip 이나 낱개 파일 묶음을 같은 모양으로 읽어요"""
+
+    def __init__(self, src: object) -> None:
+        self.zip = zipfile.ZipFile(src) if isinstance(src, Path) else None
+        self.files: dict[str, Path] = {} if self.zip else dict(src)  # type: ignore[arg-type]
+
+    def names(self) -> list[str]:
+        return self.zip.namelist() if self.zip else sorted(self.files)
+
+    def read(self, member: str) -> bytes:
+        return self.zip.read(member) if self.zip else self.files[member].read_bytes()
+
+    def __enter__(self) -> "Bundle":
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        if self.zip:
+            self.zip.close()
 
 
 def write_manifest(sources: dict) -> None:
     def lines(fn) -> str:
         return "\n".join(f"  {code}: {fn(sources[code])}," for code in sorted(sources, key=int))
 
+    def counts(s: dict) -> str:
+        return "{ " + ", ".join(f"{k}: {len(s['files'][k])}" for k in KEYS if k in s["files"]) + " }"
+
     MANIFEST.write_text(
         "/*\n * SPDX-FileCopyrightText: 2026 SG\n * SPDX-License-Identifier: AGPL-3.0-only\n */\n\n"
         "// 이 파일은 scripts/fankit/build_voice.py 가 만들어요. 직접 고치지 마세요.\n"
         "// 음성 파일(assets/er/voice/)은 님블뉴런 팬키트에서 가져와 줄인 것이에요.\n\n"
-        "/** 스킬 Q · W · E · R (skill-moves.ts 순서) · 등장 대사 */\n"
-        'export type BseoVoiceKey = "q" | "w" | "e" | "r" | "select";\n\n'
-        "/** 음성이 있는 실험체 (ER 번호 → 있는 음성). 파일: er/voice/<ER번호>_<키>.m4a */\n"
-        f"export const BSEO_VOICES: Readonly<Record<number, readonly BseoVoiceKey[]>> = {{\n{lines(lambda s: json.dumps([k for k in KEYS if k in s['files']]))}\n}};\n\n"
+        "/** 스킬 Q · W · E · R (skill-moves.ts 순서) · 등장 대사 · 쓰러질 때 대사 */\n"
+        'export type BseoVoiceKey = "q" | "w" | "e" | "r" | "select" | "die";\n\n'
+        "/** 음성이 있는 실험체 (ER 번호 → 키마다 대사 수). 파일: er/voice/<ER번호>_<키>_<0부터>.m4a */\n"
+        f"export const BSEO_VOICES: Readonly<Record<number, Readonly<Partial<Record<BseoVoiceKey, number>>>>> = {{\n{lines(counts)}\n}};\n\n"
         "/** 음성 언어 (ko 한국어 · en 영어 · ja 일본어) */\n"
         f'export const BSEO_VOICE_LANG: Readonly<Record<number, "ko" | "en" | "ja">> = {{\n{lines(lambda s: json.dumps(LANG_SHORT[s["lang"]]))}\n}};\n',
         encoding="utf-8",
@@ -215,28 +280,33 @@ def main(argv: list[str]) -> None:
                 continue  # 이미 더 좋은 언어가 있어요
             if best_rank < old_rank and old:
                 for k in old["files"]:
-                    (OUT_DIR / f"{code}_{k}.m4a").unlink(missing_ok=True)
+                    for f in OUT_DIR.glob(f"{code}_{k}_*.m4a"):
+                        f.unlink()
                 old = None
             entry = old or {"lang": cands[0][0], "zip": cands[0][2], "files": {}}
             for lang, zpath, zrel in cands:
-                with zipfile.ZipFile(zpath) as z:
-                    chosen = pick(z.namelist())
+                with Bundle(zpath) as z:
+                    chosen = pick(z.names())
                     used = False
-                    for key, member in chosen.items():
-                        if key in entry["files"]:
-                            continue
-                        # zip 안 이름은 믿지 않고, 내용만 꺼내서 정해진 이름으로 써요
-                        raw = Path(tmp) / f"{code}_{key}{PurePosixPath(member).suffix.lower()}"
-                        raw.write_bytes(z.read(member))
-                        convert(raw, OUT_DIR / f"{code}_{key}.m4a")
-                        raw.unlink()
-                        entry["files"][key] = PurePosixPath(member).name
-                        used = True
-                        made += 1
+                    for key, members in chosen.items():
+                        have = entry["files"].setdefault(key, [])
+                        for member in members:
+                            name = PurePosixPath(member.replace("\\", "/")).name
+                            if len(have) >= VARIANTS or name in have:
+                                continue
+                            # zip 안 이름은 믿지 않고, 내용만 꺼내서 정해진 이름으로 써요
+                            i = len(have)
+                            raw = Path(tmp) / f"{code}_{key}_{i}{PurePosixPath(member).suffix.lower()}"
+                            raw.write_bytes(z.read(member))
+                            convert(raw, OUT_DIR / f"{code}_{key}_{i}.m4a")
+                            raw.unlink()
+                            have.append(name)
+                            used = True
+                            made += 1
                     if used and zrel != entry["zip"] and zrel not in entry.get("more", []):
                         entry.setdefault("more", []).append(zrel)
             if entry["files"]:
-                entry["files"] = {k: entry["files"][k] for k in KEYS if k in entry["files"]}
+                entry["files"] = {k: entry["files"][k] for k in KEYS if entry["files"].get(k)}
                 sources[str(code)] = entry
 
     sources = dict(sorted(sources.items(), key=lambda kv: int(kv[0])))
@@ -246,7 +316,8 @@ def main(argv: list[str]) -> None:
     print(f"이번에 만든 음성 {made}개 · 음성이 있는 실험체 {len(sources)}명")
     for code, s in sources.items():
         missing = [k for k in KEYS if k not in s["files"]]
-        print(f"  {code:>3} {s['lang'].upper()} {' '.join(s['files'])}" + (f"  (없음: {' '.join(missing)})" if missing else ""))
+        counts = " ".join(f"{k}{len(v)}" for k, v in s["files"].items())
+        print(f"  {code:>3} {s['lang'].upper()} {counts}" + (f"  (없음: {' '.join(missing)})" if missing else ""))
     if unknown:
         print("이름을 못 맞춘 폴더:", ", ".join(sorted(unknown)))
 

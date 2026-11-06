@@ -6,7 +6,7 @@
 import { BSEO_ART_SKINS } from "#data/bseorogue/art-manifest";
 import { bseoSpeciesId } from "#data/bseorogue/roster";
 import { SKILL_MOVES } from "#data/bseorogue/skill-moves";
-import { bseoSkillVoiceKey, bseoVoiceFile, playBseoVoice } from "#data/bseorogue/voice";
+import { bseoSkillVoiceKey, bseoVoiceFile, nextBseoVoiceIndex, playBseoVoice } from "#data/bseorogue/voice";
 import { BSEO_VOICES } from "#data/bseorogue/voice-manifest";
 import { MoveId } from "#enums/move-id";
 // 블서로그 실험체 음성 · 그림: 스킬 Q W E R → 스킬 음성, 목록에 적힌 파일이 진짜 있는지
@@ -29,10 +29,12 @@ describe("블서로그 실험체 음성", () => {
   });
 
   it("음성 파일이 없는 키 · 실험체는 조용히 넘어가요", () => {
-    expect(bseoVoiceFile(bseoSpeciesId(1), "q")).toBe("er/voice/1_q.m4a");
-    const noQ = Object.entries(BSEO_VOICES).find(([, keys]) => !keys.includes("q"));
-    if (noQ) {
-      expect(bseoVoiceFile(bseoSpeciesId(Number(noQ[0])), "q")).toBeNull();
+    expect(bseoVoiceFile(bseoSpeciesId(1), "q")).toBe("er/voice/1_q_0.m4a");
+    expect(bseoVoiceFile(bseoSpeciesId(1), "die", 2)).toBe("er/voice/1_die_2.m4a");
+    expect(bseoVoiceFile(bseoSpeciesId(1), "q", 3)).toBeNull(); // 대사는 키마다 최대 3개
+    const noR = Object.entries(BSEO_VOICES).find(([, counts]) => (counts.r ?? 0) < 3);
+    if (noR) {
+      expect(bseoVoiceFile(bseoSpeciesId(Number(noR[0])), "r", 2)).toBeNull();
     }
     const silent = [...new Array(92).keys()].slice(1).find(code => !(code in BSEO_VOICES));
     if (silent) {
@@ -41,12 +43,37 @@ describe("블서로그 실험체 음성", () => {
     }
   });
 
-  it("목록(voice-manifest.ts)에 적힌 음성 파일이 모두 있어요", () => {
-    for (const [code, keys] of Object.entries(BSEO_VOICES)) {
-      for (const key of keys) {
-        expect(existsSync(resolve(ASSETS, `er/voice/${code}_${key}.m4a`)), `${code}_${key}.m4a`).toBe(true);
+  it("대사가 여러 개면 바로 전 대사는 다시 안 나오고, 결국 모두 나와요", () => {
+    for (const count of [2, 3]) {
+      const seen = new Set<number>();
+      let last: number | undefined;
+      for (let i = 0; i < 200; i++) {
+        const next = nextBseoVoiceIndex(count, last);
+        expect(next).toBeGreaterThanOrEqual(0);
+        expect(next).toBeLessThan(count);
+        expect(next).not.toBe(last);
+        seen.add(next);
+        last = next;
+      }
+      expect(seen.size).toBe(count);
+    }
+    expect(nextBseoVoiceIndex(1, 0)).toBe(0);
+  });
+
+  it("목록(voice-manifest.ts)에 적힌 음성 파일이 모두 있어요 (스킬 · 등장 · 쓰러질 때)", () => {
+    let total = 0;
+    for (const [code, counts] of Object.entries(BSEO_VOICES)) {
+      for (const [key, count] of Object.entries(counts)) {
+        expect(count).toBeGreaterThan(0);
+        expect(count).toBeLessThanOrEqual(3);
+        for (let i = 0; i < (count ?? 0); i++) {
+          const file = `er/voice/${code}_${key}_${i}.m4a`;
+          expect(existsSync(resolve(ASSETS, file)), file).toBe(true);
+          total++;
+        }
       }
     }
+    expect(total).toBeGreaterThan(0);
   });
 
   it("목록(art-manifest.ts)에 적힌 전투 그림이 모두 있어요", () => {

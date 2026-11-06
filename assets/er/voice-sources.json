@@ -3,648 +3,3215 @@
   "lang": "kor",
   "zip": "001. Jackie/05. Voice Line/Jackie_KOR.zip",
   "files": {
-   "q": "jackie_skillQ_1_ko.wav",
-   "w": "jackie_skillW_1_ko.wav",
-   "e": "jackie_skillE_1_ko.wav",
-   "r": "jackie_skillR_1_ko.wav",
-   "select": "jackie_selected_ko_01.wav"
+   "q": [
+    "jackie_skillQ_1_ko.wav",
+    "jackie_skillQ_3_ko.wav",
+    "jackie_targetOn_1_ko.wav"
+   ],
+   "w": [
+    "jackie_skillW_1_ko.wav",
+    "jackie_skillW_2_ko.wav",
+    "jackie_skillW_3_ko.wav"
+   ],
+   "e": [
+    "jackie_skillE_1_ko.wav",
+    "jackie_skillE_2_ko.wav",
+    "jackie_skillE_3_ko.wav"
+   ],
+   "r": [
+    "jackie_skillR_1_ko.wav",
+    "jackie_skillR_2_ko.wav",
+    "jackie_skillR_3_ko.wav"
+   ],
+   "select": [
+    "jackie_selected_ko_01.wav",
+    "jackie_firstMove_1_ko.wav",
+    "jackie_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "jackie_die_1_ko.wav",
+    "jackie_lost_1_ko.wav",
+    "jackie_lost_2_ko.wav"
+   ]
   }
  },
  "2": {
-  "lang": "eng",
-  "zip": "002. Aya/05. Voice Line/Aya_ENG.zip",
+  "lang": "kor",
+  "zip": "002. Aya/05. Voice Line/Aya_KOR.zip",
   "files": {
-   "q": "aya_skillQ1_01.wav",
-   "w": "aya_skillW1_01.wav",
-   "e": "aya_skillE1_01.wav",
-   "r": "aya_skillR1_01.wav",
-   "select": "aya_selected_01.wav"
+   "q": [
+    "aya_skillQ_1_ko.wav",
+    "aya_skillQ_2_ko.wav",
+    "aya_skillQ_3_ko.wav"
+   ],
+   "w": [
+    "aya_skillW_1_ko.wav",
+    "aya_skillW_2_ko.wav",
+    "aya_skillW_3_ko.wav"
+   ],
+   "e": [
+    "aya_skillE_1_ko.wav",
+    "aya_skillE_2_ko.wav",
+    "aya_skillE_3_ko.wav"
+   ],
+   "r": [
+    "aya_skillR_1_ko.wav",
+    "aya_skillR_2_ko.wav",
+    "aya_skillR_3_ko.wav"
+   ],
+   "select": [
+    "aya_selected_ko_01.wav",
+    "aya_firstMove_1_ko.wav",
+    "aya_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "aya_die_1_ko.wav",
+    "aya_die_2_ko.wav",
+    "aya_die_3_ko.wav"
+   ]
   }
  },
  "3": {
   "lang": "kor",
   "zip": "005. Fiora/05. Voice Line/Fiora_KOR.zip",
   "files": {
-   "q": "fiora_useSkillActive1_1_ko.wav",
-   "w": "fiora_useSkillActive2_1_ko.wav",
-   "e": "fiora_useSkillActive3_1_ko.wav",
-   "r": "fiora_useSkillActive4_1_ko.wav",
-   "select": "fiora_selected_ko_01.wav"
+   "q": [
+    "fiora_useSkillActive1_1_ko.wav",
+    "fiora_killMonster_1_ko.wav"
+   ],
+   "w": [
+    "fiora_useSkillActive2_1_ko.wav",
+    "fiora_killMonster_2_ko.wav"
+   ],
+   "e": [
+    "fiora_useSkillActive3_1_ko.wav",
+    "fiora_killMonster_3_ko.wav"
+   ],
+   "r": [
+    "fiora_useSkillActive4_1_ko.wav"
+   ],
+   "select": [
+    "fiora_selected_ko_01.wav",
+    "fiora_firstMove_1_ko.wav",
+    "fiora_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "fiora_lost_1_ko.wav",
+    "fiora_lost_2_ko.wav"
+   ]
   }
  },
  "4": {
   "lang": "kor",
   "zip": "004. Magnus/05. Voice Line/Magnus_KOR.zip",
   "files": {
-   "q": "magnus_skillQ_1_ko.wav",
-   "w": "magnus_skillW_1_ko.wav",
-   "e": "magnus_skillE_1_ko.wav",
-   "r": "magnus_skillR_1_ko.wav",
-   "select": "magnus_selected_ko_01.wav"
+   "q": [
+    "magnus_skillQ_1_ko.wav",
+    "magnus_skillQ_2_ko.wav",
+    "magnus_skillQ_3_ko.wav"
+   ],
+   "w": [
+    "magnus_skillW_1_ko.wav",
+    "magnus_skillW_2_ko.wav",
+    "magnus_skillW_3_ko.wav"
+   ],
+   "e": [
+    "magnus_skillE_1_ko.wav",
+    "magnus_skillE_2_ko.wav",
+    "magnus_skillE_3_ko.wav"
+   ],
+   "r": [
+    "magnus_skillR_1_ko.wav",
+    "magnus_skillR_2_ko.wav",
+    "magnus_skillR3_1_ko.wav"
+   ],
+   "select": [
+    "magnus_selected_ko_01.wav",
+    "magnus_firstMove_1_ko.wav",
+    "magnus_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "magnus_die_1_ko.wav",
+    "magnus_lost_1_ko.wav",
+    "magnus_lost_2_ko.wav"
+   ]
+  }
+ },
+ "5": {
+  "lang": "kor",
+  "zip": "007. Zahir/05. Voice Line/Zahir_KOR.zip",
+  "files": {
+   "q": [
+    "zahir_skillQ_1_ko.wav",
+    "zahir_skillQ_2_ko.wav",
+    "zahir_skillQ_3_ko.wav"
+   ],
+   "w": [
+    "zahir_skillW_1_ko.wav",
+    "zahir_skillW_2_ko.wav",
+    "zahir_skillW_3_ko.wav"
+   ],
+   "e": [
+    "zahir_skillE_1_ko.wav",
+    "zahir_skillE_2_ko.wav",
+    "zahir_skillE_3_ko.wav"
+   ],
+   "r": [
+    "zahir_skillR_1_ko.wav",
+    "zahir_skillR_2_ko.wav",
+    "zahir_skillR_3_ko.wav"
+   ],
+   "select": [
+    "zahir_selected_ko_01.wav",
+    "zahir_firstMove_1_ko.wav",
+    "zahir_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "zahir_die_1_ko.wav",
+    "zahir_die_2_ko.wav",
+    "zahir_die_3_ko.wav"
+   ]
   }
  },
  "6": {
   "lang": "kor",
   "zip": "006. Nadine/05. Voice Line/Nadine_KOR.zip",
   "files": {
-   "q": "nadine_skillQ_1_ko.wav",
-   "w": "nadine_skillW_1_ko.wav",
-   "e": "nadine_skillE_1_ko.wav",
-   "r": "nadine_targetOn_1_ko.wav",
-   "select": "nadine_selected_ko_01.wav"
+   "q": [
+    "nadine_skillQ_1_ko.wav",
+    "nadine_skillQ_2_ko.wav",
+    "nadine_skillQ_3_ko.wav"
+   ],
+   "w": [
+    "nadine_skillW_1_ko.wav",
+    "nadine_skillW_2_ko.wav",
+    "nadine_skillW_3_ko.wav"
+   ],
+   "e": [
+    "nadine_skillE_1_ko.wav",
+    "nadine_skillE_2_ko.wav",
+    "nadine_skillE_3_ko.wav"
+   ],
+   "r": [
+    "nadine_targetOn_1_ko.wav",
+    "nadine_targetOn_2_ko.wav",
+    "nadine_attack_1_ko.wav"
+   ],
+   "select": [
+    "nadine_selected_ko_01.wav",
+    "nadine_firstMove_1_ko.wav",
+    "nadine_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "nadine_die_1_ko.wav",
+    "nadine_lost_1_ko.wav",
+    "nadine_lost_2_ko.wav"
+   ]
+  }
+ },
+ "7": {
+  "lang": "kor",
+  "zip": "003. Hyunwoo/05. Voice Line/Hyunwoo_KOR.zip",
+  "files": {
+   "q": [
+    "Hyunwoo_PlaySkill1007200seq0_1_ko.wav",
+    "Hyunwoo_PlaySkill1007200seq0_2_ko.wav",
+    "Hyunwoo_PlaySkill1007200seq0_3_ko.wav"
+   ],
+   "w": [
+    "Hyunwoo_PlaySkill1007300seq0_1_ko.wav",
+    "Hyunwoo_PlaySkill1007300seq0_2_ko.wav",
+    "Hyunwoo_PlaySkill1007300seq0_3_ko.wav"
+   ],
+   "e": [
+    "Hyunwoo_PlaySkill1007400seq0_1_ko.wav",
+    "Hyunwoo_PlaySkill1007400seq0_2_ko.wav",
+    "Hyunwoo_PlaySkill1007400seq0_3_ko.wav"
+   ],
+   "r": [
+    "Hyunwoo_PlaySkill1007500seq0_1_ko.wav",
+    "Hyunwoo_PlaySkill1007500seq0_2_ko.wav",
+    "Hyunwoo_PlaySkill1007500seq0_3_ko.wav"
+   ],
+   "select": [
+    "Hyunwoo_selected_1_ko.wav",
+    "Hyunwoo_selected2_1_ko.wav",
+    "Hyunwoo_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "Hyunwoo_lost_1_ko.wav",
+    "Hyunwoo_lost_2_ko.wav"
+   ]
   }
  },
  "8": {
   "lang": "kor",
   "zip": "008. Hart/05. Voice Line/Hart_KOR.zip",
   "files": {
-   "q": "hart_useSkillActive1Seq0_1_ko.wav",
-   "w": "hart_useSkillActive2Seq0_1_ko.wav",
-   "e": "hart_useSkillActive3Seq0_1_ko.wav",
-   "r": "hart_useSkillActive4Seq0_1_ko.wav",
-   "select": "hart_selected_ko_01.wav"
+   "q": [
+    "hart_useSkillActive1Seq0_1_ko.wav",
+    "hart_useSkillActive1Seq0_2_ko.wav",
+    "hart_targetOn_1_ko.wav"
+   ],
+   "w": [
+    "hart_useSkillActive2Seq0_1_ko.wav",
+    "hart_useSkillActive2Seq0_2_ko.wav",
+    "hart_useSkillActive2Seq0_3_ko.wav"
+   ],
+   "e": [
+    "hart_useSkillActive3Seq0_1_ko.wav",
+    "hart_useSkillActive3Seq1_1_ko.wav",
+    "hart_useSkillActive3Seq2_1_ko.wav"
+   ],
+   "r": [
+    "hart_useSkillActive4Seq0_1_ko.wav",
+    "hart_useSkillActive4Seq0_2_ko.wav",
+    "hart_useSkillActive4Seq0_3_ko.wav"
+   ],
+   "select": [
+    "hart_selected_ko_01.wav",
+    "hart_firstMove_1_ko.wav",
+    "hart_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "hart_lost_1_ko.wav",
+    "hart_lost_2_ko.wav"
+   ]
   }
  },
  "9": {
   "lang": "kor",
   "zip": "009. Isol/05. Voice Line/Isol_KOR.zip",
   "files": {
-   "q": "isol_skillQ_1_ko.wav",
-   "w": "isol_skillW_1_ko.wav",
-   "e": "isol_skillE_1_ko.wav",
-   "r": "isol_skillR_1_ko.wav",
-   "select": "isol_selected_ko_01.wav"
+   "q": [
+    "isol_skillQ_1_ko.wav",
+    "isol_skillQ_2_ko.wav",
+    "isol_skillQ_3_ko.wav"
+   ],
+   "w": [
+    "isol_skillW_1_ko.wav",
+    "isol_skillW_2_ko.wav",
+    "isol_skillW_3_ko.wav"
+   ],
+   "e": [
+    "isol_skillE_1_ko.wav",
+    "isol_skillE_2_ko.wav",
+    "isol_skillE_3_ko.wav"
+   ],
+   "r": [
+    "isol_skillR_1_ko.wav",
+    "isol_skillR_2_ko.wav",
+    "isol_skillR_3_ko.wav"
+   ],
+   "select": [
+    "isol_selected_ko_01.wav",
+    "isol_firstMove_1_ko.wav",
+    "isol_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "isol_die_1_ko.wav",
+    "isol_die_2_ko.wav",
+    "isol_die_3_ko.wav"
+   ]
   }
  },
  "10": {
   "lang": "kor",
   "zip": "010. Li Dailin/05. Voice Line/Li Dailin_KOR.zip",
   "files": {
-   "q": "lidailin_useSkillActive1Seq0_1_ko.wav",
-   "w": "lidailin_useSkillActive2Seq0_1_ko.wav",
-   "e": "lidailin_useSkillActive3Seq0_1_ko.wav",
-   "r": "lidailin_useSkillActive4Seq0_1_ko.wav",
-   "select": "lidailin_selected_1_ko.wav"
+   "q": [
+    "lidailin_useSkillActive1Seq0_1_ko.wav",
+    "lidailin_useSkillActive1Seq0_2_ko.wav",
+    "lidailin_useSkillActive1Seq1_1_ko.wav"
+   ],
+   "w": [
+    "lidailin_useSkillActive2Seq0_1_ko.wav",
+    "lidailin_targetOn_1_ko.wav",
+    "lidailin_attack_1_ko.wav"
+   ],
+   "e": [
+    "lidailin_useSkillActive3Seq0_1_ko.wav",
+    "lidailin_targetOn_2_ko.wav",
+    "lidailin_killMonster_1_ko.wav"
+   ],
+   "r": [
+    "lidailin_useSkillActive4Seq0_1_ko.wav",
+    "lidailin_useSkillActive4Seq0_2_ko.wav",
+    "lidailin_killMonster_2_ko.wav"
+   ],
+   "select": [
+    "lidailin_selected_1_ko.wav",
+    "lidailin_selected2_1_ko.wav",
+    "lidailin_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "lidailin_die_1_ko.wav",
+    "lidailin_lost_1_ko.wav",
+    "lidailin_lost_2_ko.wav"
+   ]
   }
  },
  "11": {
   "lang": "kor",
   "zip": "011. Yuki/05. Voice Line/Yuki_KOR.zip",
   "files": {
-   "q": "yuki_useSkillActive1Seq1_1_ko.wav",
-   "w": "yuki_useSkillActive2Seq0_1_ko.wav",
-   "e": "yuki_useSkillActive3Seq0_1_ko.wav",
-   "r": "yuki_useSkillActive4Seq0_1_ko.wav",
-   "select": "yuki_selected_1_ko.wav"
+   "q": [
+    "yuki_useSkillActive1Seq1_1_ko.wav",
+    "yuki_useSkillActive1Seq1_2_ko.wav",
+    "yuki_useSkillActive1Seq1_3_ko.wav"
+   ],
+   "w": [
+    "yuki_useSkillActive2Seq0_1_ko.wav",
+    "yuki_useSkillActive2Seq0_2_ko.wav",
+    "yuki_useSkillActive2Seq0_3_ko.wav"
+   ],
+   "e": [
+    "yuki_useSkillActive3Seq0_1_ko.wav",
+    "yuki_useSkillActive3Seq0_2_ko.wav",
+    "yuki_targetOn_1_ko.wav"
+   ],
+   "r": [
+    "yuki_useSkillActive4Seq0_1_ko.wav",
+    "yuki_useSkillActive4Seq0_2_ko.wav",
+    "yuki_targetOn_2_ko.wav"
+   ],
+   "select": [
+    "yuki_selected_1_ko.wav",
+    "yuki_firstMove_1_ko.wav",
+    "yuki_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "yuki_die_1_ko.wav",
+    "yuki_lost_1_ko.wav",
+    "yuki_lost_2_ko.wav"
+   ]
   }
  },
  "12": {
   "lang": "kor",
   "zip": "012. Hyejin/05. Voice Line/Hyejin_KOR.zip",
   "files": {
-   "q": "hyejin_useSkillActive1Seq0_1_ko.wav",
-   "w": "hyejin_targetOn_1_ko.wav",
-   "e": "hyejin_targetOn_2_ko.wav",
-   "r": "hyejin_useSkillActive4Seq0_1_ko.wav",
-   "select": "hyejin_selected1_1_ko.wav"
+   "q": [
+    "hyejin_useSkillActive1Seq0_1_ko.wav",
+    "hyejin_useSkillActive1Seq0_2_ko.wav",
+    "hyejin_useSkillActive1Seq0_3_ko.wav"
+   ],
+   "w": [
+    "hyejin_targetOn_1_ko.wav",
+    "hyejin_attack_1_ko.wav",
+    "hyejin_killMonster_2_ko.wav"
+   ],
+   "e": [
+    "hyejin_targetOn_2_ko.wav",
+    "hyejin_killMonster_1_ko.wav",
+    "hyejin_killMonster_3_ko.wav"
+   ],
+   "r": [
+    "hyejin_useSkillActive4Seq0_1_ko.wav",
+    "hyejin_useSkillActive4Seq0_2_ko.wav"
+   ],
+   "select": [
+    "hyejin_selected1_1_ko.wav",
+    "hyejin_selected2_1_ko.wav",
+    "hyejin_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "hyejin_die_1_ko.wav",
+    "hyejin_lost_1_ko.wav",
+    "hyejin_lost_2_ko.wav"
+   ]
   }
  },
  "13": {
   "lang": "kor",
   "zip": "013. Xiukai/05. Voice Line/Xiukai_KOR.zip",
   "files": {
-   "q": "xiukai_useSkillActive1Seq0_1_ko.wav",
-   "w": "xiukai_useSkillActive2Seq0_1_ko.wav",
-   "e": "xiukai_useSkillActive3Seq0_1_ko.wav",
-   "r": "xiukai_useSkillActive4Seq0_1_ko.wav",
-   "select": "xiukai_selected_1_ko.wav"
+   "q": [
+    "xiukai_useSkillActive1Seq0_1_ko.wav",
+    "xiukai_useSkillActive1Seq0_2_ko.wav",
+    "xiukai_useSkillActive1Seq0_3_ko.wav"
+   ],
+   "w": [
+    "xiukai_useSkillActive2Seq0_1_ko.wav",
+    "xiukai_useSkillActive2Seq0_2_ko.wav",
+    "xiukai_useSkillActive2Seq0_3_ko.wav"
+   ],
+   "e": [
+    "xiukai_useSkillActive3Seq0_1_ko.wav",
+    "xiukai_useSkillActive3Seq0_2_ko.wav",
+    "xiukai_useSkillActive3Seq0_3_ko.wav"
+   ],
+   "r": [
+    "xiukai_useSkillActive4Seq0_1_ko.wav",
+    "xiukai_useSkillActive4Seq0_2_ko.wav",
+    "xiukai_useSkillActive4Seq0_3_ko.wav"
+   ],
+   "select": [
+    "xiukai_selected_1_ko.wav",
+    "xiukai_selected2_1_ko.wav",
+    "xiukai_selected2_2_ko.wav"
+   ],
+   "die": [
+    "xiukai_die_5_ko.wav",
+    "xiukai_lost_1_ko.wav",
+    "xiukai_lost_2_ko.wav"
+   ]
   }
  },
  "14": {
   "lang": "kor",
   "zip": "015. Chiara/05. Voice Line/Chiara_KOR.zip",
   "files": {
-   "q": "chiara_useSkillActive1Seq0_1_ko.wav",
-   "w": "chiara_useSkillActive2Seq0_1_ko.wav",
-   "e": "chiara_useSkillActive3Seq0_1_ko.wav",
-   "r": "chiara_useSkillActive4Seq0_1_ko.wav",
-   "select": "chiara_selected_1_ko.wav"
+   "q": [
+    "chiara_useSkillActive1Seq0_1_ko.wav",
+    "chiara_useSkillActive1Seq0_2_ko.wav",
+    "chiara_useSkillActive1Seq0_3_ko.wav"
+   ],
+   "w": [
+    "chiara_useSkillActive2Seq0_1_ko.wav",
+    "chiara_useSkillActive2Seq0_2_ko.wav",
+    "chiara_useSkillActive2Seq0_3_ko.wav"
+   ],
+   "e": [
+    "chiara_useSkillActive3Seq0_1_ko.wav",
+    "chiara_useSkillActive3Seq0_2_ko.wav",
+    "chiara_useSkillActive3Seq0_3_ko.wav"
+   ],
+   "r": [
+    "chiara_useSkillActive4Seq0_1_ko.wav",
+    "chiara_useSkillActive4Seq0_2_ko.wav",
+    "chiara_useSkillActive4Seq1_1_ko.wav"
+   ],
+   "select": [
+    "chiara_selected_1_ko.wav",
+    "chiara_selected_2_ko.wav",
+    "chiara_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "chiara_die_1_ko.wav",
+    "kiara_die1_06.wav",
+    "kiara_die1_08.wav"
+   ]
+  }
+ },
+ "15": {
+  "lang": "kor",
+  "zip": "014. Sissela/05. Voice Line/Sissela_KOR.zip",
+  "files": {
+   "q": [
+    "sissela_targetOn_1_ko.wav",
+    "sissela_killMonster_3_ko.wav",
+    "sissela_taunt_4_ko.wav"
+   ],
+   "w": [
+    "sissela_targetOn_2_ko.wav",
+    "sissela_taunt_1_ko.wav"
+   ],
+   "e": [
+    "sissela_killMonster_1_ko.wav",
+    "sissela_taunt_2_ko.wav"
+   ],
+   "r": [
+    "sissela_killMonster_2_ko.wav",
+    "sissela_taunt_3_ko.wav"
+   ],
+   "select": [
+    "sissela_selected_1_ko.wav",
+    "sissela_firstMove_1_ko.wav",
+    "sissela_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "sissela_lost_1_ko.wav",
+    "sissela_lost_2_ko.wav"
+   ]
   }
  },
  "16": {
   "lang": "kor",
   "zip": "018. Silvia/05. Voice Line/Silvia_KOR.zip",
   "files": {
-   "q": "silvia_PlaySkill1016200seq0_1_ko.wav",
-   "w": "silvia_PlaySkill1016300seq0_1_ko.wav",
-   "e": "silvia_PlaySkill1016400seq0_1_ko.wav",
-   "r": "silvia_PlaySkill1016500seq0_1_ko.wav",
-   "select": "silvia_selected_1_ko.wav"
+   "q": [
+    "silvia_PlaySkill1016200seq0_1_ko.wav",
+    "silvia_PlaySkill1016200seq0_2_ko.wav",
+    "silvia_PlaySkill1016200seq0_3_ko.wav"
+   ],
+   "w": [
+    "silvia_PlaySkill1016300seq0_1_ko.wav",
+    "silvia_PlaySkill1016300seq0_2_ko.wav",
+    "silvia_PlaySkill1016300seq0_3_ko.wav"
+   ],
+   "e": [
+    "silvia_PlaySkill1016400seq0_1_ko.wav",
+    "silvia_PlaySkill1016400seq0_2_ko.wav",
+    "silvia_PlaySkill1016400seq0_3_ko.wav"
+   ],
+   "r": [
+    "silvia_PlaySkill1016500seq0_1_ko.wav",
+    "silvia_PlaySkill1016500seq0_2_ko.wav",
+    "silvia_PlaySkill1016500seq0_3_ko.wav"
+   ],
+   "select": [
+    "silvia_selected_1_ko.wav",
+    "silvia_selected_2_kr.wav",
+    "silvia_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "silvia_lost_1_ko.wav"
+   ]
+  }
+ },
+ "17": {
+  "lang": "kor",
+  "zip": "016. Adriana/05. Voice Line/Adriana_KOR.zip",
+  "files": {
+   "q": [
+    "adriana_useSkillActive1Seq0_1_ko.wav",
+    "adriana_useSkillActive1Seq0_2_ko.wav",
+    "adriana_useSkillActive1Seq0_3_ko.wav"
+   ],
+   "w": [
+    "adriana_useSkillActive2Seq0_1_ko.wav",
+    "adriana_useSkillActive2Seq0_2_ko.wav",
+    "adriana_useSkillActive2Seq0_3_ko.wav"
+   ],
+   "e": [
+    "adriana_useSkillActive3Seq0_1_ko.wav",
+    "adriana_useSkillActive3Seq0_2_ko.wav",
+    "adriana_targetOn_1_ko.wav"
+   ],
+   "r": [
+    "adriana_useSkillActive4Seq0_1_ko.wav",
+    "adriana_useSkillActive4Seq0_2_ko.wav",
+    "adriana_useSkillActive4Seq0_3_ko.wav"
+   ],
+   "select": [
+    "adriana_selected_1_ko.wav",
+    "adriana_firstMove_1_ko.wav",
+    "adriana_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "adriana_lost_1_ko.wav",
+    "adriana_lost_2_ko.wav"
+   ]
   }
  },
  "18": {
   "lang": "kor",
   "zip": "017. Shoichi/05. Voice Line/Shoichi_KOR.zip",
   "files": {
-   "q": "shoichi_targetOn_1_ko.wav",
-   "w": "shoichi_targetOn_2_ko.wav",
-   "e": "shoichi_killMonster_1_ko.wav",
-   "r": "shoichi_killMonster_2_ko.wav",
-   "select": "shoichi_selected_ko.wav"
+   "q": [
+    "shoichi_targetOn_1_ko.wav",
+    "shoichi_killMonster_3_ko.wav",
+    "shoichi_taunt_4_ko.wav"
+   ],
+   "w": [
+    "shoichi_targetOn_2_ko.wav",
+    "shoichi_taunt_1_ko.wav"
+   ],
+   "e": [
+    "shoichi_killMonster_1_ko.wav",
+    "shoichi_taunt_2_ko.wav"
+   ],
+   "r": [
+    "shoichi_killMonster_2_ko.wav",
+    "shoichi_taunt_3_ko.wav"
+   ],
+   "select": [
+    "shoichi_selected_ko.wav",
+    "shoichi_firstMove_1_ko.wav",
+    "shoichi_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "shoichi_lost_1_ko.wav",
+    "shoichi_lost_2_ko.wav"
+   ]
+  }
+ },
+ "19": {
+  "lang": "kor",
+  "zip": "019. Emma/05. Voice Line/Emma_KOR.zip",
+  "files": {
+   "q": [
+    "Emma_PlaySkill1019200seq0_1_ko.wav",
+    "Emma_PlaySkill1019200seq0_2_ko.wav",
+    "Emma_PlaySkill1019200seq0_3_ko.wav"
+   ],
+   "w": [
+    "Emma_PlaySkill1019300seq0_1_ko.wav",
+    "Emma_PlaySkill1019300seq0_2_ko.wav",
+    "Emma_PlaySkill1019300seq0_3_ko.wav"
+   ],
+   "e": [
+    "Emma_PlaySkill1019400seq0_1_ko.wav",
+    "Emma_PlaySkill1019400seq0_2_ko.wav",
+    "Emma_PlaySkill1019400seq0_3_ko.wav"
+   ],
+   "r": [
+    "Emma_PlaySkill1019500seq0_1_ko.wav",
+    "Emma_PlaySkill1019500seq0_2_ko.wav",
+    "Emma_PlaySkill1019500seq0_3_ko.wav"
+   ],
+   "select": [
+    "Emma_selected_1_ko.wav",
+    "Emma_selected2_1_ko.wav",
+    "Emma_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "Emma_lost_1_ko.wav",
+    "Emma_lost_2_ko.wav"
+   ]
   }
  },
  "20": {
   "lang": "kor",
   "zip": "020. Lenox/05. Voice Line/Lenox_KOR.zip",
   "files": {
-   "q": "lenox_PlaySkill1020200seq0_1_ko.wav",
-   "w": "lenox_PlaySkill1020300seq0_1_ko.wav",
-   "e": "lenox_PlaySkill1020400seq0_1_ko.wav",
-   "r": "lenox_PlaySkill1020500seq0_1_ko.wav",
-   "select": "lenox_selected_1_ko.wav"
+   "q": [
+    "lenox_PlaySkill1020200seq0_1_ko.wav",
+    "lenox_PlaySkill1020200seq0_2_ko.wav",
+    "lenox_PlaySkill1020200seq0_3_ko.wav"
+   ],
+   "w": [
+    "lenox_PlaySkill1020300seq0_1_ko.wav",
+    "lenox_PlaySkill1020300seq0_2_ko.wav",
+    "lenox_PlaySkill1020300seq0_3_ko.wav"
+   ],
+   "e": [
+    "lenox_PlaySkill1020400seq0_1_ko.wav",
+    "lenox_PlaySkill1020400seq0_2_ko.wav",
+    "lenox_PlaySkill1020400seq0_3_ko.wav"
+   ],
+   "r": [
+    "lenox_PlaySkill1020500seq0_1_ko.wav",
+    "lenox_PlaySkill1020500seq0_2_ko.wav",
+    "lenox_PlaySkill1020500seq0_3_ko.wav"
+   ],
+   "select": [
+    "lenox_selected_1_ko.wav",
+    "lenox_firstMove_1_ko.wav",
+    "lenox_firstMove_2_ko.wav"
+   ],
+   "die": [
+    "lenox_lost_1_ko.wav",
+    "lenox_lost_2_ko.wav"
+   ]
   }
  },
  "21": {
   "lang": "kor",
   "zip": "021. Rozzi/05. Voice Line/Rozzi_KOR.zip",
   "files": {
-   "q": "rozzi_targetOn1_01.wav",
-   "w": "rozzi_targetOn1_02.wav",
-   "e": "rozzi_targetOn2_01.wav",
-   "r": "rozzi_skillR1_01.wav",
-   "select": "rozzi_selected_01.wav"
+   "q": [
+    "rozzi_targetOn1_01.wav",
+    "rozzi_targetOn2_02.wav",
+    "rozzi_attack_02.wav"
+   ],
+   "w": [
+    "rozzi_targetOn1_02.wav",
+    "rozzi_targetOn2_03.wav",
+    "rozzi_attack_03.wav"
+   ],
+   "e": [
+    "rozzi_targetOn2_01.wav",
+    "rozzi_attack_01.wav",
+    "rozzi_attack_04.wav"
+   ],
+   "r": [
+    "rozzi_skillR1_01.wav",
+    "rozzi_skillR1_02.wav",
+    "rozzi_skillR2_01.wav"
+   ],
+   "select": [
+    "rozzi_selected_01.wav",
+    "rozzi_selected_02.wav",
+    "rozzi_firstMove1_01.wav"
+   ],
+   "die": [
+    "rozzi_die_01.wav",
+    "rozzi_die_02.wav",
+    "rozzi_die_03.wav"
+   ]
   }
  },
  "22": {
   "lang": "kor",
   "zip": "022. Luke/05. Voice Line/Luke_KOR.zip",
   "files": {
-   "q": "Luke_PlaySkill1022200seq0_1_ko.wav",
-   "w": "Luke_PlaySkill1022300seq0_1_ko.wav",
-   "e": "Luke_PlaySkill1022400seq0_1_ko.wav",
-   "r": "Luke_PlaySkill1022500seq0_1_ko.wav",
-   "select": "luke_selected_1_ko.wav"
+   "q": [
+    "Luke_PlaySkill1022200seq0_1_ko.wav",
+    "Luke_PlaySkill1022200seq0_2_ko.wav",
+    "Luke_PlaySkill1022200seq0_3_ko.wav"
+   ],
+   "w": [
+    "Luke_PlaySkill1022300seq0_1_ko.wav",
+    "Luke_PlaySkill1022300seq0_2_ko.wav",
+    "Luke_PlaySkill1022300seq0_3_ko.wav"
+   ],
+   "e": [
+    "Luke_PlaySkill1022400seq0_1_ko.wav",
+    "Luke_PlaySkill1022400seq0_2_ko.wav",
+    "Luke_PlaySkill1022400seq0_3_ko.wav"
+   ],
+   "r": [
+    "Luke_PlaySkill1022500seq0_1_ko.wav",
+    "Luke_PlaySkill1022500seq0_2_ko.wav",
+    "Luke_PlaySkill1022500seq0_3_ko.wav"
+   ],
+   "select": [
+    "luke_selected_1_ko.wav",
+    "luke_selected2_1_ko.wav",
+    "Luke_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "Luke_die_1_ko.wav",
+    "Luke_die_2_ko.wav",
+    "Luke_die_3_ko.wav"
+   ]
+  }
+ },
+ "23": {
+  "lang": "kor",
+  "zip": "023. Cathy/05. Voice Line/Cathy_KOR.zip",
+  "files": {
+   "q": [
+    "Cathy_PlaySkill1023200seq0_1_ko.wav",
+    "Cathy_PlaySkill1023200seq0_2_ko.wav",
+    "Cathy_PlaySkill1023200seq0_3_ko.wav"
+   ],
+   "w": [
+    "Cathy_PlaySkill1023300seq0_1_ko.wav",
+    "Cathy_PlaySkill1023300seq0_2_ko.wav",
+    "Cathy_PlaySkill1023300seq0_3_ko.wav"
+   ],
+   "e": [
+    "Cathy_PlaySkill1023400seq0_1_ko.wav",
+    "Cathy_PlaySkill1023400seq0_2_ko.wav",
+    "Cathy_PlaySkill1023400seq0_3_ko.wav"
+   ],
+   "r": [
+    "Cathy_PlaySkill1023500seq0_1_ko.wav",
+    "Cathy_PlaySkill1023500seq0_2_ko.wav",
+    "Cathy_PlaySkill1023500seq0_3_ko.wav"
+   ],
+   "select": [
+    "Cathy_selected_1_ko.wav",
+    "Cathy_selected2_1_ko.wav",
+    "Cathy_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "Cathy_lost_1_ko.wav",
+    "Cathy_hacking_lost_1_ko.wav",
+    "Cathy_lost_2_ko.wav"
+   ]
   }
  },
  "24": {
   "lang": "kor",
   "zip": "024. Adela/05. Voice Line/Adela_KOR.zip",
   "files": {
-   "q": "Adela_PlaySkill1024200seq0_1_ko.wav",
-   "w": "Adela_PlaySkill1024300seq0_1_ko.wav",
-   "e": "Adela_PlaySkill1024400seq0_1_ko.wav",
-   "r": "Adela_PlaySkill1024500seq0_1_ko.wav",
-   "select": "Adela_selected_1_ko.wav"
+   "q": [
+    "Adela_PlaySkill1024200seq0_1_ko.wav",
+    "Adela_PlaySkill1024200seq0_2_ko.wav",
+    "Adela_PlaySkill1024200seq0_3_ko.wav"
+   ],
+   "w": [
+    "Adela_PlaySkill1024300seq0_1_ko.wav",
+    "Adela_PlaySkill1024300seq0_2_ko.wav",
+    "Adela_PlaySkill1024300seq0_3_ko.wav"
+   ],
+   "e": [
+    "Adela_PlaySkill1024400seq0_1_ko.wav",
+    "Adela_PlaySkill1024400seq0_2_ko.wav",
+    "Adela_PlaySkill1024400seq0_3_ko.wav"
+   ],
+   "r": [
+    "Adela_PlaySkill1024500seq0_1_ko.wav",
+    "Adela_PlaySkill1024500seq0_2_ko.wav",
+    "Adela_PlaySkill1024500seq0_3_ko.wav"
+   ],
+   "select": [
+    "Adela_selected_1_ko.wav",
+    "Adela_selected2_1_ko.wav",
+    "Adela_firstmove_1_ko.wav"
+   ],
+   "die": [
+    "Adela_lost_1_ko.wav",
+    "Adela_lost_2_ko.wav"
+   ]
   }
  },
  "25": {
   "lang": "kor",
   "zip": "025. Bernice/05. Voice Line - 음성/bERnice_KOR.zip",
   "files": {
-   "q": "Bernice_PlaySkill1025200seq0_1_ko.wav",
-   "w": "Bernice_PlaySkill1025300seq0_1_ko.wav",
-   "e": "Bernice_PlaySkill1025400seq0_1_ko.wav",
-   "r": "Bernice_PlaySkill1025500seq0_1_ko.wav",
-   "select": "Bernice_selected_1_ko.wav"
+   "q": [
+    "Bernice_PlaySkill1025200seq0_1_ko.wav",
+    "Bernice_PlaySkill1025200seq0_2_ko.wav",
+    "Bernice_PlaySkill1025200seq0_3_ko.wav"
+   ],
+   "w": [
+    "Bernice_PlaySkill1025300seq0_1_ko.wav",
+    "Bernice_PlaySkill1025300seq0_2_ko.wav",
+    "Bernice_PlaySkill1025300seq0_3_ko.wav"
+   ],
+   "e": [
+    "Bernice_PlaySkill1025400seq0_1_ko.wav",
+    "Bernice_PlaySkill1025400seq0_2_ko.wav",
+    "Bernice_PlaySkill1025400seq0_3_ko.wav"
+   ],
+   "r": [
+    "Bernice_PlaySkill1025500seq0_1_ko.wav",
+    "Bernice_PlaySkill1025500seq0_2_ko.wav",
+    "Bernice_PlaySkill1025500seq0_3_ko.wav"
+   ],
+   "select": [
+    "Bernice_selected_1_ko.wav",
+    "Bernice_selected2_1_ko.wav",
+    "Bernice_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "Bernice_lost_1_ko.wav",
+    "Bernice_lost_2_ko.wav"
+   ]
   }
  },
  "26": {
   "lang": "kor",
   "zip": "026. Barbara/05. Voice Line - 음성/Barbara_KOR.zip",
   "files": {
-   "q": "Barbara_PlaySkill1026200seq0_1_ko.wav",
-   "w": "Barbara_PlaySkill1026300seq0_1_ko.wav",
-   "e": "Barbara_PlaySkill1026400seq0_1_ko.wav",
-   "r": "Barbara_skillR1_0_4_ko.wav",
-   "select": "Barbara_selected_1_ko.wav"
+   "q": [
+    "Barbara_PlaySkill1026200seq0_1_ko.wav",
+    "Barbara_PlaySkill1026200seq0_2_ko.wav",
+    "Barbara_PlaySkill1026200seq0_3_ko.wav"
+   ],
+   "w": [
+    "Barbara_PlaySkill1026300seq0_1_ko.wav",
+    "Barbara_PlaySkill1026300seq0_2_ko.wav",
+    "Barbara_PlaySkill1026300seq0_3_ko.wav"
+   ],
+   "e": [
+    "Barbara_PlaySkill1026400seq0_1_ko.wav",
+    "Barbara_PlaySkill1026400seq0_2_ko.wav",
+    "Barbara_PlaySkill1026400seq0_3_ko.wav"
+   ],
+   "r": [
+    "Barbara_skillR1_0_4_ko.wav",
+    "Barbara_PlaySkill1026500seq0_1_ko.wav",
+    "Barbara_PlaySkill1026500seq0_2_ko.wav"
+   ],
+   "select": [
+    "Barbara_selected_1_ko.wav",
+    "Barbara_selected2_1_ko.wav",
+    "Barbara_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "Barbara_die_1_ko.wav",
+    "Barbara_die1_0_ko.wav",
+    "Barbara_die1_1_ko.wav"
+   ]
   }
  },
  "27": {
   "lang": "kor",
   "zip": "027. Alex/05. Voice Line/Alex_KOR.zip",
   "files": {
-   "q": "Alex_skillQ1.wav",
-   "w": "Alex_skillW1.wav",
-   "e": "Alex_skillE1_1.wav",
-   "r": "Alex_skillR1.wav",
-   "select": "Alex_selected.wav"
+   "q": [
+    "Alex_skillQ1.wav",
+    "Alex_skillQ2.wav",
+    "Alex_skillQ3_1.wav"
+   ],
+   "w": [
+    "Alex_skillW1.wav",
+    "Alex_skillW2.wav",
+    "Alex_skillW3_1.wav"
+   ],
+   "e": [
+    "Alex_skillE1_1.wav",
+    "Alex_skillE1_2.wav",
+    "Alex_skillE2.wav"
+   ],
+   "r": [
+    "Alex_skillR1.wav",
+    "Alex_skillR2.wav",
+    "Alex_skillR3.wav"
+   ],
+   "select": [
+    "Alex_selected.wav",
+    "Alex_selected_.wav",
+    "Alex_firstMove1.wav"
+   ],
+   "die": [
+    "Alex_die_1.wav",
+    "Alex_die_2.wav",
+    "Alex_die_3.wav"
+   ]
   }
  },
  "28": {
   "lang": "kor",
   "zip": "028. Sua/05. Voice Line/Sua_KOR.zip",
   "files": {
-   "q": "Sua_skillQ1.wav",
-   "w": "Sua_skillW1.wav",
-   "e": "Sua_skillE1.wav",
-   "r": "Sua_skillR1.wav",
-   "select": "Sua_selected.wav"
+   "q": [
+    "Sua_skillQ1.wav",
+    "Sua_skillQ2.wav",
+    "Sua_skillQ3.wav"
+   ],
+   "w": [
+    "Sua_skillW1.wav",
+    "Sua_skillW2.wav",
+    "Sua_skillW3.wav"
+   ],
+   "e": [
+    "Sua_skillE1.wav",
+    "Sua_skillE2.wav",
+    "Sua_skillE3.wav"
+   ],
+   "r": [
+    "Sua_skillR1.wav",
+    "Sua_skillR2.wav",
+    "Sua_skillR3.wav"
+   ],
+   "select": [
+    "Sua_selected.wav",
+    "Sua_firstMove1.wav",
+    "Sua_firstMove2.wav"
+   ],
+   "die": [
+    "Sua_die1.wav",
+    "Sua_die2.wav",
+    "Sua_die3.wav"
+   ]
   }
  },
  "29": {
   "lang": "kor",
   "zip": "029. Leon/05. Voice Line/Leon_KOR.zip",
   "files": {
-   "q": "Leon_PlaySkill1029200seq0_1_ko.wav",
-   "w": "Leon_PlaySkill1029300seq0_1_ko.wav",
-   "e": "Leon_PlaySkill1029400seq0_1_ko.wav",
-   "r": "Leon_PlaySkill1029500seq0_1_ko.wav",
-   "select": "Leon_selected_1_ko.wav"
+   "q": [
+    "Leon_PlaySkill1029200seq0_1_ko.wav",
+    "Leon_PlaySkill1029200seq0_2_ko.wav",
+    "Leon_PlaySkill1029200seq0_3_ko.wav"
+   ],
+   "w": [
+    "Leon_PlaySkill1029300seq0_1_ko.wav",
+    "Leon_PlaySkill1029300seq0_2_ko.wav",
+    "Leon_PlaySkill1029300seq0_3_ko.wav"
+   ],
+   "e": [
+    "Leon_PlaySkill1029400seq0_1_ko.wav",
+    "Leon_PlaySkill1029400seq0_2_ko.wav",
+    "Leon_PlaySkill1029400seq0_3_ko.wav"
+   ],
+   "r": [
+    "Leon_PlaySkill1029500seq0_1_ko.wav",
+    "Leon_PlaySkill1029500seq0_2_ko.wav",
+    "Leon_PlaySkill1029500seq0_3_ko.wav"
+   ],
+   "select": [
+    "Leon_selected_1_ko.wav",
+    "Leon_selected2_1_ko.wav",
+    "Leon_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "Leon_lost_1_ko.wav",
+    "Leon_lost_2_ko.wav"
+   ]
   }
  },
  "30": {
   "lang": "kor",
   "zip": "030. Eleven/05. Voice Line/Eleven_KOR.zip",
   "files": {
-   "q": "Eleven_skillQ1_01.wav",
-   "w": "Eleven_skillW1_01.wav",
-   "e": "Eleven_skillE1_01.wav",
-   "r": "Eleven_skillR1_01.wav",
-   "select": "Eleven_selected_01.wav"
+   "q": [
+    "Eleven_skillQ1_01.wav",
+    "Eleven_skillQ1_02.wav",
+    "Eleven_skillQ1_03.wav"
+   ],
+   "w": [
+    "Eleven_skillW1_01.wav",
+    "Eleven_skillW1_02.wav",
+    "Eleven_skillW2_01.wav"
+   ],
+   "e": [
+    "Eleven_skillE1_01.wav",
+    "Eleven_skillE1_02.wav",
+    "Eleven_skillE2_01.wav"
+   ],
+   "r": [
+    "Eleven_skillR1_01.wav",
+    "Eleven_skillR1_02.wav",
+    "Eleven_skillR2_01.wav"
+   ],
+   "select": [
+    "Eleven_selected_01.wav",
+    "Eleven_selected_02.wav",
+    "Eleven_firstMove1_01.wav"
+   ],
+   "die": [
+    "Eleven_die_01.wav",
+    "Eleven_die_02.wav",
+    "Eleven_die_03.wav"
+   ]
+  }
+ },
+ "31": {
+  "lang": "kor",
+  "zip": "031. Rio/05. Voice Line/Rio_KOR.zip",
+  "files": {
+   "q": [
+    "Rio_targetOn_1_ko.wav",
+    "Rio_targetOn_2_ko.wav",
+    "Rio_attack_1_ko.wav"
+   ],
+   "w": [
+    "Rio_PlaySkill1031300Seq0_1_ko.wav",
+    "Rio_PlaySkill1031300Seq0_2_ko.wav",
+    "Rio_PlaySkill1031300Seq0_3_ko.wav"
+   ],
+   "e": [
+    "Rio_skillE_1_ko.wav",
+    "Rio_skillE_2_ko.wav",
+    "Rio_skillE_3_3_ko.wav"
+   ],
+   "r": [
+    "Rio_skillR_1_ko.wav",
+    "Rio_skillR_2_ko.wav",
+    "Rio_skillR_2_2_ko.wav"
+   ],
+   "select": [
+    "Rio_selected_1_ko.wav",
+    "Rio_selected2_1_ko.wav",
+    "Rio_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "Rio_lost_1_ko.wav",
+    "Rio_hacking_lost_1_ko.wav",
+    "Rio_lost_2_ko.wav"
+   ]
   }
  },
  "32": {
   "lang": "kor",
   "zip": "032. William/05. Voice Line/William_KOR.zip",
   "files": {
-   "q": "William_skillQ1_01.wav",
-   "w": "William_skillW1_01.wav",
-   "e": "William_skillE1_01.wav",
-   "r": "William_skillR1_01.wav",
-   "select": "William_selected_01.wav"
+   "q": [
+    "William_skillQ1_01.wav",
+    "William_skillQ1_02.wav",
+    "William_skillQ2_01.wav"
+   ],
+   "w": [
+    "William_skillW1_01.wav",
+    "William_skillW1_02.wav",
+    "William_skillW2_01.wav"
+   ],
+   "e": [
+    "William_skillE1_01.wav",
+    "William_skillE1_02.wav",
+    "William_skillE2_01.wav"
+   ],
+   "r": [
+    "William_skillR1_01.wav",
+    "William_skillR1_02.wav",
+    "William_skillR2_01.wav"
+   ],
+   "select": [
+    "William_selected_01.wav",
+    "William_firstMove1_01.wav",
+    "William_firstMove2_01.wav"
+   ],
+   "die": [
+    "William_die_01.wav",
+    "William_die_02.wav",
+    "William_die_03.wav"
+   ]
   }
  },
  "33": {
   "lang": "kor",
   "zip": "033. Nicky/05. Voice Line/Nicky_KOR.zip",
   "files": {
-   "q": "Nicky_skillQ_1_01.wav",
-   "w": "Nicky_skillW_1_01.wav",
-   "e": "Nicky_skillE_1_01.wav",
-   "r": "Nicky_skillR_1_01.wav",
-   "select": "Nicky_selected_1_01.wav"
+   "q": [
+    "Nicky_skillQ_1_01.wav",
+    "Nicky_skillQ_1_02.wav",
+    "Nicky_skillQ_2_01.wav"
+   ],
+   "w": [
+    "Nicky_skillW_1_01.wav",
+    "Nicky_skillW_1_02.wav",
+    "Nicky_skillW_2_01.wav"
+   ],
+   "e": [
+    "Nicky_skillE_1_01.wav",
+    "Nicky_skillE_1_02.wav",
+    "Nicky_skillE_2_01.wav"
+   ],
+   "r": [
+    "Nicky_skillR_1_01.wav",
+    "Nicky_skillR_1_02.wav",
+    "Nicky_skillR_2_01.wav"
+   ],
+   "select": [
+    "Nicky_selected_1_01.wav",
+    "Nicky_firstMove_1_01.wav",
+    "Nicky_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Nicky_die_01.wav",
+    "Nicky_die_02.wav",
+    "Nicky_die_03.wav"
+   ]
   }
  },
  "34": {
   "lang": "kor",
   "zip": "034. Nathapon/05. Voice Line/Nathapon_KOR.zip",
   "files": {
-   "q": "Nathapon_skillQ_1_01.wav",
-   "w": "Nathapon_skillW_1_01.wav",
-   "e": "Nathapon_skillE_1_01.wav",
-   "r": "Nathapon_skillR_1_01.wav",
-   "select": "Nathapon_selected_1_01.wav"
+   "q": [
+    "Nathapon_skillQ_1_01.wav",
+    "Nathapon_skillQ_1_02.wav",
+    "Nathapon_skillQ_2_01.wav"
+   ],
+   "w": [
+    "Nathapon_skillW_1_01.wav",
+    "Nathapon_skillW_1_02.wav",
+    "Nathapon_skillW_1_03.wav"
+   ],
+   "e": [
+    "Nathapon_skillE_1_01.wav",
+    "Nathapon_skillE_1-1_01.wav",
+    "Nathapon_skillE_1-1_02.wav"
+   ],
+   "r": [
+    "Nathapon_skillR_1_01.wav",
+    "Nathapon_skillR_1_02.wav",
+    "Nathapon_skillR_1_03.wav"
+   ],
+   "select": [
+    "Nathapon_selected_1_01.wav",
+    "Nathapon_firstMove_1_01.wav",
+    "Nathapon_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Nathapon_die_01.wav",
+    "Nathapon_die_02.wav",
+    "Nathapon_die_03.wav"
+   ]
   }
  },
  "35": {
   "lang": "kor",
   "zip": "035. Jan/05. Voice Line/Jan_KOR.zip",
   "files": {
-   "q": "Jan_skillQ_1_01.wav",
-   "w": "Jan_skillW_1_01.wav",
-   "e": "Jan_skillE_1_01.wav",
-   "r": "Jan_skillR_1_01.wav",
-   "select": "Jan_selected_1_01.wav"
+   "q": [
+    "Jan_skillQ_1_01.wav",
+    "Jan_skillQ_1_02.wav",
+    "Jan_skillQ_2_01.wav"
+   ],
+   "w": [
+    "Jan_skillW_1_01.wav",
+    "Jan_skillW_1_02.wav",
+    "Jan_skillW_1_03.wav"
+   ],
+   "e": [
+    "Jan_skillE_1_01.wav",
+    "Jan_skillE_1_02.wav",
+    "Jan_skillE_2_01.wav"
+   ],
+   "r": [
+    "Jan_skillR_1_01.wav",
+    "Jan_skillR_1_02.wav",
+    "Jan_skillR_1_03.wav"
+   ],
+   "select": [
+    "Jan_selected_1_01.wav",
+    "Jan_firstMove_1_01.wav",
+    "Jan_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Jan_die_1_01.wav",
+    "Jan_die_1_02.wav",
+    "Jan_die_2_01.wav"
+   ]
   }
  },
  "36": {
   "lang": "kor",
   "zip": "036. Eva/05. Voice Line/Eva_KOR.zip",
   "files": {
-   "q": "EVA_skillQ1_01.wav",
-   "w": "EVA_skillW1_01.wav",
-   "e": "EVA_skillE1_01.wav",
-   "r": "EVA_skillR1_01.wav",
-   "select": "EVA_selected_1_01.wav"
+   "q": [
+    "EVA_skillQ1_01.wav",
+    "EVA_skillQ2_01.wav",
+    "EVA_skillQ3_01.wav"
+   ],
+   "w": [
+    "EVA_skillW1_01.wav",
+    "EVA_skillW1_02.wav",
+    "EVA_skillW2_01.wav"
+   ],
+   "e": [
+    "EVA_skillE1_01.wav",
+    "EVA_skillE2_01.wav",
+    "EVA_skillE3_01.wav"
+   ],
+   "r": [
+    "EVA_skillR1_01.wav",
+    "EVA_skillR1_02.wav",
+    "EVA_skillR2_01.wav"
+   ],
+   "select": [
+    "EVA_selected_1_01.wav",
+    "EVA_selected_1_02.wav",
+    "EVA_selected_1_03.wav"
+   ],
+   "die": [
+    "EVA_die_01.wav",
+    "EVA_die_02.wav",
+    "EVA_die_03.wav"
+   ]
   }
  },
  "37": {
   "lang": "kor",
   "zip": "037. Daniel/05. Voice Line/Daniel_KOR.zip",
   "files": {
-   "q": "Daniel_skillQ1_01.wav",
-   "w": "Daniel_skillW1_01.wav",
-   "e": "Daniel_skillE_01.wav",
-   "r": "Daniel_skillR1_01.wav",
-   "select": "Daniel_selected_1_01.wav"
+   "q": [
+    "Daniel_skillQ1_01.wav",
+    "Daniel_skillQ1_02.wav",
+    "Daniel_skillQ2_01.wav"
+   ],
+   "w": [
+    "Daniel_skillW1_01.wav",
+    "Daniel_skillW2_01.wav",
+    "Daniel_skillW3_01.wav"
+   ],
+   "e": [
+    "Daniel_skillE_01.wav",
+    "Daniel_skillE_02.wav",
+    "Daniel_skillE_03.wav"
+   ],
+   "r": [
+    "Daniel_skillR1_01.wav",
+    "Daniel_skillR1_02.wav",
+    "Daniel_skillR2_01.wav"
+   ],
+   "select": [
+    "Daniel_selected_1_01.wav",
+    "Daniel_firstMove_1_01.wav",
+    "Daniel_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Daniel_die_01.wav",
+    "Daniel_die_02.wav",
+    "Daniel_die_03.wav"
+   ]
   }
  },
  "38": {
   "lang": "kor",
   "zip": "038. Jenny/05. Voice Line/Jenny_KOR.zip",
   "files": {
-   "q": "Jenny_skillQ_1-1_01.wav",
-   "w": "Jenny_skillW_1_01.wav",
-   "e": "Jenny_skillE_1-1_01.wav",
-   "r": "Jenny_skillR_1_01.wav",
-   "select": "Jenny_selected_1_01.wav"
+   "q": [
+    "Jenny_skillQ_1-1_01.wav",
+    "Jenny_skillQ_1-2_01.wav",
+    "Jenny_skillQ_2-1_01.wav"
+   ],
+   "w": [
+    "Jenny_skillW_1_01.wav",
+    "Jenny_skillW_1-1_01.wav",
+    "Jenny_skillW_1-2_01.wav"
+   ],
+   "e": [
+    "Jenny_skillE_1-1_01.wav",
+    "Jenny_skillE_1-2_01.wav",
+    "Jenny_skillE_2-1_01.wav"
+   ],
+   "r": [
+    "Jenny_skillR_1_01.wav",
+    "Jenny_skillR_1_02.wav",
+    "Jenny_skillR_2_01.wav"
+   ],
+   "select": [
+    "Jenny_selected_1_01.wav",
+    "Jenny_firstMove_1_01.wav",
+    "Jenny_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Jenny_die_01.wav",
+    "Jenny_die_02.wav",
+    "Jenny_die_03.wav"
+   ]
   }
  },
  "39": {
   "lang": "kor",
   "zip": "039. Camilo/05. Voice Line/Camilo_KOR.zip",
   "files": {
-   "q": "Camilo_skillQ1-1_01.wav",
-   "w": "Camilo_skillW1_01.wav",
-   "e": "Camilo_skillE1-1_01.wav",
-   "r": "Camilo_skillR1_01.wav",
-   "select": "Camilo_selected_1_01.wav"
+   "q": [
+    "Camilo_skillQ1-1_01.wav",
+    "Camilo_skillQ1-1_02.wav",
+    "Camilo_skillQ1-2_01.wav"
+   ],
+   "w": [
+    "Camilo_skillW1_01.wav",
+    "Camilo_skillW2_01.wav",
+    "Camilo_skillW2_02.wav"
+   ],
+   "e": [
+    "Camilo_skillE1-1_01.wav",
+    "Camilo_skillE1-1_02.wav",
+    "Camilo_skillE1-2_01.wav"
+   ],
+   "r": [
+    "Camilo_skillR1_01.wav",
+    "Camilo_skillR1_02.wav",
+    "Camilo_skillR1_03.wav"
+   ],
+   "select": [
+    "Camilo_selected_1_01.wav",
+    "Camilo_firstMove_1_01.wav",
+    "Camilo_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Camilo_die_01.wav",
+    "Camilo_die_02.wav",
+    "Camilo_die_03.wav"
+   ]
   }
  },
  "40": {
   "lang": "kor",
   "zip": "040. Chloe/05. Voice Line/Chloe_KOR.zip",
   "files": {
-   "q": "Chloe_skillQ1_01.wav",
-   "w": "Chloe_skillW1_1_01.wav",
-   "e": "Chloe_skillE1_01.wav",
-   "r": "Chloe_skillR1_01.wav",
-   "select": "Chloe_selected_1_01.wav"
+   "q": [
+    "Chloe_skillQ1_01.wav",
+    "Chloe_skillQ1_02.wav",
+    "Chloe_skillQ1_03.wav"
+   ],
+   "w": [
+    "Chloe_skillW1_1_01.wav",
+    "Chloe_skillW1_1_02.wav",
+    "Chloe_skillW1_2_01.wav"
+   ],
+   "e": [
+    "Chloe_skillE1_01.wav",
+    "Chloe_skillE2_01.wav",
+    "Chloe_skillE3_01.wav"
+   ],
+   "r": [
+    "Chloe_skillR1_01.wav",
+    "Chloe_skillR1_02.wav",
+    "Chloe_skillR2_01.wav"
+   ],
+   "select": [
+    "Chloe_selected_1_01.wav",
+    "Chloe_selected_1_02.wav",
+    "Chloe_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Chloe_die_01.wav",
+    "Chloe_die_02.wav",
+    "Chloe_die_03.wav"
+   ]
   }
  },
  "41": {
   "lang": "kor",
   "zip": "041. Johann/05. Voice Line/Johann_KOR.zip",
   "files": {
-   "q": "Johann_skillQ1_01.wav",
-   "w": "Johann_skillW1_01.wav",
-   "e": "Johann_skillE1-1_01.wav",
-   "r": "Johann_skillR1_01.wav",
-   "select": "Johann_selected_1_01.wav"
+   "q": [
+    "Johann_skillQ1_01.wav",
+    "Johann_skillQ2_01.wav",
+    "Johann_skillQ3_01.wav"
+   ],
+   "w": [
+    "Johann_skillW1_01.wav",
+    "Johann_skillW2_01.wav",
+    "Johann_skillW3_01.wav"
+   ],
+   "e": [
+    "Johann_skillE1-1_01.wav",
+    "Johann_skillE1-2_01.wav",
+    "Johann_skillE2-1_01.wav"
+   ],
+   "r": [
+    "Johann_skillR1_01.wav",
+    "Johann_skillR2_01.wav",
+    "Johann_skillR3_01.wav"
+   ],
+   "select": [
+    "Johann_selected_1_01.wav",
+    "Johann_selected_1_02.wav",
+    "Johann_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Johann_die_01.wav",
+    "Johann_die_02.wav",
+    "Johann_die_03.wav"
+   ]
   }
  },
  "42": {
   "lang": "kor",
   "zip": "042. Bianca/05. Voice Line/Bianca_KOR.zip",
   "files": {
-   "q": "Bianca_skillQ_1_01.wav",
-   "w": "Bianca_skillW_1_01.wav",
-   "e": "Bianca_skillE1_1_01.wav",
-   "r": "Bianca_skillR_1_01.wav",
-   "select": "Bianca_selected_1_01.wav"
+   "q": [
+    "Bianca_skillQ_1_01.wav",
+    "Bianca_skillQ_1_02.wav",
+    "Bianca_skillQ_2_01.wav"
+   ],
+   "w": [
+    "Bianca_skillW_1_01.wav",
+    "Bianca_skillW_2_01.wav",
+    "Bianca_skillW_3_01.wav"
+   ],
+   "e": [
+    "Bianca_skillE1_1_01.wav",
+    "Bianca_skillE1_2_01.wav",
+    "Bianca_skillE1_3_01.wav"
+   ],
+   "r": [
+    "Bianca_skillR_1_01.wav",
+    "Bianca_skillR_1_02.wav",
+    "Bianca_skillR_1_03.wav"
+   ],
+   "select": [
+    "Bianca_selected_1_01.wav",
+    "Bianca_selected_1_02.wav",
+    "Bianca_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Bianca_die_01.wav",
+    "Bianca_die_02.wav",
+    "Bianca_die_03.wav"
+   ]
   }
  },
  "43": {
   "lang": "kor",
   "zip": "043. Celine/05. Voice Line/Celine_KOR.zip",
   "files": {
-   "q": "Celine_skillQ1.wav",
-   "w": "Celine_skillW1_01.wav",
-   "e": "Celine_skillE1_01.wav",
-   "r": "Celine_skillR1_01.wav",
-   "select": "Celine_selected_1.wav"
+   "q": [
+    "Celine_skillQ1.wav",
+    "Celine_skillQ2.wav",
+    "Celine_skillQ3.wav"
+   ],
+   "w": [
+    "Celine_skillW1_01.wav",
+    "Celine_skillW1_02.wav",
+    "Celine_skillW1_03.wav"
+   ],
+   "e": [
+    "Celine_skillE1_01.wav",
+    "Celine_skillE1_02.wav",
+    "Celine_skillE2_01.wav"
+   ],
+   "r": [
+    "Celine_skillR1_01.wav",
+    "Celine_skillR1_02.wav",
+    "Celine_skillR2_1.wav"
+   ],
+   "select": [
+    "Celine_selected_1.wav",
+    "Celine_firstMove_1.wav",
+    "Celine_firstMove_2.wav"
+   ],
+   "die": [
+    "Celine_die1.wav",
+    "Celine_die2.wav",
+    "Celine_die3.wav"
+   ]
   }
  },
  "44": {
   "lang": "kor",
   "zip": "044. Echion/05. Voice Line/Echion_KOR.zip",
   "files": {
-   "q": "Echion_skillQ1_01.wav",
-   "w": "Echion_skillW1_01.wav",
-   "e": "Echion_skillE1_01.wav",
-   "r": "Echion_skillR_1 (폭주)_01.wav",
-   "select": "Echion_selected_1_01.wav"
+   "q": [
+    "Echion_skillQ1_01.wav",
+    "Echion_skillQ1_02.wav",
+    "Echion_skillQ2_01.wav"
+   ],
+   "w": [
+    "Echion_skillW1_01.wav",
+    "Echion_skillW1_02.wav",
+    "Echion_skillW1_03.wav"
+   ],
+   "e": [
+    "Echion_skillE1_01.wav",
+    "Echion_skillE1_02.wav",
+    "Echion_skillE1_03.wav"
+   ],
+   "r": [
+    "Echion_skillR_1 (폭주)_01.wav",
+    "Echion_skillR1_1 (대쉬)_01.wav",
+    "Echion_skillR1_1 (대쉬)_02.wav"
+   ],
+   "select": [
+    "Echion_selected_1_01.wav",
+    "Echion_firstMove_1_01.wav",
+    "Echion_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Echion_die_01.wav",
+    "Echion_die_02.wav",
+    "Echion_die_03.wav"
+   ]
   }
  },
  "45": {
   "lang": "kor",
   "zip": "045. Mai/05. Voice Line/Mai_KOR.zip",
   "files": {
-   "q": "Mai_skillQ1_01.wav",
-   "w": "Mai_skillW1_01.wav",
-   "e": "Mai_skillE1_01.wav",
-   "r": "Mai_skillR_laugh_01.wav",
-   "select": "Mai_selected_1_01.wav"
+   "q": [
+    "Mai_skillQ1_01.wav",
+    "Mai_skillQ1_02.wav",
+    "Mai_skillQ2_01.wav"
+   ],
+   "w": [
+    "Mai_skillW1_01.wav",
+    "Mai_skillW1_02.wav",
+    "Mai_skillW2_01.wav"
+   ],
+   "e": [
+    "Mai_skillE1_01.wav",
+    "Mai_skillE1_1_01.wav",
+    "Mai_skillE1_1_02.wav"
+   ],
+   "r": [
+    "Mai_skillR_laugh_01.wav",
+    "Mai_skillR_1_01.wav",
+    "Mai_skillR_1_02.wav"
+   ],
+   "select": [
+    "Mai_selected_1_01.wav",
+    "Mai_firstMove_1_01.wav",
+    "Mai_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Mai_die_01.wav",
+    "Mai_die_02.wav",
+    "Mai_die_03.wav"
+   ]
   }
  },
  "46": {
   "lang": "kor",
   "zip": "046. Aiden/05. Voice Line/Aiden_KOR.zip",
   "files": {
-   "w": "Aiden_skillW1_01.wav",
-   "e": "Aiden_skillE1_01.wav",
-   "r": "Aiden_skillR_1_01.wav",
-   "select": "Aiden_selected_1_01.wav"
+   "q": [
+    "Aiden_targetOn_1_01.wav",
+    "Aiden_targetOn_2_01.wav",
+    "Aiden_attack_01.wav"
+   ],
+   "w": [
+    "Aiden_skillW1_01.wav",
+    "Aiden_skillW1_02.wav",
+    "Aiden_skillW1_03.wav"
+   ],
+   "e": [
+    "Aiden_skillE1_01.wav",
+    "Aiden_skillE1-2_01.wav",
+    "Aiden_skillE2_01.wav"
+   ],
+   "r": [
+    "Aiden_skillR_1_01.wav",
+    "Aiden_skillR_1-2_01.wav",
+    "Aiden_skillR_2_01.wav"
+   ],
+   "select": [
+    "Aiden_selected_1_01.wav",
+    "Aiden_firstMove_1_01.wav",
+    "Aiden_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Aiden_die_01.wav",
+    "Aiden_die_02.wav",
+    "Aiden_die_03.wav"
+   ]
   }
  },
  "47": {
   "lang": "kor",
   "zip": "047. Laura/05. Voice Line/Laura_KOR.zip",
   "files": {
-   "q": "Laura_skillQ1_01.wav",
-   "w": "Laura_skillW1_01.wav",
-   "e": "Laura_skillE1_01.wav",
-   "r": "Laura_skillR1_01.wav",
-   "select": "Laura_selected_1_01.wav"
+   "q": [
+    "Laura_skillQ1_01.wav",
+    "Laura_skillQ1_02.wav",
+    "Laura_skillQ1_2_01.wav"
+   ],
+   "w": [
+    "Laura_skillW1_01.wav",
+    "Laura_skillW1_2_01.wav",
+    "Laura_skillW2_01.wav"
+   ],
+   "e": [
+    "Laura_skillE1_01.wav",
+    "Laura_skillE1_02.wav",
+    "Laura_skillE2_01.wav"
+   ],
+   "r": [
+    "Laura_skillR1_01.wav",
+    "Laura_skillR1_02.wav",
+    "Laura_skillR1_2_01.wav"
+   ],
+   "select": [
+    "Laura_selected_1_01.wav",
+    "Laura_selected_1_02.wav",
+    "Laura_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Laura_die_01.wav",
+    "Laura_die_02.wav",
+    "Laura_die_03.wav"
+   ]
   }
  },
  "48": {
   "lang": "kor",
   "zip": "048. Tia/05. Voice Line/Tia_KOR.zip",
   "files": {
-   "q": "Tia_skillQ1_1_01.wav",
-   "w": "Tia_skillW1_01.wav",
-   "e": "Tia_skillE1_01.wav",
-   "r": "Tia_skillR_1_01.wav",
-   "select": "Tia_selected_1_01.wav"
+   "q": [
+    "Tia_skillQ1_1_01.wav",
+    "Tia_skillQ1_1_02.wav",
+    "Tia_skillQ1_1_03.wav"
+   ],
+   "w": [
+    "Tia_skillW1_01.wav",
+    "Tia_skillW2_01.wav",
+    "Tia_skillW3_01.wav"
+   ],
+   "e": [
+    "Tia_skillE1_01.wav",
+    "Tia_skillE1_02.wav",
+    "Tia_skillE2_01.wav"
+   ],
+   "r": [
+    "Tia_skillR_1_01.wav",
+    "Tia_skillR_1_02.wav",
+    "Tia_skillR_1_03.wav"
+   ],
+   "select": [
+    "Tia_selected_1_01.wav",
+    "Tia_firstMove_1_01.wav",
+    "Tia_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Tia_die1_01.wav",
+    "Tia_die1_02.wav",
+    "Tia_die1_03.wav"
+   ]
   }
  },
  "49": {
   "lang": "kor",
   "zip": "049. Felix/05. Volce Line/Felix_KOR.zip",
   "files": {
-   "q": "Felix_skillQ3.wav",
-   "w": "Felix_skillW1.wav",
-   "e": "Felix_skillE3.wav",
-   "r": "Felix_skillR_1.wav",
-   "select": "Felix_selected_1.wav"
+   "q": [
+    "Felix_skillQ3.wav",
+    "Felix_skillQ3_1.wav",
+    "Felix_skillQ3_01.wav"
+   ],
+   "w": [
+    "Felix_skillW1.wav",
+    "Felix_skillW1_1.wav",
+    "Felix_skillW2.wav"
+   ],
+   "e": [
+    "Felix_skillE3.wav",
+    "Felix_skillE3_1.wav",
+    "Felix_skillE3_1-1.wav"
+   ],
+   "r": [
+    "Felix_skillR_1.wav",
+    "Felix_skillR_1_1.wav",
+    "Felix_skillR_1_01.wav"
+   ],
+   "select": [
+    "Felix_selected_1.wav",
+    "Felix_selected_1_01.wav",
+    "Felix_selected_1_02.wav"
+   ],
+   "die": [
+    "Felix_die1.wav",
+    "Felix_die1_01.wav",
+    "Felix_die2.wav"
+   ]
+  }
+ },
+ "50": {
+  "lang": "kor",
+  "zip": "050. Elena/05. Voice Line/Elena_KOR.zip",
+  "files": {
+   "q": [
+    "Elena_skillQ1_01.wav",
+    "Elena_skillQ1_02.wav",
+    "Elena_skillQ1_03.wav"
+   ],
+   "w": [
+    "Elena_skillW1_01.wav",
+    "Elena_skillW2_01.wav",
+    "Elena_skillW3_01.wav"
+   ],
+   "e": [
+    "Elena_skillE1_01.wav",
+    "Elena_skillE2_01.wav",
+    "Elena_skillE3_01.wav"
+   ],
+   "r": [
+    "Elena_skillR1_01.wav",
+    "Elena_skillR1_02.wav",
+    "Elena_skillR1_03.wav"
+   ],
+   "select": [
+    "Elena_selected_1_01.wav",
+    "Elena_firstMove_1_01.wav",
+    "Elena_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Elena_die_01.wav",
+    "Elena_die_02.wav",
+    "Elena_die_03.wav"
+   ]
   }
  },
  "51": {
   "lang": "kor",
   "zip": "051. Priya/05. Voice Line/Priya_KOR.zip",
   "files": {
-   "q": "Priya_skillQ1_01.wav",
-   "w": "Priya_skillW1_01.wav",
-   "e": "Priya_skillE1_01.wav",
-   "r": "Priya_skillR1_01.wav",
-   "select": "Priya_selected_1_01.wav"
+   "q": [
+    "Priya_skillQ1_01.wav",
+    "Priya_skillQ1_02.wav",
+    "Priya_skillQ1_03.wav"
+   ],
+   "w": [
+    "Priya_skillW1_01.wav",
+    "Priya_skillW1_02.wav",
+    "Priya_skillW1_03.wav"
+   ],
+   "e": [
+    "Priya_skillE1_01.wav",
+    "Priya_skillE2_01.wav",
+    "Priya_skillE3_01.wav"
+   ],
+   "r": [
+    "Priya_skillR1_01.wav",
+    "Priya_skillR1_02.wav",
+    "Priya_skillR2_01.wav"
+   ],
+   "select": [
+    "Priya_selected_1_01.wav",
+    "Priya_firstMove_1_01.wav",
+    "Priya_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Priya_die1_01.wav",
+    "Priya_die1_02.wav",
+    "Priya_die1_03.wav"
+   ]
   }
  },
  "52": {
   "lang": "kor",
   "zip": "052. Adina/05. Voice Line/Adina_KOR.zip",
   "files": {
-   "q": "Adina_skillQ1_01.wav",
-   "w": "Adina_skillW1_01.wav",
-   "e": "Adina_skillE1_01.wav",
-   "r": "Adina_skillR1_01.wav",
-   "select": "Adina_selected_1_01.wav"
+   "q": [
+    "Adina_skillQ1_01.wav",
+    "Adina_skillQ2_01.wav",
+    "Adina_skillQ3_01.wav"
+   ],
+   "w": [
+    "Adina_skillW1_01.wav",
+    "Adina_skillW2_01.wav",
+    "Adina_skillW2_02.wav"
+   ],
+   "e": [
+    "Adina_skillE1_01.wav",
+    "Adina_skillE2_01.wav",
+    "Adina_skillE3_01.wav"
+   ],
+   "r": [
+    "Adina_skillR1_01.wav",
+    "Adina_skillR1_02.wav",
+    "Adina_skillR1_03.wav"
+   ],
+   "select": [
+    "Adina_selected_1_01.wav",
+    "Adina_firstMove_1_01.wav",
+    "Adina_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Adina_die1_01.wav",
+    "Adina_die1_02.wav",
+    "Adina_die1_03.wav"
+   ]
   }
  },
  "53": {
   "lang": "kor",
   "zip": "053. Markus/05. Voice Line/Markus_KOR.zip",
   "files": {
-   "q": "Markus_skillQ1_01.wav",
-   "w": "Markus_skillW1_01.wav",
-   "e": "Markus_skillE1_01.wav",
-   "r": "Markus_skillR1_01.wav",
-   "select": "Markus_selected_1_01.wav"
+   "q": [
+    "Markus_skillQ1_01.wav",
+    "Markus_skillQ2_01.wav",
+    "Markus_skillQ3_01.wav"
+   ],
+   "w": [
+    "Markus_skillW1_01.wav",
+    "Markus_skillW1(강화)_01.wav",
+    "Markus_skillW1(강화)_02.wav"
+   ],
+   "e": [
+    "Markus_skillE1_01.wav",
+    "Markus_skillE1(강화)_01.wav",
+    "Markus_skillE1_02.wav"
+   ],
+   "r": [
+    "Markus_skillR1_01.wav",
+    "Markus_skillR2_01.wav",
+    "Markus_skillR3_01.wav"
+   ],
+   "select": [
+    "Markus_selected_1_01.wav",
+    "Markus_firstMove_1_01.wav",
+    "Markus_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Markus_die1_01.wav",
+    "Markus_die1_02.wav",
+    "Markus_die1_03.wav"
+   ]
   }
  },
  "54": {
   "lang": "kor",
   "zip": "054. Karla/05. Voice Line/Karla_KOR.zip",
   "files": {
-   "q": "Karla_skillQ1-1_01.wav",
-   "w": "Karla_skillW1-1_01.wav",
-   "e": "Karla_skillE1_01.wav",
-   "r": "Karla_skillR1_01.wav",
-   "select": "Karla_selected_1_01.wav"
+   "q": [
+    "Karla_skillQ1-1_01.wav",
+    "Karla_skillQ1-2_01.wav",
+    "Karla_skillQ2-1_01.wav"
+   ],
+   "w": [
+    "Karla_skillW1-1_01.wav",
+    "Karla_skillW1-2_01.wav",
+    "Karla_skillW2-1_01.wav"
+   ],
+   "e": [
+    "Karla_skillE1_01.wav",
+    "Karla_skillE2_01.wav",
+    "Karla_skillE3_01.wav"
+   ],
+   "r": [
+    "Karla_skillR1_01.wav",
+    "Karla_skillR2_01.wav",
+    "Karla_skillR2_02.wav"
+   ],
+   "select": [
+    "Karla_selected_1_01.wav",
+    "Karla_firstMove_1_01.wav",
+    "Karla_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Karla_die1_01.wav",
+    "Karla_die1_02.wav",
+    "Karla_die1_03.wav"
+   ]
+  }
+ },
+ "55": {
+  "lang": "kor",
+  "zip": "055. Estelle/05. Voice Line/Estelle_KOR.zip",
+  "files": {
+   "q": [
+    "Estelle_skillQ1-1_01.wav",
+    "Estelle_skillQ1-1_02.wav",
+    "Estelle_skillQ1-1_03.wav"
+   ],
+   "w": [
+    "Estelle_skillW1-1_01.wav",
+    "Estelle_skillW1-1_02.wav",
+    "Estelle_skillW1-1_03.wav"
+   ],
+   "e": [
+    "Estelle_skillE1-solo-1_01.wav",
+    "Estelle_skillE1-friend-1_01.wav",
+    "Estelle_skillE1-soloHit-1_01.wav"
+   ],
+   "r": [
+    "Estelle_skillR-solo-1_01.wav",
+    "Estelle_skillR-global-1_01.wav",
+    "Estelle_skillR-globalEnd-1_01.wav"
+   ],
+   "select": [
+    "Estelle_selected_1_01.wav",
+    "Estelle_selected_1_02.wav",
+    "Estelle_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Estelle_die1_01.wav",
+    "Estelle_die1_02.wav",
+    "Estelle_die1_03.wav"
+   ]
   }
  },
  "56": {
   "lang": "kor",
   "zip": "056. Piolo/05. Voice Line/Piolo_KOR.zip",
   "files": {
-   "q": "Piolo_skillQ1-1_01.wav",
-   "w": "Piolo_skillW1-1_01.wav",
-   "e": "Piolo_skillE1-1_01.wav",
-   "r": "Piolo_skillR1_01.wav",
-   "select": "Piolo_selected_1_01.wav"
+   "q": [
+    "Piolo_skillQ1-1_01.wav",
+    "Piolo_skillQ1-1_02.wav",
+    "Piolo_skillQ1-1_03.wav"
+   ],
+   "w": [
+    "Piolo_skillW1-1_01.wav",
+    "Piolo_skillW1-1_02.wav",
+    "Piolo_skillW1-1_03.wav"
+   ],
+   "e": [
+    "Piolo_skillE1-1_01.wav",
+    "Piolo_skillE1-1_02.wav",
+    "Piolo_skillE1-2_01.wav"
+   ],
+   "r": [
+    "Piolo_skillR1_01.wav",
+    "Piolo_skillR1_02.wav",
+    "Piolo_skillR1_03.wav"
+   ],
+   "select": [
+    "Piolo_selected_1_01.wav",
+    "Piolo_selected_1_02.wav",
+    "Piolo_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Piolo_die1_01.wav",
+    "Piolo_die1_02.wav",
+    "Piolo_die2_01.wav"
+   ]
   }
  },
  "57": {
-  "lang": "eng",
-  "zip": "057. Martina/05. Voice Line/Martina_ENG.zip",
+  "lang": "kor",
+  "zip": "057. Martina/05. Voice Line/Martina_KOR.zip",
   "files": {
-   "q": "Martina_skillQ1_1.wav",
-   "w": "Martina_skillW1_1.wav",
-   "e": "Martina_skillE1_1.wav",
-   "r": "Martina_skillR1_2.wav",
-   "select": "Martina_selected_1.wav"
+   "q": [
+    "Martina_skillQ1_1_01.wav",
+    "Martina_skillQ1_1_02.wav",
+    "Martina_skillQ1_2_01.wav"
+   ],
+   "w": [
+    "Martina_skillW1_1_01.wav",
+    "Martina_skillW1_1_02.wav",
+    "Martina_skillW2_1_01.wav"
+   ],
+   "e": [
+    "Martina_skillE1_1_01.wav",
+    "Martina_skillE1_1_02.wav",
+    "Martina_skillE1_1_03.wav"
+   ],
+   "r": [
+    "Martina_skillR1_1_01.wav",
+    "Martina_skillR1_1_02.wav",
+    "Martina_skillR1_2_01.wav"
+   ],
+   "select": [
+    "Martina_selected_1_01.wav",
+    "Martina_firstMove_1_01.wav",
+    "Martina_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Martina_die1_01.wav",
+    "Martina_die1_02.wav",
+    "Martina_die1_03.wav"
+   ]
+  }
+ },
+ "58": {
+  "lang": "kor",
+  "zip": "058. Haze/05. Voice Line/Haze_KOR.zip",
+  "files": {
+   "q": [
+    "Haze_skillQ1_01.wav",
+    "Haze_skillQ2_01.wav",
+    "Haze_skillQ3_01.wav"
+   ],
+   "w": [
+    "Haze_skillW1_01.wav",
+    "Haze_skillW2_01.wav",
+    "Haze_skillW3_01.wav"
+   ],
+   "e": [
+    "Haze_skillE1_01.wav",
+    "Haze_skillEQ1_01.wav",
+    "Haze_skillE2_01.wav"
+   ],
+   "r": [
+    "Haze_skillR1_01.wav",
+    "Haze_skillRQ1_01.wav",
+    "Haze_skillR1_02.wav"
+   ],
+   "select": [
+    "Haze_selected_1_01.wav",
+    "Haze_selected_1_02.wav",
+    "Haze_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Haze_die1_01.wav",
+    "Haze_die2_01.wav",
+    "Haze_die3_01.wav"
+   ]
+  }
+ },
+ "59": {
+  "lang": "kor",
+  "zip": "059. Isaac/05. Voice Line/Isaac_KOR.zip",
+  "files": {
+   "q": [
+    "Isaac_skillQ1_01.wav",
+    "Isaac_skillQ2_01.wav",
+    "Isaac_skillQ3_01.wav"
+   ],
+   "w": [
+    "Isaac_skillW1_01.wav",
+    "Isaac_skillW2_01.wav",
+    "Isaac_skillW3_01.wav"
+   ],
+   "e": [
+    "Isaac_skillE1_01.wav",
+    "Isaac_skillE2_01.wav",
+    "Isaac_skillE3_01.wav"
+   ],
+   "r": [
+    "Isaac_skillR1_01.wav",
+    "Isaac_skillR1_02.wav",
+    "Isaac_skillR2_01.wav"
+   ],
+   "select": [
+    "Isaac_selected_1_01.wav",
+    "Isaac_selected_1_02.wav",
+    "Isaac_selected_1_03.wav"
+   ],
+   "die": [
+    "Isaac_die1_01.wav",
+    "Isaac_die1_02.wav",
+    "Isaac_die1_03.wav"
+   ]
+  }
+ },
+ "60": {
+  "lang": "kor",
+  "zip": "060. Tazia/05. Voice Line/Tazia_KOR.zip",
+  "files": {
+   "q": [
+    "Tazia_skillQ1_01.wav",
+    "Tazia_skillQ1_02.wav",
+    "Tazia_skillQ1_03.wav"
+   ],
+   "w": [
+    "Tazia_skillW1_01.wav",
+    "Tazia_skillW1_02.wav",
+    "Tazia_skillW2_01.wav"
+   ],
+   "e": [
+    "Tazia_skillE1_01.wav",
+    "Tazia_skillE1_02.wav",
+    "Tazia_skillE1_03.wav"
+   ],
+   "r": [
+    "Tazia_skillR1_01.wav",
+    "Tazia_skillR1_02.wav",
+    "Tazia_skillR1_03.wav"
+   ],
+   "select": [
+    "Tazia_selected_1_01.wav",
+    "Tazia_selected_1_02.wav",
+    "Tazia_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Tazia_die1_01.wav",
+    "Tazia_die1_02.wav",
+    "Tazia_die1_03.wav"
+   ]
+  }
+ },
+ "61": {
+  "lang": "kor",
+  "zip": "061. Irem/05. Voice Line/Irem_KOR.zip",
+  "files": {
+   "q": [
+    "Irem_skillQ1_01.wav",
+    "Irem_skillQ1_02.wav",
+    "Irem_skillQ1_03.wav"
+   ],
+   "w": [
+    "Irem_skillW1_01.wav",
+    "Irem_skillW1_02.wav",
+    "Irem_skillW1_03.wav"
+   ],
+   "e": [
+    "Irem_skillE1_01.wav",
+    "Irem_skillE1_02.wav",
+    "Irem_skillE1_03.wav"
+   ],
+   "r": [
+    "Irem_skillR2_01.wav",
+    "Irem_skillR2_02.wav",
+    "Irem_skillR2_03.wav"
+   ],
+   "select": [
+    "Irem_selected_1_01.wav",
+    "Irem_selected_1_02.wav",
+    "Irem_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Irem_lost_1_01.wav",
+    "Irem_hacking_lost_1_01.wav",
+    "Irem_lost_2_01.wav"
+   ]
+  }
+ },
+ "62": {
+  "lang": "kor",
+  "zip": "062. Theodore/05. Voice Line/Theodore_KOR.zip",
+  "files": {
+   "q": [
+    "Theodore_skillQ1_01.wav",
+    "Theodore_skillQ1_02.wav",
+    "Theodore_skillQ2_01.wav"
+   ],
+   "w": [
+    "Theodore_skillW1_01.wav",
+    "Theodore_skillW1_02.wav",
+    "Theodore_skillW2_01.wav"
+   ],
+   "e": [
+    "Theodore_skillE1_1_01.wav",
+    "Theodore_skillE1_1_02.wav",
+    "Theodore_skillE1_1_03.wav"
+   ],
+   "r": [
+    "Theodore_skillR1_01.wav",
+    "Theodore_skillR1_02.wav",
+    "Theodore_skillR1_03.wav"
+   ],
+   "select": [
+    "Theodore_selected_1_01.wav",
+    "Theodore_selected_1_02.wav",
+    "Theodore_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Theodore_die1_01.wav",
+    "Theodore_die1_02.wav",
+    "Theodore_die1_03.wav"
+   ]
+  }
+ },
+ "63": {
+  "lang": "kor",
+  "zip": "063. Ly anh/05. Voice lIne/Ly Anh_KOR.zip",
+  "files": {
+   "q": [
+    "Ly_Anh_skillQ1_01.wav",
+    "Ly_Anh_skillQ1_02.wav",
+    "Ly_Anh_skillQ2_01.wav"
+   ],
+   "w": [
+    "Ly_Anh_skillW1_01.wav",
+    "Ly_Anh_skillW1_02.wav",
+    "Ly_Anh_skillW2_01.wav"
+   ],
+   "e": [
+    "Ly_Anh_skillE1_01.wav",
+    "Ly_Anh_skillE1_02.wav",
+    "Ly_Anh_skillE2_01.wav"
+   ],
+   "r": [
+    "Ly_Anh_skillR1_01.wav",
+    "Ly_Anh_skillR1_02.wav",
+    "Ly_Anh_skillR2_01.wav"
+   ],
+   "select": [
+    "Ly_Anh_selected_1_01.wav",
+    "Ly_Anh_selected_1_02.wav",
+    "Ly_Anh_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Ly_Anh_die1_01.wav",
+    "Ly_Anh_die1_02.wav",
+    "Ly_Anh_die1_03.wav"
+   ]
+  }
+ },
+ "64": {
+  "lang": "kor",
+  "zip": "064. Vanya/05. Voice Line/Vanya_KOR.zip",
+  "files": {
+   "q": [
+    "Vanya_skillQ1_01.wav",
+    "Vanya_skillQ2_01.wav",
+    "Vanya_skillQ3_01.wav"
+   ],
+   "w": [
+    "Vanya_skillW1-1_01.wav",
+    "Vanya_skillW1-1_02.wav",
+    "Vanya_skillW1-1_03.wav"
+   ],
+   "e": [
+    "Vanya_skillE1_01.wav",
+    "Vanya_skillE1_02.wav",
+    "Vanya_skillE2_01.wav"
+   ],
+   "r": [
+    "Vanya_skillR1-1_01.wav",
+    "Vanya_skillR1-1_02.wav",
+    "Vanya_skillR1-1_03.wav"
+   ],
+   "select": [
+    "Vanya_selected_1_01.wav",
+    "Vanya_firstMove_1_01.wav",
+    "Vanya_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Vanya_die1_01.wav",
+    "Vanya_die1_02.wav",
+    "Vanya_die1_03.wav"
+   ]
+  }
+ },
+ "65": {
+  "lang": "kor",
+  "zip": "065. Debi & Marlene/05. Voice Line/Debi&Marlene_KOR.zip",
+  "files": {
+   "q": [
+    "Debi_skillQ1_01.wav",
+    "Marlene_skillQ1_01.wav",
+    "Debi_skillQ1_02.wav"
+   ],
+   "w": [
+    "Debi_skillW1_01.wav",
+    "Marlene_skillW1_01.wav",
+    "Debi_skillW1_02.wav"
+   ],
+   "e": [
+    "Debi_Marlene_skillE1_01.wav",
+    "Debi_Marlene_skillE2_01.wav",
+    "Debi_Marlene_skillE3_01.wav"
+   ],
+   "r": [
+    "Debi_Marlene_skillR1_01.wav",
+    "Debi_Marlene_skillR2_01.wav",
+    "Debi_Marlene_skillR3_01.wav"
+   ],
+   "select": [
+    "Debi_Marlene_selected_1_01.wav",
+    "Debi_Marlene_firstMove_1_01.wav",
+    "Debi_Marlene_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Debi_die1_01.wav",
+    "Marlene_die1_01.wav",
+    "Debi_die1_02.wav"
+   ]
+  }
+ },
+ "66": {
+  "lang": "kor",
+  "zip": "066. Arda/05. Voice Line/Arda_KOR.zip",
+  "files": {
+   "q": [
+    "Arda_skillQ1_01.wav",
+    "Arda_skillQ1_02.wav",
+    "Arda_skillQ2_01.wav"
+   ],
+   "w": [
+    "Arda_skillW1_01.wav",
+    "Arda_skillW1_02.wav",
+    "Arda_skillW2_01.wav"
+   ],
+   "e": [
+    "Arda_skillE1_01.wav",
+    "Arda_skillE1_02.wav",
+    "Arda_skillE1_03.wav"
+   ],
+   "r": [
+    "Arda_skillRE1_01.wav",
+    "Arda_skillRQ1_01.wav",
+    "Arda_skillRW1_01.wav"
+   ],
+   "select": [
+    "Arda_selected_1_01.wav",
+    "Arda_firstMove_1_01.wav",
+    "Arda_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Arda_die1_01.wav",
+    "Arda_die1_02.wav",
+    "Arda_die2_01.wav"
+   ]
+  }
+ },
+ "67": {
+  "lang": "kor",
+  "zip": "067. Abigail/05. Voice Line/Abigail_KOR.zip",
+  "files": {
+   "q": [
+    "Abigail_skillQ11.wav",
+    "Abigail_skillQ12.wav",
+    "Abigail_skillQ13.wav"
+   ],
+   "w": [
+    "Abigail_skillW21.wav",
+    "Abigail_skillW21_01.wav",
+    "Abigail_skillW21_02.wav"
+   ],
+   "e": [
+    "Abigail_skillE1.wav",
+    "Abigail_skillE1_01.wav",
+    "Abigail_skillE2.wav"
+   ],
+   "r": [
+    "Abigail_skillR1.wav",
+    "Abigail_skillR1_01.wav",
+    "Abigail_skillR2.wav"
+   ],
+   "select": [
+    "Abigail_selected_1.wav",
+    "Abigail_firstMove_1.wav",
+    "Abigail_firstMove_2.wav"
+   ],
+   "die": [
+    "Abigail_die1.wav",
+    "Abigail_die1_01.wav",
+    "Abigail_die1_02.wav"
+   ]
+  }
+ },
+ "68": {
+  "lang": "kor",
+  "zip": "068. Alonso/05. Voice Line/Alonso_KOR.zip",
+  "files": {
+   "q": [
+    "Alonso_skillQ1_01.wav",
+    "Alonso_skillQ1_02.wav",
+    "Alonso_skillQ1_03.wav"
+   ],
+   "w": [
+    "Alonso_skillW1_1_01.wav",
+    "Alonso_skillW1_1_02.wav",
+    "Alonso_skillW1_2_01.wav"
+   ],
+   "e": [
+    "Alonso_skillE1_1_01.wav",
+    "Alonso_skillE1_1_02.wav",
+    "Alonso_skillE1_2_01.wav"
+   ],
+   "r": [
+    "Alonso_skillR1_01.wav",
+    "Alonso_skillR1_02.wav",
+    "Alonso_skillR2_01.wav"
+   ],
+   "select": [
+    "Alonso_selected_1_01.wav",
+    "Alonso_selected_1_02.wav",
+    "Alonso_selected_1_03.wav"
+   ],
+   "die": [
+    "Alonso_killedCommon_1_01.wav",
+    "Alonso_killedCommon_1_02.wav",
+    "Alonso_killedCommon_1_03.wav"
+   ]
+  }
+ },
+ "69": {
+  "lang": "kor",
+  "zip": "069. Leni/05. Voice Line/Leni_KOR.zip",
+  "files": {
+   "q": [
+    "Leni_skillQ1_01_01.wav",
+    "Leni_skillQ1_02_01.wav",
+    "Leni_skillQ1_02_02.wav"
+   ],
+   "w": [
+    "Leni_skillW1_01_01.wav",
+    "Leni_skillW1_01_02.wav",
+    "Leni_skillW1_02_01.wav"
+   ],
+   "e": [
+    "Leni_skillE_의성어_01.wav",
+    "Leni_skillE1_01_01.wav",
+    "Leni_skillE1_02_01.wav"
+   ],
+   "r": [
+    "Leni_skillR1_01_01.wav",
+    "Leni_skillR1_01_02.wav",
+    "Leni_skillR1_02_01.wav"
+   ],
+   "select": [
+    "Leni_selected_1_01.wav",
+    "Leni_firstMove_1_01.wav",
+    "Leni_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Leni_die1_01.wav",
+    "Leni_die1_02.wav",
+    "Leni_die1_03.wav"
+   ]
+  }
+ },
+ "70": {
+  "lang": "kor",
+  "zip": "070. Tsubame/05. Voice Line/Tsubame_KOR.zip",
+  "files": {
+   "q": [
+    "tsubame_skillQ1_01.wav",
+    "tsubame_skillQ1_02.wav",
+    "tsubame_skillQ1_03.wav"
+   ],
+   "w": [
+    "tsubame_skillW1_01.wav",
+    "tsubame_skillW1_02.wav",
+    "tsubame_skillW1_03.wav"
+   ],
+   "e": [
+    "tsubame_skillE1_1_01.wav",
+    "tsubame_skillE1_1_02.wav",
+    "tsubame_skillE1_1_03.wav"
+   ],
+   "r": [
+    "tsubame_skillR_01.wav",
+    "tsubame_skillR_02.wav",
+    "tsubame_skillR2_01.wav"
+   ],
+   "select": [
+    "tsubame_selected_1_01.wav",
+    "tsubame_selected_1_02.wav",
+    "tsubame_firstMove_1_01.wav"
+   ],
+   "die": [
+    "tsubame_killedCommon_1_01.wav",
+    "tsubame_killedCommon_1_02.wav",
+    "tsubame_killedCommon_2_01.wav"
+   ]
+  }
+ },
+ "71": {
+  "lang": "kor",
+  "zip": "071. Kenneth/05. Voice Line/Kenneth_KOR.zip",
+  "files": {
+   "q": [
+    "Kenneth_skillQ1_01_01.wav",
+    "Kenneth_skillQ1_01_02.wav",
+    "Kenneth_skillQ1_01_03.wav"
+   ],
+   "w": [
+    "Kenneth_skillW1_01_01.wav",
+    "Kenneth_skillW1_01_02.wav",
+    "Kenneth_skillW1_02_01.wav"
+   ],
+   "e": [
+    "Kenneth_skillE1_01_01.wav",
+    "Kenneth_skillE1_01_02.wav",
+    "Kenneth_skillE1_01_03.wav"
+   ],
+   "r": [
+    "Kenneth_skillR1_01_01.wav",
+    "Kenneth_skillR1_01_02.wav",
+    "Kenneth_skillR1_01_03.wav"
+   ],
+   "select": [
+    "Kenneth_selected_1_01.wav",
+    "Kenneth_firstMove_1_01.wav",
+    "Kenneth_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Kenneth_die1_01.wav",
+    "Kenneth_die1_02.wav",
+    "Kenneth_die1_03.wav"
+   ]
+  }
+ },
+ "72": {
+  "lang": "kor",
+  "zip": "072. Katja/05. Voice lIne/KOR/",
+  "files": {
+   "q": [
+    "Katja_skillQ1_01.wav",
+    "Katja_skillQ2_01.wav",
+    "Katja_skillQ3_01.wav"
+   ],
+   "w": [
+    "Katja_skillW1_01.wav",
+    "Katja_skillW1 (적 발견 시)_01.wav",
+    "Katja_skillW2_01.wav"
+   ],
+   "e": [
+    "Katja_skillE1_01.wav",
+    "Katja_skillE2_01.wav",
+    "Katja_skillE3_01.wav"
+   ],
+   "r": [
+    "Katja_skillR1_01.wav",
+    "Katja_skillR1_02.wav",
+    "Katja_skillR1_03.wav"
+   ],
+   "select": [
+    "Katja_selected_1_01.wav",
+    "Katja_selected_1_02.wav",
+    "Katja_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Katja_killedCommon_1_01.wav",
+    "Katja_killedCommon_1_02.wav",
+    "Katja_killedCommon_2_01.wav"
+   ]
   }
  },
  "73": {
-  "lang": "eng",
-  "zip": "073. Charlotte/05. Voice Line/ENG.zip",
+  "lang": "kor",
+  "zip": "073. Charlotte/05. Voice Line/KOR.zip",
   "files": {
-   "q": "charlotte_skillQ1_1_01.wav",
-   "w": "charlotte_skillW0_1_01.wav",
-   "e": "charlotte_skillE1_01.wav",
-   "r": "charlotte_skillR1_1_01.wav",
-   "select": "charlotte_selected_1_01.wav"
+   "q": [
+    "charlotte_skillQ1_1_01.wav",
+    "charlotte_skillQ1_2_01.wav",
+    "charlotte_skillQ1_3_01.wav"
+   ],
+   "w": [
+    "charlotte_skillW0_1_01.wav",
+    "charlotte_skillW0_2_01.wav",
+    "charlotte_skillW1_1_01.wav"
+   ],
+   "e": [
+    "charlotte_skillE1_01.wav",
+    "charlotte_skillE2_01.wav",
+    "charlotte_skillE3_01.wav"
+   ],
+   "r": [
+    "charlotte_skillR1_1_01.wav",
+    "charlotte_skillR1_2_01.wav",
+    "charlotte_skillR1_3_01.wav"
+   ],
+   "select": [
+    "charlotte_selected_1_01.wav",
+    "charlotte_firstMove_1_01.wav",
+    "charlotte_firstMove_2_01.wav"
+   ],
+   "die": [
+    "charlotte_killedCommon_1_01.wav",
+    "charlotte_killedCommon_2_01.wav",
+    "charlotte_killedCommon_3_01.wav"
+   ]
+  }
+ },
+ "74": {
+  "lang": "kor",
+  "zip": "074. Darko/05. Voice LIne/Darko_KOR.zip",
+  "files": {
+   "q": [
+    "Darko_skillQ1_1_01.wav",
+    "Darko_skillQ1_1_02.wav",
+    "Darko_skillQ1_2_01.wav"
+   ],
+   "w": [
+    "Darko_skillW1_1_01.wav",
+    "Darko_skillW1_1_02.wav",
+    "Darko_skillW1_2_01.wav"
+   ],
+   "e": [
+    "Darko_skillE1_01.wav",
+    "Darko_skillE1_02.wav",
+    "Darko_skillE1_03.wav"
+   ],
+   "r": [
+    "Darko_skillR1_1_01.wav",
+    "Darko_skillR1_1_02.wav",
+    "Darko_skillR1_1_03.wav"
+   ],
+   "select": [
+    "Darko_selected_1_01.wav",
+    "Darko_firstMove_1_01.wav",
+    "Darko_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Darko_killedCommon_1_01.wav",
+    "Darko_killedCommon_1_02.wav",
+    "Darko_killedCommon_2_01.wav"
+   ]
+  }
+ },
+ "75": {
+  "lang": "kor",
+  "zip": "075. Lenore/05. Voice Line/Lenore_KOR.zip",
+  "files": {
+   "q": [
+    "Lenore_skillQ1_01.wav",
+    "Lenore_skillQ1_02.wav",
+    "Lenore_skillQ1_03.wav"
+   ],
+   "w": [
+    "Lenore_skillW1_01.wav",
+    "Lenore_skillW1_02.wav",
+    "Lenore_skillW2_01.wav"
+   ],
+   "e": [
+    "Lenore_skillE1_01.wav",
+    "Lenore_skillE1_02.wav",
+    "Lenore_skillE1_03.wav"
+   ],
+   "r": [
+    "Lenore_skillR1_1_01.wav",
+    "Lenore_skillR1_2_01.wav",
+    "Lenore_skillR1_3_01.wav"
+   ],
+   "select": [
+    "Lenore_selected_1_01.wav",
+    "Lenore_selected_1_02.wav",
+    "Lenore_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Lenore_killedCommon_1_01.wav",
+    "Lenore_killedCommon_1_02.wav",
+    "Lenore_killedCommon_2_01.wav"
+   ]
+  }
+ },
+ "76": {
+  "lang": "kor",
+  "zip": "076. Garnet/05. Voice Line/Garnet_KOR.zip",
+  "files": {
+   "q": [
+    "Garnet_skillQ1_01.wav",
+    "Garnet_skillQ1_02.wav",
+    "Garnet_skillQ1_03.wav"
+   ],
+   "w": [
+    "Garnet_skillW1_01.wav",
+    "Garnet_skillW1_02.wav",
+    "Garnet_skillW1_03.wav"
+   ],
+   "e": [
+    "Garnet_skillE1_01.wav",
+    "Garnet_skillE1_02.wav",
+    "Garnet_skillE1_03.wav"
+   ],
+   "r": [
+    "Garnet_skillR1_01.wav",
+    "Garnet_skillR_Kenneth_1_01.wav",
+    "Garnet_skillR1_02.wav"
+   ],
+   "select": [
+    "Garnet_selected_1_01.wav",
+    "Garnet_selected_1_02.wav",
+    "Garnet_firstMove_1_01.wav"
+   ],
+   "die": [
+    "Garnet_killedCommon_1_01.wav",
+    "Garnet_killedCommon_1_02.wav",
+    "Garnet_killedCommon_1_03.wav"
+   ]
+  }
+ },
+ "77": {
+  "lang": "kor",
+  "zip": "077. Yumin/05. Voice Line/KOR/",
+  "files": {
+   "q": [
+    "YuMin_skillQ1_01.wav",
+    "YuMin_skillQ2_01.wav",
+    "YuMin_skillQ3_01.wav"
+   ],
+   "w": [
+    "YuMin_skillW1_01.wav",
+    "YuMin_skillW2_01.wav",
+    "YuMin_skillW3_01.wav"
+   ],
+   "e": [
+    "YuMin_skillE1_01.wav",
+    "YuMin_skillE2_01.wav",
+    "YuMin_skillE3_01.wav"
+   ],
+   "r": [
+    "YuMin_skillR1_01.wav",
+    "YuMin_skillR2_01.wav",
+    "YuMin_skillR3_01.wav"
+   ],
+   "select": [
+    "YuMin_selected_1_01.wav",
+    "YuMin_firstMove_1_01.wav",
+    "YuMin_firstMove_2_01.wav"
+   ],
+   "die": [
+    "YuMin_killedCommon_1_01.wav",
+    "YuMin_killedCommon_2_01.wav",
+    "YuMin_killedCommon_3_01.wav"
+   ]
+  }
+ },
+ "78": {
+  "lang": "kor",
+  "zip": "078. Hisui/05. Voice Line/KOR/",
+  "files": {
+   "q": [
+    "Hisui_skillQ1_01.wav",
+    "Hisui_skillQ1_02.wav",
+    "Hisui_skillQ2_03.wav"
+   ],
+   "w": [
+    "Hisui_skillW1-1_01.wav",
+    "Hisui_skillW1-1_02.wav",
+    "Hisui_skillW1-2_01.wav"
+   ],
+   "e": [
+    "Hisui_skillE1_01.wav",
+    "Hisui_skillE1_02.wav",
+    "Hisui_skillE1_03.wav"
+   ],
+   "r": [
+    "Hisui_skillR1_01.wav",
+    "Hisui_skillR1_02.wav",
+    "Hisui_skillR1_03.wav"
+   ],
+   "select": [
+    "Hisui_selected_1_01.wav",
+    "Hisui_firstMove_1_01.wav",
+    "Hisui_firstMove_2_01.wav"
+   ],
+   "die": [
+    "Hisui_killedCommon_1_01.wav",
+    "Hisui_killedCommon_2_01.wav",
+    "Hisui_killedCommon_2_02.wav"
+   ]
+  }
+ },
+ "79": {
+  "lang": "kor",
+  "zip": "079. Justyna/05. Voice Line/KOR/",
+  "files": {
+   "q": [
+    "Justyna_skillQ1.wav",
+    "Justyna_skillQ2.wav",
+    "Justyna_skillQ3.wav"
+   ],
+   "w": [
+    "Justyna_skillW1.wav",
+    "Justyna_skillW2.wav",
+    "Justyna_skillW3.wav"
+   ],
+   "e": [
+    "Justyna_skillE1.wav",
+    "Justyna_skillE2.wav",
+    "Justyna_skillE3.wav"
+   ],
+   "r": [
+    "Justyna_skillR1.wav",
+    "Justyna_skillR2.wav",
+    "Justyna_skillR3.wav"
+   ],
+   "select": [
+    "Justyna_selected_1.wav",
+    "Justyna_firstMove_1.wav",
+    "Justyna_firstMove_2.wav"
+   ],
+   "die": [
+    "Justyna_killedCommon_1.wav",
+    "Justyna_killedCommon_2.wav",
+    "Justyna_killedCommon_3.wav"
+   ]
   }
  },
  "80": {
   "lang": "kor",
   "zip": "080. István/05. Voice Line/Istvan_KOR.zip",
   "files": {
-   "q": "Istavan_skillQ1_01.wav",
-   "w": "Istavan_skillW1_01.wav",
-   "e": "Istavan_skillE1_01.wav",
-   "r": "Istavan_skillR1_01.wav",
-   "select": "Istavan_selected_1_01.wav"
+   "q": [
+    "Istavan_skillQ1_01.wav",
+    "Istavan_skillQ1_02.wav",
+    "Istavan_skillQ1_03.wav"
+   ],
+   "w": [
+    "Istavan_skillW1_01.wav",
+    "Istavan_skillW1_02.wav",
+    "Istavan_skillW1_03.wav"
+   ],
+   "e": [
+    "Istavan_skillE1_01.wav",
+    "Istavan_skillE1_02.wav",
+    "Istavan_skillE1_03.wav"
+   ],
+   "r": [
+    "Istavan_skillR1_01.wav",
+    "Istavan_skillR1_02.wav",
+    "Istavan_skillR1_03.wav"
+   ],
+   "select": [
+    "Istavan_selected_1_01.wav",
+    "Istavan_selected_1_02.wav",
+    "Istavan_selected_1_03.wav"
+   ],
+   "die": [
+    "Istavan_killedCommon_1_01.wav",
+    "Istavan_killedCommon_1_02.wav",
+    "Istavan_killedCommon_1_03.wav"
+   ]
   }
  },
  "81": {
   "lang": "kor",
   "zip": "081. NiaH/05. Voice Line/NiaH_KOR.zip",
   "files": {
-   "q": "NiaH_skillQ1_01.wav",
-   "w": "NiaH_skillW1_01.wav",
-   "e": "NiaH_skillE1_1_01.wav",
-   "r": "NiaH_skillR1_01.wav",
-   "select": "NiaH_selected_1_01.wav"
+   "q": [
+    "NiaH_skillQ1_01.wav",
+    "NiaH_skillQ1_02.wav",
+    "NiaH_skillQ1_03.wav"
+   ],
+   "w": [
+    "NiaH_skillW1_01.wav",
+    "NiaH_skillW1_02.wav",
+    "NiaH_skillW1_03.wav"
+   ],
+   "e": [
+    "NiaH_skillE1_1_01.wav",
+    "NiaH_skillE1_1_02.wav",
+    "NiaH_skillE1_1_03.wav"
+   ],
+   "r": [
+    "NiaH_skillR1_01.wav",
+    "NiaH_skillR1_02.wav",
+    "NiaH_skillR1_03.wav"
+   ],
+   "select": [
+    "NiaH_selected_1_01.wav",
+    "NiaH_firstMove_1_01.wav",
+    "NiaH_firstMove_2_01.wav"
+   ],
+   "die": [
+    "NiaH_killedCommon_1_01.wav",
+    "NiaH_killedCommon_1_02.wav",
+    "NiaH_killedCommon_1_03.wav"
+   ]
   }
  },
  "82": {
   "lang": "kor",
   "zip": "082. Xuelin/05. Voice Line/Xuelin_Voice Line_KOR.zip",
   "files": {
-   "q": "Xuelin_skillQ1-1__01.wav",
-   "w": "Xuelin_skillW1-1__01.wav",
-   "e": "Xuelin_skillE1__01.wav",
-   "r": "Xuelin_skillR1-1__01.wav",
-   "select": "Xuelin_selected_1__01.wav"
+   "q": [
+    "Xuelin_skillQ1-1__01.wav",
+    "Xuelin_skillQ1-1__02.wav",
+    "Xuelin_skillQ1-2__01.wav"
+   ],
+   "w": [
+    "Xuelin_skillW1-1__01.wav",
+    "Xuelin_skillW1-1__02.wav",
+    "Xuelin_skillW1-1__03.wav"
+   ],
+   "e": [
+    "Xuelin_skillE1__01.wav",
+    "Xuelin_skillE2__01.wav",
+    "Xuelin_skillE3__01.wav"
+   ],
+   "r": [
+    "Xuelin_skillR1-1__01.wav",
+    "Xuelin_skillR1-1__02.wav",
+    "Xuelin_skillR1-1__03.wav"
+   ],
+   "select": [
+    "Xuelin_selected_1__01.wav",
+    "Xuelin_selected_1__02.wav",
+    "Xuelin_firstMove_1__01.wav"
+   ],
+   "die": [
+    "Xuelin_killedCommon_1__01.wav",
+    "Xuelin_killedCommon_2__01.wav",
+    "Xuelin_killedCommon_3__01.wav"
+   ]
   }
  },
  "83": {
   "lang": "kor",
   "zip": "083. Henry/05. Voice Line/Henry_Voice Line_KOR.zip",
   "files": {
-   "q": "Henry_skillQ1__01.wav",
-   "w": "Henry_skillW1__01.wav",
-   "e": "Henry_skillE1_1__01.wav",
-   "r": "Henry_skillR1__01.wav",
-   "select": "Henry_selected_1__01.wav"
+   "q": [
+    "Henry_skillQ1__01.wav",
+    "Henry_skillQ1__02.wav",
+    "Henry_skillQ1__03.wav"
+   ],
+   "w": [
+    "Henry_skillW1__01.wav",
+    "Henry_skillW1__02.wav",
+    "Henry_skillW1__03.wav"
+   ],
+   "e": [
+    "Henry_skillE1_1__01.wav",
+    "Henry_skillE1_1__02.wav",
+    "Henry_skillE1_1__03.wav"
+   ],
+   "r": [
+    "Henry_skillR1__01.wav",
+    "Henry_skillR1__02.wav",
+    "Henry_skillR1__03.wav"
+   ],
+   "select": [
+    "Henry_selected_1__01.wav",
+    "Henry_firstMove_1__01.wav",
+    "Henry_firstMove_2__01.wav"
+   ],
+   "die": [
+    "Henry_killedCommon_1__01.wav",
+    "Henry_killedCommon_1__02.wav",
+    "Henry_killedCommon_1__03.wav"
+   ]
   }
  },
  "84": {
   "lang": "kor",
   "zip": "084. Blair/05. Voice Line/Blair_Voice Line_KOR.zip",
   "files": {
-   "q": "Blair_skillQ1-1__01.wav",
-   "w": "Blair_skillW1-1__01.wav",
-   "e": "Blair_skillE1-1__01.wav",
-   "r": "Blair_skillR1-1__01.wav",
-   "select": "Blair_selected_1__01.wav"
+   "q": [
+    "Blair_skillQ1-1__01.wav",
+    "Blair_skillQ1-1__02.wav",
+    "Blair_skillQ1-1__03.wav"
+   ],
+   "w": [
+    "Blair_skillW1-1__01.wav",
+    "Blair_skillW1-2__01.wav",
+    "Blair_skillW1-2__02.wav"
+   ],
+   "e": [
+    "Blair_skillE1-1__01.wav",
+    "Blair_skillE1-2__01.wav",
+    "Blair_skillE1-2__02.wav"
+   ],
+   "r": [
+    "Blair_skillR1-1__01.wav",
+    "Blair_skillR1-1__02.wav",
+    "Blair_skillR1-2__01.wav"
+   ],
+   "select": [
+    "Blair_selected_1__01.wav",
+    "Blair_firstMove_1__01.wav",
+    "Blair_firstMove_2__01.wav"
+   ],
+   "die": [
+    "Blair_killedCommon_1__01.wav",
+    "Blair_killedCommon_2__01.wav",
+    "Blair_killedCommon_3__01.wav"
+   ]
   }
  },
  "85": {
   "lang": "kor",
   "zip": "085. Mirka/05. Voice Line/Mirka_Voice Line_KOR.zip",
   "files": {
-   "q": "Mirka_skillQ1__01.wav",
-   "w": "Mirka_skillW1__01.wav",
-   "e": "Mirka_skillE1__01.wav",
-   "r": "Mirka_skillR1__01.wav",
-   "select": "Mirka_selected_1__01.wav"
+   "q": [
+    "Mirka_skillQ1__01.wav",
+    "Mirka_skillQ1__02.wav",
+    "Mirka_skillQ2__01.wav"
+   ],
+   "w": [
+    "Mirka_skillW1__01.wav",
+    "Mirka_skillW1__02.wav",
+    "Mirka_skillW2__01.wav"
+   ],
+   "e": [
+    "Mirka_skillE1__01.wav",
+    "Mirka_skillE1__02.wav",
+    "Mirka_skillE1__03.wav"
+   ],
+   "r": [
+    "Mirka_skillR1__01.wav",
+    "Mirka_skillR1__02.wav",
+    "Mirka_skillR2__01.wav"
+   ],
+   "select": [
+    "Mirka_selected_1__01.wav",
+    "Mirka_firstMove_1__01.wav",
+    "Mirka_firstMove_2__01.wav"
+   ],
+   "die": [
+    "Mirka_killedCommon_1__01.wav",
+    "Mirka_killedCommon_2__01.wav",
+    "Mirka_killedCommon_3__01.wav"
+   ]
   }
  },
  "86": {
   "lang": "kor",
   "zip": "086. Fenrir/05. Voice Line/Fenrir_KOR.zip",
   "files": {
-   "q": "Fenrir_skillQ1.wav",
-   "w": "Fenrir_skillW1.wav",
-   "e": "Fenrir_skillE1.wav",
-   "r": "Fenrir_skillR1.wav",
-   "select": "Fenrir_selected_1.wav"
+   "q": [
+    "Fenrir_skillQ1.wav",
+    "Fenrir_skillQ2.wav",
+    "Fenrir_skillQ3.wav"
+   ],
+   "w": [
+    "Fenrir_skillW1.wav",
+    "Fenrir_skillW2.wav",
+    "Fenrir_skillW3.wav"
+   ],
+   "e": [
+    "Fenrir_skillE1.wav",
+    "Fenrir_skillE2.wav",
+    "Fenrir_skillE3.wav"
+   ],
+   "r": [
+    "Fenrir_skillR1.wav",
+    "Fenrir_skillR2.wav",
+    "Fenrir_skillR3.wav"
+   ],
+   "select": [
+    "Fenrir_selected_1.wav",
+    "Fenrir_firstMove_1.wav",
+    "Fenrir_firstMove_2.wav"
+   ],
+   "die": [
+    "Fenrir_killedCommon_1.wav",
+    "Fenrir_killedCommon_2.wav",
+    "Fenrir_killedCommon_3.wav"
+   ]
   }
  },
  "87": {
   "lang": "kor",
   "zip": "087. Coraline/05. Voice Line/Coraline_KOR.zip",
   "files": {
-   "q": "Coraline_skillQ1__01.wav",
-   "w": "Coraline_skillW1__01.wav",
-   "e": "Coraline_skillE1__01.wav",
-   "r": "Coraline_skillR1__01.wav",
-   "select": "Coraline_selected_1__01.wav"
+   "q": [
+    "Coraline_skillQ1__01.wav",
+    "Coraline_skillQ1__02.wav",
+    "Coraline_skillQ1__03.wav"
+   ],
+   "w": [
+    "Coraline_skillW1__01.wav",
+    "Coraline_skillW1__02.wav",
+    "Coraline_skillW2__01.wav"
+   ],
+   "e": [
+    "Coraline_skillE1__01.wav",
+    "Coraline_skillE2__01.wav",
+    "Coraline_skillE3__01.wav"
+   ],
+   "r": [
+    "Coraline_skillR1__01.wav",
+    "Coraline_skillR2__01.wav",
+    "Coraline_skillR3__01.wav"
+   ],
+   "select": [
+    "Coraline_selected_1__01.wav",
+    "Coraline_firstMove_1__01.wav",
+    "Coraline_firstMove_2__01.wav"
+   ],
+   "die": [
+    "Coraline_killedCommon_1__01.wav",
+    "Coraline_killedCommon_2__01.wav",
+    "Coraline_killedCommon_3__01.wav"
+   ]
   }
  },
  "88": {
   "lang": "kor",
   "zip": "088. Bihyung/05. Voice Line/Bihyung_KOR.zip",
   "files": {
-   "q": "Bihyung_PlaySkill1088200seq0_1_ko.wav",
-   "w": "Bihyung_PlaySkill1088300seq0_1_ko.wav",
-   "e": "Bihyung_PlaySkill1088400seq0_1_ko.wav",
-   "r": "Bihyung_PlaySkill1088500seq0_1_ko.wav",
-   "select": "Bihyung_selected_1_ko.wav"
+   "q": [
+    "Bihyung_PlaySkill1088200seq0_1_ko.wav",
+    "Bihyung_PlaySkill1088200seq0_2_ko.wav",
+    "Bihyung_PlaySkill1088200seq0_3_ko.wav"
+   ],
+   "w": [
+    "Bihyung_PlaySkill1088300seq0_1_ko.wav",
+    "Bihyung_PlaySkill1088300seq0_2_ko.wav",
+    "Bihyung_PlaySkill1088300seq0_3_ko.wav"
+   ],
+   "e": [
+    "Bihyung_PlaySkill1088400seq0_1_ko.wav",
+    "Bihyung_PlaySkill1088400seq0_2_ko.wav",
+    "Bihyung_PlaySkill1088400seq0_3_ko.wav"
+   ],
+   "r": [
+    "Bihyung_PlaySkill1088500seq0_1_ko.wav",
+    "Bihyung_PlaySkill1088500seq0_2_ko.wav",
+    "Bihyung_PlaySkill1088500seq0_3_ko.wav"
+   ],
+   "select": [
+    "Bihyung_selected_1_ko.wav",
+    "Bihyung_selected2_1_ko.wav",
+    "Bihyung_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "Bihyung_killedCommon_1_ko.wav",
+    "Bihyung_killedCommon_2_ko.wav",
+    "Bihyung_killedCommon_3_ko.wav"
+   ]
   }
  },
  "89": {
   "lang": "kor",
   "zip": "089. CravER/05. Voice Line/CravER_KOR.zip",
   "files": {
-   "q": "Craver_PlaySkill1089200seq0_1_ko.wav",
-   "w": "Craver_PlaySkill1089300seq0_1_ko.wav",
-   "e": "Craver_PlaySkill1089400seq0_1_ko.wav",
-   "r": "Craver_PlaySkill1089500seq0_1_ko.wav",
-   "select": "Craver_selected_1_ko.wav"
+   "q": [
+    "Craver_PlaySkill1089200seq0_1_ko.wav",
+    "Craver_PlaySkill1089200seq0_2_ko.wav",
+    "Craver_PlaySkill1089200seq0_3_ko.wav"
+   ],
+   "w": [
+    "Craver_PlaySkill1089300seq0_1_ko.wav",
+    "Craver_PlaySkill1089300seq0_2_ko.wav",
+    "Craver_PlaySkill1089300seq0_3_ko.wav"
+   ],
+   "e": [
+    "Craver_PlaySkill1089400seq0_1_ko.wav",
+    "Craver_PlaySkill1089400seq0_2_ko.wav",
+    "Craver_PlaySkill1089400seq0_3_ko.wav"
+   ],
+   "r": [
+    "Craver_PlaySkill1089500seq0_1_ko.wav",
+    "Craver_PlaySkill1089500seq0_2_ko.wav",
+    "Craver_PlaySkill1089500seq0_3_ko.wav"
+   ],
+   "select": [
+    "Craver_selected_1_ko.wav",
+    "Craver_selected2_1_ko.wav",
+    "Craver_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "Craver_killedCommon_1_ko.wav",
+    "Craver_killedCommon_2_ko.wav",
+    "Craver_killedCommon_3_ko.wav"
+   ]
+  }
+ },
+ "90": {
+  "lang": "kor",
+  "zip": "090. Lucia/05. Voice Line/Lucia_Voice Line_KOR.zip",
+  "files": {
+   "q": [
+    "Lucia_PlaySkill1090200seq0_1_ko.wav",
+    "Lucia_PlaySkill1090200seq0_2_ko.wav",
+    "Lucia_PlaySkill1090200seq0_3_ko.wav"
+   ],
+   "w": [
+    "Lucia_PlaySkill1090300seq0_1_ko.wav",
+    "Lucia_PlaySkill1090300seq0_2_ko.wav",
+    "Lucia_PlaySkill1090300seq0_3_ko.wav"
+   ],
+   "e": [
+    "Lucia_PlaySkill1090400seq0_1_ko.wav",
+    "Lucia_PlaySkill1090400seq0_2_ko.wav",
+    "Lucia_PlaySkill1090400seq0_3_ko.wav"
+   ],
+   "r": [
+    "Lucia_PlaySkill1090500seq0_1_ko.wav",
+    "Lucia_PlaySkill1090500seq0_2_ko.wav",
+    "Lucia_PlaySkill1090500seq0_3_ko.wav"
+   ],
+   "select": [
+    "Lucia_selected_1_ko.wav",
+    "Lucia_selected2_1_ko.wav",
+    "Lucia_firstMove_1_ko.wav"
+   ],
+   "die": [
+    "Lucia_killedCommon_1_ko.wav",
+    "Lucia_killedCommon_2_ko.wav",
+    "Lucia_killedCommon_3_ko.wav"
+   ]
   }
  }
 }

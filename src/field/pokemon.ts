@@ -41,6 +41,8 @@ import {
   TarShotTag,
   TrappedTag,
 } from "#data/battler-tags";
+import { erCodeOfSpecies } from "#data/bseorogue/roster";
+import { playBseoVoice } from "#data/bseorogue/voice";
 import { getDailyEventSeedBoss, isDailyForcedWaveHiddenAbility } from "#data/daily-run";
 import { isDailyEventSeed, isDailyFinalBoss } from "#data/daily-seed-utils";
 import { allAbilities, allMoves } from "#data/data-lists";
@@ -4707,6 +4709,12 @@ export abstract class Pokemon extends Phaser.GameObjects.Container {
    * @param callback - A function to be called once the cry has finished playing
    */
   public faintCry(callback: () => any): void {
+    // 블서로그: 실험체는 울음소리 대신 쓰러질 때 대사 (대사가 끝나길 기다리지 않고 바로 쓰러져요)
+    if (erCodeOfSpecies(this.species.speciesId) != null) {
+      playBseoVoice(this.species.speciesId, "die");
+      callback();
+      return;
+    }
     if (this.fusionSpecies && this.getSpeciesForm() !== this.getFusionSpeciesForm()) {
       this.fusionFaintCry(callback);
       return;
