@@ -88,6 +88,25 @@ export function objRect(
   };
 }
 
+/**
+ * 컨테이너에서 지금 보이는 자식만 감싸는 사각형 (pad 만큼 넓혀서).
+ * 컨테이너 getBounds 는 숨은 자식까지 넣어서, 숨은 자식이 멀리 있으면 칸이 엉뚱하게 커져요
+ * (예: 보상 고르기의 숨은 몬스터볼 그림이 화면 위쪽에 있어서 보상 칸이 상점 칸까지 덮었어요)
+ */
+export function shownChildrenRect(
+  container: Phaser.GameObjects.Container | null | undefined,
+  pad = 0,
+): () => Phaser.Geom.Rectangle | null {
+  return () => {
+    if (!container || !isShown(container)) {
+      return null;
+    }
+    const children = container.list.filter(c => typeof (c as { getBounds?: unknown }).getBounds === "function");
+    const out = unionRect(...(children as unknown as Parameters<typeof unionRect>))();
+    return out && pad ? out.setTo(out.x - pad * 6, out.y - pad * 6, out.width + pad * 12, out.height + pad * 12) : out;
+  };
+}
+
 /** 컨테이너 안 좌표(x, y, w, h)를 화면 좌표로 */
 export function localRect(
   parent: Phaser.GameObjects.Container | null | undefined,

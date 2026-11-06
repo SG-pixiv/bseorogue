@@ -170,6 +170,8 @@ def make_png(rel, src, atlas_frames):
     elif bbox:
         x0, y0, x1, y1 = bbox
         fill = TEXT_SLOT if text_slot else (PANEL if "/ui/" in name else color_of(rel, 200))
+        if "/ui/" in name and w >= 320 and h >= 180:
+            fill = PANEL[:3] + (255,)  # 화면 전체를 덮는 배경은 불투명 (뒤 화면이 비치면 글자가 겹쳐 보여요)
         draw_box(d, x0, y0, x1 - x0, y1 - y0, fill, TEXT_BORDER if text_slot else BORDER)
     save(rel, lambda dst: img.save(dst, optimize=True))
     stats["png"] += 1

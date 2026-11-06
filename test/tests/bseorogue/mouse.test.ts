@@ -11,7 +11,7 @@ import { UiMode } from "#enums/ui-mode";
 import { GameManager } from "#test/framework/game-manager";
 import { mouseController } from "#ui/mouse-controller";
 import { mouseTargetsFor } from "#ui/mouse-screens";
-import type { MouseTarget } from "#ui/mouse-targets";
+import { type MouseTarget, shownChildrenRect } from "#ui/mouse-targets";
 import Phaser from "phaser";
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -126,5 +126,23 @@ describe("블서로그 마우스 조작", () => {
     expect(rewardLabels).toEqual(expect.arrayContaining(["reward:0", "reroll", "check-team"]));
     // 팀 확인 버튼 → 실험체 화면
     await waitMode(UiMode.PARTY);
+  });
+});
+
+describe("블서로그 마우스 칸 계산", () => {
+  it("숨은 자식은 빼고 보이는 자식만 감싸요 (보상 칸이 숨은 몬스터볼까지 커지지 않게)", () => {
+    const container = { visible: true, alpha: 1, parentContainer: null, displayList: {}, list: [] as unknown[] };
+    const child = (x: number, y: number, w: number, h: number, visible = true) => ({
+      visible,
+      alpha: 1,
+      parentContainer: container,
+      getBounds: () => new Phaser.Geom.Rectangle(x, y, w, h),
+    });
+    container.list = [child(0, 0, 10, 10), child(0, -500, 10, 10, false), child(0, 20, 10, 5)];
+    const r = shownChildrenRect(container as unknown as Phaser.GameObjects.Container, 1)();
+    expect(r && [r.x, r.y, r.width, r.height]).toEqual([-6, -6, 22, 37]);
+
+    container.visible = false;
+    expect(shownChildrenRect(container as unknown as Phaser.GameObjects.Container)()).toBeNull();
   });
 });

@@ -8,7 +8,7 @@ import { globalScene } from "#app/global-scene";
 import { Button } from "#enums/buttons";
 import type { EggGachaUiHandler } from "#ui/egg-gacha-ui-handler";
 import type { ModifierSelectUiHandler } from "#ui/modifier-select-ui-handler";
-import { isShown, localRect, type MouseTarget, objRect, peek, press } from "#ui/mouse-targets";
+import { isShown, localRect, type MouseTarget, objRect, peek, press, shownChildrenRect } from "#ui/mouse-targets";
 import type { PartyUiHandler } from "#ui/party-ui-handler";
 import type { SaveSlotSelectUiHandler } from "#ui/save-slot-select-ui-handler";
 import type { SummaryUiHandler } from "#ui/summary-ui-handler";
@@ -189,9 +189,16 @@ export function modifierSelectTargets(handler: ModifierSelectUiHandler): MouseTa
       handler.setCursor(col);
     }
   };
-  const item = (label: string, obj: C | undefined, row: number, col: number, pad = 0): MouseTarget => ({
+  const item = (
+    label: string,
+    obj: C | undefined,
+    row: number,
+    col: number,
+    pad = 0,
+    rect: MouseTarget["rect"] = objRect(obj, pad),
+  ): MouseTarget => ({
     label,
-    rect: objRect(obj, pad),
+    rect,
     hover: go(row, col),
     click: () => {
       go(row, col)();
@@ -210,11 +217,12 @@ export function modifierSelectTargets(handler: ModifierSelectUiHandler): MouseTa
     targets.push(item("continue", h.continueButtonContainer, 1, 0, 2));
   }
   // 무료 보상
-  h.options.forEach((o, i) => targets.push(item(`reward:${i}`, o, 1, i, 2)));
+  // (보상 칸 안에는 화면 위쪽에 숨은 몬스터볼 그림이 있어서, 보이는 것만 감싸요)
+  h.options.forEach((o, i) => targets.push(item(`reward:${i}`, o, 1, i, 2, shownChildrenRect(o, 2))));
   // 상점 (돈 내고 사는 줄)
   const rows = h.shopOptionsRows.length;
   h.shopOptionsRows.forEach((row, k) => {
-    row.forEach((o, i) => targets.push(item(`shop:${k}:${i}`, o, rows - k + 1, i, 1)));
+    row.forEach((o, i) => targets.push(item(`shop:${k}:${i}`, o, rows - k + 1, i, 1, shownChildrenRect(o, 1))));
   });
   return targets;
 }

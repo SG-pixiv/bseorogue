@@ -60,7 +60,7 @@ pnpm build         # dist/ 에 배포용 파일
 | 임시 그림 | `src/data/bseorogue/placeholder-art.ts` (진짜 그림을 넣으면 `REAL_ART` 에 종 번호 추가) |
 | 실험체 그림 · 아이콘 (팬키트) | `python3 scripts/fankit/build_art.py <팬키트 폴더> …` → `assets/er/char/`, `art-manifest.ts` (더하기 방식, `--fresh` 는 새로) |
 | 실험체 음성 (스킬 Q W E R · 등장 · 쓰러질 때, 키마다 최대 3개) | `python3 scripts/fankit/build_voice.py <팬키트 폴더> …` → `assets/er/voice/`, `voice-manifest.ts` · 게임 쪽은 `src/data/bseorogue/voice.ts` |
-| 마우스로 누르는 칸 (화면마다) | `src/ui/mouse/mouse-screens.ts` (조작 규칙은 `mouse-controller.ts`) |
+| 마우스로 누르는 칸 (화면마다) | `src/ui/mouse/mouse-screens.ts` (조작 규칙은 `mouse-controller.ts`, 브라우저로 칸 확인은 `scripts/browser-check/mouse_check.py`) |
 
 검사: `pnpm test:silent test/tests/bseorogue` (1웨이브부터 50웨이브 클리어까지 자동으로 돌려 봐요)
 
