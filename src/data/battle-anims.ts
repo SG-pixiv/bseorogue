@@ -1,6 +1,7 @@
 import { audioManager } from "#app/global-audio-manager";
 import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
+import { erCodeOfSpecies } from "#data/bseorogue/roster";
 import { allMoves } from "#data/data-lists";
 import type { BattlerIndex } from "#enums/battler-index";
 import { BattlerTagType } from "#enums/battler-tag-type";
@@ -304,6 +305,10 @@ class AnimTimedSoundEvent extends AnimTimedEvent {
         return 0;
       }
       return Math.ceil((sound.totalDuration * 1000) / 33.33);
+    }
+    // 블서로그 종은 기술 연출 속 울음소리를 건너뛰어요 (실험체는 스킬 음성을 move-phase.ts 에서 이미 틀어요)
+    if (battleAnim.user && erCodeOfSpecies(battleAnim.user.species.speciesId) != null) {
+      return 0;
     }
     const cry = battleAnim.user!.cry(soundConfig); // TODO: is the bang behind user correct?
     if (!cry) {

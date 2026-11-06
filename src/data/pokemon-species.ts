@@ -9,6 +9,7 @@ import type { AnySound } from "#audio/audio-manager";
 import { speciesEggMoves } from "#balance/egg-moves";
 import { isBseoSpecies } from "#data/bseorogue/hooks";
 import { ensureBseoIcons, ensureBseoSprite, REAL_ART } from "#data/bseorogue/placeholder-art";
+import { loadBseoVoices, playBseoVoice } from "#data/bseorogue/voice";
 import type { GrowthRate } from "#data/exp";
 import { Gender } from "#data/gender";
 import { AbilityId } from "#enums/ability-id";
@@ -720,6 +721,8 @@ export abstract class PokemonSpeciesForm {
     const spriteKey = this.getSpriteKey(female, formIndex, shiny, variant, back);
     // 블서로그: 그림 파일이 아직 없는 실험체 · 동물 · 보스는 게임 안에서 임시 그림을 그려요
     if (isBseoSpecies(this.speciesId) && ensureBseoSprite(spriteKey, this.speciesId, back)) {
+      // 블서로그: 실험체 음성(스킬 · 등장 대사)도 같이 받아 둬요
+      loadBseoVoices(this.speciesId);
       if (startLoad && !globalScene.load.isLoading()) {
         globalScene.load.start();
       }
@@ -774,6 +777,10 @@ export abstract class PokemonSpeciesForm {
   }
 
   cry(soundConfig?: Phaser.Types.Sound.SoundConfig, ignorePlay?: boolean): AnySound | null {
+    // 블서로그: 실험체는 울음소리 대신 등장 대사 (팬키트 음성, 없으면 조용히)
+    if (isBseoSpecies(this.speciesId)) {
+      return ignorePlay ? null : playBseoVoice(this.speciesId, "select");
+    }
     const cryKey = this.getCryKey(this.formIndex);
     let cry: AnySound | null = globalScene.sound.get(cryKey) as AnySound;
     if (cry?.pendingRemove) {

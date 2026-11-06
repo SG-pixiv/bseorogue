@@ -51,3 +51,4 @@ game-data-output/*
 er-key.txt
 /er-data/
 scripts/er-data/er-data/
+__pycache__/

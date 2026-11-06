@@ -4,6 +4,7 @@ import { getPokemonNameWithAffix } from "#app/messages";
 import { activeOverrides } from "#app/overrides";
 import { MOVE_COLOR } from "#constants/colors";
 import { CenterOfAttentionTag, type EncoreTag } from "#data/battler-tags";
+import { playBseoSkillVoice } from "#data/bseorogue/voice";
 import { SpeciesFormChangePreMoveTrigger } from "#data/form-change-triggers";
 import { getStatusEffectActivationText } from "#data/status-effect";
 import { getTerrainBlockMessage } from "#data/terrain";
@@ -692,6 +693,8 @@ export class MovePhase extends PokemonPhase {
         .replace(/([!?~])!$/u, "$1"),
       500,
     );
+    // 블서로그: 실험체가 자기 스킬(Q W E R)을 쓰면 그 스킬 음성
+    playBseoSkillVoice(pokemon.species.speciesId, moveId);
 
     // Moves with pre-use messages (Magnitude, Chilly Reception, Fickle Beam, etc.) always display their messages even on failure
     // TODO: This assumes single target for message funcs - is this sustainable?

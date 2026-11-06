@@ -1,0 +1,150 @@
+{
+ "1": {
+  "lang": "kor",
+  "zip": "001. Jackie/05. Voice Line/Jackie_KOR.zip",
+  "files": {
+   "q": "jackie_skillQ_1_ko.wav",
+   "w": "jackie_skillW_1_ko.wav",
+   "e": "jackie_skillE_1_ko.wav",
+   "r": "jackie_skillR_1_ko.wav",
+   "select": "jackie_selected_ko_01.wav"
+  }
+ },
+ "2": {
+  "lang": "eng",
+  "zip": "002. Aya/05. Voice Line/Aya_ENG.zip",
+  "files": {
+   "q": "aya_skillQ1_01.wav",
+   "w": "aya_skillW1_01.wav",
+   "e": "aya_skillE1_01.wav",
+   "r": "aya_skillR1_01.wav",
+   "select": "aya_selected_01.wav"
+  }
+ },
+ "3": {
+  "lang": "jpn",
+  "zip": "005. Fiora/05. Voice Line/Fiora_JPN.zip",
+  "files": {
+   "select": "fiora_selected .wav"
+  }
+ },
+ "4": {
+  "lang": "eng",
+  "zip": "004. Magnus/05. Voice Line/Magnus_ENG.zip",
+  "files": {
+   "q": "magnus_skillQ_1_en.wav",
+   "w": "magnus_skillW_1_en.wav",
+   "e": "magnus_skillE_1_en.wav",
+   "r": "magnus_skillR_1_en.wav",
+   "select": "magnus_selected_en.wav"
+  }
+ },
+ "9": {
+  "lang": "kor",
+  "zip": "009. Isol/05. Voice Line/Isol_KOR.zip",
+  "files": {
+   "q": "isol_skillQ_1_ko.wav",
+   "w": "isol_skillW_1_ko.wav",
+   "e": "isol_skillE_1_ko.wav",
+   "r": "isol_skillR_1_ko.wav",
+   "select": "isol_selected_ko_01.wav"
+  }
+ },
+ "20": {
+  "lang": "jpn",
+  "zip": "020. Lenox/05. Voice Line/Lenox_JPN.zip",
+  "files": {
+   "w": "Lenox _skillW1.wav",
+   "e": "Lenox _skillE1.wav",
+   "r": "Lenox _skillR1.wav",
+   "select": "Lenox _selected.wav"
+  }
+ },
+ "25": {
+  "lang": "kor",
+  "zip": "025. Bernice/05. Voice Line - 음성/bERnice_KOR.zip",
+  "files": {
+   "q": "Bernice_PlaySkill1025200seq0_1_ko.wav",
+   "w": "Bernice_PlaySkill1025300seq0_1_ko.wav",
+   "e": "Bernice_PlaySkill1025400seq0_1_ko.wav",
+   "r": "Bernice_PlaySkill1025500seq0_1_ko.wav",
+   "select": "Bernice_selected_1_ko.wav"
+  }
+ },
+ "42": {
+  "lang": "kor",
+  "zip": "042. Bianca/05. Voice Line/Bianca_KOR.zip",
+  "files": {
+   "q": "Bianca_skillQ_1_01.wav",
+   "w": "Bianca_skillW_1_01.wav",
+   "e": "Bianca_skillE1_1_01.wav",
+   "r": "Bianca_skillR_1_01.wav",
+   "select": "Bianca_selected_1_01.wav"
+  }
+ },
+ "46": {
+  "lang": "kor",
+  "zip": "046. Aiden/05. Voice Line/Aiden_KOR.zip",
+  "files": {
+   "w": "Aiden_skillW1_01.wav",
+   "e": "Aiden_skillE1_01.wav",
+   "r": "Aiden_skillR_1_01.wav",
+   "select": "Aiden_selected_1_01.wav"
+  }
+ },
+ "56": {
+  "lang": "eng",
+  "zip": "056. Piolo/05. Voice Line/Piolo_ENG.zip",
+  "files": {
+   "q": "Piolo_skillQ1-1_01.wav",
+   "w": "Piolo_skillW1-1_01.wav",
+   "e": "Piolo_skillE1-1_01.wav",
+   "r": "Piolo_skillR1_01.wav",
+   "select": "Piolo_selected_1_01.wav"
+  }
+ },
+ "57": {
+  "lang": "eng",
+  "zip": "057. Martina/05. Voice Line/Martina_ENG.zip",
+  "files": {
+   "q": "Martina_skillQ1_1.wav",
+   "w": "Martina_skillW1_1.wav",
+   "e": "Martina_skillE1_1.wav",
+   "r": "Martina_skillR1_2.wav",
+   "select": "Martina_selected_1.wav"
+  }
+ },
+ "73": {
+  "lang": "eng",
+  "zip": "073. Charlotte/05. Voice Line/ENG.zip",
+  "files": {
+   "q": "charlotte_skillQ1_1_01.wav",
+   "w": "charlotte_skillW0_1_01.wav",
+   "e": "charlotte_skillE1_01.wav",
+   "r": "charlotte_skillR1_1_01.wav",
+   "select": "charlotte_selected_1_01.wav"
+  }
+ },
+ "83": {
+  "lang": "kor",
+  "zip": "083. Henry/05. Voice Line/Henry_Voice Line_KOR.zip",
+  "files": {
+   "q": "Henry_skillQ1__01.wav",
+   "w": "Henry_skillW1__01.wav",
+   "e": "Henry_skillE1_1__01.wav",
+   "r": "Henry_skillR1__01.wav",
+   "select": "Henry_selected_1__01.wav"
+  }
+ },
+ "88": {
+  "lang": "jpn",
+  "zip": "088. Bihyung/05. Voice Line/Bihyung_JPN.zip",
+  "files": {
+   "q": "Bihyung_PlaySkill1088200seq0_1_ja.wav",
+   "w": "Bihyung_PlaySkill1088300seq0_1_ja.wav",
+   "e": "Bihyung_PlaySkill1088400seq0_1_ja.wav",
+   "r": "Bihyung_PlaySkill1088500seq0_1_ja.wav",
+   "select": "Bihyung_selected_1_ja.wav"
+  }
+ }
+}
