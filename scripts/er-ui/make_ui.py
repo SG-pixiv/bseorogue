@@ -547,6 +547,11 @@ def icons():
         for fname, x, y, fw, fh in frames(UI / f"{atlas}.json"):
             color, label = TYPE_STYLE.get(fname, TYPE_STYLE["unknown"])
             short = (SHORT.get(fname) or label)[:1]
+            if atlas == "type_bgs":
+                # 9조각(테두리 2px)으로 늘려 쓰는 스킬 칸 바탕: 글자 · 모서리 깎기를 넣으면 늘어나서 흰 줄 · 홈이 생겨요
+                d.rectangle([x, y, x + fw - 1, y + fh - 1], fill=rgba(color), outline=INK)
+                d.line([(x + 1, y + 1), (x + fw - 2, y + 1)], fill=rgba(tuple(min(255, v + 40) for v in color)))
+                continue
             badge(d, (x + 1, y + 1, x + fw - 2, y + fh - 2), color, short if fh >= 10 else None)
         save(img, p)
     # 상태이상
