@@ -63,6 +63,7 @@ pnpm build         # dist/ 에 배포용 파일
 | 실험체 도트 정리 (AI 밑그림 → 80×80 · 15색) | `python3 scripts/er-dot/clean_dot.py <그림> <ER번호>_<스킨>.png [--size S\|M\|L] [--icon]` (규격은 `docs/dot-guide/`) |
 | 실험체 도트 나란히 검수 | `python3 scripts/er-dot/lineup.py <폴더> -o lineup.png` (발밑 · 키 등급 선) |
 | UI 그림 (창 · 바 · 커서 · 배지, ER 느낌) | `python3 scripts/er-ui/make_ui.py` (색 · 모양은 맨 위 `THEMES` · `TYPE_STYLE`, 글꼴은 npm `galmuri`) |
+| 아이템 아이콘 · 보급 상자 · 키 아이콘 · 알 · 실험체 색 | `python3 -I -B scripts/er-ui/make_items.py` (이름 → 모양 규칙은 `draw()`, 한눈에 보기 `docs/item-icons-preview.png`) |
 | 마우스로 누르는 칸 (화면마다) | `src/ui/mouse/mouse-screens.ts` (조작 규칙은 `mouse-controller.ts`, 브라우저로 칸 확인은 `scripts/browser-check/mouse_check.py`) |
 
 검사: `pnpm test:silent test/tests/bseorogue` (1웨이브부터 50웨이브 클리어까지 자동으로 돌려 봐요)
