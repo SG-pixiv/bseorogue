@@ -50,7 +50,7 @@ export class RunHistoryUiHandler extends MessageUiHandler {
       0,
       globalScene.scaledCanvas.width,
       -globalScene.scaledCanvas.height,
-      0x006860,
+      0x141926 /* 블서로그: 원래 청록 → ER 남색 */,
     );
     loadSessionBg.setOrigin(0, 0);
     this.runSelectContainer.add(loadSessionBg);

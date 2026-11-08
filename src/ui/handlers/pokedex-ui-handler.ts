@@ -280,7 +280,7 @@ export class PokedexUiHandler extends MessageUiHandler {
       0,
       globalScene.scaledCanvas.width,
       globalScene.scaledCanvas.height,
-      0x006860,
+      0x141926 /* 블서로그: 원래 청록 → ER 남색 */,
     );
     bgColor.setOrigin(0, 0);
     this.starterSelectContainer.add(bgColor);
@@ -1360,6 +1360,10 @@ export class PokedexUiHandler extends MessageUiHandler {
 
     for (const species of speciesDataRegistry.getAllSpecies()) {
       const starterId = speciesDataRegistry.getStarter(species.speciesId);
+      if (!this.gameData.starterData[starterId] || speciesDataRegistry.getStarterCost(starterId) == null) {
+        // 블서로그: 시작 실험체 데이터나 코스트가 없는 종(야생동물 등)은 도감에서 빼요. 없으면 읽다가 도감 화면이 까맣게 멈춰요
+        continue;
+      }
 
       const props = this.getSanitizedProps(this.getCurrentDexProps(species.speciesId));
 

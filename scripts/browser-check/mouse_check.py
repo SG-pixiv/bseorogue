@@ -105,7 +105,14 @@ async def to_battle(pg):
         await press(pg, "Space", 1200)
     await shot(pg, "00-starter")
     await click(pg, "start", 1200)
-    await press(pg, "Space", 2500)
+    # "이 실험체들로 시작하시겠습니까?" → 예 (Space 만 누르면 느릴 때 아니오 쪽으로 넘어가 같은 화면을 맴돌아요)
+    for _ in range(10):
+        if (await state(pg))["mode"] == "CONFIRM":
+            await click(pg, "option:0", 2500)
+            break
+        await pg.wait_for_timeout(300)
+    else:
+        await press(pg, "Space", 2500)
     for _ in range(40):
         s = await state(pg)
         if s["mode"] == "COMMAND":

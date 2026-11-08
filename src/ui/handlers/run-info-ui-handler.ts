@@ -97,7 +97,7 @@ export class RunInfoUiHandler extends UiHandler {
       0,
       globalScene.game.canvas.width,
       globalScene.game.canvas.height,
-      0x006860,
+      0x141926 /* 블서로그: 원래 청록 → ER 남색 */,
     );
     gameStatsBg.setOrigin(0, 0);
     this.runContainer.add(gameStatsBg);

@@ -233,7 +233,9 @@ export class StarterSelectUiHandler extends MessageUiHandler {
     this.starterSelectContainer = globalScene.add.container(0, -sHeight).setVisible(false);
     ui.add(this.starterSelectContainer);
 
-    const bgColor = globalScene.add.rectangle(0, 0, sWidth, sHeight, 0x006860).setOrigin(0);
+    const bgColor = globalScene.add
+      .rectangle(0, 0, sWidth, sHeight, 0x141926 /* 블서로그: 원래 청록 → ER 남색 */)
+      .setOrigin(0);
 
     const starterDexNoLabel = globalScene.add
       .image(6, 14, getLocalizedSpriteKey("summary_dexnb_label"))

@@ -401,7 +401,8 @@ export function getTextStyleOptions(
           break;
         case "ko":
           styleOptions.fontSize = defaultFontSize - 40;
-          styleOptions.padding = { top: -2 };
+          // 블서로그: 갈무리 글꼴은 위 여백이 작아서 스킬 칸(14px) 위쪽에 붙어 보여요 → 가운데로 내림
+          styleOptions.padding = { top: 10 };
           break;
         case "zh-Hans":
         case "zh-Hant":

@@ -36,7 +36,13 @@ export class EggListUiHandler extends MessageUiHandler {
     ui.add(this.eggListContainer);
 
     const bgColor = globalScene.add
-      .rectangle(0, 0, globalScene.scaledCanvas.width, globalScene.scaledCanvas.height, 0x006860)
+      .rectangle(
+        0,
+        0,
+        globalScene.scaledCanvas.width,
+        globalScene.scaledCanvas.height,
+        0x141926 /* 블서로그: 원래 청록 → ER 남색 */,
+      )
       .setOrigin(0);
 
     const eggListBg = globalScene.add.image(0, 0, "egg_list_bg").setOrigin(0);

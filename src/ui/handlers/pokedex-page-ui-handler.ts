@@ -341,7 +341,9 @@ export class PokedexPageUiHandler extends MessageUiHandler {
       .setVisible(false);
     ui.add(this.starterSelectContainer);
 
-    const bgColor = globalScene.add.rectangle(0, 0, width, height, 0x006860).setOrigin(0);
+    const bgColor = globalScene.add
+      .rectangle(0, 0, width, height, 0x141926 /* 블서로그: 원래 청록 → ER 남색 */)
+      .setOrigin(0);
     this.starterSelectContainer.add(bgColor);
 
     const starterSelectBg = globalScene.add //
