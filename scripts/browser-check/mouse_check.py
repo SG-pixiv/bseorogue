@@ -70,6 +70,7 @@ async def shot(pg, name, hover=None):
     box = await canvas_box(pg)
     s = box[2] / 1920
     im = Image.open(path).convert("RGB")
+    im.save(path.replace(".png", "-raw.png"))  # 칸 없는 그림 (UI 스타일 보기용)
     d = ImageDraw.Draw(im)
     for t in ts:
         x0, y0 = box[0] + t["x"] * s, box[1] + t["y"] * s
@@ -102,6 +103,7 @@ async def to_battle(pg):
     for idx in (0, 71):
         await click(pg, f"starter:{idx}")
         await press(pg, "Space", 1200)
+    await shot(pg, "00-starter")
     await click(pg, "start", 1200)
     await press(pg, "Space", 2500)
     for _ in range(40):
