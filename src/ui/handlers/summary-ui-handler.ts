@@ -1,5 +1,5 @@
 import type { Ability } from "#abilities/ability";
-import { loggedInUser } from "#app/account";
+import { displayUsername } from "#app/account";
 import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
@@ -936,7 +936,7 @@ export class SummaryUiHandler extends UiHandler {
           `${getBBCodeFrag(`${i18next.t("pokemonSummary:ot")}/`, TextStyle.SUMMARY_ALT)}${getBBCodeFrag(
             settings.display.hideUsername
               ? usernameReplacement
-              : loggedInUser?.username || i18next.t("pokemonSummary:unknownTrainer"),
+              : displayUsername(i18next.t("pokemonSummary:unknownTrainer")),
             otColor,
           )}`,
           TextStyle.SUMMARY_ALT,

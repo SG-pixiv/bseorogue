@@ -16,7 +16,7 @@
     "eva": "회피율"
   },
   "type": {
-    "unknown": "Unknown",
+    "unknown": "???",
     "normal": "야생",
     "fighting": "브루저",
     "flying": "비행",

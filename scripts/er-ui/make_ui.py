@@ -479,9 +479,8 @@ def screens():
         w, h = size_of(p)
         img, d = new(w, h)
         panel(d, (0, 0, w - 1, h - 1), 1, c=5 if min(w, h) > 40 else 3, alpha=255)
-        if name.startswith("summary_") and h > 100:  # 제목 띠
-            d.rectangle([6, 2, w - 2, 13], fill=rgba(THEMES[1][1]))
-            d.line([(6, 14), (w - 2, 14)], fill=rgba(THEMES[1][2]))
+        if name.startswith("summary_") and h > 100:  # 제목 띠 (첫 줄 글자에 선이 겹치지 않게 얇게, 아래 선 없이)
+            d.rectangle([6, 1, w - 2, 8], fill=rgba(THEMES[1][1]))
         save(img, p)
     w, h = size_of(UI / "summary_moves_cursor.png")
     img, d = new(w, h)
@@ -592,10 +591,15 @@ def numbers():
 
 
 def text_images():
-    def label(rel, s, mini=False, col=WHITE):
+    def label(rel, s, mini=False, col=WHITE, plate=False):
         p = KO / rel
         w, h = size_of(p)
         img, d = new(w, h)
+        if plate:  # 판 테두리 위에 놓이는 제목: 글자 뒤를 판 색으로 채워서 테두리 선이 글자를 가로지르지 않게
+            tmp, td = new(w, h)
+            text_center(td, (0, 0, w, h), s, col, F7)
+            x0, _, x1, _ = tmp.getbbox() or (0, 0, w, h)
+            d.rectangle([max(0, x0 - 2), 0, min(w - 1, x1 + 1), h - 1], fill=rgba(THEMES[1][0]))
         if mini:
             mini_text(d, (w - mini_width(s)) // 2, (h - 5) // 2, s, col, INK)
         else:
@@ -616,7 +620,7 @@ def text_images():
                    ("summary/summary_profile_passive_ko.png", "패시브"), ("summary/summary_profile_memo_title_ko.png", "메모"),
                    ("summary/summary_profile_profile_title_ko.png", "프로필"), ("summary/summary_stats_exp_title_ko.png", "경험치"),
                    ("summary/summary_stats_item_title_ko.png", "아이템"), ("summary/summary_stats_stats_title_ko.png", "스탯")):
-        label(rel, s, col=GOLD)
+        label(rel, s, col=GOLD, plate=True)
     # 정보 화면 쪽 탭: 지금 쪽만 금색
     for i, rel in enumerate(("summary/summary_tabs_1_ko.png", "summary/summary_tabs_2_ko.png", "summary/summary_tabs_3_ko.png")):
         p = KO / rel
@@ -719,6 +723,49 @@ def small_icons():
         icon(n, lambda d, w, h: None)
 
 
+def logo():
+    """타이틀 로고 '블서로그' (150×33): 갈무리14 를 2배로 키운 글자 + 테두리 + 금색 그림자 + 아래 금색 띠"""
+    path = FONTS / "Galmuri14.ttf"
+    if not path.exists():
+        return
+    f = ImageFont.truetype(str(path), 14)
+    for name in ("logo.png", "logo_fake.png"):
+        w, h = size_of(IMG / name)
+        small, sd = new(75, 17)
+        sd.fontmode = "1"
+        word = "블서로그"
+        x0, y0, x1, y1 = sd.textbbox((0, 0), word, font=f)
+        sd.text(((75 - (x1 - x0)) // 2 - x0, (17 - (y1 - y0)) // 2 - y0), word, fill=WHITE, font=f)
+        big = small.resize((150, 34), Image.NEAREST).crop((0, 0, 150, 33))
+        mask = big.getchannel("A")
+        img, d = new(w, h)
+        # 금색 그림자 (오른쪽 아래 2px) → 검은 테두리 → 흰 글자
+        shadow = Image.new("RGBA", (w, h), GOLD_D)
+        img.paste(shadow, (2, 2), mask)
+        outline = Image.new("RGBA", (w, h), INK)
+        for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (1, 1), (-1, 1), (1, -1)):
+            img.paste(outline, (dx, dy), mask)
+        img.paste(Image.new("RGBA", (w, h), WHITE), (0, 0), mask)
+        # 글자 위쪽 절반을 조금 밝게 · 아래쪽 금색 띠
+        px = img.load()
+        bbox = mask.getbbox()
+        if bbox:
+            for y in range(bbox[1], bbox[1] + (bbox[3] - bbox[1]) // 2):
+                for x in range(w):
+                    if px[x, y] == WHITE:
+                        px[x, y] = (255, 255, 255, 255)
+            for y in range(bbox[1] + (bbox[3] - bbox[1]) // 2, bbox[3]):
+                for x in range(w):
+                    if px[x, y] == WHITE:
+                        px[x, y] = (214, 222, 236, 255)
+        if name == "logo_fake.png":
+            for y in range(h):
+                for x in range(w):
+                    if px[x, y][:3] == GOLD_D[:3]:
+                        px[x, y] = (*TEAL[:3], 255)
+        save(img, IMG / name)
+
+
 def unmark():
     if not MARK.exists():
         return
@@ -744,6 +791,7 @@ def main():
     numbers()
     text_images()
     small_icons()
+    logo()
     unmark()
     print(f"그린 그림 {len(done)}개")
 

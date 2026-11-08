@@ -2078,7 +2078,8 @@ class PartySlot extends Phaser.GameObjects.Container {
     // or for active pokemon if in a double battle in item management mode.
 
     // icon position relative to slot background
-    let slotPb = { x: 4, y: 4 };
+    // 블서로그: 실험체 아이콘은 40×30 을 꽉 채운 얼굴이라 원래 자리(4)면 맨 앞 칸 아이콘이 화면 왼쪽에서 잘려요
+    let slotPb = { x: 9, y: 4 };
     // name position relative to slot background
     let namePosition = { x: 24, y: 10 };
     // maximum allowed length of name; must accomodate fusion symbol
@@ -2086,7 +2087,8 @@ class PartySlot extends Phaser.GameObjects.Container {
     // "Lv." label position relative to slot background
     let levelLabelPosition = { x: 24 + 8, y: 10 + 12 };
     // offset from "Lv." to the level number; should not be changed.
-    const levelTextToLevelLabelOffset = { x: 9, y: 0 };
+    // 블서로그: 갈무리 글꼴은 위쪽 여백이 작아서 숫자가 "Lv" 보다 2px 떠 보여요 → 2px 내림
+    const levelTextToLevelLabelOffset = { x: 9, y: 2 };
     // offests from "Lv." to gender, spliced and status icons, these depend on the type of slot.
     let genderTextToLevelLabelOffset = { x: 68 - (isFusion ? 8 : 0), y: -9 };
     let splicedIconToLevelLabelOffset = { x: 68, y: 3.5 - 12 };

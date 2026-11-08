@@ -2,6 +2,7 @@ import { pokerogueApi } from "#api/api";
 import { bypassLogin } from "#constants/app-constants";
 import type { UserInfo } from "#types/api";
 import { randomString } from "#utils/common";
+import i18next from "i18next";
 
 export let loggedInUser: UserInfo | null = null;
 
@@ -64,4 +65,16 @@ export function getSessionDataLocalStorageKey(slotId: number): string {
   // TODO: Default to `Guest` as a fallback for no logged in username
   // rather than leaving a trailing underscore
   return `sessionData${slotId || ""}_${loggedInUser?.username}`;
+}
+
+/**
+ * 블서로그: 화면에 보여 줄 이름. 로그인 안 한 사람의 내부 이름 "Guest" 는 저장 키라 그대로 두고, 화면에는 "생존자" 로 보여요
+ * @param fallback - 이름이 없을 때 쓸 글자
+ */
+export function displayUsername(fallback = ""): string {
+  const name = loggedInUser?.username;
+  if (!name) {
+    return fallback;
+  }
+  return name === "Guest" ? i18next.t("common:guest") : name;
 }

@@ -27,7 +27,7 @@ import { StatsContainer } from "#ui/stats-container";
 import { addBBCodeTextObject, addTextObject, getTextColor, updateCandyCountTextStyle } from "#ui/text";
 import { argbFromRgba, rgbHexToRgba } from "#utils/color-utils";
 import { getLocalizedSpriteKey, padInt, truncateString } from "#utils/common";
-import { getStarterColors } from "#utils/pokemon-utils";
+import { getDexNumber, getStarterColors } from "#utils/pokemon-utils";
 import { toCamelCase, toTitleCase } from "#utils/strings";
 import i18next from "i18next";
 import type { GameObjects } from "phaser";
@@ -467,7 +467,7 @@ export class StarterSummary extends Phaser.GameObjects.Container {
   }
 
   private setNameAndNumber(species: PokemonSpecies, starterPreferences: StarterPreferences): void {
-    this.pokemonNumberText.setText(padInt(species.speciesId, 4));
+    this.pokemonNumberText.setText(padInt(getDexNumber(species.speciesId), 4));
 
     if (starterPreferences?.nickname) {
       const name = decodeURIComponent(escape(atob(starterPreferences.nickname)));

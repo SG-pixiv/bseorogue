@@ -1,5 +1,5 @@
 import { pokerogueApi } from "#api/api";
-import { loggedInUser } from "#app/account";
+import { displayUsername } from "#app/account";
 import { BSEO } from "#app/bseorogue";
 import { FAKE_TITLE_LOGO_CHANCE } from "#app/constants";
 import { eventBus } from "#app/event-bus";
@@ -50,7 +50,7 @@ export class TitleUiHandler extends OptionSelectUiHandler {
 
     const displayName = settings.display.hideUsername
       ? usernameReplacement
-      : (loggedInUser?.username ?? i18next.t("common:guest"));
+      : displayUsername(i18next.t("common:guest"));
 
     return i18next.t("menu:loggedInAs", { username: displayName });
   }

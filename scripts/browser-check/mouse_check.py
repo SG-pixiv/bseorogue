@@ -218,4 +218,5 @@ async def main():
     open(f"{OUT}-log.txt", "w").write("\n".join(log))
 
 
-asyncio.run(main())
+if __name__ == "__main__":  # 다른 확인 스크립트에서 함수만 가져다 쓸 수 있게
+    asyncio.run(main())

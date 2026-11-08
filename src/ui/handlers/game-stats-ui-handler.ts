@@ -1,4 +1,4 @@
-import { loggedInUser } from "#app/account";
+import { displayUsername } from "#app/account";
 import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
@@ -341,7 +341,7 @@ export class GameStatsUiHandler extends UiHandler {
 
     const displayName = settings.display.hideUsername
       ? usernameReplacement
-      : (loggedInUser?.username ?? i18next.t("common:guest"));
+      : displayUsername(i18next.t("common:guest"));
 
     return i18next.t("gameStatsUiHandler:stats", { username: displayName });
   }

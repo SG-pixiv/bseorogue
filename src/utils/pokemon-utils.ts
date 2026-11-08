@@ -2,6 +2,7 @@ import { MAX_TERAS_PER_ARENA } from "#app/constants";
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { POKERUS_STARTER_COUNT } from "#balance/starters";
+import { erCodeOfSpecies } from "#data/bseorogue/roster";
 import { starterColors } from "#data/data-lists";
 import { BattlerIndex } from "#enums/battler-index";
 import { MAX_REGULAR_POKEMON_TYPE, MIN_REGULAR_POKEMON_TYPE, type RegularPokemonType } from "#enums/pokemon-type";
@@ -16,7 +17,8 @@ import { randSeedIntRange, randSeedItem } from "#utils/common";
  * @returns The national dex number matching the `SpeciesId`
  */
 export function getDexNumber(speciesId: SpeciesId): number {
-  return speciesId % 2000;
+  // 블서로그: 실험체는 내부 종 번호(1030 + ER × 3 + 단계) 대신 ER 실험체 번호를 보여 줘요 (재키 1, 카티야 72)
+  return erCodeOfSpecies(speciesId) ?? speciesId % 2000;
 }
 
 /**
