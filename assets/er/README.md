@@ -8,8 +8,11 @@ https://support.playeternalreturn.com/hc/ko/articles/63456926675865
 - `char-icons.png` 아이콘 한 장 (팬키트 Mini 얼굴)
 - `art-sources.json` 그림마다 어느 팬키트 파일 · 종류(전신 · 반신 · 얼굴)로 만들었는지
 - `voice/<ER번호>_<q|w|e|r|select|die>_<0|1|2>.m4a` 스킬 · 등장 · 쓰러질 때 대사 음성, 키마다 최대 3개 (팬키트 Voice Line, 한국어 > 영어 > 일본어 중 하나, AAC 모노 64kbps)
+- `skill/<ER번호>_<p|q|w|e|r>.png` 스킬 아이콘 (팬키트 Skill Icon, 72×72 · 128색, p = 패시브)
+- `skill-icon-sources.json` 아이콘마다 어느 팬키트 파일로 만들었는지
 - `voice-sources.json` 실험체마다 음성 언어 · zip(또는 낱개 폴더) · 고른 파일
 
 다시 만들기 (팬키트가 zip 여러 개로 나뉘어 있어서 기본은 더하기예요. 처음부터는 `--fresh`):
 - 그림: `python3 scripts/fankit/build_art.py <팬키트 폴더> [<폴더> …]`
+- 스킬 아이콘: `python3 -B scripts/fankit/build_skill_icons.py <팬키트 폴더> [<폴더> …]`
 - 음성: `python3 scripts/fankit/build_voice.py <팬키트 폴더> [<폴더> …]` (ffmpeg 필요)
