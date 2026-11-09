@@ -10,11 +10,13 @@ import { loadKelTeams } from "#data/bseorogue/kel";
 import { REGION_ROLES } from "#data/bseorogue/regions";
 import { Role } from "#data/bseorogue/roles";
 import { BSEO_ALL_IDS, BSEO_BOSSES, BSEO_CHARACTERS, BSEO_WILD, ENEMY_MOVE_NAMES } from "#data/bseorogue/roster";
+import { SHEET_SKILLS } from "#data/bseorogue/sheet-data";
 /**
  * 블서로그가 포켓로그 엔진에 끼어드는 곳들 (야생 · 보스 · 스킬 이름 · 역할군)
  */
 import { allMoves } from "#data/data-lists";
 import type { PokemonSpecies } from "#data/pokemon-species";
+import { MoveCategory } from "#enums/move-category";
 import { MoveId } from "#enums/move-id";
 import type { PokemonType } from "#enums/pokemon-type";
 import type { SpeciesId } from "#enums/species-id";
@@ -56,21 +58,51 @@ export function bseoBossSpecies(waveIndex: number): PokemonSpecies | null {
   return boss ? speciesDataRegistry.getSpecies(boss.id) : null;
 }
 
-/** 실험체 스킬: 빌려 쓰는 기술의 이름 · 상성(역할군)을 블서로그 것으로 */
+interface SkillMove {
+  _type: PokemonType;
+  _category: MoveCategory;
+  power: number;
+  accuracy: number;
+  pp: number;
+  priority: number;
+  localize(): void;
+}
+
+/**
+ * 시트의 위력 · 명중 · PP · 선공을 빌려 쓰는 기술에 넣어요.
+ * 물리 ↔ 스증은 바꿔도 되지만, 변화 ↔ 공격은 기술 자체가 달라야 해서 그대로 둬요 (효과를 정할 때 빌릴 기술을 바꿔요).
+ */
+function applySheetSkill(move: SkillMove, sheet: (typeof SHEET_SKILLS)[number][number] | undefined): void {
+  if (!sheet) {
+    return;
+  }
+  move.pp = sheet.pp;
+  move.priority = sheet.priority;
+  move.accuracy = sheet.accuracy;
+  const isStatus = move._category === MoveCategory.STATUS;
+  if (isStatus || sheet.category === "STATUS") {
+    return;
+  }
+  move.power = sheet.power;
+  move._category = sheet.category === "SPECIAL" ? MoveCategory.SPECIAL : MoveCategory.PHYSICAL;
+}
+
+/** 실험체 스킬: 빌려 쓰는 기술의 이름 · 상성(역할군) · 위력 · 명중 · PP 를 블서로그 것으로 */
 export function initBseorogue(): void {
   // KEL 팀 불러오기 (기다리지 않아요. 못 불러오면 기본 팀)
   void loadKelTeams();
   for (const c of BSEO_CHARACTERS) {
-    for (const s of c.skills) {
-      const move = allMoves[s.move] as unknown as { _type: PokemonType; localize(): void } | undefined;
+    c.skills.forEach((s, i) => {
+      const move = allMoves[s.move] as unknown as SkillMove | undefined;
       if (!move) {
-        continue;
+        return;
       }
       // 이름은 글자 묶음(i18n)에 넣어 둬야 다시 불러와도 안 바뀌어요
       i18next.addResource(i18next.resolvedLanguage ?? "ko", "move", `${toCamelCase(MoveId[s.move])}.name`, s.name);
       move._type = c.role as unknown as PokemonType;
+      applySheetSkill(move, SHEET_SKILLS[c.erCode]?.[i]);
       move.localize();
-    }
+    });
   }
   for (const [id, name] of Object.entries(ENEMY_MOVE_NAMES)) {
     const move = allMoves[Number(id)] as unknown as { localize(): void } | undefined;

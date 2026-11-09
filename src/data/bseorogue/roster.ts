@@ -5,6 +5,7 @@
 
 import { ER_CHARACTERS, ER_MONSTERS, type ErRoleKey } from "#data/bseorogue/er-data";
 import { Role } from "#data/bseorogue/roles";
+import { SHEET_CHARACTERS, SHEET_SKILLS } from "#data/bseorogue/sheet-data";
 import { SKILL_MOVES } from "#data/bseorogue/skill-moves";
 import { skinEvolutionOf } from "#data/bseorogue/skin-evolution";
 import { characterStages, erMonsterStats, ROLE_SHAPE, type Stages3, type Stats6 } from "#data/bseorogue/stats";
@@ -147,9 +148,11 @@ function buildCharacter(erCode: number, cfg: PlayableConfig | undefined): BseoCh
   if (!er || !moves) {
     return null;
   }
-  const role = Role[cfg?.role ?? er.role];
-  const cost = cfg?.cost ?? 1;
-  const stages = characterStages(cfg?.final ?? ROLE_SHAPE[role], cost);
+  // 시트(docs/sheets/실험체-스킬.xlsx → sheet-data.ts)가 있으면 시트 값이 먼저예요
+  const sheet = SHEET_CHARACTERS[erCode];
+  const role = Role[sheet?.role ?? cfg?.role ?? er.role];
+  const cost = sheet?.cost ?? cfg?.cost ?? 1;
+  const stages = characterStages(sheet?.final ?? cfg?.final ?? ROLE_SHAPE[role], cost);
   const evo = skinEvolutionOf(erCode);
   const roles: Role[] = [role];
   for (const r of evo.roles) {
@@ -168,20 +171,20 @@ function buildCharacter(erCode: number, cfg: PlayableConfig | undefined): BseoCh
     id: forms[0].id,
     erCode,
     name: er.name,
-    weapon: cfg?.weapon ?? er.weapons[0] ?? "",
+    weapon: sheet?.weapon || cfg?.weapon || er.weapons[0] || "",
     role,
     cost,
     playable: ALL_PLAYABLE || !!cfg,
     stats: stages[0],
     stages,
-    focus: cfg?.focus ?? "역할군 기본",
+    focus: cfg?.focus ?? (sheet ? "시트" : "역할군 기본"),
     forms,
     passive: er.skills[0] ?? "",
     skins: er.skins,
     skills: moves.map((move, i) => ({
       move,
       name: er.skills[i + 1] || `${er.name} ${SKILL_KEYS[i]}`,
-      level: SKILL_LEVELS[i],
+      level: SHEET_SKILLS[erCode]?.[i]?.level ?? SKILL_LEVELS[i],
     })) as unknown as BseoCharacter["skills"],
   };
 }

@@ -4,6 +4,7 @@
  */
 
 import type { ErRoleKey } from "#data/bseorogue/er-data";
+import { SHEET_CHARACTERS } from "#data/bseorogue/sheet-data";
 
 /**
  * 스킨 진화 (진화 = 스킨) — 임시 순서예요. 완성 뒤에 SG가 정하는 대로 이 표만 고치면 돼요.
@@ -34,6 +35,12 @@ export const SKIN_EVOLUTION: Readonly<Partial<Record<number, Partial<SkinEvoluti
   // 30: { skins: [3, 1], levels: [15, 30], roles: [null, "BRUISER"] },
 };
 
+/** 기본값 ← 위 표 ← 시트(docs/sheets/실험체-스킬.xlsx) 순서로 덮어써요 */
 export function skinEvolutionOf(erCode: number): SkinEvolution {
-  return { ...SKIN_EVOLUTION_DEFAULT, ...SKIN_EVOLUTION[erCode] };
+  const sheet = SHEET_CHARACTERS[erCode];
+  return {
+    ...SKIN_EVOLUTION_DEFAULT,
+    ...SKIN_EVOLUTION[erCode],
+    ...(sheet ? { skins: sheet.skins, levels: sheet.levels, roles: sheet.roles } : {}),
+  };
 }

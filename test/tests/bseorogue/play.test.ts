@@ -7,6 +7,7 @@
 import { LEADERS } from "#data/bseorogue/leaders";
 import { BSEO_STARTER_IDS, bseoCharacter, erCodeOfSpecies } from "#data/bseorogue/roster";
 import { setRunTier } from "#data/bseorogue/tiers";
+import { allMoves } from "#data/data-lists";
 import { Egg } from "#data/egg";
 import { BattleType } from "#enums/battle-type";
 import { BattlerIndex } from "#enums/battler-index";
@@ -18,7 +19,7 @@ import { TrainerType } from "#enums/trainer-type";
 import { GameOverPhase } from "#phases/game-over-phase";
 import { GameManager } from "#test/framework/game-manager";
 import Phaser from "phaser";
-import { beforeAll, beforeEach, describe, expect, it } from "vitest";
+import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("블서로그 한 판 흐름", () => {
   let phaserGame: Phaser.Game;
@@ -106,6 +107,8 @@ describe("블서로그 한 판 흐름", () => {
 
   it("1웨이브부터 50웨이브까지 끝까지 (동물 · KEL 팀 · 보스 · 지역 이동 · 최종 보스)", async () => {
     game.override.moveset([MoveId.BODY_SLAM]).startingWave(1).startingLevel(100);
+    // 몸통박치기는 일레븐 E 스킬이라 시트 명중(100 아래)을 따라요. 검사에서는 반드시 맞게 (검사 난수는 빗나가는 쪽으로 굴러요)
+    vi.spyOn(allMoves[MoveId.BODY_SLAM], "calculateBattleAccuracy").mockReturnValue(-1);
     await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
 
     const seen = { kel: 0, leader: 0, boss: 0, character: 0, animal: 0, biomes: new Set<number>() };

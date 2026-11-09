@@ -60,6 +60,7 @@ pnpm build         # dist/ 에 배포용 파일
 | 임시 그림 | `src/data/bseorogue/placeholder-art.ts` (진짜 그림을 넣으면 `REAL_ART` 에 종 번호 추가) |
 | 실험체 그림 · 아이콘 (팬키트) | `python3 scripts/fankit/build_art.py <팬키트 폴더> …` → `assets/er/char/`, `art-manifest.ts` (더하기 방식, `--fresh` 는 새로) |
 | 실험체 음성 (스킬 Q W E R · 등장 · 쓰러질 때, 키마다 최대 3개) | `python3 scripts/fankit/build_voice.py <팬키트 폴더> …` → `assets/er/voice/`, `voice-manifest.ts` · 게임 쪽은 `src/data/bseorogue/voice.ts` |
+| 실험체 · 스킬 시트 → 게임 데이터 | `docs/sheets/실험체-스킬.xlsx` 를 고친 뒤 `python3 -I -B scripts/er-sheet/import_sheet.py` (→ `src/data/bseorogue/sheet-data.ts`) |
 | 실험체 도트 정리 (AI 밑그림 → 80×80 · 15색) | `python3 scripts/er-dot/clean_dot.py <그림> <ER번호>_<스킨>.png [--size S\|M\|L] [--icon]` (규격은 `docs/dot-guide/`) |
 | 실험체 도트 나란히 검수 | `python3 scripts/er-dot/lineup.py <폴더> -o lineup.png` (발밑 · 키 등급 선) |
 | UI 그림 (창 · 바 · 커서 · 배지, ER 느낌) | `python3 scripts/er-ui/make_ui.py` (색 · 모양은 맨 위 `THEMES` · `TYPE_STYLE`, 글꼴은 npm `galmuri`) |
