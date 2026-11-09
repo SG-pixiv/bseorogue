@@ -4,6 +4,7 @@ import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { getStarterValueFriendshipCap } from "#balance/starters";
+import { addBseoSkillIcon } from "#data/bseorogue/skill-icon";
 import { getLevelRelExp, getLevelTotalExp } from "#data/exp";
 import { getGenderColor, getGenderSymbol } from "#data/gender";
 import { getNatureName, getNatureStatMultiplier } from "#data/nature";
@@ -1303,6 +1304,12 @@ export class SummaryUiHandler extends UiHandler {
             const newMoveTypeIcon = globalScene.add.sprite(0, 0, spriteKey, PokemonType[moveType].toLowerCase());
             newMoveTypeIcon.setOrigin(0, 1);
             this.extraMoveRowContainer.add(newMoveTypeIcon);
+            // 블서로그: 새로 배울 스킬 이름 왼쪽에 스킬 아이콘
+            const newMoveIcon = addBseoSkillIcon(35, -1, this.newMove.id, 12);
+            if (newMoveIcon) {
+              this.extraMoveRowContainer.add(newMoveIcon.setOrigin(0, 1));
+              extraRowText.setX(49);
+            }
           }
           const ppOverlay = globalScene.add.image(177, -5, getLocalizedSpriteKey("summary_moves_overlay_pp")); // Pixel text 'PP'
           ppOverlay.setOrigin(1, 0.5);
@@ -1331,7 +1338,13 @@ export class SummaryUiHandler extends UiHandler {
             moveRowContainer.add(typeIcon);
           }
 
-          const moveText = addTextObject(35, 0, move ? move.getName() : "-", TextStyle.SUMMARY);
+          // 블서로그: 스킬 이름 왼쪽에 실험체 스킬 아이콘 (12칸)
+          const moveIcon = move ? addBseoSkillIcon(35, -1, move.moveId, 12) : null;
+          if (moveIcon) {
+            moveRowContainer.add(moveIcon.setOrigin(0, 1));
+          }
+
+          const moveText = addTextObject(moveIcon ? 49 : 35, 0, move ? move.getName() : "-", TextStyle.SUMMARY);
           moveText.setOrigin(0, 1);
           moveRowContainer.add(moveText);
 

@@ -84,6 +84,28 @@ async def shot(pg, name, hover=None):
     return ts
 
 
+async def skip_tutorial(pg, tries=12):
+    """튜토리얼 창(시작 고르기에서 실험체를 처음 누르면 코스트 안내가 떠요)이 있으면 Space 로 넘기기 (11-09)"""
+    for _ in range(tries):
+        if not (await state(pg)).get("tutorial"):
+            return
+        await press(pg, "Space", 700)
+
+
+async def back_to_starters(pg, tries=8):
+    """시작 고르기 화면으로: 튜토리얼은 넘기고, 열린 고르기 창은 닫아요"""
+    for _ in range(tries):
+        st = await state(pg)
+        labels = [t["label"] for t in await targets(pg)]
+        if st.get("tutorial"):
+            await press(pg, "Space", 700)
+        elif st["mode"] == "OPTION_SELECT" or "option:0" in labels or not labels:
+            await pg.mouse.click(1270, 710, button="right")  # 오른쪽 클릭 = 취소
+            await pg.wait_for_timeout(700)
+        else:
+            return
+
+
 async def to_battle(pg):
     await pg.goto("http://localhost:8010/index.html")
     await pg.wait_for_timeout(12000)
@@ -101,8 +123,15 @@ async def to_battle(pg):
         await press(pg, "Space", 700)
     await pg.wait_for_timeout(800)
     for idx in (0, 71):
+        await back_to_starters(pg)
         await click(pg, f"starter:{idx}")
-        await press(pg, "Space", 1200)
+        await skip_tutorial(pg)
+        # 실험체를 누르면 고르기 창(데려가기 · …)이 떠요 → 첫 줄 "데려가기"
+        if any(t["label"] == "option:0" for t in await targets(pg)):
+            await click(pg, "option:0", 1200)
+        else:
+            await press(pg, "Space", 1200)
+    await back_to_starters(pg)
     await shot(pg, "00-starter")
     await click(pg, "start", 1200)
     # "이 실험체들로 시작하시겠습니까?" → 예 (Space 만 누르면 느릴 때 아니오 쪽으로 넘어가 같은 화면을 맴돌아요)

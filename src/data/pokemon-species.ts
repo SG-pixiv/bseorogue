@@ -9,6 +9,7 @@ import type { AnySound } from "#audio/audio-manager";
 import { speciesEggMoves } from "#balance/egg-moves";
 import { isBseoSpecies } from "#data/bseorogue/hooks";
 import { ensureBseoIcons, ensureBseoSprite, REAL_ART } from "#data/bseorogue/placeholder-art";
+import { loadBseoSkillIcons } from "#data/bseorogue/skill-icon";
 import { loadBseoVoices, playBseoVoice } from "#data/bseorogue/voice";
 import type { GrowthRate } from "#data/exp";
 import { Gender } from "#data/gender";
@@ -721,8 +722,9 @@ export abstract class PokemonSpeciesForm {
     const spriteKey = this.getSpriteKey(female, formIndex, shiny, variant, back);
     // 블서로그: 그림 파일이 아직 없는 실험체 · 동물 · 보스는 게임 안에서 임시 그림을 그려요
     if (isBseoSpecies(this.speciesId) && ensureBseoSprite(spriteKey, this.speciesId, back)) {
-      // 블서로그: 실험체 음성(스킬 · 등장 대사)도 같이 받아 둬요
+      // 블서로그: 실험체 음성(스킬 · 등장 대사) · 스킬 아이콘도 같이 받아 둬요
       loadBseoVoices(this.speciesId);
+      loadBseoSkillIcons(this.speciesId);
       if (startLoad && !globalScene.load.isLoading()) {
         globalScene.load.start();
       }
