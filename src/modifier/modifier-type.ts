@@ -8,6 +8,7 @@ import { activeOverrides } from "#app/overrides";
 import { EvolutionItem } from "#balance/pokemon-evolutions";
 import { getTmNumber, tmPoolTiers } from "#balance/tm-pool-tiers";
 import { getBerryEffectDescription, getBerryName } from "#data/berry";
+import { bseoRewardKeep, bseoRewardOff } from "#data/bseorogue/reward-filter";
 import { getDailyEventSeedLuck } from "#data/daily-run";
 import { allMoves, modifierTypes } from "#data/data-lists";
 import { SpeciesFormChangeItemTrigger } from "#data/form-change-triggers";
@@ -28,7 +29,7 @@ import { PokemonType } from "#enums/pokemon-type";
 import { SpeciesFormKey } from "#enums/species-form-key";
 import { SpeciesId } from "#enums/species-id";
 import type { PermanentStat, TempBattleStat } from "#enums/stat";
-import { getStatKey, Stat, TEMP_BATTLE_STATS } from "#enums/stat";
+import { getStatKey, PERMANENT_STATS, Stat, TEMP_BATTLE_STATS } from "#enums/stat";
 import { StatusEffect } from "#enums/status-effect";
 import { VoucherType } from "#enums/voucher-type";
 import type { EnemyPokemon, PlayerPokemon, Pokemon } from "#field/pokemon";
@@ -1274,6 +1275,10 @@ class AttackTypeBoosterModifierTypeGenerator extends ModifierTypeGenerator {
             types = p.getMoveTypeForItemSpawn(move);
           }
           for (const type of types) {
+            // 블서로그: 뺀 강화 모듈(야생 · 보스 등)은 내 보상에 안 나와요 (적이 지닌 것은 그대로: 야생동물은 야생 스킬뿐이라)
+            if (p.isPlayer() && bseoRewardOff("ATTACK_TYPE_BOOSTER", PokemonType[type])) {
+              continue;
+            }
             const currentWeight = attackMoveTypeWeights.get(type) ?? 0;
             if (currentWeight < 3) {
               attackMoveTypeWeights.set(type, currentWeight + 1);
@@ -1313,11 +1318,16 @@ class BaseStatBoosterModifierTypeGenerator extends ModifierTypeGenerator {
   };
 
   constructor() {
-    super((_party: readonly Pokemon[], pregenArgs?: any[]) => {
+    super((party: readonly Pokemon[], pregenArgs?: any[]) => {
       if (pregenArgs) {
         return new BaseStatBoosterModifierType(pregenArgs[0]);
       }
-      const randStat: PermanentStat = randSeedInt(Stat.SPD + 1);
+      // 블서로그: 뺀 것은 빼고 고르기 (다 뺐으면 안 나와요)
+      const stats = bseoRewardKeep("BASE_STAT_BOOSTER", PERMANENT_STATS, st => Stat[st], party);
+      if (stats.length === 0) {
+        return null;
+      }
+      const randStat: PermanentStat = stats[randSeedInt(stats.length)];
       return new BaseStatBoosterModifierType(randStat);
     });
   }
@@ -1334,11 +1344,16 @@ class TempStatStageBoosterModifierTypeGenerator extends ModifierTypeGenerator {
   };
 
   constructor() {
-    super((_party: readonly Pokemon[], pregenArgs?: any[]) => {
+    super((party: readonly Pokemon[], pregenArgs?: any[]) => {
       if (pregenArgs && pregenArgs.length === 1 && TEMP_BATTLE_STATS.includes(pregenArgs[0])) {
         return new TempStatStageBoosterModifierType(pregenArgs[0]);
       }
-      const randStat: TempBattleStat = randSeedInt(Stat.ACC, Stat.ATK);
+      // 블서로그: 뺀 것은 빼고 고르기 (다 뺐으면 안 나와요)
+      const stats = bseoRewardKeep("TEMP_STAT_STAGE_BOOSTER", TEMP_BATTLE_STATS, st => Stat[st], party);
+      if (stats.length === 0) {
+        return null;
+      }
+      const randStat: TempBattleStat = stats[randSeedInt(stats.length)];
       return new TempStatStageBoosterModifierType(randStat);
     });
   }
@@ -1930,7 +1945,7 @@ const modifierTypeInitObj = Object.freeze({
     }),
 
   BERRY: () =>
-    new ModifierTypeGenerator((_party: readonly Pokemon[], pregenArgs?: any[]) => {
+    new ModifierTypeGenerator((party: readonly Pokemon[], pregenArgs?: any[]) => {
       if (pregenArgs && pregenArgs.length === 1 && pregenArgs[0] in BerryType) {
         return new BerryModifierType(pregenArgs[0] as BerryType);
       }
@@ -1945,6 +1960,14 @@ const modifierTypeInitObj = Object.freeze({
         randBerryType = BerryType.LEPPA;
       } else {
         randBerryType = berryTypes[randSeedInt(berryTypes.length - 3) + 2];
+      }
+      // 블서로그: 뺀 음식이 뽑히면 남은 것 중에서 다시 (다 뺐으면 안 나와요)
+      if (bseoRewardOff("BERRY", BerryType[randBerryType])) {
+        const kept = bseoRewardKeep("BERRY", berryTypes, b => BerryType[b], party);
+        if (kept.length === 0) {
+          return null;
+        }
+        randBerryType = kept[randSeedInt(kept.length)];
       }
       return new BerryModifierType(randBerryType);
     }),
@@ -2598,36 +2621,44 @@ export function getPlayerShopModifierTypeOptionsForWave(waveIndex: number, baseC
     return [];
   }
 
+  // 블서로그: 상점 물건에도 이름표(id)를 붙여서, SG가 뺀 아이템(시트 '아이템 줄이기')은 상점에도 안 나오게
+  const shopType = (id: string): ModifierType => {
+    const type = modifierTypeInitObj[id]() as ModifierType;
+    type.id = id;
+    return type;
+  };
+
   const options = [
     [
-      new ModifierTypeOption(modifierTypeInitObj.POTION(), 0, baseCost * 0.2),
-      new ModifierTypeOption(modifierTypeInitObj.ETHER(), 0, baseCost * 0.4),
-      new ModifierTypeOption(modifierTypeInitObj.REVIVE(), 0, baseCost * 2),
+      new ModifierTypeOption(shopType("POTION"), 0, baseCost * 0.2),
+      new ModifierTypeOption(shopType("ETHER"), 0, baseCost * 0.4),
+      new ModifierTypeOption(shopType("REVIVE"), 0, baseCost * 2),
     ],
     [
-      new ModifierTypeOption(modifierTypeInitObj.SUPER_POTION(), 0, baseCost * 0.45),
-      new ModifierTypeOption(modifierTypeInitObj.FULL_HEAL(), 0, baseCost),
+      new ModifierTypeOption(shopType("SUPER_POTION"), 0, baseCost * 0.45),
+      new ModifierTypeOption(shopType("FULL_HEAL"), 0, baseCost),
     ],
     [
-      new ModifierTypeOption(modifierTypeInitObj.ELIXIR(), 0, baseCost),
-      new ModifierTypeOption(modifierTypeInitObj.MAX_ETHER(), 0, baseCost),
+      new ModifierTypeOption(shopType("ELIXIR"), 0, baseCost),
+      new ModifierTypeOption(shopType("MAX_ETHER"), 0, baseCost),
     ],
     [
-      new ModifierTypeOption(modifierTypeInitObj.HYPER_POTION(), 0, baseCost * 0.8),
-      new ModifierTypeOption(modifierTypeInitObj.MAX_REVIVE(), 0, baseCost * 2.75),
-      new ModifierTypeOption(modifierTypeInitObj.MEMORY_MUSHROOM(), 0, baseCost * 4),
+      new ModifierTypeOption(shopType("HYPER_POTION"), 0, baseCost * 0.8),
+      new ModifierTypeOption(shopType("MAX_REVIVE"), 0, baseCost * 2.75),
+      new ModifierTypeOption(shopType("MEMORY_MUSHROOM"), 0, baseCost * 4),
     ],
     [
-      new ModifierTypeOption(modifierTypeInitObj.MAX_POTION(), 0, baseCost * 1.5),
-      new ModifierTypeOption(modifierTypeInitObj.MAX_ELIXIR(), 0, baseCost * 2.5),
+      new ModifierTypeOption(shopType("MAX_POTION"), 0, baseCost * 1.5),
+      new ModifierTypeOption(shopType("MAX_ELIXIR"), 0, baseCost * 2.5),
     ],
-    [new ModifierTypeOption(modifierTypeInitObj.FULL_RESTORE(), 0, baseCost * 2.25)],
-    [new ModifierTypeOption(modifierTypeInitObj.SACRED_ASH(), 0, baseCost * 10)],
+    [new ModifierTypeOption(shopType("FULL_RESTORE"), 0, baseCost * 2.25)],
+    [new ModifierTypeOption(shopType("SACRED_ASH"), 0, baseCost * 10)],
   ];
 
   return options
     .slice(0, Math.ceil(Math.max(waveIndex + 10, 0) / 30))
     .flat()
+    .filter(shopItem => !bseoRewardOff(shopItem.type.id))
     .filter(shopItem => {
       const status = new BooleanHolder(true);
       applyChallenges(ChallengeType.SHOP_ITEM, shopItem, status);

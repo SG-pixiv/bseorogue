@@ -20,7 +20,8 @@ from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "docs/sheets/SG-정할-것.xlsx"
+_ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
+OUT = Path(_ARGS[0]) if _ARGS else ROOT / "docs/sheets/SG-정할-것.xlsx"
 F = "맑은 고딕"
 thin = Side(style="thin", color="C9CED8")
 B = Border(left=thin, right=thin, top=thin, bottom=thin)
@@ -170,6 +171,9 @@ def characters():
 
 
 def main():
+    # SG가 채운 파일(답 · '아이템 줄이기' 시트)을 지우지 않게: 이미 있으면 --force 가 있어야 덮어써요
+    if OUT.exists() and "--force" not in sys.argv:
+        raise SystemExit(f"{OUT.name} 이 이미 있어요. SG가 채운 답이 지워질 수 있어요 → 다른 이름을 주거나 --force")
     wb = Workbook()
     # 1) 읽어 주세요
     ws = wb.active

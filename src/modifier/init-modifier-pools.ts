@@ -2,6 +2,7 @@ import { BSEO } from "#app/bseorogue";
 import { timedEventManager } from "#app/global-event-manager";
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
+import { bseoRewardOff } from "#data/bseorogue/reward-filter";
 import { modifierTypes } from "#data/data-lists";
 import { MAX_PER_TYPE_POKEBALLS } from "#data/pokeball";
 import { AbilityId } from "#enums/ability-id";
@@ -805,11 +806,15 @@ export function initModifierPools() {
   initEnemyBuffModifierPool();
   initDailyStarterModifierPool();
 
-  // 블서로그: 포켓몬에만 맞는 보상은 빼요
-  for (const tier of Object.keys(modifierPool)) {
-    const pool = modifierPool[tier as unknown as ModifierTier];
-    if (pool) {
-      modifierPool[tier as unknown as ModifierTier] = pool.filter(w => !BSEO_NO_REWARD.has(w.modifierType.id));
+  // 블서로그: 포켓몬에만 맞는 보상 · SG가 뺀 아이템(시트 '아이템 줄이기')은 빼요. 적이 지닌 물건도 같이
+  for (const pools of [modifierPool, wildModifierPool, trainerModifierPool]) {
+    for (const tier of Object.keys(pools)) {
+      const pool = pools[tier as unknown as ModifierTier];
+      if (pool) {
+        pools[tier as unknown as ModifierTier] = pool.filter(
+          w => !BSEO_NO_REWARD.has(w.modifierType.id) && !bseoRewardOff(w.modifierType.id),
+        );
+      }
     }
   }
 }
