@@ -1,6 +1,6 @@
 {
   "trappedDesc": "함정",
-  "flinchedDesc": "풀죽음",
+  "flinchedDesc": "스턴",
   "confusedDesc": "혼란",
   "infatuatedDesc": "헤롱헤롱",
   "seedDesc": "씨뿌리기",
@@ -25,7 +25,7 @@
   "snapTrapOnAdd": "{{pokemonNameWithAffix}}[[는]]\n집게덫에 붙잡혔다!",
   "thunderCageOnAdd": "{{sourcePokemonName}}[[는]]\n{{pokemonNameWithAffix}}를 가두었다!",
   "infestationOnAdd": "{{pokemonNameWithAffix}}[[는]]\n{{sourcePokemonName}}에게 엉겨 붙었다!",
-  "flinchedLapse": "{{pokemonNameWithAffix}}[[는]] 풀이 죽어\n움직일 수 없었다!",
+  "flinchedLapse": "{{pokemonNameWithAffix}}[[는]] 스턴에 걸려\n움직일 수 없었다!",
   "confusedOnAdd": "{{pokemonNameWithAffix}}[[는]]\n혼란에 빠졌다!",
   "confusedOnRemove": "{{pokemonNameWithAffix}}의\n혼란이 풀렸다!",
   "confusedOnOverlap": "{{pokemonNameWithAffix}}[[는]]\n이미 혼란에 빠져 있다",

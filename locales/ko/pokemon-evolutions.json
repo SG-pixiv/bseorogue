@@ -22,7 +22,7 @@
   "treasure": "충분한 보물을 모았을 때",
   "moveUseCount": "{{move}}[[를]] {{count}}번 사용한 후",
   "nature": "특정 성격을 갖고 있을 때",
-  "biome": "특정 바이옴에서",
+  "biome": "특정 지역에서",
   "heldItem": {
     "deepSeaTooth": "심해의이빨을 지니고 있어야함",
     "deepSeaScale": "심해의비늘을 지니고 있어야함"

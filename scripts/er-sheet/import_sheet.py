@@ -247,7 +247,7 @@ def main():
         'export type SheetStat = "ATK" | "DEF" | "SPATK" | "SPDEF" | "SPD" | "ACC" | "EVA";',
         "",
         "export interface SheetSkillEffect {",
-        "  /** 상태이상 · 혼란 · 풀죽음 확률 (%), -1 = 반드시 */",
+        "  /** 상태이상 · 혼란 · 스턴 확률 (%), -1 = 반드시 */",
         "  chance: number;",
         '  status?: "BURN" | "PARALYSIS" | "POISON" | "TOXIC" | "SLEEP" | "FREEZE";',
         "  confuse?: boolean;",

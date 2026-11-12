@@ -119,7 +119,7 @@ ROWS = [
     ("지닌 물건", "FOCUS_BAND", "10% 확률로 HP 1 로 버팀", "로그", KEEP, KEEP, ""),
     ("지닌 물건", "REVIVER_SEED", "쓰러질 때 한 번 HP 절반으로 회복", "희귀", KEEP, KEEP, ""),
     ("지닌 물건", "QUICK_CLAW", "10% 확률로 먼저 행동", "희귀", KEEP, KEEP, ""),
-    ("지닌 물건", "KINGS_ROCK", "공격하면 10% 확률로 풀죽임", "로그", KEEP, KEEP, ""),
+    ("지닌 물건", "KINGS_ROCK", "공격하면 10% 확률로 스턴", "로그", KEEP, KEEP, ""),
     ("지닌 물건", "GRIP_CLAW", "공격하면 10% 확률로 상대 물건을 빼앗음", "로그", KEEP, KEEP, ""),
     ("지닌 물건", "BATON", "교체할 때 능력 변화를 넘겨줌", "로그", KEEP, KEEP, ""),
     ("지닌 물건", "WIDE_LENS", "명중률 +5", "희귀", KEEP, KEEP, ""),

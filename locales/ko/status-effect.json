@@ -30,13 +30,13 @@
     "heal": "{{pokemonNameWithAffix}}의\n둔화가 풀렸다!"
   },
   "sleep": {
-    "name": "기절",
-    "description": "기절",
-    "obtain": "{{pokemonNameWithAffix}}[[는]]\n기절했다!",
-    "obtainSource": "{{pokemonNameWithAffix}}[[는]]\n{{sourceText}} 때문에 기절했다!",
-    "activation": "{{pokemonNameWithAffix}}[[는]]\n기절해서 움직일 수 없다.",
-    "overlap": "{{pokemonNameWithAffix}}[[는]]\n이미 기절해 있다.",
-    "heal": "{{pokemonNameWithAffix}}[[는]]\n정신을 차렸다!"
+    "name": "잠듦",
+    "description": "잠듦",
+    "obtain": "{{pokemonNameWithAffix}}[[는]]\n잠들어 버렸다!",
+    "obtainSource": "{{pokemonNameWithAffix}}[[는]]\n{{sourceText}} 때문에 잠들어 버렸다!",
+    "activation": "{{pokemonNameWithAffix}}[[는]]\n쿨쿨 잠들어 있다.",
+    "overlap": "{{pokemonNameWithAffix}}[[는]]\n이미 잠들어 있다.",
+    "heal": "{{pokemonNameWithAffix}}[[는]]\n눈을 떴다!"
   },
   "freeze": {
     "name": "속박",

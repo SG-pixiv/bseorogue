@@ -1,7 +1,7 @@
 {
   "genFilter": "세대",
   "typeFilter": "타입",
-  "biomeFilter": "바이옴",
+  "biomeFilter": "지역",
   "caughtFilter": "포획",
   "unlocksFilter": "해금",
   "miscFilter": "기타",
