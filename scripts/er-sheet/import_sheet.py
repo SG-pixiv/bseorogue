@@ -8,7 +8,10 @@ SG가 고친 엑셀을 docs/sheets/실험체-스킬.xlsx 에 덮어쓰고 이 �
 
 쓰는 법: python3 -I -B scripts/er-sheet/import_sheet.py [엑셀 경로]
   → 이상한 칸(없는 역할군, 0 이하 숫자, 없는 스킨 번호 등)은 줄 번호와 같이 알려 주고 멈춰요.
-  → 효과 칸은 아직 글자만 저장해요 (효과를 실제로 바꾸는 건 효과가 정해진 뒤에 따로 해요).
+  → 효과 칸 글자를 읽어 게임 효과로 바꿔요 (쓸 수 있는 표현은 skill_effect.py 맨 위). 못 읽는 글자도 줄 번호와 같이 알려 줘요.
+  → 스킬마다 연출(애니메이션) 틀로 빌려 쓸 포켓로그 기술도 다시 골라 skill-moves.ts 에 써요 (pick_skill_moves.py).
+     틀을 안 바꾸려면 --keep-moves
+  → 다 되면: pnpm exec biome format --write src/data/bseorogue/ 그리고 블서로그 테스트
 """
 import json
 import sys
@@ -16,8 +19,14 @@ from pathlib import Path
 
 from openpyxl import load_workbook
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # -I 로 돌려도 같은 폴더 모듈을 읽게
+import pick_skill_moves  # noqa: E402
+import skill_effect  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[2]
-SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "docs" / "sheets" / "실험체-스킬.xlsx"
+ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
+KEEP_MOVES = "--keep-moves" in sys.argv
+SRC = Path(ARGS[0]) if ARGS else ROOT / "docs" / "sheets" / "실험체-스킬.xlsx"
 OUT = ROOT / "src" / "data" / "bseorogue" / "sheet-data.ts"
 ROLE = {"탱커": "TANK", "브루저": "BRUISER", "암살자": "ASSASSIN", "평원딜": "MARKSMAN", "원딜": "MARKSMAN",
         "스증딜러": "MAGE", "스증": "MAGE", "서포터": "SUPPORT"}
@@ -102,7 +111,7 @@ def main():
             errors.append(f"{at}: 분류는 물리 · 스증 · 변화 ({row[col['분류']]})")
             cat = "PHYSICAL"
         status = cat == "STATUS"
-        skills.setdefault(code, []).append({
+        sk = {
             "category": cat,
             "power": 0 if status else num(row[col["위력"]], at + " 위력", 1, 250),
             "accuracy": num(row[col["명중"]], at + " 명중", 1, 100, blank=-1),  # 비우면 반드시 맞음
@@ -110,7 +119,14 @@ def main():
             "priority": num(row[col["선공"]], at + " 선공", -7, 5, blank=0),
             "level": num(row[col["배우는 레벨"]], at + " 배우는 레벨", 1, 100),
             "effect": str(row[col["효과 (초안)"]] or "").strip(),
-        })
+        }
+        try:
+            sk["fx"], sk["desc"], warns = skill_effect.parse(sk["effect"], cat, sk["priority"])
+            warnings.extend(f"{at}: {w}" for w in warns)
+        except skill_effect.EffectError as e:
+            errors.append(f"{at}: 효과 — {e}")
+            sk["fx"], sk["desc"] = {"chance": -1}, ""
+        skills.setdefault(code, []).append(sk)
     for code, s in skills.items():
         if len(s) != 4:
             errors.append(f"실험체 {code}: 스킬이 4개가 아니에요 ({len(s)}개)")
@@ -160,8 +176,33 @@ def main():
         "  pp: number;",
         "  priority: number;",
         "  level: number;",
-        "  /** 원하는 효과 (아직 글자만, 실제 효과는 빌려 쓴 기술 것) */",
+        "  /** 시트 효과 칸 글자 그대로 */",
         "  effect: string;",
+        "  /** 효과 칸을 읽은 게임 효과 (skill-effect.ts 가 빌려 쓴 기술에 붙여요) */",
+        "  fx: SheetSkillEffect;",
+        "  /** 실험체 정보 화면 스킬 설명 */",
+        "  desc: string;",
+        "}",
+        "",
+        'export type SheetStat = "ATK" | "DEF" | "SPATK" | "SPDEF" | "SPD" | "ACC" | "EVA";',
+        "",
+        "export interface SheetSkillEffect {",
+        "  /** 상태이상 · 혼란 · 풀죽음 확률 (%), -1 = 반드시 */",
+        "  chance: number;",
+        '  status?: "BURN" | "PARALYSIS" | "POISON" | "TOXIC" | "SLEEP" | "FREEZE";',
+        "  confuse?: boolean;",
+        "  flinch?: boolean;",
+        "  /** 능력 변화 (self: 자기, 아니면 상대 · chance: 확률 %) */",
+        "  stats?: readonly { self: boolean; stats: readonly SheetStat[]; stages: number; chance: number }[];",
+        "  highCrit?: boolean;",
+        "  /** 준 피해의 이 비율만큼 회복 */",
+        "  drain?: number;",
+        "  /** 최대 체력의 이 비율만큼 회복 */",
+        "  heal?: number;",
+        "  /** 준 피해의 이 비율만큼 반동 */",
+        "  recoil?: number;",
+        "  /** 쓴 다음 턴 못 움직임 */",
+        "  recharge?: boolean;",
         "}",
         "",
         "/** ER 번호 → 실험체 (시트) */",
@@ -178,6 +219,17 @@ def main():
     lines += ["};", ""]
     OUT.write_text("\n".join(lines), encoding="utf-8")
     print(f"{OUT.relative_to(ROOT)}: 실험체 {len(chars)}명 · 스킬 {sum(len(s) for s in skills.values())}개")
+    if KEEP_MOVES:
+        return
+    want = {
+        code: [{"kind": skill_effect.kind_of(s["fx"], s["category"]), "tags": skill_effect.tags_of(s["fx"], s["category"]),
+                "category": s["category"], "power": s["power"], "priority": s["priority"]} for s in sk]
+        for code, sk in skills.items()
+    }
+    changed, moves = pick_skill_moves.pick(want)
+    print(f"{pick_skill_moves.OUT.relative_to(ROOT)}: 연출 틀 {len(changed)}개 바뀜")
+    for code, name, qwer, old, new in changed:
+        print(f"  {name} {qwer}: {old} → {new} ({' · '.join(sorted(moves[new]['tags'])) or '-'})")
 
 
 if __name__ == "__main__":

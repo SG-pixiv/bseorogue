@@ -73,6 +73,11 @@ async def main():
         # 스킬 하나 고르면 설명 · 위력 칸
         await press(pg, "Space", 1000)
         await snap(pg, "04-summary-move-selected")
+        # 옵션 창 닫고 아래 스킬로: 효과가 있는 스킬 설명 (시트 효과 칸에서 만든 문장)
+        await press(pg, "ArrowDown", 600)  # 옵션 '그만둔다'
+        await press(pg, "Space", 1000)
+        await press(pg, "ArrowDown", 800)
+        await snap(pg, "05-summary-move-desc")
         say("errors", errs[:5])
         await b.close()
 

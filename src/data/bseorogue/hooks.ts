@@ -11,6 +11,7 @@ import { REGION_ROLES } from "#data/bseorogue/regions";
 import { Role } from "#data/bseorogue/roles";
 import { BSEO_ALL_IDS, BSEO_BOSSES, BSEO_CHARACTERS, BSEO_WILD, ENEMY_MOVE_NAMES } from "#data/bseorogue/roster";
 import { SHEET_SKILLS } from "#data/bseorogue/sheet-data";
+import { applyBseoSkillEffect } from "#data/bseorogue/skill-effect";
 /**
  * 블서로그가 포켓로그 엔진에 끼어드는 곳들 (야생 · 보스 · 스킬 이름 · 역할군)
  */
@@ -70,7 +71,8 @@ interface SkillMove {
 
 /**
  * 시트의 위력 · 명중 · PP · 선공을 빌려 쓰는 기술에 넣어요.
- * 물리 ↔ 스증은 바꿔도 되지만, 변화 ↔ 공격은 기술 자체가 달라야 해서 그대로 둬요 (효과를 정할 때 빌릴 기술을 바꿔요).
+ * 물리 ↔ 스증은 바꿔도 되지만, 변화 ↔ 공격은 기술 자체가 달라야 해서 그대로 둬요
+ * (시트를 가져올 때 pick_skill_moves.py 가 분류에 맞는 기술로 바꿔 둬요. 테스트가 확인해요).
  */
 function applySheetSkill(move: SkillMove, sheet: (typeof SHEET_SKILLS)[number][number] | undefined): void {
   if (!sheet) {
@@ -87,7 +89,7 @@ function applySheetSkill(move: SkillMove, sheet: (typeof SHEET_SKILLS)[number][n
   move._category = sheet.category === "SPECIAL" ? MoveCategory.SPECIAL : MoveCategory.PHYSICAL;
 }
 
-/** 실험체 스킬: 빌려 쓰는 기술의 이름 · 상성(역할군) · 위력 · 명중 · PP 를 블서로그 것으로 */
+/** 실험체 스킬: 빌려 쓰는 기술의 이름 · 상성(역할군) · 위력 · 명중 · PP · 효과 · 설명을 블서로그 것으로 */
 export function initBseorogue(): void {
   // KEL 팀 불러오기 (기다리지 않아요. 못 불러오면 기본 팀)
   void loadKelTeams();
@@ -97,10 +99,16 @@ export function initBseorogue(): void {
       if (!move) {
         return;
       }
-      // 이름은 글자 묶음(i18n)에 넣어 둬야 다시 불러와도 안 바뀌어요
-      i18next.addResource(i18next.resolvedLanguage ?? "ko", "move", `${toCamelCase(MoveId[s.move])}.name`, s.name);
+      // 이름 · 설명은 글자 묶음(i18n)에 넣어 둬야 다시 불러와도 안 바뀌어요
+      const key = toCamelCase(MoveId[s.move]);
+      const sheet = SHEET_SKILLS[c.erCode]?.[i];
+      i18next.addResource(i18next.resolvedLanguage ?? "ko", "move", `${key}.name`, s.name);
       move._type = c.role as unknown as PokemonType;
-      applySheetSkill(move, SHEET_SKILLS[c.erCode]?.[i]);
+      applySheetSkill(move, sheet);
+      if (sheet?.desc) {
+        applyBseoSkillEffect(allMoves[s.move], sheet);
+        i18next.addResource(i18next.resolvedLanguage ?? "ko", "move", `${key}.effect`, sheet.desc);
+      }
       move.localize();
     });
   }
