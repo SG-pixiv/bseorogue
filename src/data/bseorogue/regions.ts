@@ -7,7 +7,9 @@
  * 지역마다 자주 나오는 역할군 (초안이에요. SG가 지역 분류를 정하면 이 표만 고치면 돼요)
  *
  * 일반 웨이브의 적은 대부분 실험체이고, 그 지역의 역할군이 3배 더 자주 나와요.
- * 지역 이름은 locales/ko/biomes.json 에서 바꿔요 (포켓로그 지역 35곳을 루미아 섬 20곳에 나눠 붙였어요).
+ * 지역 이름은 locales/ko/biomes.json 에서 바꿔요 (포켓로그 지역 35곳을 루미아 섬 21곳에 나눠 붙였어요).
+ * 바지선은 2026년 시즌 11에 생긴 21번째 지역이에요. 바지선(SEABED) · 호텔(SNOWY_FOREST) 자리는 11-12 임시예요
+ * (바꾸면 biomes.json · scripts/er-ui/make_arenas.py 의 BIOME_REGION 도 같이).
  */
 import type { ErRoleKey } from "#data/bseorogue/er-data";
 import { BiomeId } from "#enums/biome-id";
@@ -32,6 +34,8 @@ const AREA = {
   chapel: ["SUPPORT", "MAGE"], // 성당
   hospital: ["SUPPORT", "TANK"], // 병원
   lab: [], // 연구소 (골고루)
+  barge: ["BRUISER", "TANK"], // 바지선
+  hotel: ["ASSASSIN", "SUPPORT"], // 호텔
 } satisfies Record<string, ErRoleKey[]>;
 
 export const REGION_ROLES: Readonly<Partial<Record<BiomeId, readonly ErRoleKey[]>>> = {
@@ -42,10 +46,10 @@ export const REGION_ROLES: Readonly<Partial<Record<BiomeId, readonly ErRoleKey[]
   [BiomeId.TALL_GRASS]: AREA.forest,
   [BiomeId.FOREST]: AREA.forest,
   [BiomeId.JUNGLE]: AREA.forest,
-  [BiomeId.SNOWY_FOREST]: AREA.forest,
+  [BiomeId.SNOWY_FOREST]: AREA.hotel,
   [BiomeId.METROPOLIS]: AREA.uptown,
   [BiomeId.SEA]: AREA.harbor,
-  [BiomeId.SEABED]: AREA.harbor,
+  [BiomeId.SEABED]: AREA.barge,
   [BiomeId.SWAMP]: AREA.pond,
   [BiomeId.LAKE]: AREA.pond,
   [BiomeId.BEACH]: AREA.beach,

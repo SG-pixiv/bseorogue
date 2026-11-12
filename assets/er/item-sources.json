@@ -1,0 +1,635 @@
+{
+ "ability_charm": {
+  "file": "01. Weapons/13. Shuriken/010. Mystic Jade Charm.png",
+  "name": "부적 (ability_charm)",
+  "tint": [
+   150,
+   90,
+   210
+  ]
+ },
+ "amulet_coin": {
+  "file": "02. Armor/03. Arm, Accessory/047. Buccaneer Doubloon.png",
+  "name": "크레딧 부적"
+ },
+ "apicot_berry": {
+  "file": "03. Consumables/Food/024. Yellow Sweet Potato.png",
+  "name": "호박 고구마"
+ },
+ "baton": {
+  "file": "01. Weapons/11. Bat/001. Short Rod.png",
+  "name": "배턴"
+ },
+ "big_mushroom": {
+  "file": "03. Consumables/Food/017. Grilled Mushroom Skewers.png",
+  "name": "기억버섯"
+ },
+ "black_belt": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (fighting)",
+  "tint": [
+   214,
+   108,
+   64
+  ]
+ },
+ "black_glasses": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (dark)",
+  "tint": [
+   88,
+   76,
+   104
+  ]
+ },
+ "bug_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (bug)",
+  "tint": [
+   204,
+   62,
+   78
+  ]
+ },
+ "calcium": {
+  "file": "03. Consumables/Boost/06. Tear of Selene.png",
+  "name": "셀레네의 눈물"
+ },
+ "carbos": {
+  "file": "03. Consumables/Boost/03. Capsule_Galaxy.png",
+  "name": "캡슐 - 우주 (2026 시즌 11)"
+ },
+ "catching_charm": {
+  "file": "01. Weapons/13. Shuriken/010. Mystic Jade Charm.png",
+  "name": "부적 (catching_charm)",
+  "tint": [
+   214,
+   64,
+   64
+  ]
+ },
+ "charcoal": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (fire)",
+  "tint": [
+   236,
+   112,
+   60
+  ]
+ },
+ "dark_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (dark)",
+  "tint": [
+   88,
+   76,
+   104
+  ]
+ },
+ "dragon_fang": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (dragon)",
+  "tint": [
+   236,
+   168,
+   48
+  ]
+ },
+ "dragon_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (dragon)",
+  "tint": [
+   236,
+   168,
+   48
+  ]
+ },
+ "dynamax_band": {
+  "file": "02. Armor/03. Arm, Accessory/003. Bracelet.png",
+  "name": "다이맥스 밴드"
+ },
+ "electric_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (electric)",
+  "tint": [
+   240,
+   200,
+   56
+  ]
+ },
+ "elixir": {
+  "file": "03. Consumables/Food/019. Boiling Water.png",
+  "name": "뜨거운 물"
+ },
+ "enigma_berry": {
+  "file": "03. Consumables/Food/11. Watermelon.png",
+  "name": "수박"
+ },
+ "ether": {
+  "file": "03. Consumables/Food/008. Water.png",
+  "name": "물"
+ },
+ "eviolite": {
+  "file": "05. Material/999. Gem of Evolution.png",
+  "name": "진화의휘석"
+ },
+ "exp_charm": {
+  "file": "01. Weapons/13. Shuriken/010. Mystic Jade Charm.png",
+  "name": "부적 (exp_charm)",
+  "tint": [
+   70,
+   130,
+   220
+  ]
+ },
+ "exp_share": {
+  "file": "02. Armor/02. Head/047. Commander Headset.png",
+  "name": "관전 학습 장치"
+ },
+ "fairy_feather": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (fairy)",
+  "tint": [
+   72,
+   196,
+   158
+  ]
+ },
+ "fairy_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (fairy)",
+  "tint": [
+   72,
+   196,
+   158
+  ]
+ },
+ "fighting_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (fighting)",
+  "tint": [
+   214,
+   108,
+   64
+  ]
+ },
+ "fire_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (fire)",
+  "tint": [
+   236,
+   112,
+   60
+  ]
+ },
+ "flame_orb": {
+  "file": "01. Weapons/12. Throw/013. Fireball.png",
+  "name": "화염구슬"
+ },
+ "flying_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (flying)",
+  "tint": [
+   130,
+   160,
+   220
+  ]
+ },
+ "focus_band": {
+  "file": "02. Armor/02. Head/001. Hairband.png",
+  "name": "기합의머리띠"
+ },
+ "full_heal": {
+  "file": "03. Consumables/Food/029. First Aid Kit.png",
+  "name": "구급상자"
+ },
+ "full_restore": {
+  "file": "03. Consumables/Food/035. Perpetual Stew.png",
+  "name": "만년수프"
+ },
+ "ganlon_berry": {
+  "file": "03. Consumables/Food/001. Potato.png",
+  "name": "감자"
+ },
+ "ghost_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (ghost)",
+  "tint": [
+   116,
+   100,
+   180
+  ]
+ },
+ "golden_exp_charm": {
+  "file": "01. Weapons/13. Shuriken/010. Mystic Jade Charm.png",
+  "name": "부적 (golden_exp_charm)",
+  "tint": [
+   232,
+   176,
+   48
+  ]
+ },
+ "golden_punch": {
+  "file": "01. Weapons/16. Glove/012. Buddha_s Palm.png",
+  "name": "골든펀치"
+ },
+ "grass_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (grass)",
+  "tint": [
+   96,
+   184,
+   92
+  ]
+ },
+ "grip_claw": {
+  "file": "01. Weapons/16. Glove/014. White Claw Punch.png",
+  "name": "끈기갈고리손톱"
+ },
+ "ground_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (ground)",
+  "tint": [
+   196,
+   158,
+   96
+  ]
+ },
+ "hard_stone": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (rock)",
+  "tint": [
+   110,
+   138,
+   196
+  ]
+ },
+ "healing_charm": {
+  "file": "01. Weapons/13. Shuriken/010. Mystic Jade Charm.png",
+  "name": "부적 (healing_charm)",
+  "tint": [
+   84,
+   170,
+   84
+  ]
+ },
+ "hp_up": {
+  "file": "03. Consumables/Boost/05. Zen Vitality.png",
+  "name": "대환단"
+ },
+ "hyper_potion": {
+  "file": "03. Consumables/Food/026. Mint Choco Ice Cream.png",
+  "name": "민트 초코"
+ },
+ "ice_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (ice)",
+  "tint": [
+   116,
+   206,
+   226
+  ]
+ },
+ "iron": {
+  "file": "03. Consumables/Boost/04. Holy Water.png",
+  "name": "성수"
+ },
+ "kings_rock": {
+  "file": "02. Armor/02. Head/011. Crown.png",
+  "name": "왕의징표석"
+ },
+ "lansat_berry": {
+  "file": "03. Consumables/Food/027. Truffle.png",
+  "name": "트러플"
+ },
+ "leftovers": {
+  "file": "03. Consumables/Omurice.png",
+  "name": "먹다 남은 도시락 (2026 시즌 11 오므라이스)"
+ },
+ "leppa_berry": {
+  "file": "03. Consumables/Food/015. Choco Spread.png",
+  "name": "루텔라"
+ },
+ "liechi_berry": {
+  "file": "03. Consumables/Food/005. Chocolate.png",
+  "name": "초콜릿"
+ },
+ "lum_berry": {
+  "file": "03. Consumables/Food/034. Golden Apple.png",
+  "name": "황금사과"
+ },
+ "magnet": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (electric)",
+  "tint": [
+   240,
+   200,
+   56
+  ]
+ },
+ "max_elixir": {
+  "file": "03. Consumables/Food/020. Flower Liquor.png",
+  "name": "백일취"
+ },
+ "max_potion": {
+  "file": "03. Consumables/Food/999. #11 Combo Meal.png",
+  "name": "일레븐 세트"
+ },
+ "max_revive": {
+  "file": "00. Gadget/Kiosk Remote.png",
+  "name": "부활 키트"
+ },
+ "mega_bracelet": {
+  "file": "02. Armor/03. Arm, Accessory/010. Golden Bracelet.png",
+  "name": "메가링"
+ },
+ "metal_coat": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (steel)",
+  "tint": [
+   160,
+   170,
+   188
+  ]
+ },
+ "miracle_seed": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (grass)",
+  "tint": [
+   96,
+   184,
+   92
+  ]
+ },
+ "mystic_water": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (water)",
+  "tint": [
+   72,
+   146,
+   232
+  ]
+ },
+ "mystical_rock": {
+  "file": "05. Material/058. Meteorite.png",
+  "name": "신비한바위"
+ },
+ "never_melt_ice": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (ice)",
+  "tint": [
+   116,
+   206,
+   226
+  ]
+ },
+ "normal_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (normal)",
+  "tint": [
+   150,
+   156,
+   140
+  ]
+ },
+ "oval_charm": {
+  "file": "01. Weapons/13. Shuriken/010. Mystic Jade Charm.png",
+  "name": "부적 (oval_charm)",
+  "tint": [
+   232,
+   236,
+   244
+  ]
+ },
+ "petaya_berry": {
+  "file": "03. Consumables/Food/006. Edible Mushroom.png",
+  "name": "양송이 버섯"
+ },
+ "poison_barb": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (poison)",
+  "tint": [
+   160,
+   96,
+   186
+  ]
+ },
+ "poison_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (poison)",
+  "tint": [
+   160,
+   96,
+   186
+  ]
+ },
+ "potion": {
+  "file": "03. Consumables/Food/004. Meat.png",
+  "name": "고기"
+ },
+ "protein": {
+  "file": "03. Consumables/Boost/07. Combat Epinephrine.png",
+  "name": "컴뱃 에피네프린"
+ },
+ "psychic_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (psychic)",
+  "tint": [
+   170,
+   98,
+   232
+  ]
+ },
+ "quick_claw": {
+  "file": "02. Armor/03. Arm, Accessory/043. Nightmare Nails.png",
+  "name": "선제공격손톱"
+ },
+ "rare_candy": {
+  "file": "05. Material/060. VF Blood Sample.png",
+  "name": "VF 혈액 샘플"
+ },
+ "rarer_candy": {
+  "file": "05. Material/060. VF Blood Sample.png",
+  "name": "VF 혈액 샘플 세트"
+ },
+ "relic_gold": {
+  "file": "05. Material/047. Gold.png",
+  "name": "현상금"
+ },
+ "revive": {
+  "file": "03. Consumables/Boost/08. Gadget Energy Pack.png",
+  "name": "가젯 에너지 팩"
+ },
+ "reviver_seed": {
+  "file": "05. Material/057. Tree of Life.png",
+  "name": "부활의씨앗"
+ },
+ "rock_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (rock)",
+  "tint": [
+   110,
+   138,
+   196
+  ]
+ },
+ "sacred_ash": {
+  "file": "06. Exchangeable/04. Aglaia_s Gift - Legendary.png",
+  "name": "아글라이아의 선물"
+ },
+ "salac_berry": {
+  "file": "03. Consumables/Food/007. Fried Chicken.png",
+  "name": "후라이드 치킨"
+ },
+ "scanner": {
+  "file": "02. Armor/03. Arm, Accessory/036. Radar.png",
+  "name": "실험체 분석기"
+ },
+ "scope_lens": {
+  "file": "01. Weapons/21. Camera/002. Rangefinder.png",
+  "name": "초점렌즈"
+ },
+ "sharp_beak": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (flying)",
+  "tint": [
+   130,
+   160,
+   220
+  ]
+ },
+ "shell_bell": {
+  "file": "05. Material/019. Turtle Shell.png",
+  "name": "조개껍질방울"
+ },
+ "shiny_charm": {
+  "file": "01. Weapons/13. Shuriken/010. Mystic Jade Charm.png",
+  "name": "부적 (shiny_charm)",
+  "tint": [
+   240,
+   200,
+   70
+  ]
+ },
+ "silk_scarf": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (normal)",
+  "tint": [
+   150,
+   156,
+   140
+  ]
+ },
+ "silver_powder": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (bug)",
+  "tint": [
+   204,
+   62,
+   78
+  ]
+ },
+ "sitrus_berry": {
+  "file": "03. Consumables/Food/018. Apple.png",
+  "name": "사과"
+ },
+ "soft_sand": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (ground)",
+  "tint": [
+   196,
+   158,
+   96
+  ]
+ },
+ "soothe_bell": {
+  "file": "02. Armor/03. Arm, Accessory/029. Music Box.png",
+  "name": "평온의방울"
+ },
+ "spell_tag": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (ghost)",
+  "tint": [
+   116,
+   100,
+   180
+  ]
+ },
+ "starf_berry": {
+  "file": "03. Consumables/Food/032. Sweet Potato.png",
+  "name": "꿀고구마"
+ },
+ "steel_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (steel)",
+  "tint": [
+   160,
+   170,
+   188
+  ]
+ },
+ "stellar_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (stellar)",
+  "tint": [
+   110,
+   180,
+   230
+  ]
+ },
+ "super_exp_charm": {
+  "file": "01. Weapons/13. Shuriken/010. Mystic Jade Charm.png",
+  "name": "부적 (super_exp_charm)",
+  "tint": [
+   192,
+   200,
+   214
+  ]
+ },
+ "super_potion": {
+  "file": "03. Consumables/Food/010. Bread In Tears.png",
+  "name": "눈물젖은 빵"
+ },
+ "tera_orb": {
+  "file": "01. Weapons/22. Arcana/001. Glass Bead.png",
+  "name": "테라스탈오브"
+ },
+ "toxic_orb": {
+  "file": "03. Consumables/Boost/02. Capsule_Sanguine.png",
+  "name": "출혈구슬 (2026 시즌 11 캡슐 - 선혈)"
+ },
+ "twisted_spoon": {
+  "file": "05. Material/062. Tac. Skill Module.png",
+  "name": "강화 모듈 (psychic)",
+  "tint": [
+   170,
+   98,
+   232
+  ]
+ },
+ "water_tera_shard": {
+  "file": "05. Material/034. Crimson Shard.png",
+  "name": "테라피스 (water)",
+  "tint": [
+   72,
+   146,
+   232
+  ]
+ },
+ "white_herb": {
+  "file": "03. Consumables/Oriental Herb.png",
+  "name": "하양허브"
+ },
+ "wide_lens": {
+  "file": "01. Weapons/21. Camera/001. Lens.png",
+  "name": "광각렌즈"
+ },
+ "zinc": {
+  "file": "03. Consumables/Boost/01. Capsule_Essence.png",
+  "name": "캡슐 - 생명 (2026 시즌 11)"
+ },
+ "zoom_lens": {
+  "file": "01. Weapons/21. Camera/012. Triple Focus.png",
+  "name": "멀티렌즈"
+ }
+}

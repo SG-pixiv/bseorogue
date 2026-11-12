@@ -1,9 +1,14 @@
 # SPDX-FileCopyrightText: 2026 SG
 # SPDX-License-Identifier: AGPL-3.0-only
 """
-블서로그 지역 배경 20곳 (루미아 섬) — 전투 배경 · 발판을 코드로 그려요
+블서로그 지역 배경 21곳 (루미아 섬) — 전투 배경 · 발판을 코드로 그려요
 
-포켓로그 지역(바이옴) 35곳을 루미아 섬 20곳에 나눠 붙였어요 (이름은 locales/ko/biomes.json, 역할군은
+2026년 이터널 리턴 기준이에요 (공식 패치노트, 팬키트에는 지역 그림이 없고 섬 지도만 있어요):
+  - 시즌 11 (2026-04): 21번째 지역 바지선 (항구와 공장 사이, 배 4척이 이어진 어두운 해상 작업장, 크레인 · 배럴),
+    자연 지역(숲 · 연못 · 절 · 양궁장 · 성당 · 묘지) 사과나무, 학교 괘종시계, 경찰서 분실물 상자, 병원 의료 지원
+  - 시즌 13 (2026-11): 연구소를 뺀 모든 지역에 음식 자판기 (공장은 2대)
+
+포켓로그 지역(바이옴) 35곳을 루미아 섬 21곳에 나눠 붙였어요 (이름은 locales/ko/biomes.json, 역할군은
 src/data/bseorogue/regions.ts). 같은 지역에 붙은 바이옴은 같은 그림을 써요.
   - <바이옴>_bg.png   320×180 배경 (지평선 y≈66, 아래 48칸은 전투 창에 가려요)
   - <바이옴>_a.png    320×132 내 발판 (가운데 104, 132 · 반만 보여요)
@@ -29,10 +34,11 @@ W, H = 320, 180
 HORIZON = 66
 OUTLINE = (26, 28, 44)
 
-# 바이옴 → 지역 (locales/ko/biomes.json 과 같게). 호텔은 아직 붙은 바이옴이 없어요 (SG가 정하면 여기만)
+# 바이옴 → 지역 (locales/ko/biomes.json · src/data/bseorogue/regions.ts 와 같게)
+# 바지선 = seabed, 호텔 = snowy_forest 는 11-12 에 임시로 붙인 자리예요 (SG가 바꾸면 세 곳을 같이)
 BIOME_REGION = {
     "town": "alley", "slum": "alley", "plains": "archery", "grass": "stream", "tall_grass": "forest", "forest": "forest",
-    "jungle": "forest", "snowy_forest": "forest", "metropolis": "uptown", "sea": "harbor", "seabed": "harbor",
+    "jungle": "forest", "snowy_forest": "hotel", "metropolis": "uptown", "sea": "harbor", "seabed": "barge",
     "swamp": "pond", "lake": "pond", "beach": "beach", "desert": "beach", "island": "beach", "mountain": "temple",
     "temple": "temple", "badlands": "gas", "cave": "warehouse", "ice_cave": "warehouse", "meadow": "school",
     "power_plant": "factory", "factory": "factory", "construction_site": "factory", "volcano": "fire",
@@ -42,7 +48,7 @@ BIOME_REGION = {
 NAMES = {"alley": "골목길", "archery": "양궁장", "stream": "개울", "forest": "숲", "uptown": "고급 주택가", "harbor": "항구",
          "pond": "연못", "beach": "모래사장", "temple": "절", "gas": "주유소", "warehouse": "창고", "school": "학교",
          "factory": "공장", "fire": "소방서", "cemetery": "묘지", "police": "경찰서", "chapel": "성당", "hospital": "병원",
-         "lab": "연구소", "hotel": "호텔"}
+         "lab": "연구소", "hotel": "호텔", "barge": "바지선"}
 
 done: list[str] = []
 
@@ -94,6 +100,57 @@ def pine(d, x, y, h, leaf=(40, 96, 70)):
         top = y + k * h // 4
         w = (k + 2) * h // 7
         d.polygon([(x, top), (x - w, top + h // 2), (x + w, top + h // 2)], fill=shade(leaf, 1 + k * 0.08), outline=shade(leaf, 0.7))
+
+
+def vending(d, x, y=HORIZON + 3, c=(52, 104, 196)):
+    """음식 자판기 (시즌 13). (x, y) = 왼쪽 아래"""
+    d.rectangle([x, y - 16, x + 9, y], fill=c, outline=OUTLINE)
+    d.rectangle([x + 1, y - 15, x + 8, y - 14], fill=shade(c, 1.3))
+    d.rectangle([x + 1, y - 13, x + 6, y - 6], fill=(214, 236, 250))  # 진열창
+    for i, cc in enumerate(((230, 80, 70), (250, 200, 80), (110, 190, 110))):
+        d.point((x + 2 + i * 2, y - 11), fill=cc)
+        d.point((x + 2 + i * 2, y - 8), fill=cc)
+    d.rectangle([x + 7, y - 12, x + 8, y - 9], fill=(250, 220, 120))  # 버튼
+    d.rectangle([x + 2, y - 4, x + 6, y - 2], fill=(30, 34, 50))  # 꺼내는 곳
+
+
+def apple_tree(d, x, y, r, leaf=(70, 136, 70), gold=False):
+    """사과나무 (시즌 11, 자연 지역). 열 개에 하나쯤 황금사과"""
+    tree(d, x, y, r, leaf=leaf)
+    spots = [(-r // 2, -r // 3), (r // 3, -r // 2), (0, 0), (r // 2, -1), (-r // 3, 2 - r // 6)]
+    for i, (dx, dy) in enumerate(spots):
+        c = (250, 206, 70) if gold and i == 2 else (224, 60, 54)
+        d.rectangle([x + dx, y + dy - r // 4, x + dx + 1, y + dy - r // 4 + 1], fill=c)
+
+
+def grandfather_clock(d, x, y=HORIZON + 3):
+    """괘종시계 (시즌 11, 학교)"""
+    wood = (120, 78, 48)
+    d.rectangle([x, y - 24, x + 8, y], fill=wood, outline=OUTLINE)
+    d.polygon([(x - 1, y - 24), (x + 4, y - 28), (x + 9, y - 24)], fill=shade(wood, 0.8), outline=OUTLINE)
+    d.ellipse([x + 1, y - 22, x + 7, y - 16], fill=(250, 244, 220), outline=OUTLINE)
+    d.line([(x + 4, y - 19), (x + 4, y - 21)], fill=OUTLINE)
+    d.line([(x + 4, y - 19), (x + 5, y - 19)], fill=OUTLINE)
+    d.rectangle([x + 2, y - 13, x + 6, y - 3], fill=shade(wood, 0.6))
+    d.line([(x + 4, y - 13), (x + 5, y - 6)], fill=(240, 200, 80))  # 추
+    d.rectangle([x + 4, y - 6, x + 6, y - 4], fill=(240, 200, 80))
+
+
+def lost_box(d, x, y=HORIZON + 3):
+    """분실물 상자 (시즌 11, 경찰서)"""
+    c = (60, 84, 150)
+    d.rectangle([x, y - 10, x + 14, y], fill=c, outline=OUTLINE)
+    d.rectangle([x, y - 10, x + 14, y - 7], fill=shade(c, 1.3), outline=OUTLINE)
+    d.rectangle([x + 6, y - 7, x + 8, y - 3], fill=(250, 210, 70), outline=OUTLINE)  # 자물쇠
+    d.line([(x + 2, y - 2), (x + 12, y - 2)], fill=shade(c, 0.7))
+
+
+def barrel(d, x, y, c=(190, 80, 50)):
+    """배럴 (시즌 11, 바지선). (x, y) = 왼쪽 아래"""
+    d.rectangle([x, y - 10, x + 7, y], fill=c, outline=OUTLINE)
+    d.line([(x + 1, y - 7), (x + 6, y - 7)], fill=shade(c, 0.65))
+    d.line([(x + 1, y - 3), (x + 6, y - 3)], fill=shade(c, 0.65))
+    d.point((x + 2, y - 9), fill=shade(c, 1.4))
 
 
 def hills(d, y, amp, color, seed, step=16):
@@ -182,6 +239,7 @@ def alley(d, rng):
     d.line([(54, 18), (W, 8)], fill=OUTLINE)  # 전깃줄
     d.line([(54, 22), (W, 14)], fill=OUTLINE)
     d.rectangle([270, 30, 290, HORIZON], fill=(60, 60, 70))  # 쓰레기통
+    vending(d, 40, c=(196, 70, 60))
     return dict(top=(92, 94, 106), rim=(60, 62, 74), pattern=pat_dots([(70, 72, 84), (110, 112, 124)]))
 
 
@@ -197,6 +255,9 @@ def archery(d, rng):
     for x in range(0, W, 12):  # 울타리
         d.line([(x, HORIZON + 14), (x, HORIZON + 8)], fill=(236, 236, 240))
     d.line([(0, HORIZON + 9), (W, HORIZON + 9)], fill=(236, 236, 240))
+    apple_tree(d, 100, HORIZON - 12, 11, gold=True)
+    apple_tree(d, 28, HORIZON - 10, 10)
+    vending(d, 304)
     return dict(top=(130, 190, 100), rim=(86, 134, 70), pattern=pat_grass((104, 160, 84)))
 
 
@@ -213,6 +274,7 @@ def stream(d, rng):
     for k in range(10):
         x, y = rng.randint(0, W), rng.randint(HORIZON + 4, H - 4)
         d.ellipse([x, y, x + 6, y + 3], fill=(150, 150, 150), outline=(100, 100, 110))
+    vending(d, 14)
     return dict(top=(126, 180, 104), rim=(90, 130, 80), pattern=pat_dots([(150, 150, 150), (110, 160, 90)], 40))
 
 
@@ -225,6 +287,9 @@ def forest(d, rng):
     for k in range(5):  # 햇살
         x = rng.randint(20, W - 20)
         d.polygon([(x, 0), (x + 8, 0), (x + 30, HORIZON), (x + 18, HORIZON)], fill=(150, 196, 150))
+    apple_tree(d, 44, HORIZON - 8, 12, leaf=(64, 128, 70))
+    apple_tree(d, 128, HORIZON - 6, 11, leaf=(64, 128, 70), gold=True)
+    vending(d, 300, c=(60, 130, 90))
     return dict(top=(104, 84, 60), rim=(70, 56, 42), pattern=pat_dots([(170, 120, 50), (90, 140, 70), (130, 96, 64)], 50))
 
 
@@ -239,6 +304,7 @@ def uptown(d, rng):
         d.ellipse([x + 30, HORIZON - 6, x + 46, HORIZON + 4], fill=(70, 140, 80), outline=(50, 100, 60))
         d.line([(x + 20, HORIZON + 4), (x + 20, HORIZON - 22)], fill=OUTLINE)
         d.rectangle([x + 18, HORIZON - 25, x + 22, HORIZON - 22], fill=(255, 236, 160))
+    vending(d, 6, c=(230, 230, 236))
     return dict(top=(200, 196, 188), rim=(140, 136, 130), pattern=pat_tiles((176, 170, 160), 12))
 
 
@@ -260,13 +326,17 @@ def harbor(d, rng):
     ground(d, (150, 120, 90), y0=HORIZON + 6)
     for y in range(HORIZON + 8, H, 6):
         d.line([(0, y), (W, y)], fill=(120, 92, 66))
+    vending(d, 80, HORIZON + 8)
     return dict(top=(160, 124, 88), rim=(110, 84, 60), pattern=pat_planks((126, 96, 68)))
 
 
 def pond(d, rng):
     sky(d, (130, 186, 220), (220, 240, 236))
-    for x in range(0, W, 26):
-        tree(d, x + rng.randint(-5, 5), HORIZON - 12, 11, leaf=(80, 140, 80))
+    for i, x in enumerate(range(0, W, 26)):
+        if i in (2, 9):
+            apple_tree(d, x + rng.randint(-5, 5), HORIZON - 12, 11, leaf=(80, 140, 80), gold=i == 9)
+        else:
+            tree(d, x + rng.randint(-5, 5), HORIZON - 12, 11, leaf=(80, 140, 80))
     ground(d, (110, 166, 100))
     d.ellipse([20, HORIZON + 6, 300, H + 40], fill=(80, 150, 180), outline=(60, 110, 130))
     for k in range(9):  # 연잎
@@ -276,6 +346,7 @@ def pond(d, rng):
             d.point((x + 5, y + 1), fill=(250, 170, 200))
     for x in range(10, W, 18):
         d.line([(x, HORIZON + 6), (x + 1, HORIZON - 4)], fill=(80, 120, 60))
+    vending(d, 302, c=(60, 130, 90))
     return dict(top=(120, 176, 104), rim=(80, 120, 72), pattern=pat_grass((100, 156, 86)))
 
 
@@ -294,6 +365,7 @@ def beach(d, rng):
             d.line([(x + 6, HORIZON - 30), (x + 6 + 14 * math.cos(r), HORIZON - 30 + 6 * math.sin(r) + 4)], fill=(60, 150, 70), width=2)
     d.polygon([(250, HORIZON - 8), (236, HORIZON - 2), (264, HORIZON - 2)], fill=(230, 80, 70))  # 파라솔
     d.line([(250, HORIZON - 2), (250, HORIZON + 10)], fill=OUTLINE)
+    vending(d, 62, HORIZON + 8, c=(240, 150, 60))
     return dict(top=(240, 220, 168), rim=(200, 176, 120), pattern=pat_dots([(220, 196, 140), (250, 236, 200)], 70))
 
 
@@ -310,6 +382,9 @@ def temple(d, rng):
     for xx in (40, 70, 250, 285):
         pine(d, xx, HORIZON - 30, 30, (50, 100, 70))
     ground(d, (196, 186, 160))
+    apple_tree(d, 16, HORIZON - 10, 11)
+    apple_tree(d, 304, HORIZON - 8, 10)
+    vending(d, 96)
     return dict(top=(190, 186, 176), rim=(130, 124, 116), pattern=pat_tiles((160, 154, 142), 14))
 
 
@@ -328,6 +403,7 @@ def gas(d, rng):
     ground(d, (96, 96, 104))
     for x in range(10, W, 40):
         d.rectangle([x, HORIZON + 30, x + 18, HORIZON + 32], fill=(240, 220, 90))
+    vending(d, 44, c=(196, 70, 60))
     return dict(top=(150, 150, 156), rim=(100, 100, 108), pattern=pat_tiles((130, 130, 136), 20))
 
 
@@ -347,6 +423,7 @@ def warehouse(d, rng):
             x += w + rng.randint(2, 8)
     d.rectangle([0, 0, W, 4], fill=(200, 200, 160))
     ground(d, (130, 130, 134))
+    vending(d, 300)
     return dict(top=(150, 150, 154), rim=(100, 100, 106), pattern=pat_dots([(130, 130, 134), (170, 170, 174)], 50))
 
 
@@ -361,6 +438,8 @@ def school(d, rng):
         tree(d, x, HORIZON - 12, 10, leaf=(90, 160, 90))
     ground(d, (200, 160, 110))
     d.ellipse([-40, HORIZON + 14, W + 40, H + 60], outline=(250, 250, 250))
+    grandfather_clock(d, 66)
+    vending(d, 284)
     return dict(top=(196, 92, 70), rim=(140, 64, 50), pattern=pat_rings((236, 236, 236)))
 
 
@@ -376,6 +455,8 @@ def factory(d, rng):
     d.polygon([(90, HORIZON - 24), (110, HORIZON - 34), (130, HORIZON - 24), (150, HORIZON - 34), (170, HORIZON - 24), (190, HORIZON - 34), (210, HORIZON - 24), (230, HORIZON - 34), (230, HORIZON - 24)], fill=(100, 92, 88))
     d.line([(0, HORIZON - 4), (W, HORIZON - 4)], fill=(90, 90, 96), width=3)  # 관
     ground(d, (110, 108, 108))
+    vending(d, 76, c=(196, 130, 50))  # 공장은 자판기 2대
+    vending(d, 290)
     return dict(top=(140, 144, 152), rim=(96, 98, 106), pattern=pat_tiles((120, 124, 132), 16))
 
 
@@ -391,6 +472,7 @@ def fire(d, rng):
     d.rectangle([272, HORIZON - 50, 290, HORIZON], fill=(200, 60, 50), outline=OUTLINE)  # 망루
     ground(d, (150, 150, 156))
     d.rectangle([0, HORIZON + 20, W, HORIZON + 22], fill=(240, 220, 90))
+    vending(d, 40, c=(196, 70, 60))
     return dict(top=(170, 170, 176), rim=(116, 116, 124), pattern=pat_tiles((150, 150, 156), 18))
 
 
@@ -412,6 +494,8 @@ def cemetery(d, rng):
             d.rectangle([x, y - 8, x + 8, y], fill=(130, 130, 140), outline=OUTLINE)
             d.ellipse([x, y - 11, x + 8, y - 5], fill=(130, 130, 140), outline=OUTLINE)
             d.rectangle([x + 1, y - 7, x + 7, y - 1], fill=(130, 130, 140))
+    apple_tree(d, 112, HORIZON - 12, 11, leaf=(52, 84, 70))
+    vending(d, 300, c=(70, 80, 130))
     return dict(top=(70, 86, 76), rim=(46, 58, 52), pattern=pat_grass((56, 72, 64)))
 
 
@@ -424,6 +508,8 @@ def police(d, rng):
         d.ellipse([x - 6, HORIZON - 26, x + 6, HORIZON - 14], fill=c, outline=OUTLINE)
         d.line([(x, HORIZON - 14), (x, HORIZON)], fill=OUTLINE)
     ground(d, (130, 130, 140))
+    lost_box(d, 10)
+    vending(d, 54)
     return dict(top=(150, 156, 170), rim=(100, 106, 120), pattern=pat_tiles((130, 136, 150), 14))
 
 
@@ -441,6 +527,9 @@ def chapel(d, rng):
     for xx in (40, 70, 250, 280):
         pine(d, xx, HORIZON - 26, 26, (60, 110, 80))
     ground(d, (170, 160, 150))
+    apple_tree(d, 100, HORIZON - 10, 10)
+    apple_tree(d, 302, HORIZON - 10, 10, gold=True)
+    vending(d, 14, c=(120, 90, 80))
     return dict(top=(196, 188, 178), rim=(140, 132, 124), pattern=pat_tiles((176, 168, 158), 12))
 
 
@@ -451,6 +540,11 @@ def hospital(d, rng):
     d.rectangle([157, HORIZON - 58, 163, HORIZON - 48], fill=(220, 60, 60))
     d.rectangle([152, HORIZON - 56, 168, HORIZON - 50], fill=(220, 60, 60))
     ground(d, (200, 206, 212))
+    # 의료 지원 (시즌 11): 구급상자 보관함
+    d.rectangle([290, HORIZON - 9, 304, HORIZON + 3], fill=(244, 246, 250), outline=OUTLINE)
+    d.rectangle([296, HORIZON - 6, 298, HORIZON], fill=(220, 60, 60))
+    d.rectangle([294, HORIZON - 4, 300, HORIZON - 2], fill=(220, 60, 60))
+    vending(d, 54, c=(90, 170, 200))
     return dict(top=(226, 232, 238), rim=(160, 168, 178), pattern=pat_tiles((200, 208, 216), 12))
 
 
@@ -480,13 +574,57 @@ def hotel(d, rng):
     for x in range(224, W, 24):
         building(d, x, HORIZON - 18, 20, 18, (70, 70, 100), rng=rng)
     ground(d, (120, 40, 50))
+    vending(d, 124, c=(200, 170, 90))
     return dict(top=(150, 48, 60), rim=(100, 30, 40), pattern=pat_tiles((176, 140, 70), 16))
+
+
+def barge(d, rng):
+    """바지선 (시즌 11, 21번째 지역): 배 4척이 이어진 어두운 해상 작업장, 크레인이 배럴을 내려요"""
+    sky(d, (36, 42, 62), (104, 108, 124))
+    d.rectangle([0, HORIZON - 16, W, HORIZON + 8], fill=(38, 60, 82))  # 바다
+    for k in range(22):
+        x, y = rng.randint(0, W), rng.randint(HORIZON - 14, HORIZON + 6)
+        d.line([(x, y), (x + 4, y)], fill=(86, 118, 142))
+    steel = (58, 62, 76)
+    for x, w, cab in ((6, 96, 12), (212, 104, 78)):  # 뒤쪽 배 두 척
+        d.polygon([(x, HORIZON - 10), (x + w, HORIZON - 10), (x + w - 8, HORIZON + 2), (x + 8, HORIZON + 2)], fill=steel, outline=OUTLINE)
+        d.line([(x + 2, HORIZON - 7), (x + w - 2, HORIZON - 7)], fill=(170, 60, 50))
+        d.rectangle([x + cab, HORIZON - 26, x + cab + 22, HORIZON - 10], fill=(84, 90, 106), outline=OUTLINE)  # 선실
+        for wx in (x + cab + 3, x + cab + 10, x + cab + 17):
+            d.rectangle([wx, HORIZON - 22, wx + 3, HORIZON - 18], fill=(250, 214, 120))
+        for i in range(3):  # 갑판 화물
+            cx = x + (40 if cab < 40 else 8) + i * 14
+            c = [(150, 70, 56), (64, 100, 140), (170, 140, 60)][i]
+            d.rectangle([cx, HORIZON - 18, cx + 12, HORIZON - 10], fill=c, outline=OUTLINE)
+    d.line([(102, HORIZON - 9), (212, HORIZON - 9)], fill=(120, 124, 136), width=2)  # 배를 잇는 다리
+    for x in range(106, 212, 8):
+        d.line([(x, HORIZON - 9), (x, HORIZON - 13)], fill=(120, 124, 136))
+    d.line([(102, HORIZON - 13), (212, HORIZON - 13)], fill=(120, 124, 136))
+    crane = (214, 160, 50)  # 크레인
+    d.rectangle([146, HORIZON - 60, 152, HORIZON - 9], fill=crane, outline=OUTLINE)
+    for y in range(HORIZON - 56, HORIZON - 10, 8):
+        d.line([(147, y), (151, y + 6)], fill=shade(crane, 0.6))
+    d.rectangle([118, HORIZON - 64, 204, HORIZON - 60], fill=crane, outline=OUTLINE)
+    d.rectangle([136, HORIZON - 70, 150, HORIZON - 64], fill=(84, 90, 106), outline=OUTLINE)  # 조종실
+    d.line([(196, HORIZON - 60), (196, HORIZON - 38)], fill=OUTLINE)
+    barrel(d, 192, HORIZON - 28)  # 매달린 배럴
+    d.rectangle([0, HORIZON + 8, W, H], fill=(70, 76, 90))  # 앞 갑판
+    for y in range(HORIZON + 14, H, 8):
+        d.line([(0, y), (W, y)], fill=(58, 62, 76))
+    for x in range(-20, W, 44):
+        d.line([(x + 30, HORIZON + 8), (x, H)], fill=(58, 62, 76))
+    for x in range(0, W, 12):  # 노란 · 검정 경고선
+        d.rectangle([x, HORIZON + 8, x + 5, HORIZON + 10], fill=(232, 190, 60))
+    for x, c in ((8, (190, 80, 50)), (18, (60, 110, 150)), (286, (190, 80, 50)), (296, (200, 170, 60)), (306, (190, 80, 50))):
+        barrel(d, x, HORIZON + 22, c)
+    vending(d, 44, HORIZON + 12, c=(196, 130, 50))
+    return dict(top=(92, 98, 112), rim=(54, 58, 70), pattern=pat_tiles((72, 78, 92), 14))
 
 
 REGIONS = {"alley": alley, "archery": archery, "stream": stream, "forest": forest, "uptown": uptown, "harbor": harbor,
            "pond": pond, "beach": beach, "temple": temple, "gas": gas, "warehouse": warehouse, "school": school,
            "factory": factory, "fire": fire, "cemetery": cemetery, "police": police, "chapel": chapel,
-           "hospital": hospital, "lab": lab, "hotel": hotel}
+           "hospital": hospital, "lab": lab, "hotel": hotel, "barge": barge}
 
 
 def draw_region(name):

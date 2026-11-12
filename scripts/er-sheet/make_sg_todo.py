@@ -3,7 +3,7 @@
 """
 SG가 정할 것 · 바꿀 것 · 더할 것 (방법 포함) 엑셀 만들기 → docs/sheets/SG-정할-것.xlsx
 
-시트: 읽어 주세요 · 할 일 목록 · 첫 공개 30명 · 명칭 정리 · 지역 · 역할군
+시트: 읽어 주세요 · 할 일 목록 · 첫 공개 30명 · 명칭 정리 · 지역 · 역할군 · 아이템 그림
 노란 칸만 SG가 채워요. 할 일이 바뀌면 TODO 표를 고치고 다시 돌려요 (SG가 채운 파일을 덮어쓰지 않게 나올 이름을 따로 줘요).
 쓰는 법: python3 -B scripts/er-sheet/make_sg_todo.py [나올 파일]
 """
@@ -36,9 +36,13 @@ STARTERS = {30: "일레븐", 11: "유키", 18: "쇼이치", 6: "나딘", 12: "�
 TODO = [
     # ── 확인 (지금 바로) ──
     ("확인할 것", "먼저", "11-12 마무리 작업 미리보기 확인 → 병합",
-     "브랜치 feat/polish: 기술 연출 7종 · 상태이상 이름 · 지역 배경 20곳 · 상점 줄 겹침. 아직 main 에 안 합쳤어요",
-     "Vercel 의 feat/polish 미리보기 주소에서 한 판 해 보기 → 괜찮으면 채팅에 \"병합해줘\"",
-     "main 에 합치고 실제 사이트 배포 확인", "Vercel 프로젝트 bseorogue → Deployments → feat/polish"),
+     "브랜치 feat/dot-art (feat/polish 내용 포함): 기술 연출 7종 · 상태이상 이름 · 지역 배경 21곳(2026 기준) · 아이템 도트 · 상점 줄 겹침. 아직 main 에 안 합쳤어요",
+     "Vercel 의 feat/dot-art 미리보기 주소에서 한 판 해 보기 → 괜찮으면 채팅에 \"병합해줘\"",
+     "main 에 합치고 실제 사이트 배포 확인", "Vercel 프로젝트 bseorogue → Deployments → feat/dot-art"),
+    ("확인할 것", "먼저", "아이템 도트 (팬키트 그림 → 32×32 도트)",
+     "아이템 57개를 팬키트 아이템 그림으로 도트로 바꿈 + 강화 모듈 · 테라피스 · 부적은 색만 바꿔 44개. 나머지는 코드로 그린 그림 그대로",
+     "이 파일 '아이템 그림' 시트: 고른 그림이 이상하면 '바꿀 팬키트 그림' 칸에 파일 이름 (예: Food/Hamburger). 코드 그림인 줄에도 적으면 그 그림으로 바꿔요",
+     "build_item_dots.py 의 표를 고쳐 다시 만들기 (노트북 er 폴더 필요)", "이 파일 '아이템 그림' · docs/item-dots-preview.png"),
     ("확인할 것", "먼저", "소리 크기 · 상대 그림 크기 · 대사가 매번 바뀌는지",
      "한국어 음성 90명 (세레스 없음), 키마다 대사 최대 3개", "실제 사이트에서 스킬 몇 번 써 보고 크기 · 반복 느낌을 답 칸에",
      "소리 크기 조절 (지금 -18 LUFS) · 상대 그림 최대 높이(80) 조절", "게임 설정 → 효과음 크기"),
@@ -49,8 +53,8 @@ TODO = [
      "베기 · 타격 · 투사체 · 폭발 · 회복 · 강화 · 약화. 칼 · 도끼 · 창 → 베기, 망치 · 글러브 등 → 타격, 총 · 활 · 아르카나 등 → 투사체, R 위력 100 이상 → 폭발",
      "미리보기에서 보고 바꿀 점을 답 칸에 (예: \"폭발은 R 전부\", \"베기 더 크게\")",
      "make_fx.py · skill-anim.ts 고치기", "docs/fx-preview.png"),
-    ("확인할 것", "보통", "지역 배경 20곳",
-     "도트 느낌 배경 · 발판. 게임이 시간대(낮 · 저녁 · 밤) 색을 덧입혀요", "마음에 안 드는 지역 · 바꿀 점을 답 칸에",
+    ("확인할 것", "보통", "지역 배경 21곳 (2026 기준)",
+     "도트 느낌 배경 · 발판 21곳. 2026년 기준: 바지선(시즌 11) · 사과나무 · 괘종시계 · 분실물 상자 · 음식 자판기(시즌 13). 게임이 시간대 색을 덧입혀요", "마음에 안 드는 지역 · 바꿀 점을 답 칸에",
      "make_arenas.py 의 그 지역 함수 고치기", "docs/arenas-preview.png"),
     ("확인할 것", "보통", "상태이상 이름 (기획대로 바꿈)",
      "중독 · 출혈 · 화상 · 둔화 · 기절(잠듦 자리) · 속박. 쓰러진 실험체 아이콘은 '탈락'", "괜찮으면 \"OK\", 아니면 '명칭 정리' 시트에",
@@ -70,8 +74,8 @@ TODO = [
     ("정할 것", "보통", "명칭 정리 (알 · 볼 · 도감 용어 · 풀죽음 등)",
      "11-08 \"내가 따로 할게\". 포켓몬 말이 남은 곳이 있어요", "이 파일 '명칭 정리' 시트 '새 이름' 칸",
      "locales/ko · 아이콘 같이 바꾸기", "이 파일 '명칭 정리'"),
-    ("정할 것", "보통", "지역별 역할군 · 호텔 자리",
-     "지역마다 자주 나오는 역할군(3배) 초안. 호텔은 그림만 있고 붙은 자리가 없어요", "이 파일 '지역 · 역할군' 시트 노란 칸",
+    ("정할 것", "보통", "지역별 역할군 · 바지선 · 호텔 자리",
+     "지역마다 자주 나오는 역할군(3배) 초안. 바지선(2026 시즌 11 신규 지역)은 seabed, 호텔은 snowyForest 자리에 임시로 붙였어요", "이 파일 '지역 · 역할군' 시트 노란 칸 (자리를 바꾸려면 메모에)",
      "regions.ts · biomes.json · make_arenas.py", "이 파일 '지역 · 역할군'"),
     ("정할 것", "보통", "스킨 진화 순서 · 레벨",
      "지금 ER 스킨 1번 · 2번, Lv12 · Lv24 (임시)", "실험체-스킬.xlsx '실험체' 시트 진화1/2 스킨 · 레벨 칸 (✓ 는 그림 있는 스킨)",
@@ -94,9 +98,9 @@ TODO = [
     ("더할 것", "먼저", "ER 스킬 · 패시브 설명 (er-data 폴더)",
      "없어서 스킬 효과 · 패시브를 이름 · 역할군으로만 정했어요", "SG PC 의 er-data 폴더(l10n-Korean.txt 가 있는 곳)를 채팅에 올리기. er-key.txt(API 키)는 절대 올리지 않기",
      "Q/W/E/R · 패시브 초안을 실제 ER 효과에 맞춰 다시 → 시트 2판", "PC 의 er-data 폴더"),
-    ("더할 것", "보통", "아이템 그림 (팬키트)",
-     "게임에 나오는 104개 목록 엑셀을 11-08 보냄", "docs/sheets/아이템-팬키트-목록.xlsx 노란 칸(팬키트 파일 이름) 채워서 보내기 + 노트북 켜고 er 폴더 연결",
-     "팬키트 그림을 32×32 로 → make_items.py 가 먼저 쓰게", "아이템-팬키트-목록.xlsx"),
+    ("더할 것", "나중", "남은 아이템 그림 (코드 그림 → 팬키트 도트)",
+     "이름이 포켓몬 말인 아이템(코롱 · 부적 일부 등)은 맞는 팬키트 그림을 못 골라 코드 그림이에요", "명칭 정리로 이름이 정해지면 '아이템 그림' 시트에 쓸 팬키트 그림을 적기",
+     "노트북 er 폴더에서 가져와 도트로", "이 파일 '아이템 그림'"),
     ("더할 것", "보통", "실험체 도트 (기준판 2~3명부터)",
      "넣는 도구 있음 (규격 검사 · 1배)", "님블뉴런 2차 창작 · AI 정책 확인 → 도트 가이드대로 2~3명 → 파일 이름 1_0.png 또는 재키_0.png 로 채팅에",
      "import_dot.py 로 검사 · 넣기 → 스크린샷", "도트 가이드 문서 · docs/dot-guide/"),
@@ -175,11 +179,12 @@ def main():
         ("블서로그 · SG가 정할 것 · 바꿀 것 · 더할 것 (2026-11-12)", True),
         ("노란 칸만 채우면 돼요. 다 채우지 않아도 괜찮아요 — 채운 만큼 채팅에 파일을 보내 주시면 제가 이어서 해요.", False),
         ("", False),
-        ("시트 4개", True),
+        ("시트 5개", True),
         ("· 할 일 목록: 확인할 것 · 정할 것 · 더할 것 전부. '먼저' 부터 봐 주세요. 'SG 답' 칸에 답을 적어요 (예: OK / 병합해줘 / 바꿀 점).", False),
         ("· 첫 공개 30명: 처음 공개할 때 고를 수 있게 할 실험체. '고르기' 칸에 O. 지금 시작 6명은 O 가 미리 들어 있어요 (예시). 위쪽에 고른 수 · 역할군별 수가 자동으로 세져요.", False),
         ("· 명칭 정리: 포켓몬 말이 남은 이름들. '새 이름' 칸에 적으면 게임 글자 · 아이콘을 같이 바꿔요. 그대로 두려면 비워요.", False),
-        ("· 지역 · 역할군: 지역마다 자주 나오는 역할군(3배)과 호텔 자리. 바꿀 것만 노란 칸에.", False),
+        ("· 지역 · 역할군: 지역마다 자주 나오는 역할군(3배)과 바지선 · 호텔 자리. 바꿀 것만 노란 칸에.", False),
+        ("· 아이템 그림: 아이템마다 지금 쓰는 그림(팬키트 도트 또는 코드 그림). 바꾸고 싶은 것만 '바꿀 팬키트 그림' 칸에.", False),
         ("", False),
         ("어떻게 보내요?", True),
         ("· 이 파일(SG-정할-것.xlsx)을 고쳐서 채팅에 올리고 \"정할 것 시트 보냈어\" 라고 적어 주세요. 실험체-스킬.xlsx 도 같이 고쳤으면 같이 올려요.", False),
@@ -191,8 +196,8 @@ def main():
         c = ws.cell(i, 1, t)
         c.font = Font(name=F, size=12 if i == 1 else (11 if bold else 10), bold=bold)
         c.alignment = Alignment(wrap_text=True, vertical="center")
-    ws.cell(16, 1, "노란 칸 = SG가 채우는 칸").fill = EDIT
-    ws.cell(16, 1).font = Font(name=F, size=10)
+    ws.cell(len(lines) + 2, 1, "노란 칸 = SG가 채우는 칸").fill = EDIT
+    ws.cell(len(lines) + 2, 1).font = Font(name=F, size=10)
 
     # 2) 할 일 목록
     ws = wb.create_sheet("할 일 목록")
@@ -273,21 +278,50 @@ def main():
     for key, ko in biome_ko.items():
         by_region.setdefault(ko, []).append(key)
     header(ws, 1, ["지역", "붙은 포켓로그 바이옴", "자주 나오는 역할군 (지금)", "바꿀 역할군 (노란 칸)", "메모"], [14, 40, 26, 26, 34])
-    regions = [(ko, roles) for roles, ko in area.values()] + [("호텔", [])]
+    regions = [(ko, roles) for roles, ko in area.values()]
     for i, (ko, roles) in enumerate(regions, 2):
         put(ws, i, 1, ko, bold=True)
         biomes = ", ".join(b for b in by_region.get(ko, []))
         put(ws, i, 2, biomes or "없음 — 붙일 바이옴을 메모에 (예: metropolis 를 호텔로)", small=not biomes)
         put(ws, i, 3, " · ".join(ROLE_KO.get(r, r) for r in roles) or "골고루")
         put(ws, i, 4, "", edit=True)
-        put(ws, i, 5, "", edit=True)
+        put(ws, i, 5, "임시 자리 (11-12). 다른 바이옴으로 옮기려면 여기에" if ko in ("바지선", "호텔") else "", edit=True)
     ws.freeze_panes = "B2"
+
+    # 6) 아이템 그림
+    ws = wb.create_sheet("아이템 그림")
+    header(ws, 1, ["번호", "나오는 정도", "게임 이름", "그림 파일 (items/)", "지금 그림", "팬키트 파일 (지금)", "바꿀 팬키트 그림 (노란 칸)", "메모"],
+           [6, 10, 22, 22, 12, 46, 34, 26])
+    sources = json.loads((ROOT / "assets/er/item-sources.json").read_text(encoding="utf-8"))
+    from openpyxl import load_workbook
+
+    listed = load_workbook(ROOT / "docs/sheets/아이템-팬키트-목록.xlsx")["게임에 나오는 아이템"]
+    r = 2
+    for row in listed.iter_rows(min_row=7, values_only=True):
+        if not isinstance(row[0], int):
+            continue
+        num, freq, _tier, name, file = row[:5]
+        key = str(file).replace(".png", "")
+        if "*" in key:  # tm_* · *_tera_shard · mint_*
+            src = next((v for k, v in sources.items() if k.endswith(key.replace("*", "")) or k.startswith(key.replace("*", ""))), None)
+        else:
+            src = sources.get(key)
+        put(ws, r, 1, num)
+        put(ws, r, 2, freq, small=True)
+        put(ws, r, 3, name, bold=True)
+        put(ws, r, 4, file, small=True)
+        put(ws, r, 5, ("팬키트 도트 (색 바꿈)" if src and src.get("tint") else "팬키트 도트") if src else "코드 그림")
+        put(ws, r, 6, src["file"] if src else "", small=True)
+        put(ws, r, 7, "", edit=True)
+        put(ws, r, 8, "", edit=True)
+        r += 1
+    ws.freeze_panes = "D2"
 
     for sh in wb.worksheets:
         sh.sheet_view.zoomScale = 100
     OUT.parent.mkdir(parents=True, exist_ok=True)
     wb.save(OUT)
-    print(OUT, "할 일", len(TODO), "· 실험체", len(chars), "· 명칭", len(NAMES), "· 지역", len(regions))
+    print(OUT, "할 일", len(TODO), "· 실험체", len(chars), "· 명칭", len(NAMES), "· 지역", len(regions), "· 아이템", r - 2)
 
 
 if __name__ == "__main__":
