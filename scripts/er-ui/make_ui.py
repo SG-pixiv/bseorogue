@@ -596,9 +596,13 @@ def numbers():
 
 
 def text_images():
+    # 글자가 길어져서 칸을 넓힌 것 (원래 포켓로그 칸보다 넓게. 실험체 정보 '특성' → '패시브', 11-12 SG)
+    widen = {"summary/summary_profile_ability_ko.png": 27}
+
     def label(rel, s, mini=False, col=WHITE, plate=False):
         p = KO / rel
         w, h = size_of(p)
+        w = max(w, widen.get(rel, 0))
         img, d = new(w, h)
         if plate:  # 판 테두리 위에 놓이는 제목: 글자 뒤를 판 색으로 채워서 테두리 선이 글자를 가로지르지 않게
             tmp, td = new(w, h)
@@ -621,7 +625,7 @@ def text_images():
     label("summary/summary_moves_overlay_pp_ko.png", "PP", mini=True, col=GOLD)
     label("summary/summary_stats_expbar_title_ko.png", "EXP", mini=True, col=(130, 196, 255, 255))
     for rel, s in (("summary/summary_moves_descriptions_title_ko.png", "설명"), ("summary/summary_moves_effect_title_ko.png", "효과"),
-                   ("summary/summary_moves_moves_title_ko.png", "스킬"), ("summary/summary_profile_ability_ko.png", "특성"),
+                   ("summary/summary_moves_moves_title_ko.png", "스킬"), ("summary/summary_profile_ability_ko.png", "패시브"),
                    ("summary/summary_profile_passive_ko.png", "패시브"), ("summary/summary_profile_memo_title_ko.png", "메모"),
                    ("summary/summary_profile_profile_title_ko.png", "프로필"), ("summary/summary_stats_exp_title_ko.png", "경험치"),
                    ("summary/summary_stats_item_title_ko.png", "아이템"), ("summary/summary_stats_stats_title_ko.png", "스탯")):

@@ -7,6 +7,7 @@ import { GrowthRate, getGrowthRateColor } from "#data/exp";
 import { Gender, getGenderColor, getGenderSymbol } from "#data/gender";
 import { getNatureName } from "#data/nature";
 import type { PokemonSpecies } from "#data/pokemon-species";
+import { AbilityId } from "#enums/ability-id";
 import { Challenges } from "#enums/challenges";
 import { Passive } from "#enums/passive";
 import { PokemonType } from "#enums/pokemon-type";
@@ -750,7 +751,8 @@ export class StarterSummary extends Phaser.GameObjects.Container {
     const passiveAttr = starterDataEntry.passiveAttr;
     const passiveAbility = allAbilities[speciesDataRegistry.getSpecies(starterId).getPassiveAbility(formIndex)];
 
-    if (!passiveAbility) {
+    // 블서로그: 포켓로그 패시브(해금 특성)는 안 써요. 없으면 줄을 숨겨요 (고유 패시브는 위 '패시브:' 줄)
+    if (!passiveAbility || passiveAbility.id === AbilityId.NONE) {
       if (this.activeTooltip === "PASSIVE") {
         globalScene.ui.hideTooltip();
       }
