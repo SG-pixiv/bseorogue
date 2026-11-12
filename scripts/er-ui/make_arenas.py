@@ -3,7 +3,7 @@
 """
 블서로그 지역 배경 20곳 (루미아 섬) — 전투 배경 · 발판을 코드로 그려요
 
-포켓로그 지역(바이옴) 35곳을 루미아 섬 20곳에 나눠 붙였어요 (이름은 locales/ko/biome.json, 역할군은
+포켓로그 지역(바이옴) 35곳을 루미아 섬 20곳에 나눠 붙였어요 (이름은 locales/ko/biomes.json, 역할군은
 src/data/bseorogue/regions.ts). 같은 지역에 붙은 바이옴은 같은 그림을 써요.
   - <바이옴>_bg.png   320×180 배경 (지평선 y≈66, 아래 48칸은 전투 창에 가려요)
   - <바이옴>_a.png    320×132 내 발판 (가운데 104, 132 · 반만 보여요)
@@ -29,7 +29,7 @@ W, H = 320, 180
 HORIZON = 66
 OUTLINE = (26, 28, 44)
 
-# 바이옴 → 지역 (locales/ko/biome.json 과 같게). 호텔은 아직 붙은 바이옴이 없어요 (SG가 정하면 여기만)
+# 바이옴 → 지역 (locales/ko/biomes.json 과 같게). 호텔은 아직 붙은 바이옴이 없어요 (SG가 정하면 여기만)
 BIOME_REGION = {
     "town": "alley", "slum": "alley", "plains": "archery", "grass": "stream", "tall_grass": "forest", "forest": "forest",
     "jungle": "forest", "snowy_forest": "forest", "metropolis": "uptown", "sea": "harbor", "seabed": "harbor",
