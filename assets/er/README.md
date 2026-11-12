@@ -11,8 +11,10 @@ https://support.playeternalreturn.com/hc/ko/articles/63456926675865
 - `skill/<ER번호>_<p|q|w|e|r>.png` 스킬 아이콘 (팬키트 Skill Icon, 72×72 · 128색, p = 패시브)
 - `skill-icon-sources.json` 아이콘마다 어느 팬키트 파일로 만들었는지
 - `voice-sources.json` 실험체마다 음성 언어 · zip(또는 낱개 폴더) · 고른 파일
+- `dot/<ER번호>_<스킨>.png` · `dot/<ER번호>_<스킨>_icon.png` 실험체 도트 (블서로그용으로 새로 그린 것, 전투 80×80 · 아이콘 40×30 1배), `dot-icons.png` 도트 아이콘 한 장. 있으면 팬키트 그림보다 먼저 써요
 
 다시 만들기 (팬키트가 zip 여러 개로 나뉘어 있어서 기본은 더하기예요. 처음부터는 `--fresh`):
 - 그림: `python3 scripts/fankit/build_art.py <팬키트 폴더> [<폴더> …]`
 - 스킬 아이콘: `python3 -B scripts/fankit/build_skill_icons.py <팬키트 폴더> [<폴더> …]`
 - 음성: `python3 scripts/fankit/build_voice.py <팬키트 폴더> [<폴더> …]` (ffmpeg 필요)
+- 도트: `python3 -B scripts/er-dot/import_dot.py <도트.png 또는 폴더>` (규격 검사 후 넣기, 검사만은 `--check`)

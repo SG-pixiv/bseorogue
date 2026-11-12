@@ -3,6 +3,7 @@ import { globalScene } from "#app/global-scene";
 import { activeOverrides } from "#app/overrides";
 import { SceneBase } from "#app/scene-base";
 import { isMobile } from "#app/touch-controls";
+import { BSEO_DOT_ICON_FRAMES } from "#data/bseorogue/dot-manifest";
 import { BiomeId } from "#enums/biome-id";
 import { GachaType } from "#enums/gacha-types";
 import { getBiomeHasProps } from "#field/arena";
@@ -36,6 +37,10 @@ export class LoadingScene extends SceneBase {
     // Load menu images
     // 블서로그: 팬키트 실험체 아이콘 한 장 (placeholder-art.ts 가 아이콘 칸을 그릴 때 써요)
     this.load.image("bseo_char_icons", getCachedUrl("er/char-icons.png"));
+    // 블서로그: 실험체 도트 아이콘 한 장 (도트가 있을 때만, scripts/er-dot/import_dot.py 가 만들어요)
+    if (Object.keys(BSEO_DOT_ICON_FRAMES).length > 0) {
+      this.load.image("bseo_dot_icons", getCachedUrl("er/dot-icons.png"));
+    }
     this.loadImage("loading_bg", "arenas")
       .loadImage("logo", "")
       .loadImage("logo_fake", "")
