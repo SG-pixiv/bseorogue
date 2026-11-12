@@ -22,7 +22,7 @@
       }
     },
     "PokemonReviveModifierType": {
-      "description": "기절해 버린 실험체 1마리의 HP를 {{restorePercent}}%까지 회복한다."
+      "description": "쓰러진 실험체 1명의 HP를 {{restorePercent}}%까지 회복한다."
     },
     "PokemonStatusHealModifierType": {
       "description": "실험체 1마리의 상태 이상을 모두 회복한다."
@@ -76,7 +76,7 @@
       "description": "자신의 실험체의 HP를 모두 회복한다."
     },
     "AllPokemonFullReviveModifierType": {
-      "description": "기절해 버린 실험체 전원의 HP를 완전히 회복한다."
+      "description": "쓰러진 실험체 전원의 HP를 완전히 회복한다."
     },
     "MoneyRewardModifierType": {
       "description": "{{moneyMultiplier}} 양의 돈을 획득한다. ({{moneyAmount}}크레딧)",
@@ -322,7 +322,7 @@
     },
     "FOCUS_BAND": {
       "name": "기합의머리띠",
-      "description": "기절할 듯한 데미지를 받아도 HP를 1 남겨서 견딜 확률이 10% 추가된다."
+      "description": "쓰러질 듯한 피해를 받아도 HP를 1 남겨서 견딜 확률이 10% 추가된다."
     },
     "QUICK_CLAW": {
       "name": "선제공격손톱",
@@ -341,8 +341,8 @@
       "description": "실험체가 준 데미지의 1/8씩을 회복한다."
     },
     "TOXIC_ORB": {
-      "name": "맹독구슬",
-      "description": "이 도구를 지닌 실험체는 턴이 끝나는 시점에 상태이상에 걸리지 않았다면 맹독 상태가 된다."
+      "name": "출혈구슬",
+      "description": "이 도구를 지닌 실험체는 턴이 끝나는 시점에 상태이상에 걸리지 않았다면 출혈 상태가 된다."
     },
     "FLAME_ORB": {
       "name": "화염구슬",
@@ -407,10 +407,10 @@
       "description": "매 턴 최대 체력의 2%를 회복한다."
     },
     "ENEMY_ATTACK_POISON_CHANCE": {
-      "name": "독 토큰"
+      "name": "중독 토큰"
     },
     "ENEMY_ATTACK_PARALYZE_CHANCE": {
-      "name": "마비 토큰"
+      "name": "둔화 토큰"
     },
     "ENEMY_ATTACK_BURN_CHANCE": {
       "name": "화상 토큰"
