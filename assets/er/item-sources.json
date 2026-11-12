@@ -53,11 +53,11 @@
  },
  "calcium": {
   "file": "03. Consumables/Boost/06. Tear of Selene.png",
-  "name": "셀레네의 눈물"
+  "name": "셀레네의 눈물 - 스킬증폭 (11-12 SG)"
  },
  "carbos": {
-  "file": "03. Consumables/Boost/03. Capsule_Galaxy.png",
-  "name": "캡슐 - 우주 (2026 시즌 11)"
+  "file": "03. Consumables/Boost/07. Combat Epinephrine.png",
+  "name": "컴뱃 에피네프린 (11-12 SG: 속도 영구 강화)"
  },
  "catching_charm": {
   "file": "01. Weapons/13. Shuriken/010. Mystic Jade Charm.png",
@@ -76,6 +76,10 @@
    112,
    60
   ]
+ },
+ "coupon": {
+  "file": "06. Exchangeable/04. Aglaia_s Gift - Legendary.png",
+  "name": "아글라이아의 선물 - 영웅 (그림은 전설 것, 영웅 · 초월 그림은 노트북에서 가져와야 해요)"
  },
  "dark_tera_shard": {
   "file": "05. Material/034. Crimson Shard.png",
@@ -134,13 +138,8 @@
   "name": "진화의휘석"
  },
  "exp_charm": {
-  "file": "01. Weapons/13. Shuriken/010. Mystic Jade Charm.png",
-  "name": "부적 (exp_charm)",
-  "tint": [
-   70,
-   130,
-   220
-  ]
+  "file": "06. Exchangeable/04. Aglaia_s Gift - Legendary.png",
+  "name": "아글라이아의 선물 (경험치 +25%)"
  },
  "exp_share": {
   "file": "02. Armor/02. Head/047. Commander Headset.png",
@@ -278,8 +277,8 @@
   "name": "대환단"
  },
  "hyper_potion": {
-  "file": "03. Consumables/Food/026. Mint Choco Ice Cream.png",
-  "name": "민트 초코"
+  "file": "03. Consumables/Food/010. Bread In Tears.png",
+  "name": "눈물젖은 빵 (11-12 SG: 큰 회복이 이 이름)"
  },
  "ice_tera_shard": {
   "file": "05. Material/034. Crimson Shard.png",
@@ -361,6 +360,10 @@
    92
   ]
  },
+ "mystic_ticket": {
+  "file": "06. Exchangeable/04. Aglaia_s Gift - Legendary.png",
+  "name": "아글라이아의 선물 - 초월 (그림은 전설 것)"
+ },
  "mystic_water": {
   "file": "05. Material/062. Tac. Skill Module.png",
   "name": "강화 모듈 (water)",
@@ -401,6 +404,10 @@
    244
   ]
  },
+ "pair_of_tickets": {
+  "file": "06. Exchangeable/04. Aglaia_s Gift - Legendary.png",
+  "name": "아글라이아의 선물 - 전설"
+ },
  "petaya_berry": {
   "file": "03. Consumables/Food/006. Edible Mushroom.png",
   "name": "양송이 버섯"
@@ -427,9 +434,13 @@
   "file": "03. Consumables/Food/004. Meat.png",
   "name": "고기"
  },
+ "pp_up": {
+  "file": "03. Consumables/Food/999. #11 Combo Meal.png",
+  "name": "일레븐 세트 (최대 PP 영구 증가)"
+ },
  "protein": {
-  "file": "03. Consumables/Boost/07. Combat Epinephrine.png",
-  "name": "컴뱃 에피네프린"
+  "file": "03. Consumables/Boost/06. Tear of Selene.png",
+  "name": "셀레네의 눈물 - 공격력 (11-12 SG)"
  },
  "psychic_tera_shard": {
   "file": "05. Material/034. Crimson Shard.png",
@@ -556,8 +567,8 @@
   ]
  },
  "starf_berry": {
-  "file": "03. Consumables/Food/032. Sweet Potato.png",
-  "name": "꿀고구마"
+  "file": "03. Consumables/Food/026. Mint Choco Ice Cream.png",
+  "name": "민트초코 (11-12 SG)"
  },
  "steel_tera_shard": {
   "file": "05. Material/034. Crimson Shard.png",
@@ -623,6 +634,14 @@
  "wide_lens": {
   "file": "01. Weapons/21. Camera/001. Lens.png",
   "name": "광각렌즈"
+ },
+ "x_attack": {
+  "file": "03. Consumables/Boost/02. Capsule_Sanguine.png",
+  "name": "캡슐-선혈 (공격력 강화제)"
+ },
+ "x_sp_atk": {
+  "file": "03. Consumables/Boost/03. Capsule_Galaxy.png",
+  "name": "캡슐-우주 (스킬 증폭 강화제)"
  },
  "zinc": {
   "file": "03. Consumables/Boost/01. Capsule_Essence.png",

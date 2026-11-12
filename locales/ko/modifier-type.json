@@ -163,7 +163,7 @@
       "name": "눈물젖은 빵"
     },
     "HYPER_POTION": {
-      "name": "민트 초코"
+      "name": "눈물젖은 빵"
     },
     "MAX_POTION": {
       "name": "일레븐 세트"
@@ -204,7 +204,7 @@
       "name": "백일취"
     },
     "PP_UP": {
-      "name": "포인트업"
+      "name": "일레븐 세트"
     },
     "PP_MAX": {
       "name": "포인트맥스"
@@ -223,7 +223,7 @@
       "description": "실험체가 잊어버린 스킬을 떠올린다."
     },
     "EXP_SHARE": {
-      "name": "관전 학습 장치",
+      "name": "휴대용 생성기",
       "description": "배틀에 참여하지 않아도 20%의 경험치를 받을 수 있게 된다."
     },
     "EXP_BALANCE": {
@@ -235,7 +235,7 @@
       "description": "여러 마리의 실험체가 배틀에 참여할 경우, 전체 경험치의 10%씩을 추가로 획득한다."
     },
     "EXP_CHARM": {
-      "name": "경험부적"
+      "name": "아글라이아의 선물"
     },
     "SUPER_EXP_CHARM": {
       "name": "좋은경험부적"
@@ -296,7 +296,7 @@
       "description": "매 열 번째 배틀마다, 가진 돈의 10%를 이자로 획득한다."
     },
     "LOCK_CAPSULE": {
-      "name": "록캡슐",
+      "name": "휴대용 생성기",
       "description": "받을 아이템을 갱신할 때 희귀도를 고정시킬 수 있게 된다."
     },
     "GRIP_CLAW": {
@@ -313,7 +313,7 @@
       "description": "HP를 회복하는 스킬이나 도구를 썼을 때 효율이 10% 증가한다. (부활 제외)"
     },
     "CANDY_JAR": {
-      "name": "사탕단지",
+      "name": "부거단지",
       "description": "이상한사탕 종류의 아이템이 올려주는 레벨이 1 증가한다."
     },
     "BERRY_POUCH": {
@@ -478,9 +478,9 @@
     }
   },
   "TempStatStageBoosterItem": {
-    "x_attack": "공격력 강화제",
+    "x_attack": "캡슐-선혈",
     "x_defense": "방어력 강화제",
-    "x_sp_atk": "스킬 증폭 강화제",
+    "x_sp_atk": "캡슐-우주",
     "x_sp_def": "스킬 저항 강화제",
     "x_speed": "속도 강화제",
     "x_accuracy": "명중 강화제"
@@ -507,11 +507,11 @@
   },
   "BaseStatBoosterItem": {
     "hp_up": "대환단",
-    "protein": "컴뱃 에피네프린",
+    "protein": "셀레네의 눈물 - 공격력",
     "iron": "성수",
-    "calcium": "셀레네의 눈물",
+    "calcium": "셀레네의 눈물 - 스킬증폭",
     "zinc": "캡슐 - 생명",
-    "carbos": "캡슐 - 우주"
+    "carbos": "컴뱃 에피네프린"
   },
   "EvolutionItem": {
     "NONE": "None",

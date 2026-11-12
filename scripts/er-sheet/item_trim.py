@@ -4,9 +4,11 @@
 아이템 줄이기: SG 시트 '아이템 줄이기' ↔ 게임에서 뺄 아이템 목록 (src/data/bseorogue/reward-trim.ts)
 
 쓰는 법: python3 -I -B scripts/er-sheet/item_trim.py [엑셀 파일]   (기본 docs/sheets/SG-정할-것.xlsx)
-  1) 엑셀에 '아이템 줄이기' 시트가 없으면 더해요. 있으면 SG가 적은 '결정' · '메모' 는 그대로 두고 나머지(이름 · 효과 · 추천)만 새로 써요.
+  1) 엑셀에 '아이템 줄이기' 시트가 없으면 더해요. 있으면 SG가 적은 '아이템'(이름) · '결정' · '메모' 는 그대로 두고 나머지(효과 · 추천)만 새로 써요.
      다른 시트는 건드리지 않아요.
   2) '결정' 칸이 '뺌' 인 아이템을 reward-trim.ts 에 써요 → 게임이 보상 · 상점 · 적이 지닌 물건에서 빼요 (reward-filter.ts).
+  3) '아이템' 칸 이름이 게임 글자(locales/ko)와 다르면 게임 글자를 그 이름으로 바꿔요 (아이템 이름 바꾸기, 11-12 SG).
+     그림은 따로예요: scripts/fankit/build_item_dots.py 의 ITEMS 표.
   → 그 뒤: pnpm exec biome format --write src/data/bseorogue/reward-trim.ts 그리고 블서로그 테스트
 
 아이템을 더하거나 구분을 바꾸려면 아래 ROWS 표를 고쳐요.
@@ -36,8 +38,7 @@ TEMP_KEY = {"ATK": "x_attack", "DEF": "x_defense", "SPATK": "x_sp_atk", "SPDEF":
 BASE_KEY = {"HP": "hp_up", "ATK": "protein", "DEF": "iron", "SPATK": "calcium", "SPDEF": "zinc", "SPD": "carbos"}
 TYPE_KEY = {"ROCK": "hard_stone", "FIGHTING": "black_belt", "DARK": "black_glasses", "DRAGON": "dragon_fang", "PSYCHIC": "twisted_spoon", "FAIRY": "fairy_feather"}
 # 글자 묶음(locales)에 이름이 따로 없는 것
-NAMES = {"VOUCHER": "보급 요청권", "VOUCHER_PLUS": "보급 요청권 플러스", "VOUCHER_PREMIUM": "보급 요청권 프리미엄", "MINT": "민트 (성격 바꾸기)",
-         "POKEBALL": "볼 (지금 이름 '보급 상자')", "GREAT_BALL": "슈퍼볼", "ULTRA_BALL": "하이퍼볼", "ROGUE_BALL": "로그볼", "MASTER_BALL": "마스터볼"}
+NAMES = {"MINT": "민트 (성격 바꾸기)"}
 
 # (구분, 키, 효과, 나오는 곳, 처음 결정, 추천, 이유)   키: "ID" · "ID:하위" · 여러 개는 쉼표
 ROWS = [
@@ -151,15 +152,68 @@ FIRST_ROW = 5
 README = [
     ("아이템 줄이기 시트 (11-12 추가)", True),
     ("· 보상 · 상점에 나오는 아이템을 구분별로 모았어요. 노란 '결정' 칸에 남김 / 뺌 만 고르면 돼요 (칸을 누르면 고르는 목록이 나와요).", False),
+    ("· 노란 '아이템' 칸의 이름을 고치면 게임 안 이름도 그렇게 바뀌어요.", False),
     ("· '뺌' 으로 하면 보상 · 상점 · 적이 지닌 물건에서 모두 안 나와요. '추천' 은 제 의견이고, 결정 칸이 실제로 들어가는 값이에요.", False),
     ("· 맨 위 '뺀 것' 은 SG가 11-12 에 빼기로 한 것, 맨 아래 회색은 포켓몬 전용이라 처음부터 빠져 있는 것 (못 바꿔요).", False),
 ]
 
 
-def item_name(key: str, mt: dict, berry: dict, extra: dict) -> str:
+VOUCHER_KEY = {"VOUCHER": "eggVoucher", "VOUCHER_PLUS": "eggVoucherPlus", "VOUCHER_PREMIUM": "eggVoucherPremium"}
+BALL_KEY = {"POKEBALL": "pokeBall", "GREAT_BALL": "greatBall", "ULTRA_BALL": "ultraBall", "ROGUE_BALL": "rogueBall", "MASTER_BALL": "masterBall"}
+
+
+def name_slot(key: str):
+    """그 아이템 이름이 들어 있는 곳 → (locales/ko 파일, 키 길) 또는 None"""
+    if "," in key:
+        return None
+    head, _, sub = key.partition(":")
+    if head == "BERRY":
+        return "berry.json", [BERRY_KEY[sub], "name"]
+    if head == "TEMP_STAT_STAGE_BOOSTER":
+        return "modifier-type.json", ["TempStatStageBoosterItem", TEMP_KEY[sub]]
+    if head == "BASE_STAT_BOOSTER":
+        return "modifier-type.json", ["BaseStatBoosterItem", BASE_KEY[sub]]
+    if head == "ATTACK_TYPE_BOOSTER":
+        return "modifier-type.json", ["AttackTypeBoosterItem", TYPE_KEY[sub]]
+    if head in VOUCHER_KEY:
+        return "voucher.json", [VOUCHER_KEY[head]]
+    if head in BALL_KEY:
+        return "pokeball.json", [BALL_KEY[head]]
+    if head == "MINT":
+        return None
+    return "modifier-type.json", ["ModifierType", head, "name"]
+
+
+def apply_names(wb) -> list[str]:
+    """시트 '아이템' 칸 이름을 게임 글자에 넣기 → 바뀐 것 목록"""
+    files, changed = {}, []
+    for row in wb[SHEET].iter_rows(min_row=FIRST_ROW, values_only=True):
+        key, name = row[8], str(row[1] or "").strip()
+        slot = name_slot(key) if key else None
+        if not slot or not name:
+            continue
+        fname, path = slot
+        data = files.setdefault(fname, json.loads((ROOT / "locales/ko" / fname).read_text(encoding="utf-8")))
+        node = data
+        for k in path[:-1]:
+            node = node.setdefault(k, {})
+        if node.get(path[-1]) != name:
+            changed.append(f"{node.get(path[-1])} → {name}")
+            node[path[-1]] = name
+    if changed:
+        for fname, data in files.items():
+            (ROOT / "locales/ko" / fname).write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return changed
+
+
+def item_name(key: str, mt: dict, berry: dict, extra: dict, vouchers: dict, balls: dict) -> str:
     if "," in key:
         return "야생 · 보스 · 그 밖 타입 강화 모듈"
     head, _, sub = key.partition(":")
+    if head in VOUCHER_KEY:
+        return vouchers[VOUCHER_KEY[head]]
+    if head in BALL_KEY:
+        return balls[BALL_KEY[head]]
     if head == "BERRY":
         return berry[BERRY_KEY[sub]]["name"]
     if head == "TEMP_STAT_STAGE_BOOSTER":
@@ -180,11 +234,13 @@ def build_sheet(wb) -> None:
         index = wb.sheetnames.index(SHEET)
         for row in old.iter_rows(min_row=FIRST_ROW, values_only=True):
             if row[8]:
-                answers[row[8]] = (row[4], row[7])
+                answers[row[8]] = (row[4], row[7], str(row[1] or "").strip())
         del wb[SHEET]
     ws = wb.create_sheet(SHEET, index=index if index is not None else len(wb.sheetnames))
     locale = json.loads((ROOT / "locales/ko/modifier-type.json").read_text(encoding="utf-8"))
     berry = json.loads((ROOT / "locales/ko/berry.json").read_text(encoding="utf-8"))
+    vouchers = json.loads((ROOT / "locales/ko/voucher.json").read_text(encoding="utf-8"))
+    balls = json.loads((ROOT / "locales/ko/pokeball.json").read_text(encoding="utf-8"))
     last = FIRST_ROW + len(ROWS) - 1
     ws["A1"] = "아이템 줄이기 — 노란 '결정' 칸에 남김 / 뺌 을 골라요. 뺌 이면 보상 · 상점 · 적이 지닌 물건에서 안 나와요."
     ws["A1"].font = Font(name=F, size=11, bold=True)
@@ -210,8 +266,8 @@ def build_sheet(wb) -> None:
         fixed = decision == FIXED
         if group != prev:
             band, prev = band + 1, group
-        name = key if fixed else item_name(key, locale["ModifierType"], berry, locale)
-        said, memo = answers.get(key, (None, None))
+        said, memo, new_name = answers.get(key, (None, None, ""))
+        name = key if fixed else (new_name or item_name(key, locale["ModifierType"], berry, locale, vouchers, balls))
         vals = [group, name, effect, where, decision if fixed else (said or decision), rec, why, memo or "", "" if fixed else key]
         for c, v in enumerate(vals, 1):
             cell = ws.cell(r, c, v)
@@ -220,7 +276,7 @@ def build_sheet(wb) -> None:
             cell.alignment = Alignment(vertical="center", wrap_text=c in (1, 3, 7, 8), horizontal="center" if c in (4, 5, 6) else None)
             if fixed:
                 cell.fill = GREY
-            elif c in (5, 8):
+            elif c in (5, 8) or (c == 2 and "," not in key and not key.startswith("MINT")):
                 cell.fill = EDIT
             elif BAND[band % 2]:
                 cell.fill = BAND[band % 2]
@@ -279,6 +335,9 @@ def main() -> None:
         raise SystemExit("\n".join(errors))
     wb.save(path)
     write_ts(off)
+    renamed = apply_names(wb)
+    if renamed:
+        print(f"이름 {len(renamed)}개 바꿈 (locales/ko): " + " · ".join(renamed))
     groups = {}
     for group, key, *_ in ROWS:
         groups.setdefault(group, []).append(key)

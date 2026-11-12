@@ -27,14 +27,12 @@ const OFF = BSEO_REWARD_OFF as Set<string>;
 describe("블서로그 아이템 줄이기", () => {
   let phaserGame: Phaser.Game;
   let game: GameManager;
-  const added: string[] = [];
+  /** 시트에서 정한 지금 목록 (테스트가 끝나면 되돌려요) */
+  const fromSheet = [...OFF];
 
   function cut(...keys: string[]): void {
     for (const k of keys) {
-      if (!OFF.has(k)) {
-        OFF.add(k);
-        added.push(k);
-      }
+      OFF.add(k);
     }
   }
 
@@ -48,8 +46,9 @@ describe("블서로그 아이템 줄이기", () => {
   });
 
   afterEach(() => {
-    for (const k of added.splice(0)) {
-      OFF.delete(k);
+    OFF.clear();
+    for (const k of fromSheet) {
+      OFF.add(k);
     }
   });
 
@@ -68,12 +67,21 @@ describe("블서로그 아이템 줄이기", () => {
       }
     }
     // 남기기로 한 것은 그대로
-    for (const id of ["POTION", "LEFTOVERS", "BASE_STAT_BOOSTER", "VOUCHER", "MAP", "BERRY"]) {
+    for (const id of [
+      "POTION",
+      "LEFTOVERS",
+      "BASE_STAT_BOOSTER",
+      "VOUCHER",
+      "MAP",
+      "BERRY",
+      "TEMP_STAT_STAGE_BOOSTER",
+    ]) {
       expect(ids(modifierPool), id).toContain(id);
     }
   });
 
   it("전부 뺀 종류: 내 보상은 빈 목록, 적이 지닐 물건은 원래 목록", () => {
+    OFF.clear();
     cut("X:A", "X:B");
     const player = [{ isPlayer: () => true }];
     const enemy = [{ isPlayer: () => false }];
@@ -85,6 +93,8 @@ describe("블서로그 아이템 줄이기", () => {
   it("전투에서: 뺀 음식 · 강화 모듈 · 상점 물건이 안 나와요", async () => {
     await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
     const party = game.scene.getPlayerParty();
+    OFF.clear(); // 시트 값과 상관없이 거르는 것만 봐요
+    cut("ATTACK_TYPE_BOOSTER:NORMAL", "ATTACK_TYPE_BOOSTER:BUG");
 
     cut("BERRY:LIECHI", "BERRY:GANLON", "BERRY:PETAYA", "BERRY:APICOT", "BERRY:SALAC", "BERRY:LANSAT");
     const berries = modifierTypes.BERRY() as ModifierTypeGenerator;

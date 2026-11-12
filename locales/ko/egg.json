@@ -15,8 +15,8 @@
   "gachaTypeShiny": "색이 다른 실험체 확률 업",
   "eventType": "미스터리 이벤트",
   "selectMachine": "사용할 보급 요청 기계를 골라 주세요.",
-  "noVouchers": "보급 요청권이 없어요!",
-  "notEnoughVouchers": "보급 요청권이 모자라요!",
+  "noVouchers": "아글라이아의 선물이 없어요!",
+  "notEnoughVouchers": "아글라이아의 선물이 모자라요!",
   "tooManyEggs": "보급 상자를 너무 많이 가지고 있어요!",
   "pull": "요청",
   "pulls": "요청",
@@ -27,5 +27,5 @@
   "moveUpGacha": "추가 스킬 UP!",
   "shinyUpGacha": "색이 다른\n실험체 UP!",
   "legendaryUpGacha": "UP!",
-  "vouchersExceedEggCap": "보급 요청권이 보급 상자 상한을 넘었어요!"
+  "vouchersExceedEggCap": "아글라이아의 선물이 보급 상자 상한을 넘었어요!"
 }

@@ -42,7 +42,7 @@ A = "02. Armor/"
 ITEMS = {
     "potion": (F + "004. Meat.png", "고기"),
     "super_potion": (F + "010. Bread In Tears.png", "눈물젖은 빵"),
-    "hyper_potion": (F + "026. Mint Choco Ice Cream.png", "민트 초코"),
+    "hyper_potion": (F + "010. Bread In Tears.png", "눈물젖은 빵 (11-12 SG: 큰 회복이 이 이름)"),
     "max_potion": (F + "999. #11 Combo Meal.png", "일레븐 세트"),
     "full_restore": (F + "035. Perpetual Stew.png", "만년수프"),
     "ether": (F + "008. Water.png", "물"),
@@ -58,7 +58,7 @@ ITEMS = {
     "apicot_berry": (F + "024. Yellow Sweet Potato.png", "호박 고구마"),
     "salac_berry": (F + "007. Fried Chicken.png", "후라이드 치킨"),
     "lansat_berry": (F + "027. Truffle.png", "트러플"),
-    "starf_berry": (F + "032. Sweet Potato.png", "꿀고구마"),
+    "starf_berry": (F + "026. Mint Choco Ice Cream.png", "민트초코 (11-12 SG)"),
     "leppa_berry": (F + "015. Choco Spread.png", "루텔라"),
     "big_mushroom": (F + "017. Grilled Mushroom Skewers.png", "기억버섯"),
     "leftovers": ("03. Consumables/Omurice.png", "먹다 남은 도시락 (2026 시즌 11 오므라이스)"),
@@ -66,11 +66,19 @@ ITEMS = {
     "revive": (B + "08. Gadget Energy Pack.png", "가젯 에너지 팩"),
     "max_revive": ("00. Gadget/Kiosk Remote.png", "부활 키트"),
     "hp_up": (B + "05. Zen Vitality.png", "대환단"),
-    "protein": (B + "07. Combat Epinephrine.png", "컴뱃 에피네프린"),
+    "protein": (B + "06. Tear of Selene.png", "셀레네의 눈물 - 공격력 (11-12 SG)"),
     "iron": (B + "04. Holy Water.png", "성수"),
-    "calcium": (B + "06. Tear of Selene.png", "셀레네의 눈물"),
+    "calcium": (B + "06. Tear of Selene.png", "셀레네의 눈물 - 스킬증폭 (11-12 SG)"),
     "zinc": (B + "01. Capsule_Essence.png", "캡슐 - 생명 (2026 시즌 11)"),
-    "carbos": (B + "03. Capsule_Galaxy.png", "캡슐 - 우주 (2026 시즌 11)"),
+    "carbos": (B + "07. Combat Epinephrine.png", "컴뱃 에피네프린 (11-12 SG: 속도 영구 강화)"),
+    # 11-12 SG가 이름을 바꾼 것 (시트 '아이템 줄이기')
+    "pp_up": (F + "999. #11 Combo Meal.png", "일레븐 세트 (최대 PP 영구 증가)"),
+    "x_attack": (B + "02. Capsule_Sanguine.png", "캡슐-선혈 (공격력 강화제)"),
+    "x_sp_atk": (B + "03. Capsule_Galaxy.png", "캡슐-우주 (스킬 증폭 강화제)"),
+    "exp_charm": ("06. Exchangeable/04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물 (경험치 +25%)"),
+    "coupon": ("06. Exchangeable/04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물 - 영웅 (그림은 전설 것, 영웅 · 초월 그림은 노트북에서 가져와야 해요)"),
+    "pair_of_tickets": ("06. Exchangeable/04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물 - 전설"),
+    "mystic_ticket": ("06. Exchangeable/04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물 - 초월 (그림은 전설 것)"),
     "toxic_orb": (B + "02. Capsule_Sanguine.png", "출혈구슬 (2026 시즌 11 캡슐 - 선혈)"),
     "flame_orb": (W + "12. Throw/013. Fireball.png", "화염구슬"),
     "sacred_ash": ("06. Exchangeable/04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물"),
@@ -244,6 +252,8 @@ def main() -> None:
             typ = name[: -len("_tera_shard")]
             put(name, SHARD_SRC, f"테라피스 ({typ})", tint=mi.TYPE.get(typ, (200, 200, 210)))
     for name, (c, _c2) in mi.CHARMS.items():
+        if name in ITEMS:  # 따로 그림을 고른 부적 (예: 경험부적 → 아글라이아의 선물)
+            continue
         put(name, CHARM_SRC, f"부적 ({name})", tint=c)
     unknown = sorted(n for n in sources if n not in order)
     json.dump(dict(sorted(sources.items())), open(SOURCES, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

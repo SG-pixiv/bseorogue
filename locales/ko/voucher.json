@@ -1,9 +1,9 @@
 {
-  "vouchers": "보급 요청권",
-  "eggVoucher": "보급 요청권",
-  "eggVoucherPlus": "보급 요청권 플러스",
-  "eggVoucherPremium": "보급 요청권 프리미엄",
-  "eggVoucherGold": "보급 요청권 골드",
+  "vouchers": "아글라이아의 선물",
+  "eggVoucher": "아글라이아의 선물 - 영웅",
+  "eggVoucherPlus": "아글라이아의 선물 - 전설",
+  "eggVoucherPremium": "아글라이아의 선물 - 초월",
+  "eggVoucherGold": "아글라이아의 선물 - 골드",
   "locked": "미획득",
   "defeatTrainer": "{{trainerName}}에게 승리"
 }
