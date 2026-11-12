@@ -103,7 +103,7 @@
   },
   "maxFriendship": {
     "name": "친밀 맥스",
-    "description": "최대 친밀도 달성"
+    "description": "최대 숙련도 달성"
   },
   "megaEvolve": {
     "name": "메가변환",
@@ -172,7 +172,7 @@
   },
   "perfectIvs": {
     "name": "진짜배기 증명서",
-    "description": "최고의 개체값을 지닌 실험체 획득"
+    "description": "잠재력이 완벽한 실험체 획득"
   },
   "classicVictory": {
     "name": "무패",
@@ -298,7 +298,7 @@
   },
   "breedersInSpace": {
     "name": "충격!우주에 브리더 진짜 계심ㄷㄷ",
-    "description": "우주 바이옴에서 실험체 브리더에게 승리."
+    "description": "우주 지역에서 실험체 브리더에게 승리."
   },
   "dailyVictory": {
     "name": "1일1러닝…",

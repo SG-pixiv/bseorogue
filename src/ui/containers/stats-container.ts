@@ -1,4 +1,5 @@
 import { globalScene } from "#app/global-scene";
+import { BSEO_POTENTIAL_COLOR, bseoPotentialGrade, bseoPotentialImproves } from "#data/bseorogue/potential";
 import { getStatKey, PERMANENT_STATS } from "#enums/stat";
 import { TextStyle } from "#enums/text-style";
 import { addBBCodeTextObject, addTextObject, getTextColor } from "#ui/text";
@@ -28,6 +29,8 @@ export class StatsContainer extends Phaser.GameObjects.Container {
   private statsIvsCache: number[];
   private ivChart: Phaser.GameObjects.Polygon;
   private ivStatValueTexts: BBCodeText[];
+  /** 블서로그: 개체값 대신 보여 주는 '잠재력 A' 한 줄 */
+  private potentialText: BBCodeText;
 
   constructor(x: number, y: number, showDiff = false) {
     super(globalScene, x, y);
@@ -109,9 +112,38 @@ export class StatsContainer extends Phaser.GameObjects.Container {
       this.add(statLabel);
       this.add(this.ivStatValueTexts[s]);
     }
+
+    // 블서로그: 육각형 · 숫자 6개는 숨기고 '잠재력' 등급 한 줄만 보여 줘요 (src/data/bseorogue/potential.ts)
+    for (const child of this.list as Phaser.GameObjects.GameObject[]) {
+      (child as unknown as Phaser.GameObjects.Components.Visible).setVisible(false);
+    }
+    this.potentialText = addBBCodeTextObject(ivChartBg.x, ivChartBg.y - 8, "", TextStyle.WINDOW, {
+      align: "center",
+      lineSpacing: 8,
+    });
+    this.potentialText.setOrigin(0.5);
+    this.add(this.potentialText);
+  }
+
+  /** 블서로그: '잠재력 A' (얻을 때 화면에서는 오르는지도) */
+  private updatePotential(ivs: number[] | null, originalIvs?: number[]): void {
+    if (!ivs) {
+      this.potentialText.setText("");
+      return;
+    }
+    const grade = bseoPotentialGrade(ivs);
+    const shadow = getTextColor(TextStyle.WINDOW, true);
+    let label = `[shadow=${shadow}]${i18next.t("pokemonInfo:bseoPotential")} [color=${BSEO_POTENTIAL_COLOR[grade]}]${grade}[/color][/shadow]`;
+    if (this.showDiff && originalIvs) {
+      const up = bseoPotentialImproves(ivs, originalIvs);
+      const color = getTextColor(up ? TextStyle.SUMMARY_BLUE : TextStyle.WINDOW, false);
+      label += `\n[shadow=${shadow}][color=${color}]${i18next.t(up ? "pokemonInfo:bseoPotentialUp" : "pokemonInfo:bseoPotentialSame")}[/color][/shadow]`;
+    }
+    this.potentialText.setText(label);
   }
 
   public updateIvs(ivs: number[] | null, originalIvs?: number[]): void {
+    this.updatePotential(ivs, originalIvs);
     if (!ivs) {
       this.statsIvsCache = defaultIvChartData;
       this.ivChart.setTo(defaultIvChartData);

@@ -4,6 +4,7 @@
 블서로그 아이템 아이콘 · 보급 상자(볼) 그림 만들기 (UI 2단계, 11-08)
 
 포켓로그 아이템 그림은 저장소에 없어서(임시 네모) 여기서 새로 그려요.
+팬키트 아이템 그림으로 만든 도트(assets/er/item/, scripts/fankit/build_item_dots.py)가 있는 아이템은 그 도트를 써요.
 아이템 이름(영어 키)을 보고 종류별 모양 + 색으로 그려요. 이름은 locales/ko/modifier-type.json 의
 블서로그 이름(고기 · 눈물젖은 빵 · VF 혈액 샘플 · 강화 모듈 …)에 맞췄어요.
 
@@ -748,6 +749,17 @@ EGGS = {"common_egg": (WHITE, GRAY), "rare_egg": (BLUE, WHITE), "epic_egg": (PUR
         "lucky_egg": (CREAM, RED)}
 
 
+FANKIT_DOTS = ROOT / "assets" / "er" / "item"
+
+
+def fankit_dot(name: str) -> Image.Image | None:
+    f = FANKIT_DOTS / f"{name[3:] if name.startswith('wl_') else name}.png"
+    if not f.exists():
+        return None
+    with Image.open(f) as im:
+        return im.convert("RGBA").copy()
+
+
 def draw(name: str) -> Image.Image:
     n = name
     base = n[3:] if n.startswith("wl_") else n
@@ -1278,7 +1290,8 @@ def main():
     done = []
     data = json.load(open(IMG / "items.json", encoding="utf-8"))
     order = [f["filename"] for f in data["textures"][0]["frames"]]
-    images = {n: draw(n) for n in order}
+    # 팬키트 그림으로 만든 도트가 있으면 그것 먼저 (scripts/fankit/build_item_dots.py → assets/er/item/)
+    images = {n: fankit_dot(n) or draw(n) for n in order}
     for n, im in images.items():
         im.save(IMG / "items" / f"{n}.png", optimize=True)
         done.append(f"images/items/{n}.png")

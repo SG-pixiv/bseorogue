@@ -5,7 +5,8 @@
 
 쓸 수 있는 표현 (+ 나 , 로 이어 써요. 예: "피해 + 30% 화상", "강한 피해, 쓴 뒤 스킬 증폭 2단계 ↓")
   피해 / 강한 피해            공격 스킬 (변화 스킬에는 쓰지 않아요)
-  30% 화상 · 마비 · 독 · 맹독 · 잠듦 · 얼음 · 혼란 · 기절(풀죽음)   확률을 안 쓰면 반드시
+  30% 중독 · 출혈 · 화상 · 둔화 · 잠듦 · 속박 · 혼란 · 스턴   확률을 안 쓰면 반드시
+                              (예전 이름 독 · 맹독 · 마비 · 얼음 도 돼요. 스턴 = 한 턴 못 움직임, 예전 표현 "기절(풀죽음)" · "풀죽음" 도 스턴으로 읽어요. 그냥 "기절" 은 쓰러짐이라 못 써요)
   공격 · 방어 1단계 ↑          능력 변화. 능력: 공격 · 방어 · 스킬 증폭 · 스킬 저항 · 속도 · 명중 · 회피
                               ↑ 는 자기, ↓ 는 상대가 기본. "상대" · "자기" · "쓴 뒤"(자기) 로 정해요. 단계를 안 쓰면 1단계
   급소에 잘 맞음              급소 확률 ↑
@@ -28,11 +29,15 @@ STATS = [
 ]
 STAT_KO = {"ATK": "공격력", "DEF": "방어력", "SPATK": "스킬 증폭", "SPDEF": "스킬 저항", "SPD": "속도", "ACC": "명중률", "EVA": "회피율"}
 STAT_RE = "|".join(f"(?:{p})" for _, p in STATS)
-STATUS = {"화상": "BURN", "마비": "PARALYSIS", "맹독": "TOXIC", "독": "POISON", "잠듦": "SLEEP", "수면": "SLEEP", "얼음": "FREEZE", "빙결": "FREEZE"}
-STATUS_KO = {"BURN": "화상", "PARALYSIS": "마비", "TOXIC": "맹독", "POISON": "독", "SLEEP": "잠듦", "FREEZE": "얼음"}
+# 상태이상 (docs/기획.md 이름: 독→중독 · 맹독→출혈 · 화상 · 마비→둔화 · 수면→기절 · 얼음→속박). 예전 이름도 읽어요
+STATUS = {"화상": "BURN", "둔화": "PARALYSIS", "마비": "PARALYSIS", "출혈": "TOXIC", "맹독": "TOXIC", "중독": "POISON", "독": "POISON",
+          "잠듦": "SLEEP", "수면": "SLEEP", "속박": "FREEZE", "얼음": "FREEZE", "빙결": "FREEZE"}
+STATUS_KO = {"BURN": "화상", "PARALYSIS": "둔화", "TOXIC": "출혈", "POISON": "중독", "SLEEP": "잠듦", "FREEZE": "속박"}
 
 RE_PRIORITY = re.compile(r"선공\s*\(?\s*\+?\s*(\d)\s*\)?")
-RE_CHANCE_TAG = re.compile(r"(?:(\d+)\s*%\s*(?:확률로?\s*)?)?(?:상대\s*)?(화상|마비|맹독|독|잠듦|수면|얼음|빙결|혼란|기절\s*\(\s*풀죽음\s*\)|기절|풀죽음)")
+RE_CHANCE_TAG = re.compile(
+    r"(?:(\d+)\s*%\s*(?:확률로?\s*)?)?(?:상대\s*)?(기절\s*\(\s*풀죽음\s*\)|스턴|풀죽음|경직|화상|둔화|마비|출혈|맹독|중독|독|기절|잠듦|수면|속박|얼음|빙결|혼란)"
+)
 RE_STAT = re.compile(
     rf"(?:(\d+)\s*%\s*(?:확률로?\s*)?)?(쓴\s*뒤\s*|자기\s*|자신의?\s*|상대의?\s*)?((?:{STAT_RE})(?:\s*[·,]\s*(?:{STAT_RE}))*)\s*(?:(\d)\s*단계\s*)?(↑|↓)"
 )
@@ -105,7 +110,9 @@ def parse(text, category, priority=0):
         word = re.sub(r"\s", "", mm[2])
         if word == "혼란":
             fx["confuse"] = True
-        elif word.startswith("기절") or word == "풀죽음":
+        elif word == "기절":
+            raise EffectError("'기절' 은 이제 쓰러진 상태 이름이에요 (11-12 명칭 정리) → 한 턴 못 움직이게는 '스턴', 재우는 것은 '잠듦' 으로 써 주세요")
+        elif word in ("스턴", "기절(풀죽음)", "풀죽음", "경직"):
             fx["flinch"] = True
         else:
             if "status" in fx:
@@ -142,7 +149,7 @@ def parse(text, category, priority=0):
     if not attack and (damage or fx.get("drain") or fx.get("recoil") or fx.get("recharge") or fx.get("highCrit")):
         raise EffectError(f"변화 스킬에 공격 효과(피해 · 흡수 · 반동 · 다음 턴 쉼 · 급소)가 있어요 → 분류를 물리/스증으로 바꾸거나 효과를 고쳐요 ('{src}')")
     if len(chances) > 1:
-        raise EffectError(f"상태이상 · 혼란 · 풀죽음 확률은 하나로 맞춰요 ({sorted(chances)}, '{src}')")
+        raise EffectError(f"상태이상 · 혼란 · 스턴 확률은 하나로 맞춰요 ({sorted(chances)}, '{src}')")
     if chances:
         c = chances.pop()
         fx["chance"] = -1 if c >= 100 else c
@@ -223,7 +230,7 @@ def describe(fx, attack, priority=0):
     if fx.get("confuse"):
         out.append(f"{_pct(c)}상대를 혼란에 빠뜨린다.")
     if fx.get("flinch"):
-        out.append(f"{_pct(c)}상대를 풀죽게 한다.")
+        out.append(f"{_pct(c)}상대를 스턴시킨다.")
     stats = fx.get("stats", [])
     for s in stats:
         if not s["self"]:

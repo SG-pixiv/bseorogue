@@ -765,6 +765,7 @@ export class GameData {
       seed: globalScene.seed,
       playTime: globalScene.sessionPlayTime,
       bseoTier: getRunTier(),
+      bseoCatchFails: globalScene.bseoCatchFails,
       gameMode: globalScene.gameMode.modeId,
       dailyConfig: getSerializedDailyRunConfig(),
       party: globalScene.getPlayerParty().map(p => new PokemonData(p)),
@@ -902,6 +903,7 @@ export class GameData {
     globalScene.sessionPlayTime = fromSession.playTime || 0;
     globalScene.lastSavePlayTime = 0;
     setRunTier(fromSession.bseoTier ?? 0);
+    globalScene.bseoCatchFails = fromSession.bseoCatchFails ?? 0;
 
     const loadPokemonAssets: Promise<void>[] = [];
 
@@ -1505,8 +1507,8 @@ export class GameData {
   }
 
   /**
-   * 블서로그: 시작 실험체는 처음부터 전부 열려 있어요.
-   * 예전 저장 파일(시작 실험체가 6명이던 때)에서 잠겨 있던 실험체도 불러올 때 열어요.
+   * 블서로그: 처음부터 열려 있는 실험체(BSEO.startUnlocked)를 불러올 때 열어요 (목록이 바뀌어도 예전 저장에 반영).
+   * 그 밖의 실험체는 판 중에 잡거나 보급 상자에서 얻어야 열려요. 이미 열려 있던 것은 그대로 둬요.
    */
   private unlockBseoStarters(): void {
     const attr = DexAttr.NON_SHINY | DexAttr.MALE | DexAttr.FEMALE | DexAttr.DEFAULT_VARIANT | DexAttr.DEFAULT_FORM;

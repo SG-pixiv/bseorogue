@@ -236,6 +236,8 @@ export class BattleScene extends SceneBase {
   public lastEnemyTrainer: Trainer | null;
   public currentBattle: Battle;
   public pokeballCounts: PokeballCounts;
+  /** 블서로그: 이 판에서 영입에 실패한 횟수 (쌓이면 확정, src/data/bseorogue/catch.ts) */
+  public bseoCatchFails = 0;
   public money: number;
   public pokemonInfoContainer: PokemonInfoContainer;
   private party: PlayerPokemon[];
@@ -1157,8 +1159,9 @@ export class BattleScene extends SceneBase {
           .filter(pt => pt !== PokeballType.LUXURY_BALL)
           .map(t => [t, 0]),
       );
-      this.pokeballCounts[PokeballType.POKEBALL] = 5;
+      this.pokeballCounts[PokeballType.POKEBALL] = BSEO.startBalls; // 블서로그: 3 (포켓로그 5)
     }
+    this.bseoCatchFails = 0;
 
     this.modifiers = [];
     this.enemyModifiers = [];
@@ -2182,6 +2185,11 @@ export class BattleScene extends SceneBase {
 
   hideEnemyModifierBar(): void {
     this.enemyModifierBar.setVisible(false);
+  }
+
+  /** 블서로그: 오른쪽 위 글자(티어 · 리그 · 지역 - 웨이브 · 크레딧)가 차지하는 너비 (보상 화면 상점 줄이 피해 가려고) */
+  getTopRightTextWidth(): number {
+    return Math.max(this.biomeWaveText?.displayWidth ?? 0, this.moneyText?.displayWidth ?? 0);
   }
 
   updateBiomeWaveText(): void {

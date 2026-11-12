@@ -22,7 +22,7 @@
       }
     },
     "PokemonReviveModifierType": {
-      "description": "기절해 버린 실험체 1마리의 HP를 {{restorePercent}}%까지 회복한다."
+      "description": "기절한 실험체 1명의 HP를 {{restorePercent}}%까지 회복한다."
     },
     "PokemonStatusHealModifierType": {
       "description": "실험체 1마리의 상태 이상을 모두 회복한다."
@@ -66,7 +66,7 @@
       "description": "자신의 모든 실험체의 레벨이 {{levels}}만큼 상승한다."
     },
     "BaseStatBoosterModifierType": {
-      "description": "지니게 하면 {{stat}} 종족치를 10% 올려준다. 개체값이 높을수록 더 많이 누적시킬 수 있다."
+      "description": "지니게 하면 {{stat}} 종족치를 10% 올려준다. 잠재력이 높을수록 더 많이 누적시킬 수 있다."
     },
     "PokemonBaseStatFlatModifierType": {
       "name": "숲의양갱",
@@ -76,7 +76,7 @@
       "description": "자신의 실험체의 HP를 모두 회복한다."
     },
     "AllPokemonFullReviveModifierType": {
-      "description": "기절해 버린 실험체 전원의 HP를 완전히 회복한다."
+      "description": "기절한 실험체 전원의 HP를 완전히 회복한다."
     },
     "MoneyRewardModifierType": {
       "description": "{{moneyMultiplier}} 양의 돈을 획득한다. ({{moneyAmount}}크레딧)",
@@ -93,7 +93,7 @@
       "description": "지니게 한 실험체는 받는 경험치가 {{boostPercent}}% 증가한다."
     },
     "PokemonFriendshipBoosterModifierType": {
-      "description": "획득하는 친밀도가 50% 증가한다."
+      "description": "획득하는 숙련도가 50% 증가한다."
     },
     "PokemonMoveAccuracyBoosterModifierType": {
       "description": "스킬의 명중률이 {{accuracyAmount}} 증가한다."
@@ -163,7 +163,7 @@
       "name": "눈물젖은 빵"
     },
     "HYPER_POTION": {
-      "name": "민트 초코"
+      "name": "눈물젖은 빵"
     },
     "MAX_POTION": {
       "name": "일레븐 세트"
@@ -204,7 +204,7 @@
       "name": "백일취"
     },
     "PP_UP": {
-      "name": "포인트업"
+      "name": "일레븐 세트"
     },
     "PP_MAX": {
       "name": "포인트맥스"
@@ -223,7 +223,7 @@
       "description": "실험체가 잊어버린 스킬을 떠올린다."
     },
     "EXP_SHARE": {
-      "name": "관전 학습 장치",
+      "name": "휴대용 생성기",
       "description": "배틀에 참여하지 않아도 20%의 경험치를 받을 수 있게 된다."
     },
     "EXP_BALANCE": {
@@ -235,7 +235,7 @@
       "description": "여러 마리의 실험체가 배틀에 참여할 경우, 전체 경험치의 10%씩을 추가로 획득한다."
     },
     "EXP_CHARM": {
-      "name": "경험부적"
+      "name": "아글라이아의 선물"
     },
     "SUPER_EXP_CHARM": {
       "name": "좋은경험부적"
@@ -296,7 +296,7 @@
       "description": "매 열 번째 배틀마다, 가진 돈의 10%를 이자로 획득한다."
     },
     "LOCK_CAPSULE": {
-      "name": "록캡슐",
+      "name": "휴대용 생성기",
       "description": "받을 아이템을 갱신할 때 희귀도를 고정시킬 수 있게 된다."
     },
     "GRIP_CLAW": {
@@ -313,7 +313,7 @@
       "description": "HP를 회복하는 스킬이나 도구를 썼을 때 효율이 10% 증가한다. (부활 제외)"
     },
     "CANDY_JAR": {
-      "name": "사탕단지",
+      "name": "부거단지",
       "description": "이상한사탕 종류의 아이템이 올려주는 레벨이 1 증가한다."
     },
     "BERRY_POUCH": {
@@ -322,7 +322,7 @@
     },
     "FOCUS_BAND": {
       "name": "기합의머리띠",
-      "description": "기절할 듯한 데미지를 받아도 HP를 1 남겨서 견딜 확률이 10% 추가된다."
+      "description": "기절할 듯한 피해를 받아도 HP를 1 남겨서 견딜 확률이 10% 추가된다."
     },
     "QUICK_CLAW": {
       "name": "선제공격손톱",
@@ -330,7 +330,7 @@
     },
     "KINGS_ROCK": {
       "name": "왕의징표석",
-      "description": "공격해서 데미지를 줄 때 상대를 풀죽일 확률이 10% 추가된다."
+      "description": "공격해서 데미지를 줄 때 상대를 스턴시킬 확률이 10% 추가된다."
     },
     "LEFTOVERS": {
       "name": "먹다 남은 도시락",
@@ -341,8 +341,8 @@
       "description": "실험체가 준 데미지의 1/8씩을 회복한다."
     },
     "TOXIC_ORB": {
-      "name": "맹독구슬",
-      "description": "이 도구를 지닌 실험체는 턴이 끝나는 시점에 상태이상에 걸리지 않았다면 맹독 상태가 된다."
+      "name": "출혈구슬",
+      "description": "이 도구를 지닌 실험체는 턴이 끝나는 시점에 상태이상에 걸리지 않았다면 출혈 상태가 된다."
     },
     "FLAME_ORB": {
       "name": "화염구슬",
@@ -382,7 +382,7 @@
     },
     "IV_SCANNER": {
       "name": "실험체 분석기",
-      "description": "적 실험체의 개체값을 확인 가능하다."
+      "description": "적 실험체의 잠재력을 확인 가능하다."
     },
     "DNA_SPLICERS": {
       "name": "유전자쐐기"
@@ -407,10 +407,10 @@
       "description": "매 턴 최대 체력의 2%를 회복한다."
     },
     "ENEMY_ATTACK_POISON_CHANCE": {
-      "name": "독 토큰"
+      "name": "중독 토큰"
     },
     "ENEMY_ATTACK_PARALYZE_CHANCE": {
-      "name": "마비 토큰"
+      "name": "둔화 토큰"
     },
     "ENEMY_ATTACK_BURN_CHANCE": {
       "name": "화상 토큰"
@@ -478,9 +478,9 @@
     }
   },
   "TempStatStageBoosterItem": {
-    "x_attack": "공격력 강화제",
+    "x_attack": "캡슐-선혈",
     "x_defense": "방어력 강화제",
-    "x_sp_atk": "스킬 증폭 강화제",
+    "x_sp_atk": "캡슐-우주",
     "x_sp_def": "스킬 저항 강화제",
     "x_speed": "속도 강화제",
     "x_accuracy": "명중 강화제"
@@ -507,11 +507,11 @@
   },
   "BaseStatBoosterItem": {
     "hp_up": "대환단",
-    "protein": "컴뱃 에피네프린",
+    "protein": "셀레네의 눈물 - 공격력",
     "iron": "성수",
-    "calcium": "셀레네의 눈물",
+    "calcium": "셀레네의 눈물 - 스킬증폭",
     "zinc": "캡슐 - 생명",
-    "carbos": "캡슐 - 우주"
+    "carbos": "컴뱃 에피네프린"
   },
   "EvolutionItem": {
     "NONE": "None",

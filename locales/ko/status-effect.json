@@ -3,31 +3,31 @@
     "name": "없음"
   },
   "poison": {
-    "name": "독",
-    "description": "독",
-    "obtain": "{{pokemonNameWithAffix}}의\n몸에 독이 퍼졌다!",
-    "obtainSource": "{{pokemonNameWithAffix}}[[는]]\n{{sourceText}} 때문에 몸에 독이 퍼졌다!",
-    "activation": "{{pokemonNameWithAffix}}[[는]]\n독에 의한 데미지를 입었다!",
-    "overlap": "{{pokemonNameWithAffix}}[[는]] 이미\n몸에 독이 퍼진 상태다.",
-    "heal": "{{pokemonNameWithAffix}}의 독은\n말끔하게 해독됐다!"
+    "name": "중독",
+    "description": "중독",
+    "obtain": "{{pokemonNameWithAffix}}[[는]]\n중독되었다!",
+    "obtainSource": "{{pokemonNameWithAffix}}[[는]]\n{{sourceText}} 때문에 중독되었다!",
+    "activation": "{{pokemonNameWithAffix}}[[는]]\n중독 피해를 입었다!",
+    "overlap": "{{pokemonNameWithAffix}}[[는]] 이미\n중독된 상태다.",
+    "heal": "{{pokemonNameWithAffix}}의\n중독이 나았다!"
   },
   "toxic": {
-    "name": "맹독",
-    "description": "독",
-    "obtain": "{{pokemonNameWithAffix}}의\n몸에 맹독이 퍼졌다!",
-    "obtainSource": "{{pokemonNameWithAffix}}[[는]]\n{{sourceText}} 때문에 몸에 맹독이 퍼졌다!",
-    "activation": "{{pokemonNameWithAffix}}[[는]]\n독에 의한 데미지를 입었다!",
-    "overlap": "{{pokemonNameWithAffix}}[[는]] 이미\n몸에 독이 퍼진 상태다.",
-    "heal": "{{pokemonNameWithAffix}}의 독은\n말끔하게 해독됐다!"
+    "name": "출혈",
+    "description": "출혈",
+    "obtain": "{{pokemonNameWithAffix}}[[는]]\n출혈이 시작됐다!",
+    "obtainSource": "{{pokemonNameWithAffix}}[[는]]\n{{sourceText}} 때문에 출혈이 시작됐다!",
+    "activation": "{{pokemonNameWithAffix}}[[는]]\n출혈 피해를 입었다!",
+    "overlap": "{{pokemonNameWithAffix}}[[는]] 이미\n출혈 상태다.",
+    "heal": "{{pokemonNameWithAffix}}의\n출혈이 멈췄다!"
   },
   "paralysis": {
-    "name": "마비",
-    "description": "마비",
-    "obtain": "{{pokemonNameWithAffix}}[[는]] 마비되어\n스킬이 나오기 어려워졌다!",
-    "obtainSource": "{{pokemonNameWithAffix}}[[는]] {{sourceText}} 때문에\n마비되어 스킬이 나오기 어려워졌다!",
-    "activation": "{{pokemonNameWithAffix}}[[는]]\n몸이 저려서 움직일 수 없다!",
-    "overlap": "{{pokemonNameWithAffix}}[[는]]\n이미 마비되어 있다!",
-    "heal": "{{pokemonNameWithAffix}}의\n몸저림이 풀렸다!"
+    "name": "둔화",
+    "description": "둔화",
+    "obtain": "{{pokemonNameWithAffix}}[[는]] 둔화되어\n스킬이 나오기 어려워졌다!",
+    "obtainSource": "{{pokemonNameWithAffix}}[[는]] {{sourceText}} 때문에\n둔화되어 스킬이 나오기 어려워졌다!",
+    "activation": "{{pokemonNameWithAffix}}[[는]]\n몸이 둔해져서 움직일 수 없다!",
+    "overlap": "{{pokemonNameWithAffix}}[[는]]\n이미 둔화되어 있다!",
+    "heal": "{{pokemonNameWithAffix}}의\n둔화가 풀렸다!"
   },
   "sleep": {
     "name": "잠듦",
@@ -39,14 +39,14 @@
     "heal": "{{pokemonNameWithAffix}}[[는]]\n눈을 떴다!"
   },
   "freeze": {
-    "name": "얼음",
-    "description": "얼음",
-    "obtain": "{{pokemonNameWithAffix}}[[는]]\n얼어붙었다!",
-    "obtainSource": "{{pokemonNameWithAffix}}[[는]]\n{{sourceText}} 때문에 얼어붙었다!",
-    "activation": "{{pokemonNameWithAffix}}[[는]]\n얼어 버려서 움직일 수 없다!",
-    "overlap": "{{pokemonNameWithAffix}}[[는]]\n이미 얼어 있다.",
-    "heal": "{{pokemonNameWithAffix}}의\n얼음 상태가 나았다!",
-    "healByMove": "{{pokemonNameWithAffix}}의\n{{moveName}} 때문에 얼음이 녹았다!"
+    "name": "속박",
+    "description": "속박",
+    "obtain": "{{pokemonNameWithAffix}}[[는]]\n속박되었다!",
+    "obtainSource": "{{pokemonNameWithAffix}}[[는]]\n{{sourceText}} 때문에 속박되었다!",
+    "activation": "{{pokemonNameWithAffix}}[[는]]\n속박되어 움직일 수 없다!",
+    "overlap": "{{pokemonNameWithAffix}}[[는]]\n이미 속박되어 있다.",
+    "heal": "{{pokemonNameWithAffix}}의\n속박이 풀렸다!",
+    "healByMove": "{{pokemonNameWithAffix}}의\n{{moveName}} 때문에 속박이 풀렸다!"
   },
   "burn": {
     "name": "화상",

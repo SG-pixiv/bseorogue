@@ -40,7 +40,7 @@ export interface SheetSkill {
 export type SheetStat = "ATK" | "DEF" | "SPATK" | "SPDEF" | "SPD" | "ACC" | "EVA";
 
 export interface SheetSkillEffect {
-  /** 상태이상 · 혼란 · 풀죽음 확률 (%), -1 = 반드시 */
+  /** 상태이상 · 혼란 · 스턴 확률 (%), -1 = 반드시 */
   chance: number;
   status?: "BURN" | "PARALYSIS" | "POISON" | "TOXIC" | "SLEEP" | "FREEZE";
   confuse?: boolean;
@@ -1142,9 +1142,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -1556,9 +1556,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -1878,9 +1878,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -2338,9 +2338,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -3028,9 +3028,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -3258,9 +3258,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -3396,9 +3396,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -3488,9 +3488,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -4086,9 +4086,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -4454,9 +4454,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -4868,9 +4868,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -5144,9 +5144,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 30% 기절(풀죽음)",
+      effect: "피해 + 30% 스턴",
       fx: { chance: 30, flinch: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 풀죽게 한다.",
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다.",
     },
     {
       category: "PHYSICAL",
@@ -5177,7 +5177,7 @@ export const SHEET_PASSIVES: Readonly<Record<number, { name: string; ability: st
   11: { name: "완벽한 옷매무새", ability: "CLEAR_BODY", desc: "상대가 자신의 능력을 떨어뜨릴 수 없다." },
   12: { name: "삼재", ability: "CURSED_BODY", desc: "공격을 받으면 30% 확률로 그 스킬을 봉인한다." },
   13: { name: "요리사의 열정", ability: "CHEEK_POUCH", desc: "열매를 먹으면 최대 체력의 1/3만큼 더 회복한다." },
-  14: { name: "낙인", ability: "POISON_TOUCH", desc: "직접 공격하면 30% 확률로 상대를 독 상태로 만든다." },
+  14: { name: "낙인", ability: "POISON_TOUCH", desc: "직접 공격하면 30% 확률로 상대를 중독 상태로 만든다." },
   15: {
     name: "삶은 고통이에요.",
     ability: "INNARDS_OUT",
@@ -5190,12 +5190,12 @@ export const SHEET_PASSIVES: Readonly<Record<number, { name: string; ability: st
   20: { name: "위풍당당", ability: "INTIMIDATE", desc: "등장하면 상대의 공격력을 1단계 떨어뜨린다." },
   21: { name: "더블샷", ability: "QUICK_DRAW", desc: "30% 확률로 먼저 행동한다." },
   22: { name: "청소 완료", ability: "CHILLING_NEIGH", desc: "상대를 쓰러뜨리면 공격력이 1단계 올라간다." },
-  23: { name: "외과 전문의", ability: "MERCILESS", desc: "독 상태인 상대를 공격하면 반드시 급소에 맞는다." },
+  23: { name: "외과 전문의", ability: "MERCILESS", desc: "중독 상태인 상대를 공격하면 반드시 급소에 맞는다." },
   24: { name: "퀸즈 갬빗 디클라인드", ability: "ANALYTIC", desc: "상대보다 늦게 행동하면 스킬 위력이 1.3배가 된다." },
   25: { name: "산탄", ability: "TINTED_LENS", desc: "효과가 별로인 상대에게 주는 피해가 2배가 된다." },
   26: { name: "개조", ability: "ADAPTABILITY", desc: "자기 역할군과 같은 스킬이 더 강해진다 (1.5배 → 2배)." },
   27: { name: "잠입", ability: "INFILTRATOR", desc: "상대의 벽 · 대타를 무시하고 공격한다." },
-  28: { name: "마음의 양식", ability: "INNER_FOCUS", desc: "풀죽지 않고, 위협에 공격력이 떨어지지 않는다." },
+  28: { name: "마음의 양식", ability: "INNER_FOCUS", desc: "스턴에 걸리지 않고, 위협에 공격력이 떨어지지 않는다." },
   29: { name: "인간 어뢰", ability: "TOUGH_CLAWS", desc: "직접 공격하는 스킬의 위력이 1.3배가 된다." },
   30: { name: "힘내자고!", ability: "SHELL_ARMOR", desc: "급소에 맞지 않는다." },
   31: { name: "카이", ability: "COMPOUND_EYES", desc: "스킬 명중률이 1.3배가 된다." },
@@ -5214,7 +5214,7 @@ export const SHEET_PASSIVES: Readonly<Record<number, { name: string; ability: st
   40: {
     name: "살아 있는 마리오네트",
     ability: "SYNCHRONIZE",
-    desc: "독 · 마비 · 화상이 되면 상대도 같은 상태로 만든다.",
+    desc: "중독 · 둔화 · 화상이 되면 상대도 같은 상태로 만든다.",
   },
   41: { name: "빛의 가호", ability: "NATURAL_CURE", desc: "교체해서 들어가면 상태 이상이 낫는다." },
   42: { name: "흡혈귀", ability: "GRIM_NEIGH", desc: "상대를 쓰러뜨리면 스킬 증폭이 1단계 올라간다." },
@@ -5229,7 +5229,7 @@ export const SHEET_PASSIVES: Readonly<Record<number, { name: string; ability: st
     desc: "공격을 받아 체력이 절반 아래가 되면 스킬 증폭이 1단계 올라간다.",
   },
   45: { name: "오뜨꾸뛰르", ability: "FUR_COAT", desc: "물리 공격으로 받는 피해가 절반이 된다." },
-  46: { name: "과전하", ability: "STATIC", desc: "직접 공격을 받으면 30% 확률로 상대를 마비 상태로 만든다." },
+  46: { name: "과전하", ability: "STATIC", desc: "직접 공격을 받으면 30% 확률로 상대를 둔화 상태로 만든다." },
   47: { name: "괴도", ability: "PICKPOCKET", desc: "직접 공격을 받으면 상대의 아이템을 빼앗는다." },
   48: { name: "알록달록 컬러믹스", ability: "SERENE_GRACE", desc: "스킬 추가 효과가 나올 확률이 2배가 된다." },
   49: { name: "연계 창술", ability: "OPPORTUNIST", desc: "상대의 능력이 올라가면 자신도 똑같이 올린다." },
@@ -5252,7 +5252,7 @@ export const SHEET_PASSIVES: Readonly<Record<number, { name: string; ability: st
   },
   59: { name: "착취", ability: "PRESSURE", desc: "상대가 스킬을 쓰면 PP가 1 더 줄어든다." },
   60: { name: "아르띠지아나토", ability: "SOUL_HEART", desc: "누군가 쓰러질 때마다 스킬 증폭이 1단계 올라간다." },
-  61: { name: "고양이의 습성", ability: "LIMBER", desc: "마비 상태가 되지 않는다." },
+  61: { name: "고양이의 습성", ability: "LIMBER", desc: "둔화 상태가 되지 않는다." },
   62: {
     name: "에너지 프로토콜",
     ability: "ELECTRIC_SURGE",
@@ -5293,7 +5293,7 @@ export const SHEET_PASSIVES: Readonly<Record<number, { name: string; ability: st
     desc: "등장하면 상대의 방어력 · 스킬 저항을 비교해 공격력이나 스킬 증폭을 1단계 올린다.",
   },
   81: { name: "K.O.", ability: "GORILLA_TACTICS", desc: "공격력이 1.5배가 되지만 처음 고른 스킬만 쓸 수 있다." },
-  82: { name: "결심응진", ability: "STEADFAST", desc: "풀죽으면 속도가 1단계 올라간다." },
+  82: { name: "결심응진", ability: "STEADFAST", desc: "스턴에 걸리면 속도가 1단계 올라간다." },
   83: {
     name: "시차 균열",
     ability: "PSYCHIC_SURGE",

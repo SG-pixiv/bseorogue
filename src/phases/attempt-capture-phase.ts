@@ -4,6 +4,7 @@ import { timedEventManager } from "#app/global-event-manager";
 import { globalScene } from "#app/global-scene";
 import { IS_TEST, isBeta, isDev } from "#constants/app-constants";
 import { SubstituteTag } from "#data/battler-tags";
+import { bseoNextThrowGuaranteed, bseoThrowsUntilGuaranteed } from "#data/bseorogue/catch";
 import { Gender } from "#data/gender";
 import {
   doPokeballBounceAnim,
@@ -87,7 +88,9 @@ export class AttemptCapturePhase extends PokemonPhase {
       );
     }
 
-    const isCritical = pokemon.randBattleSeedInt(256) < criticalCaptureChance;
+    // 블서로그: 실패가 쌓여 이번 볼이 확정이면 흔들림 검사를 모두 통과해요 (catch.ts)
+    const bseoGuaranteed = bseoNextThrowGuaranteed();
+    const isCritical = !bseoGuaranteed && pokemon.randBattleSeedInt(256) < criticalCaptureChance;
     const fpOffset = pokemon.getFieldPositionOffset();
 
     const pokeballAtlasKey = getPokeballAtlasKey(this.pokeballType);
@@ -154,6 +157,7 @@ export class AttemptCapturePhase extends PokemonPhase {
                     // Shake check (skip check for critical or guaranteed captures, but still play the sound)
                     if (
                       pokeballMultiplier === -1
+                      || bseoGuaranteed
                       || isCritical
                       || modifiedCatchRate >= 255
                       || pokemon.randBattleSeedInt(65536) < shakeProbability
@@ -241,12 +245,22 @@ export class AttemptCapturePhase extends PokemonPhase {
 
     globalScene.currentBattle.lastUsedPokeball = this.pokeballType;
     this.removePb();
+    // 블서로그: 실패가 쌓여요 → 확정까지 몇 번 남았는지 알려 줘요
+    globalScene.bseoCatchFails++;
+    globalScene.phaseManager.queueMessage(
+      i18next.t(bseoNextThrowGuaranteed() ? "battle:bseoCatchFailedNextSure" : "battle:bseoCatchFailed", {
+        pokemonName: pokemon.getNameToRender(),
+        count: bseoThrowsUntilGuaranteed(),
+      }),
+    );
     this.end();
   }
 
   catch() {
     const { gameData, phaseManager, pokemonInfoContainer, ui } = globalScene;
     const pokemon = this.getPokemon() as EnemyPokemon;
+    // 블서로그: 잡으면 실패 횟수는 처음부터
+    globalScene.bseoCatchFails = 0;
 
     const speciesForm = pokemon.fusionSpecies ? pokemon.getFusionSpeciesForm() : pokemon.getSpeciesForm();
 

@@ -1,7 +1,7 @@
 {
   "genFilter": "세대",
   "typeFilter": "타입",
-  "biomeFilter": "바이옴",
+  "biomeFilter": "지역",
   "caughtFilter": "포획",
   "unlocksFilter": "해금",
   "miscFilter": "기타",
@@ -46,7 +46,7 @@
   "sortByNumber": "도감번호",
   "sortByCost": "코스트",
   "sortByCandies": "사탕 수",
-  "sortByIVs": "개체값",
+  "sortByIVs": "잠재력",
   "sortByName": "이름",
   "sortByNumCaught": "포획 횟수",
   "sortByNumHatched": "부화 횟수"

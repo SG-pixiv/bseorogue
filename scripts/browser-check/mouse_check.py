@@ -122,13 +122,17 @@ async def to_battle(pg):
             break
         await press(pg, "Space", 700)
     await pg.wait_for_timeout(800)
-    for idx in (0, 71):
+    # 새 저장에는 처음 열린 6명만 보여요 (11-12 해금, BSEO.startUnlocked): 나딘 · 유키 · 혜진 · 쇼이치 · 일레븐(4) · 레니(5)
+    for idx in (4, 5):
         await back_to_starters(pg)
         await click(pg, f"starter:{idx}")
         await skip_tutorial(pg)
-        # 실험체를 누르면 고르기 창(데려가기 · …)이 떠요 → 첫 줄 "데려가기"
-        if any(t["label"] == "option:0" for t in await targets(pg)):
-            await click(pg, "option:0", 1200)
+        # 실험체를 누르면 고르기 창(데려가기 · …)이 떠요 → 첫 줄 "데려가기" (느릴 때가 있어 조금 기다려요)
+        for _ in range(10):
+            if any(t["label"] == "option:0" for t in await targets(pg)):
+                await click(pg, "option:0", 1200)
+                break
+            await pg.wait_for_timeout(400)
         else:
             await press(pg, "Space", 1200)
     await back_to_starters(pg)
@@ -156,7 +160,9 @@ async def to_battle(pg):
             await shot(pg, "00-party-at-start")
             await click(pg, "party-cancel", 900)
             continue
-        await press(pg, "Space", 900)
+        # 메시지 넘기기는 빈 곳 클릭으로 (Space 는 그 사이 명령 화면이 뜨면 '스킬' 을 눌러 버려요, 11-12)
+        await pg.mouse.click(420, 260)
+        await pg.wait_for_timeout(900)
     return False
 
 

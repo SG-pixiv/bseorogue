@@ -26,11 +26,17 @@ export const TYPE_BOOST_ITEM_BOOST_PERCENT = 20;
  * The default species that a new player can choose from
  */
 /**
- * 블서로그: 실험체(ER 번호마다 기본 모습 1030 + 번호×3)는 처음부터 전부 열려 있어요.
- * roster.ts 를 여기서 불러오면 순환 참조가 생겨서, 종 번호 범위로 골라요.
+ * 블서로그: 처음부터 열려 있는 실험체는 BSEO.startUnlocked (ER 번호마다 기본 모습 = 1030 + 번호×3).
+ * 나머지는 판 중에 잡거나(11-12 해금) 보급 상자에서 얻으면 열려요.
+ * roster.ts 를 여기서 불러오면 순환 참조가 생겨서, 종 번호로 골라요.
  */
 export const defaultStarterSpecies: readonly StarterSpeciesId[] = (Object.values(SpeciesId) as unknown[]).filter(
-  (id): id is StarterSpeciesId => typeof id === "number" && id >= 1030 && id < 1600 && (id - 1030) % 3 === 0,
+  (id): id is StarterSpeciesId =>
+    typeof id === "number"
+    && id >= 1030
+    && id < 1600
+    && (id - 1030) % 3 === 0
+    && BSEO.startUnlocked.includes((id - 1030) / 3),
 );
 
 export const saveKey = "x0i2O7WRiANTqPmZ"; // Temporary; secure encryption is not yet necessary

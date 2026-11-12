@@ -707,11 +707,8 @@ export class SummaryUiHandler extends UiHandler {
         this.passiveContainer.nameText?.setVisible(!this.passiveContainer.descriptionText?.visible);
         this.passiveContainer.descriptionText?.setVisible(!this.passiveContainer.descriptionText.visible);
         this.passiveContainer.labelImage.setVisible(!this.passiveContainer.labelImage.visible);
-      } else if (this.cursor === Page.STATS) {
-        //Show IVs
-        this.permStatsContainer.setVisible(!this.permStatsContainer.visible);
-        this.ivContainer.setVisible(!this.ivContainer.visible);
       }
+      // 블서로그: 능력 쪽에서 개체값 숫자(n/31)로 바꿔 보는 것은 안 써요 (잠재력 등급만 보여 줘요, potential.ts)
     } else if (button === Button.CANCEL) {
       if (this.summaryUiMode === SummaryUiMode.LEARN_MOVE) {
         this.hideMoveSelect();
