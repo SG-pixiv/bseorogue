@@ -21,9 +21,12 @@ import {
   BSEO_WILD,
   bseoCharacter,
 } from "#data/bseorogue/roster";
+import { SHEET_CHARACTERS, SHEET_SKILLS } from "#data/bseorogue/sheet-data";
 import { COST_TOTALS } from "#data/bseorogue/stats";
 import { setRunTier, TIERS, tierLevelMultiplier, tierName, unlockedTier, unlockNextTier } from "#data/bseorogue/tiers";
+import { allMoves } from "#data/data-lists";
 import { GameModes } from "#enums/game-modes";
+import { MoveCategory } from "#enums/move-category";
 import { MoveId } from "#enums/move-id";
 import { SpeciesId } from "#enums/species-id";
 import { GameManager } from "#test/framework/game-manager";
@@ -76,7 +79,8 @@ describe("블서로그 데이터", () => {
       expect(c.stats).toEqual(c.stages[0]);
       expect(c.stats.every(v => v >= 10 && v <= 255)).toBe(true);
     }
-    expect(BSEO_STARTERS[0].stages.map(sum)).toEqual([320, 410, 500]);
+    // 1코스트 실험체 (일레븐)
+    expect(bseoCharacter(30)?.stages.map(sum)).toEqual([320, 410, 500]);
     // 동물은 뒤에 나올수록, 보스는 알파 → 루미 순서로 세져요
     const wild = BSEO_WILD.map(w => sum(w.stats));
     expect(wild).toEqual([...wild].sort((a, b) => a - b));
@@ -174,6 +178,24 @@ describe("블서로그 규칙 - 전투", () => {
   beforeEach(() => {
     game = new GameManager(phaserGame);
     game.override.startingWave(5).enemyMoveset(MoveId.SPLASH).moveset([MoveId.TACKLE]);
+  });
+
+  it("시트(docs/sheets/실험체-스킬.xlsx)의 PP · 위력 · 명중 · 배우는 레벨이 스킬에 들어가요", () => {
+    expect(Object.keys(SHEET_CHARACTERS).length).toBe(BSEO_CHARACTERS.length);
+    for (const c of BSEO_CHARACTERS) {
+      const sheet = SHEET_SKILLS[c.erCode];
+      expect(sheet).toHaveLength(4);
+      expect(c.cost).toBe(SHEET_CHARACTERS[c.erCode].cost);
+      c.skills.forEach((s, i) => {
+        const move = allMoves[s.move];
+        expect(move.pp).toBe(sheet[i].pp);
+        expect(s.level).toBe(sheet[i].level);
+        if (move.category !== MoveCategory.STATUS && sheet[i].category !== "STATUS") {
+          expect(move.power).toBe(sheet[i].power);
+          expect(move.accuracy).toBe(sheet[i].accuracy);
+        }
+      });
+    }
   });
 
   it("야생 전투는 늘 1:1 이에요", async () => {

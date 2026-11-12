@@ -1,0 +1,67 @@
+// make_draft.py 가 읽을 실험체 · 스킬 · 포켓몬 데이터를 /tmp/bseo-sheet-dump 로 내보내요 (잠깐 복사해서 돌리고 지워요)
+import { mkdirSync, writeFileSync } from "node:fs";
+import { speciesDataRegistry } from "#app/global-species-data-registry";
+import { ER_CHARACTERS } from "#data/bseorogue/er-data";
+import { BSEO_CHARACTERS } from "#data/bseorogue/roster";
+import { skinEvolutionOf } from "#data/bseorogue/skin-evolution";
+import { allMoves } from "#data/data-lists";
+import { MoveId } from "#enums/move-id";
+import { SpeciesId } from "#enums/species-id";
+import { GameManager } from "#test/framework/game-manager";
+import Phaser from "phaser";
+import { beforeAll, it } from "vitest";
+
+const DIR = process.env.SHEET_DUMP ?? "/tmp/bseo-sheet-dump";
+
+beforeAll(() => {
+  new GameManager(new Phaser.Game({ type: Phaser.HEADLESS }));
+});
+
+it("dump", () => {
+  mkdirSync(DIR, { recursive: true });
+  const chars = BSEO_CHARACTERS.map(c => ({
+    erCode: c.erCode,
+    name: c.name,
+    en: ER_CHARACTERS[c.erCode].en,
+    erRole: ER_CHARACTERS[c.erCode].role,
+    role: c.role,
+    weapon: c.weapon,
+    weapons: ER_CHARACTERS[c.erCode].weapons,
+    cost: c.cost,
+    stages: c.stages,
+    er: ER_CHARACTERS[c.erCode],
+    evo: skinEvolutionOf(c.erCode),
+    skills: c.skills.map(s => {
+      const m = allMoves[s.move];
+      return { name: s.name, level: s.level, move: MoveId[s.move], power: m.power, accuracy: m.accuracy, pp: m.pp, category: m.category };
+    }),
+  }));
+  writeFileSync(`${DIR}/characters.json`, JSON.stringify(chars));
+  const moves = allMoves
+    .filter(m => m && m.id > 0)
+    .map(m => ({
+      id: m.id,
+      key: MoveId[m.id],
+      category: m.category,
+      power: m.power,
+      accuracy: m.accuracy,
+      pp: m.pp,
+      priority: m.priority,
+      chance: m.chance,
+      unimpl: (m as unknown as { isUnimplemented?: boolean }).isUnimplemented ?? false,
+    }));
+  const species = speciesDataRegistry
+    .getAllSpecies()
+    .filter(s => s.speciesId < 1030)
+    .map(s => ({
+      id: s.speciesId,
+      key: SpeciesId[s.speciesId],
+      stats: s.baseStats,
+      total: s.baseTotal,
+      legendary: s.legendary || s.subLegendary || s.mythical,
+      starter: speciesDataRegistry.getStarter(s.speciesId),
+      starterCost: (speciesDataRegistry.getSpeciesData(s.speciesId) as unknown as { starterCost?: number }).starterCost ?? null,
+      evo: speciesDataRegistry.getEvolutionChain(s.speciesId),
+    }));
+  writeFileSync(`${DIR}/pokemon.json`, JSON.stringify({ moves, species }));
+});

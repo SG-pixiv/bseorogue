@@ -4,6 +4,7 @@
  */
 
 import { SpeciesEvolution } from "#balance/pokemon-evolutions";
+import { bseoPassiveAbility } from "#data/bseorogue/passive";
 import { BOSS_TYPE, WILD_TYPE } from "#data/bseorogue/roles";
 import { BSEO_BOSSES, BSEO_CHARACTERS, BSEO_WILD, type Stats6 } from "#data/bseorogue/roster";
 // 블서로그 실험체 · 야생동물 · 보스를 포켓로그 종(species) 데이터 형식으로 만들어요
@@ -34,7 +35,7 @@ function makeSpecies(
   id: SpeciesId,
   type: PokemonType,
   stats: Stats6,
-  opts: { catchRate: number; baseExp: number; subLegendary?: boolean },
+  opts: { catchRate: number; baseExp: number; subLegendary?: boolean; ability?: AbilityId },
 ) {
   const [hp, atk, def, spatk, spdef, spd] = stats;
   return new PokemonSpecies({
@@ -46,9 +47,10 @@ function makeSpecies(
     type2: null,
     height: 1.7,
     weight: 60,
-    ability1: AbilityId.NONE,
-    ability2: AbilityId.NONE,
-    abilityHidden: AbilityId.NONE,
+    // 실험체는 고유 패시브 하나 (세 칸 모두 같은 특성, passive.ts)
+    ability1: opts.ability ?? AbilityId.NONE,
+    ability2: opts.ability ?? AbilityId.NONE,
+    abilityHidden: opts.ability ?? AbilityId.NONE,
     baseTotal: hp + atk + def + spatk + spdef + spd,
     baseHp: hp,
     baseAtk: atk,
@@ -80,7 +82,11 @@ export function initBseorogueSpecies(): SpeciesDataMapConfig {
       const next = c.forms[stage + 1];
       const isStarter = c.playable && stage === 0;
       data[form.id] = {
-        species: makeSpecies(form.id, type, form.stats, { catchRate: 45, baseExp: expFor(form.stats, 0.2) }),
+        species: makeSpecies(form.id, type, form.stats, {
+          catchRate: 45,
+          baseExp: expFor(form.stats, 0.2),
+          ability: bseoPassiveAbility(c.erCode),
+        }),
         starter: c.id as StarterSpeciesId,
         ...(isStarter ? { starterCost: c.cost as never, eggTier: EggTier.COMMON } : {}),
         evolutions: next ? [new SpeciesEvolution({ speciesId: next.id, level: next.level })] : [],

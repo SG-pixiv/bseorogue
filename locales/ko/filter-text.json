@@ -2,6 +2,6 @@
   "nameField": "이름:",
   "move1Field": "스킬:",
   "move2Field": "스킬:",
-  "ability1Field": "특성:",
-  "ability2Field": "특성:"
+  "ability1Field": "패시브:",
+  "ability2Field": "패시브:"
 }

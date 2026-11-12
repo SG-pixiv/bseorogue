@@ -236,6 +236,7 @@ type SummaryPeek = {
   movesContainer: C;
   pokemon?: { moveset: unknown[] };
   newMove: unknown;
+  transitioning: boolean;
 };
 const SUMMARY_PAGES = 3;
 
@@ -256,8 +257,19 @@ export function summaryTargets(handler: SummaryUiHandler): MouseTarget[] {
       },
       instant: true,
       click: () => {
-        const diff = page - h.cursor;
-        pressTimes(diff > 0 ? Button.RIGHT : Button.LEFT, Math.abs(diff));
+        // 쪽이 넘어가는 동안(transitioning)엔 키를 무시해서, 두 쪽 건너뛸 땐 넘어간 뒤에 한 번 더 눌러요
+        const step = (tries: number, waits = 40): void => {
+          if (h.cursor === page || tries <= 0 || waits <= 0) {
+            return;
+          }
+          if (h.transitioning) {
+            setTimeout(() => step(tries, waits - 1), 50);
+            return;
+          }
+          press(page > h.cursor ? Button.RIGHT : Button.LEFT);
+          setTimeout(() => step(tries - 1), 50);
+        };
+        step(SUMMARY_PAGES);
       },
     });
   }

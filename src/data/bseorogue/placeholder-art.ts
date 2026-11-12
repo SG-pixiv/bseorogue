@@ -6,13 +6,15 @@
 /**
  * 실험체 · 동물 · 보스 그림
  *
- * 팬키트 그림이 있으면 그 그림을 쓰고(scripts/fankit/build_art.py 가 assets/er/ 에 만들어요),
- * 없으면 게임 안에서 역할군 색 카드에 이름을 적어 그려요 (보스 · KEL 팀 · 관장 그림도 아직 카드).
+ * 실험체 도트가 있으면 도트(scripts/er-dot/import_dot.py → assets/er/dot/, 80×80 1배),
+ * 없으면 팬키트 그림(scripts/fankit/build_art.py 가 assets/er/ 에 만들어요),
+ * 둘 다 없으면 게임 안에서 역할군 색 카드에 이름을 적어 그려요 (보스 · KEL 팀 · 관장 그림도 아직 카드).
  * 스킨 진화한 모습은 그 스킨 그림, 없으면 기본 모습 그림을 써요.
  */
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { BSEO_ART_SKINS, BSEO_ICON_FRAMES } from "#data/bseorogue/art-manifest";
+import { BSEO_DOT_ICON_FRAMES, BSEO_DOT_SKINS } from "#data/bseorogue/dot-manifest";
 import { BOSS_TYPE, Role, WILD_TYPE } from "#data/bseorogue/roles";
 import { BSEO_ALL_IDS, erCodeOfSpecies } from "#data/bseorogue/roster";
 import { skinEvolutionOf } from "#data/bseorogue/skin-evolution";
@@ -152,26 +154,51 @@ function pickSkin(have: readonly number[] | undefined, want: number): number | n
   return [...have].sort((a, b) => a - b)[0];
 }
 
+/**
+ * 전투 그림 파일 고르기. 도트가 한 장이라도 있는 실험체는 도트만 (한 실험체 안에서 그림체가 섞이지 않게),
+ * 없으면 팬키트 그림. 둘 다 없으면 null
+ */
+export function pickArtFile(
+  key: string,
+  want: number,
+  artSkins: Readonly<Record<string | number, readonly number[]>> = BSEO_ART_SKINS,
+  dotSkins: Readonly<Record<number, readonly number[]>> = BSEO_DOT_SKINS,
+): string | null {
+  const dot = pickSkin(dotSkins[Number(key)], want);
+  if (dot != null) {
+    return `er/dot/${key}_${dot}.png`;
+  }
+  const skin = pickSkin(artSkins[key], want);
+  return skin == null ? null : `er/char/${key.replace("wild:", "wild_")}_${skin}.png`;
+}
+
 /** 전투 그림 파일 (없으면 null) */
 export function bseoArtFile(speciesId: SpeciesId): string | null {
   const a = artKeyOf(speciesId);
-  const skin = a && pickSkin(BSEO_ART_SKINS[a.key], a.skin);
-  if (a == null || skin == null) {
+  return a ? pickArtFile(a.key, a.skin) : null;
+}
+
+/** 팬키트 아이콘 한 장 · 도트 아이콘 한 장 (로딩 화면 loading-scene.ts 에서 미리 받아요) */
+const BSEO_ICON_SHEET_KEY = "bseo_char_icons";
+const BSEO_DOT_ICON_SHEET_KEY = "bseo_dot_icons";
+
+/** 아이콘 자리: 도트 아이콘이 있으면 도트 (er/dot-icons.png), 없으면 팬키트 (er/char-icons.png). 없으면 null */
+function bseoIconFrame(speciesId: SpeciesId): { sheet: string; at: readonly [number, number] } | null {
+  const a = artKeyOf(speciesId);
+  if (!a) {
     return null;
   }
-  return `er/char/${a.key.replace("wild:", "wild_")}_${skin}.png`;
+  for (const [sheet, frames] of [
+    [BSEO_DOT_ICON_SHEET_KEY, BSEO_DOT_ICON_FRAMES[Number(a.key)]],
+    [BSEO_ICON_SHEET_KEY, BSEO_ICON_FRAMES[a.key]],
+  ] as const) {
+    const skin = pickSkin(frames ? Object.keys(frames).map(Number) : undefined, a.skin);
+    if (frames && skin != null && frames[skin] && globalScene.textures.exists(sheet)) {
+      return { sheet, at: frames[skin] };
+    }
+  }
+  return null;
 }
-
-/** 아이콘 자리 (er/char-icons.png 안). 없으면 null */
-function bseoIconFrame(speciesId: SpeciesId): readonly [number, number] | null {
-  const a = artKeyOf(speciesId);
-  const frames = a ? BSEO_ICON_FRAMES[a.key] : undefined;
-  const skin = a && pickSkin(frames ? Object.keys(frames).map(Number) : undefined, a.skin);
-  return frames && skin != null ? (frames[skin] ?? null) : null;
-}
-
-/** 팬키트 아이콘 한 장 (로딩 화면 loading-scene.ts 에서 미리 받아요) */
-const BSEO_ICON_SHEET_KEY = "bseo_char_icons";
 
 const ART_SIZE = 96;
 /** 상대 쪽(앞모습) 그림 최대 높이. 상대 자리는 화면 위쪽이라 96 이면 전신 그림 머리가 잘려요 */
@@ -277,19 +304,17 @@ export function ensureBseoIcons(): string {
     return ICON_ATLAS_KEY;
   }
   const ctx = tex.getContext();
-  const sheet = textures.exists(BSEO_ICON_SHEET_KEY)
-    ? (textures.get(BSEO_ICON_SHEET_KEY).getSourceImage() as HTMLImageElement)
-    : null;
   ids.forEach((id, i) => {
     const species = speciesDataRegistry.getSpecies(id);
     const color = colorOf(id);
-    const frame = sheet ? bseoIconFrame(id) : null;
+    const frame = bseoIconFrame(id);
+    const sheet = frame ? (textures.get(frame.sheet).getSourceImage() as HTMLImageElement) : null;
     for (const shiny of [false, true]) {
       const x = (i % cols) * ICON_W;
       const y = (Math.floor(i / cols) * 2 + (shiny ? 1 : 0)) * ICON_H;
       if (sheet && frame) {
         try {
-          ctx.drawImage(sheet, frame[0], frame[1], ICON_W, ICON_H, x, y, ICON_W, ICON_H);
+          ctx.drawImage(sheet, frame.at[0], frame.at[1], ICON_W, ICON_H, x, y, ICON_W, ICON_H);
         } catch {
           // 검사 환경(가짜 캔버스)
         }

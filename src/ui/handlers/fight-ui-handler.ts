@@ -1,6 +1,7 @@
 import type { InfoToggle } from "#app/battle-scene";
 import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
+import { addBseoSkillIcon } from "#data/bseorogue/skill-icon";
 import { getTypeDamageMultiplierColor } from "#data/type";
 import { BattleType } from "#enums/battle-type";
 import { Button } from "#enums/buttons";
@@ -357,6 +358,12 @@ export class FightUiHandler extends UiHandler implements InfoToggle {
           .setText(pokemonMove.getName())
           .setName(pokemonMove.getName())
           .setColor(this.getMoveColor(pokemon, pokemonMove) ?? moveText.style.color);
+        // 블서로그: 스킬 이름 왼쪽에 실험체 스킬 아이콘 (12칸)
+        const icon = addBseoSkillIcon(moveText.x, moveText.y + 2, pokemonMove.moveId, 12);
+        if (icon) {
+          this.movesContainer.add(icon);
+          moveText.setX(moveText.x + 14);
+        }
       }
 
       this.movesContainer.add(moveText);
