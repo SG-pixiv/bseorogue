@@ -1,3 +1,4 @@
+import { BSEO } from "#app/bseorogue";
 import { TYPE_BOOST_ITEM_BOOST_PERCENT } from "#app/constants";
 import { timedEventManager } from "#app/global-event-manager";
 import { globalScene } from "#app/global-scene";
@@ -1794,7 +1795,8 @@ export type ModifierOverride = GeneratorModifierOverride | BaseModifierOverride;
 export type ModifierTypeKeys = keyof typeof modifierTypeInitObj;
 
 const modifierTypeInitObj = Object.freeze({
-  POKEBALL: () => new AddPokeballModifierType("pb", PokeballType.POKEBALL, 5),
+  // 블서로그: 볼 보상은 2개 (포켓로그 5)
+  POKEBALL: () => new AddPokeballModifierType("pb", PokeballType.POKEBALL, BSEO.ballRewardCount),
   GREAT_BALL: () => new AddPokeballModifierType("gb", PokeballType.GREAT_BALL, 5),
   ULTRA_BALL: () => new AddPokeballModifierType("ub", PokeballType.ULTRA_BALL, 5),
   ROGUE_BALL: () => new AddPokeballModifierType("rb", PokeballType.ROGUE_BALL, 5),

@@ -65,7 +65,8 @@ function initWildModifierPool() {
  */
 function initCommonModifierPool() {
   modifierPool[ModifierTier.COMMON] = [
-    new WeightedModifierType(modifierTypes.POKEBALL, () => (hasMaximumBalls(PokeballType.POKEBALL) ? 0 : 6), 6),
+    // 블서로그: 볼은 가끔만 (포켓로그 6 → 3)
+    new WeightedModifierType(modifierTypes.POKEBALL, () => (hasMaximumBalls(PokeballType.POKEBALL) ? 0 : 3), 3),
     new WeightedModifierType(modifierTypes.RARE_CANDY, 2),
     new WeightedModifierType(
       modifierTypes.POTION,
@@ -896,7 +897,7 @@ function lureWeightFunc(maxBattles: number, weight: number): WeightedModifierTyp
  * @returns boolean: true if the player has the maximum of a given ball type
  */
 function hasMaximumBalls(ballType: PokeballType): boolean {
-  // 블서로그: 판 중 영입이 없어서 공은 보상으로 안 나와요 (가중치 0)
+  // 블서로그: 판 중 영입을 끄면 공은 보상으로 안 나와요 (가중치 0)
   if (!BSEO.allowCatch) {
     return true;
   }

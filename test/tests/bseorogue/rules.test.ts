@@ -49,8 +49,9 @@ describe("블서로그 규칙", () => {
     }
   });
 
-  it("판 중 영입 · 미스터리 인카운터는 꺼져 있어요", () => {
-    expect(BSEO.allowCatch).toBe(false);
+  it("판 중 영입은 켜져 있고 (11-12, 볼 한 종류 · 3번째 확정), 미스터리 인카운터는 꺼져 있어요", () => {
+    expect(BSEO.allowCatch).toBe(true);
+    expect(BSEO.catchGuaranteedThrow).toBe(3);
     expect(BSEO.mysteryEncounters).toBe(false);
     expect(BSEO.singleBattlesOnly).toBe(true);
   });
@@ -110,11 +111,15 @@ describe("블서로그 데이터", () => {
     expect(BSEO_CHARACTERS.filter(c => c.playable).length).toBe(BSEO_STARTERS.length);
   });
 
-  it("지금은 실험체 전부를 고를 수 있고 (도감처럼 ER 번호 순서), 처음부터 열려 있어요", () => {
+  it("실험체 전부가 시작 고르기에 나오고 (도감처럼 ER 번호 순서), 처음부터 열린 것은 시작 6명", () => {
     expect(BSEO_STARTERS.length).toBe(BSEO_CHARACTERS.length);
     const codes = BSEO_STARTERS.map(c => c.erCode);
     expect(codes).toEqual([...codes].sort((a, b) => a - b));
-    expect([...defaultStarterSpecies].sort()).toEqual([...BSEO_STARTER_IDS].sort());
+    // 나머지는 판 중에 잡거나 보급 상자에서 얻어야 열려요 (11-12 해금, catch.test.ts)
+    expect(defaultStarterSpecies.length).toBe(BSEO.startUnlocked.length);
+    for (const id of defaultStarterSpecies) {
+      expect(BSEO_STARTER_IDS).toContain(id);
+    }
   });
 
   it("스킨 진화: 기본 → 스킨 진화 1 (Lv12) → 스킨 진화 2 (Lv24)", () => {

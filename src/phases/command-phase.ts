@@ -5,6 +5,7 @@ import { settings } from "#app/global-settings-manager";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { getPokemonNameWithAffix } from "#app/messages";
 import { TrappedTag } from "#data/battler-tags";
+import { bseoCanCatchSpecies } from "#data/bseorogue/catch";
 import { getDailyEventSeedBoss } from "#data/daily-run";
 import { isDailyFinalBoss } from "#data/daily-seed-utils";
 import { AbilityId } from "#enums/ability-id";
@@ -358,6 +359,12 @@ export class CommandPhase extends FieldPhase {
     // 블서로그: 판 중 영입 없음 (보급 상자로만)
     if (!BSEO.allowCatch) {
       this.queueShowText("battle:bseoNoCatch");
+      return false;
+    }
+    // 블서로그: 실험체만 영입할 수 있어요 (야생동물 · 보스는 안 됨)
+    const bseoTarget = globalScene.getEnemyPokemon(false);
+    if (bseoTarget && !bseoCanCatchSpecies(bseoTarget.species.speciesId)) {
+      this.queueShowText("battle:bseoNoCatchTarget");
       return false;
     }
     const { arena, currentBattle, gameData, gameMode } = globalScene;

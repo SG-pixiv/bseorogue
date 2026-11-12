@@ -51,6 +51,8 @@ export interface SessionSaveData {
   playTime: number;
   /** 블서로그: 이 판의 티어 (0 아이언 ~ 9 이터니티) */
   bseoTier?: number;
+  /** 블서로그: 이 판에서 영입에 실패한 횟수 (확정까지 세는 것) */
+  bseoCatchFails?: number;
   gameMode: GameModes;
   dailyConfig?: SerializedDailyRunConfig;
   party: PokemonData[];

@@ -1,10 +1,12 @@
 import { BSEO } from "#app/bseorogue";
 import { MAX_TERAS_PER_ARENA } from "#app/constants";
 import { globalScene } from "#app/global-scene";
+import { bseoNextThrowGuaranteed } from "#data/bseorogue/catch";
 import { getTypeRgb } from "#data/type";
 import { Button } from "#enums/buttons";
 import { Command } from "#enums/command";
 import { PartyUiMode } from "#enums/party-ui-mode";
+import { PokeballType } from "#enums/pokeball";
 import { PokemonType } from "#enums/pokemon-type";
 import { TextStyle } from "#enums/text-style";
 import { UiMode } from "#enums/ui-mode";
@@ -90,6 +92,8 @@ export class CommandUiHandler extends UiHandler {
     }
     this.toggleTeraButton();
 
+    this.updateBseoBallLabel();
+
     const pokemonName = commandPhase.getPokemon().getNameToRender({ prependFormName: false });
     const messageHandler = this.getUi().getMessageHandler();
     messageHandler.bg.setVisible(true);
@@ -105,6 +109,18 @@ export class CommandUiHandler extends UiHandler {
     }
 
     return true;
+  }
+
+  /** 블서로그: '영입' 옆에 남은 볼 개수, 다음 볼이 확정이면 ★ (catch.ts) */
+  private updateBseoBallLabel(): void {
+    const ballText = this.commandsContainer.getAt(1 + Command.BALL) as Phaser.GameObjects.Text | undefined;
+    if (!BSEO.allowCatch || !ballText?.setText) {
+      return;
+    }
+    const count = globalScene.pokeballCounts[PokeballType.POKEBALL] ?? 0;
+    ballText.setText(
+      `${i18next.t("commandUiHandler:ball")}×${count}${count > 0 && bseoNextThrowGuaranteed() ? "★" : ""}`,
+    );
   }
 
   processInput(button: Button): boolean {
@@ -141,7 +157,26 @@ export class CommandUiHandler extends UiHandler {
               success = true;
               break;
             }
-            ui.setModeWithoutClear(UiMode.BALL);
+            // 블서로그: 볼은 한 종류 → 고르는 창 없이 바로 던져요 (없으면 안내)
+            {
+              const commandPhase = globalScene.phaseManager.getCurrentPhase() as CommandPhase;
+              if (!globalScene.pokeballCounts[PokeballType.POKEBALL]) {
+                const fieldIndex = commandPhase.getFieldIndex();
+                ui.setMode(UiMode.MESSAGE);
+                ui.showText(
+                  i18next.t("battle:bseoNoBall"),
+                  null,
+                  () => {
+                    ui.showText("", 0);
+                    ui.setMode(UiMode.COMMAND, fieldIndex);
+                  },
+                  null,
+                  true,
+                );
+              } else if (commandPhase.handleCommand(Command.BALL, PokeballType.POKEBALL)) {
+                ui.setMode(UiMode.MESSAGE);
+              }
+            }
             success = true;
             break;
           // Pokemon

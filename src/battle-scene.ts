@@ -236,6 +236,8 @@ export class BattleScene extends SceneBase {
   public lastEnemyTrainer: Trainer | null;
   public currentBattle: Battle;
   public pokeballCounts: PokeballCounts;
+  /** 블서로그: 이 판에서 영입에 실패한 횟수 (쌓이면 확정, src/data/bseorogue/catch.ts) */
+  public bseoCatchFails = 0;
   public money: number;
   public pokemonInfoContainer: PokemonInfoContainer;
   private party: PlayerPokemon[];
@@ -1157,8 +1159,9 @@ export class BattleScene extends SceneBase {
           .filter(pt => pt !== PokeballType.LUXURY_BALL)
           .map(t => [t, 0]),
       );
-      this.pokeballCounts[PokeballType.POKEBALL] = 5;
+      this.pokeballCounts[PokeballType.POKEBALL] = BSEO.startBalls; // 블서로그: 3 (포켓로그 5)
     }
+    this.bseoCatchFails = 0;
 
     this.modifiers = [];
     this.enemyModifiers = [];
