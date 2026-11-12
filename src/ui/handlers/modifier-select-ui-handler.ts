@@ -22,6 +22,9 @@ import Phaser from "phaser";
 
 export const SHOP_OPTIONS_ROW_LIMIT = 7;
 const SINGLE_SHOP_ROW_YOFFSET = 12;
+/** 블서로그: 상점 줄 왼쪽 끝 (메뉴 버튼 오른쪽) · 칸 사이 최소 간격 */
+const SHOP_ROW_LEFT = 34;
+const SHOP_ROW_MIN_STEP = 26;
 const DOUBLE_SHOP_ROW_YOFFSET = 24;
 const OPTION_BUTTON_YPOSITION = -62;
 
@@ -235,9 +238,12 @@ export class ModifierSelectUiHandler extends AwaitableUiHandler {
         row ? SHOP_OPTIONS_ROW_LIMIT : 0,
         row ? undefined : SHOP_OPTIONS_ROW_LIMIT,
       );
-      const sliceWidth = globalScene.scaledCanvas.width / (rowOptions.length + 2);
+      // 블서로그: 오른쪽 위 '티어 · 리그 · 지역 - 웨이브' 글자와 겹치지 않게 그 왼쪽(메뉴 버튼 오른쪽)에 고르게 놓아요
+      const shopLeft = SHOP_ROW_LEFT;
+      const shopRight = globalScene.scaledCanvas.width - globalScene.getTopRightTextWidth() - 6;
+      const shopStep = Math.max(SHOP_ROW_MIN_STEP, (shopRight - shopLeft) / rowOptions.length);
       const option = new ModifierOption(
-        sliceWidth * (col + 1) + sliceWidth * 0.5,
+        shopLeft + shopStep * (col + 0.5),
         -globalScene.scaledCanvas.height / 2 - globalScene.game.canvas.height / 32 - (42 - (28 * row - 1)),
         shopTypeOptions[m],
       );

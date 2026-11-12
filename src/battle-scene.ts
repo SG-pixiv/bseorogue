@@ -2184,6 +2184,11 @@ export class BattleScene extends SceneBase {
     this.enemyModifierBar.setVisible(false);
   }
 
+  /** 블서로그: 오른쪽 위 글자(티어 · 리그 · 지역 - 웨이브 · 크레딧)가 차지하는 너비 (보상 화면 상점 줄이 피해 가려고) */
+  getTopRightTextWidth(): number {
+    return Math.max(this.biomeWaveText?.displayWidth ?? 0, this.moneyText?.displayWidth ?? 0);
+  }
+
   updateBiomeWaveText(): void {
     const isBoss = !(this.currentBattle.waveIndex % 10);
     const biomeString: string = getBiomeName(this.arena.biomeId);
