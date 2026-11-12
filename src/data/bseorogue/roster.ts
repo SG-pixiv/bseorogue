@@ -5,7 +5,7 @@
 
 import { ER_CHARACTERS, ER_MONSTERS, type ErRoleKey } from "#data/bseorogue/er-data";
 import { Role } from "#data/bseorogue/roles";
-import { SHEET_CHARACTERS, SHEET_SKILLS } from "#data/bseorogue/sheet-data";
+import { SHEET_CHARACTERS, SHEET_PASSIVES, SHEET_SKILLS } from "#data/bseorogue/sheet-data";
 import { SKILL_MOVES } from "#data/bseorogue/skill-moves";
 import { skinEvolutionOf } from "#data/bseorogue/skin-evolution";
 import { characterStages, erMonsterStats, ROLE_SHAPE, type Stages3, type Stats6 } from "#data/bseorogue/stats";
@@ -68,7 +68,7 @@ export interface BseoCharacter {
   forms: readonly [BseoForm, BseoForm, BseoForm];
   /** Q · W · E · R */
   skills: readonly [BseoSkill, BseoSkill, BseoSkill, BseoSkill];
-  /** 고유 패시브 이름 (효과는 나중에) */
+  /** 고유 패시브 이름 (효과는 빌려 쓰는 특성, passive.ts) */
   passive: string;
   /** ER 스킨 목록 (0번 기본 모습) */
   skins: readonly string[];
@@ -179,7 +179,7 @@ function buildCharacter(erCode: number, cfg: PlayableConfig | undefined): BseoCh
     stages,
     focus: cfg?.focus ?? (sheet ? "시트" : "역할군 기본"),
     forms,
-    passive: er.skills[0] ?? "",
+    passive: SHEET_PASSIVES[erCode]?.name || (er.skills[0] ?? ""),
     skins: er.skins,
     skills: moves.map((move, i) => ({
       move,

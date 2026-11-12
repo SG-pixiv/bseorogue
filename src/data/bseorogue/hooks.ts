@@ -7,6 +7,7 @@ import { BSEO } from "#app/bseorogue";
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { loadKelTeams } from "#data/bseorogue/kel";
+import { applyBseoPassiveNames } from "#data/bseorogue/passive";
 import { REGION_ROLES } from "#data/bseorogue/regions";
 import { Role } from "#data/bseorogue/roles";
 import { BSEO_ALL_IDS, BSEO_BOSSES, BSEO_CHARACTERS, BSEO_WILD, ENEMY_MOVE_NAMES } from "#data/bseorogue/roster";
@@ -112,6 +113,8 @@ export function initBseorogue(): void {
       move.localize();
     });
   }
+  // 고유 패시브: 빌려 쓰는 특성 이름 · 설명
+  applyBseoPassiveNames();
   for (const [id, name] of Object.entries(ENEMY_MOVE_NAMES)) {
     const move = allMoves[Number(id)] as unknown as { localize(): void } | undefined;
     if (move && name) {

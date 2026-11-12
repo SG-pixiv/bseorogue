@@ -14,6 +14,7 @@ SG가 고친 엑셀을 docs/sheets/실험체-스킬.xlsx 에 덮어쓰고 이 �
   → 다 되면: pnpm exec biome format --write src/data/bseorogue/ 그리고 블서로그 테스트
 """
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -62,6 +63,64 @@ def role(v, where, blank_ok=False):
         errors.append(f"{where}: 없는 역할군이에요 ({v}) — 탱커 · 브루저 · 암살자 · 평원딜 · 스증딜러 · 서포터")
         return "BRUISER"
     return r
+
+
+# 패시브로 못 쓰는 특성: 블서로그에 없는 것(모습 바꾸기 · 타입 · 날씨)이 대부분이지만, 확실히 막을 것만
+BAD_ABILITIES = {"NONE", "WONDER_GUARD", "IMPOSTER", "ILLUSION", "STANCE_CHANGE", "ZEN_MODE", "SCHOOLING", "DISGUISE",
+                 "BATTLE_BOND", "POWER_CONSTRUCT", "SHIELDS_DOWN", "ICE_FACE", "GULP_MISSILE", "HUNGER_SWITCH", "ZERO_TO_HERO",
+                 "FORECAST", "FLOWER_GIFT", "MULTITYPE", "RKS_SYSTEM", "TERA_SHIFT", "PROTEAN", "LIBERO", "COLOR_CHANGE"}
+
+
+def ability_table():
+    """AbilityId 이름 · 한국어 원래 이름 → AbilityId 이름, 그리고 미구현 목록"""
+    src = (ROOT / "src/data/abilities/init-abilities.ts").read_text(encoding="utf-8")
+    ko = json.loads((ROOT / "locales/ko/ability.json").read_text(encoding="utf-8"))
+    keys = re.findall(r"^\s+([A-Z0-9_]+),", (ROOT / "src/enums/ability-id.ts").read_text(encoding="utf-8"), re.M)
+    names = {}
+    for k in keys:
+        names[k] = k
+        camel = re.sub(r"_([a-z0-9])", lambda m: m[1].upper(), k.lower())
+        if ko.get(camel, {}).get("name"):
+            names.setdefault(re.sub(r"\s", "", ko[camel]["name"]), k)
+    heads = list(re.finditer(r"new AbBuilder\(AbilityId\.(\w+)", src))
+    broken = set()
+    for i, h in enumerate(heads):
+        body = src[h.end():heads[i + 1].start() if i + 1 < len(heads) else len(src)]
+        if ".unimplemented()" in body or ".partial()" in body:
+            broken.add(h[1])
+    return names, broken
+
+
+def read_passives(wb, chars, errors):
+    ws = wb["패시브"]
+    col = {c.value: i for i, c in enumerate(ws[1])}
+    names, broken = ability_table()
+    out, used = {}, {}
+    for r, row in enumerate(ws.iter_rows(min_row=2, values_only=True), 2):
+        if row[col["ER번호"]] is None:
+            continue
+        code = int(row[col["ER번호"]])
+        at = f"패시브 {r}줄 ({row[col['이름']]})"
+        raw = re.sub(r"\s", "", str(row[col["빌려 쓸 특성"]] or ""))
+        key = names.get(raw.upper()) or names.get(raw)
+        if not key:
+            errors.append(f"{at}: '{raw}' 라는 특성이 없어요 (영어 이름 예: GUTS, 또는 한국어 원래 이름 예: 근성)")
+            continue
+        if key in BAD_ABILITIES or key in broken:
+            errors.append(f"{at}: {key} 는 블서로그에서 못 써요 (모습이 바뀌거나 미구현인 특성)")
+        if key in used:
+            errors.append(f"{at}: {key} 를 {used[key]} 도 써요 (한 특성은 한 실험체만)")
+        used[key] = row[col["이름"]]
+        if code not in chars:
+            errors.append(f"{at}: 실험체 시트에 없는 ER 번호 {code}")
+        out[code] = {
+            "name": str(row[col["패시브 이름"]] or "").strip(),
+            "ability": key,
+            "desc": str(row[col["효과 설명 (화면에 나와요)"]] or "").strip(),
+        }
+        if not out[code]["name"] or not out[code]["desc"]:
+            errors.append(f"{at}: 패시브 이름 · 효과 설명을 채워 주세요")
+    return out
 
 
 def main():
@@ -133,6 +192,7 @@ def main():
     missing = set(chars) ^ set(skills)
     if missing:
         errors.append(f"실험체 시트와 스킬 시트의 ER 번호가 달라요: {sorted(missing)}")
+    passives = read_passives(wb, chars, errors) if "패시브" in wb.sheetnames else {}
     for w in warnings:
         print("  (참고)", w)
     if errors:
@@ -216,9 +276,17 @@ def main():
         for s in skills[code]:
             lines.append(f"    {js(s)},")
         lines.append("  ],")
+    lines += [
+        "};",
+        "",
+        "/** ER 번호 → 고유 패시브 (시트 '패시브'). ability 는 빌려 쓰는 포켓로그 특성 AbilityId 이름 */",
+        "export const SHEET_PASSIVES: Readonly<Record<number, { name: string; ability: string; desc: string }>> = {",
+    ]
+    for code in sorted(passives):
+        lines.append(f"  {code}: {js(passives[code])},")
     lines += ["};", ""]
     OUT.write_text("\n".join(lines), encoding="utf-8")
-    print(f"{OUT.relative_to(ROOT)}: 실험체 {len(chars)}명 · 스킬 {sum(len(s) for s in skills.values())}개")
+    print(f"{OUT.relative_to(ROOT)}: 실험체 {len(chars)}명 · 스킬 {sum(len(s) for s in skills.values())}개 · 패시브 {len(passives)}개")
     if KEEP_MOVES:
         return
     want = {

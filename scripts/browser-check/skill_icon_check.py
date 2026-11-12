@@ -65,6 +65,7 @@ async def main():
         await click(pg, "party-option:0", 1500)
         await wait_target(pg, "summary-page:1")
         await pg.wait_for_timeout(1000)
+        await snap(pg, "03a-summary-profile")  # 첫 쪽: 고유 패시브 이름 · 설명
         # 스킬 쪽 탭 한 번에 (정보 → 스킬, 두 쪽 건너뛰기)
         await click(pg, "summary-page:2", 2000)
         page = await pg.evaluate("() => window.__bseoScene?.ui?.getHandler?.()?.cursor")
