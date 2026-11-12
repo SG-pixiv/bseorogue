@@ -2,6 +2,7 @@ import { audioManager } from "#app/global-audio-manager";
 import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
 import { erCodeOfSpecies } from "#data/bseorogue/roster";
+import { bseoSkillAnim } from "#data/bseorogue/skill-anim";
 import { allMoves } from "#data/data-lists";
 import type { BattlerIndex } from "#enums/battler-index";
 import { BattlerTagType } from "#enums/battler-tag-type";
@@ -466,7 +467,8 @@ export function initMoveAnim(move: MoveId): Promise<void> {
           : MoveId.TAIL_WHIP;
 
       const fetchAnimAndResolve = (move: MoveId) => {
-        cachedFetch(`./battle-anims/${toKebabCase(MoveId[move])}.json`)
+        // 블서로그: 실험체 스킬은 공용 연출 7개 중 하나 (skill-anim.ts)
+        cachedFetch(`./battle-anims/${toKebabCase(MoveId[bseoSkillAnim(move) ?? move])}.json`)
           .then(response => {
             const contentType = response.headers.get("content-type");
             if (!response.ok || contentType?.indexOf("application/json") === -1) {
