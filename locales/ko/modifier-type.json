@@ -66,7 +66,7 @@
       "description": "자신의 모든 실험체의 레벨이 {{levels}}만큼 상승한다."
     },
     "BaseStatBoosterModifierType": {
-      "description": "지니게 하면 {{stat}} 종족치를 10% 올려준다. 개체값이 높을수록 더 많이 누적시킬 수 있다."
+      "description": "지니게 하면 {{stat}} 종족치를 10% 올려준다. 잠재력이 높을수록 더 많이 누적시킬 수 있다."
     },
     "PokemonBaseStatFlatModifierType": {
       "name": "숲의양갱",
@@ -93,7 +93,7 @@
       "description": "지니게 한 실험체는 받는 경험치가 {{boostPercent}}% 증가한다."
     },
     "PokemonFriendshipBoosterModifierType": {
-      "description": "획득하는 친밀도가 50% 증가한다."
+      "description": "획득하는 숙련도가 50% 증가한다."
     },
     "PokemonMoveAccuracyBoosterModifierType": {
       "description": "스킬의 명중률이 {{accuracyAmount}} 증가한다."
@@ -382,7 +382,7 @@
     },
     "IV_SCANNER": {
       "name": "실험체 분석기",
-      "description": "적 실험체의 개체값을 확인 가능하다."
+      "description": "적 실험체의 잠재력을 확인 가능하다."
     },
     "DNA_SPLICERS": {
       "name": "유전자쐐기"

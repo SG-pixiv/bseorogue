@@ -98,7 +98,7 @@
   "eggSkipPrompt_few": "{{eggsToHatch}}개의 보급 상자가 열리려고 해요.\n결과 요약 화면으로 갈까요?",
   "eggSkipPrompt_many": "{{eggsToHatch}}개의 보급 상자가 열리려고 해요.\n결과 요약 화면으로 갈까요?",
   "eggSkipPrompt_other": "{{eggsToHatch}}개의 보급 상자가 열리려고 해요.\n결과 요약 화면으로 갈까요?",
-  "ivScannerUseQuestion": "{{pokemonName}}에게 개체값탐지기를 사용하시겠습니까?",
+  "ivScannerUseQuestion": "{{pokemonName}}에게 실험체 분석기를 사용하시겠습니까?",
   "wildPokemonWithAffix": "상대 {{pokemonName}}",
   "foePokemonWithAffix": "상대 {{pokemonName}}",
   "useMove": "{{pokemonNameWithAffix}}의 {{moveName}}!",

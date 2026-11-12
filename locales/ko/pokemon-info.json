@@ -1,4 +1,7 @@
 {
+  "bseoPotential": "잠재력",
+  "bseoPotentialUp": "▲ 올랐다!",
+  "bseoPotentialSame": "(그대로)",
   "stat": {
     "hp": "체력",
     "hpShortened": "체력",

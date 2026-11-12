@@ -11,15 +11,15 @@
   "option": {
     "1": {
       "label": "{{pokemon1Name}}",
-      "tooltipBase": "(-) 힘든 배틀\n(+) {{pokemon1Name}} 친밀도 상승"
+      "tooltipBase": "(-) 힘든 배틀\n(+) {{pokemon1Name}} 숙련도 상승"
     },
     "2": {
       "label": "{{pokemon2Name}}",
-      "tooltipBase": "(-) 힘든 배틀\n(+) {{pokemon2Name}} 친밀도 상승"
+      "tooltipBase": "(-) 힘든 배틀\n(+) {{pokemon2Name}} 숙련도 상승"
     },
     "3": {
       "label": "{{pokemon3Name}}",
-      "tooltipBase": "(-) 힘든 배틀\n(+) {{pokemon3Name}} 친밀도 상승"
+      "tooltipBase": "(-) 힘든 배틀\n(+) {{pokemon3Name}} 숙련도 상승"
     },
     "selected": "그럼 갑니다!"
   },
