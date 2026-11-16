@@ -38,6 +38,7 @@ B = "03. Consumables/Boost/"
 M = "05. Material/"
 W = "01. Weapons/"
 A = "02. Armor/"
+X = "06. Exchangeable/"
 # 아이템 그림 파일 이름 → (팬키트 경로, 블서로그 이름)
 ITEMS = {
     "potion": (F + "004. Meat.png", "고기"),
@@ -51,7 +52,7 @@ ITEMS = {
     "full_heal": (F + "029. First Aid Kit.png", "구급상자"),
     "sitrus_berry": (F + "018. Apple.png", "사과"),
     "lum_berry": (F + "034. Golden Apple.png", "황금사과"),
-    "enigma_berry": (F + "11. Watermelon.png", "수박"),
+    "enigma_berry": (F + "022. Fish And Chips.png", "피쉬 앤 칩스 (11-12 SG, 전에는 수박)"),
     "liechi_berry": (F + "005. Chocolate.png", "초콜릿"),
     "ganlon_berry": (F + "001. Potato.png", "감자"),
     "petaya_berry": (F + "006. Edible Mushroom.png", "양송이 버섯"),
@@ -59,7 +60,7 @@ ITEMS = {
     "salac_berry": (F + "007. Fried Chicken.png", "후라이드 치킨"),
     "lansat_berry": (F + "027. Truffle.png", "트러플"),
     "starf_berry": (F + "026. Mint Choco Ice Cream.png", "민트초코 (11-12 SG)"),
-    "leppa_berry": (F + "015. Choco Spread.png", "루텔라"),
+    "leppa_berry": (F + "021. Breakfast Sandwich.png", "베이컨토스트 (11-12 SG, 전에는 루텔라. 팬키트 이름은 Breakfast Sandwich)"),
     "big_mushroom": (F + "017. Grilled Mushroom Skewers.png", "기억버섯"),
     "leftovers": ("03. Consumables/Omurice.png", "먹다 남은 도시락 (2026 시즌 11 오므라이스)"),
     "white_herb": ("03. Consumables/Oriental Herb.png", "하양허브"),
@@ -75,13 +76,13 @@ ITEMS = {
     "pp_up": (F + "999. #11 Combo Meal.png", "일레븐 세트 (최대 PP 영구 증가)"),
     "x_attack": (B + "02. Capsule_Sanguine.png", "캡슐-선혈 (공격력 강화제)"),
     "x_sp_atk": (B + "03. Capsule_Galaxy.png", "캡슐-우주 (스킬 증폭 강화제)"),
-    "exp_charm": ("06. Exchangeable/04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물 (경험치 +25%)"),
-    "coupon": ("06. Exchangeable/04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물 - 영웅 (그림은 전설 것, 영웅 · 초월 그림은 노트북에서 가져와야 해요)"),
-    "pair_of_tickets": ("06. Exchangeable/04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물 - 전설"),
-    "mystic_ticket": ("06. Exchangeable/04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물 - 초월 (그림은 전설 것)"),
+    "exp_charm": (X + "02. Aglaia_s Gift - Rare.png", "아글라이아의 선물 (경험치 +25%, 뽑기권과 구분되게 희귀 등급 그림)"),
+    "coupon": (X + "03. Aglaia_s Gift - Epic.png", "아글라이아의 선물 - 영웅 (뽑기 1번)"),
+    "pair_of_tickets": (X + "04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물 - 전설 (뽑기 5번)"),
+    "mystic_ticket": (X + "09. Aglaia_s Gift - Mythic.png", "아글라이아의 선물 - 초월 (뽑기 10번)"),
     "toxic_orb": (B + "02. Capsule_Sanguine.png", "출혈구슬 (2026 시즌 11 캡슐 - 선혈)"),
     "flame_orb": (W + "12. Throw/013. Fireball.png", "화염구슬"),
-    "sacred_ash": ("06. Exchangeable/04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물"),
+    "sacred_ash": (X + "04. Aglaia_s Gift - Legendary.png", "아글라이아의 선물"),
     "rare_candy": (M + "060. VF Blood Sample.png", "VF 혈액 샘플"),
     "rarer_candy": (M + "060. VF Blood Sample.png", "VF 혈액 샘플 세트"),
     "relic_gold": (M + "047. Gold.png", "현상금"),
@@ -101,7 +102,9 @@ ITEMS = {
     "wide_lens": (W + "21. Camera/001. Lens.png", "광각렌즈"),
     "scope_lens": (W + "21. Camera/002. Rangefinder.png", "초점렌즈"),
     "zoom_lens": (W + "21. Camera/012. Triple Focus.png", "멀티렌즈"),
-    "exp_share": (A + "02. Head/047. Commander Headset.png", "관전 학습 장치"),
+    "exp_share": (X + "06. Portable Crafter - Head.png", "휴대용 생성기 (전에는 관전 학습 장치)"),
+    "lock_capsule": (X + "05. Portable Crafter - Chest.png", "휴대용 생성기 (전에는 록캡슐, 같은 이름이라 그림은 다른 것)"),
+    "pb": (X + "9996. Pistol Supply Box.png", "보급상자 (영입에 쓰는 볼, 보상 아이콘)"),
     "kings_rock": (A + "02. Head/011. Crown.png", "왕의징표석"),
     "focus_band": (A + "02. Head/001. Hairband.png", "기합의머리띠"),
     "baton": (W + "11. Bat/001. Short Rod.png", "배턴"),

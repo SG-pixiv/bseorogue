@@ -78,8 +78,8 @@
   ]
  },
  "coupon": {
-  "file": "06. Exchangeable/04. Aglaia_s Gift - Legendary.png",
-  "name": "아글라이아의 선물 - 영웅 (그림은 전설 것, 영웅 · 초월 그림은 노트북에서 가져와야 해요)"
+  "file": "06. Exchangeable/03. Aglaia_s Gift - Epic.png",
+  "name": "아글라이아의 선물 - 영웅 (뽑기 1번)"
  },
  "dark_tera_shard": {
   "file": "05. Material/034. Crimson Shard.png",
@@ -126,8 +126,8 @@
   "name": "뜨거운 물"
  },
  "enigma_berry": {
-  "file": "03. Consumables/Food/11. Watermelon.png",
-  "name": "수박"
+  "file": "03. Consumables/Food/022. Fish And Chips.png",
+  "name": "피쉬 앤 칩스 (11-12 SG, 전에는 수박)"
  },
  "ether": {
   "file": "03. Consumables/Food/008. Water.png",
@@ -138,12 +138,12 @@
   "name": "진화의휘석"
  },
  "exp_charm": {
-  "file": "06. Exchangeable/04. Aglaia_s Gift - Legendary.png",
-  "name": "아글라이아의 선물 (경험치 +25%)"
+  "file": "06. Exchangeable/02. Aglaia_s Gift - Rare.png",
+  "name": "아글라이아의 선물 (경험치 +25%, 뽑기권과 구분되게 희귀 등급 그림)"
  },
  "exp_share": {
-  "file": "02. Armor/02. Head/047. Commander Headset.png",
-  "name": "관전 학습 장치"
+  "file": "06. Exchangeable/06. Portable Crafter - Head.png",
+  "name": "휴대용 생성기 (전에는 관전 학습 장치)"
  },
  "fairy_feather": {
   "file": "05. Material/062. Tac. Skill Module.png",
@@ -306,12 +306,16 @@
   "name": "먹다 남은 도시락 (2026 시즌 11 오므라이스)"
  },
  "leppa_berry": {
-  "file": "03. Consumables/Food/015. Choco Spread.png",
-  "name": "루텔라"
+  "file": "03. Consumables/Food/021. Breakfast Sandwich.png",
+  "name": "베이컨토스트 (11-12 SG, 전에는 루텔라. 팬키트 이름은 Breakfast Sandwich)"
  },
  "liechi_berry": {
   "file": "03. Consumables/Food/005. Chocolate.png",
   "name": "초콜릿"
+ },
+ "lock_capsule": {
+  "file": "06. Exchangeable/05. Portable Crafter - Chest.png",
+  "name": "휴대용 생성기 (전에는 록캡슐, 같은 이름이라 그림은 다른 것)"
  },
  "lum_berry": {
   "file": "03. Consumables/Food/034. Golden Apple.png",
@@ -361,8 +365,8 @@
   ]
  },
  "mystic_ticket": {
-  "file": "06. Exchangeable/04. Aglaia_s Gift - Legendary.png",
-  "name": "아글라이아의 선물 - 초월 (그림은 전설 것)"
+  "file": "06. Exchangeable/09. Aglaia_s Gift - Mythic.png",
+  "name": "아글라이아의 선물 - 초월 (뽑기 10번)"
  },
  "mystic_water": {
   "file": "05. Material/062. Tac. Skill Module.png",
@@ -406,7 +410,11 @@
  },
  "pair_of_tickets": {
   "file": "06. Exchangeable/04. Aglaia_s Gift - Legendary.png",
-  "name": "아글라이아의 선물 - 전설"
+  "name": "아글라이아의 선물 - 전설 (뽑기 5번)"
+ },
+ "pb": {
+  "file": "06. Exchangeable/9996. Pistol Supply Box.png",
+  "name": "보급상자 (영입에 쓰는 볼, 보상 아이콘)"
  },
  "petaya_berry": {
   "file": "03. Consumables/Food/006. Edible Mushroom.png",
