@@ -16,6 +16,7 @@ import { SHEET_CHARACTERS } from "#data/bseorogue/sheet-data";
  *
  * 표에 없는 실험체는 기본값(DEFAULT)을 써요: ER 스킨 목록 1번 · 2번 스킨, Lv12 · Lv24, 역할군 그대로.
  * 스킨이 모자라면 이름 뒤에 ★ 를 붙여요.
+ * 진화2 스킨이 0 이면 (시트 진화2 칸이 빈칸) 진화는 한 번만 해요 — ER 스킨이 1개뿐인 실험체 (11-17)
  */
 export interface SkinEvolution {
   skins: readonly [number, number];

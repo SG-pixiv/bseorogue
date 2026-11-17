@@ -139,6 +139,22 @@ describe("블서로그 데이터", () => {
     expect(speciesDataRegistry.getSpecies(SpeciesId.BSEO_ELEVEN_S2).baseTotal).toBe(500);
   });
 
+  it("ER 스킨이 1개뿐인 실험체는 진화를 한 번만 해요 (Lv18 에 바로 다 큰 종족값, 11-17)", () => {
+    const sum = (s: readonly number[]) => s.reduce((a, b) => a + b, 0);
+    const ones = BSEO_CHARACTERS.filter(c => c.skins.length === 2);
+    expect(ones.map(c => c.name)).toEqual(["헨리", "미르카", "펜리르", "비형", "크레이버", "루치아", "세레스"]);
+    for (const c of ones) {
+      expect(c.lastStage, c.name).toBe(1);
+      expect(speciesDataRegistry.getSpecies(c.forms[0].id).getEvolutionLevels(), c.name).toEqual([[c.forms[1].id, 18]]);
+      expect(speciesDataRegistry.getSpecies(c.forms[1].id).baseTotal, c.name).toBe(sum(c.stages[2]));
+      expect(c.forms[1].name, c.name).toBe(c.skins[1]);
+    }
+    // 시트 진화2 칸이 있으면 두 번
+    for (const c of BSEO_CHARACTERS) {
+      expect(c.lastStage, c.name).toBe(SHEET_CHARACTERS[c.erCode].skins[1] > 0 ? 2 : 1);
+    }
+  });
+
   it("실험체 스킬은 다른 실험체 · 동물 · 보스 · 추가 스킬과 겹치지 않아요 (이름이 바뀌니까)", () => {
     const owner = new Map<MoveId, string>();
     for (const c of BSEO_CHARACTERS) {

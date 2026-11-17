@@ -79,7 +79,8 @@ export function initBseorogueSpecies(): SpeciesDataMapConfig {
     c.forms.forEach((form, stage) => {
       const type = form.role as unknown as PokemonType;
       addNames(form.id, form.name, `${roleName(type)} 실험체`);
-      const next = c.forms[stage + 1];
+      // 진화가 한 번뿐인 실험체(lastStage 1)는 스킨 진화 1 에서 멈춰요
+      const next = stage < c.lastStage ? c.forms[stage + 1] : undefined;
       const isStarter = c.playable && stage === 0;
       data[form.id] = {
         species: makeSpecies(form.id, type, form.stats, {

@@ -18,7 +18,7 @@ class DraftRules(unittest.TestCase):
 
     def test_attack_category_by_coef(self):
         d = draft("BRUISER", "Q", "적에게 N의 스킬 피해를 입힙니다.", "N(+스킬 증폭의 N)의 스킬 피해")
-        self.assertEqual((d["cat"], d["effect"], d["power"]), ("스증", "피해", 60))
+        self.assertEqual((d["cat"], d["effect"], d["power"]), ("스증", "피해", 65))
         d = draft("MAGE", "Q", "적에게 N의 스킬 피해를 입힙니다.", "N(+공격력의 N)의 스킬 피해")
         self.assertEqual(d["cat"], "물리")
         self.check(d)
@@ -27,12 +27,12 @@ class DraftRules(unittest.TestCase):
         d = draft("ASSASSIN", "E", "지정한 방향으로 돌진하며 N의 스킬 피해를 입히고 N초 동안 기절시키며 이동 속도를 N 감소시킵니다.", "(+공격력의 N)")
         self.assertEqual(d["effect"], "선공(+1) 피해 + 30% 스턴 + 상대 속도 1단계 ↓")
         self.assertEqual(d["prio"], 1)
-        self.assertLessEqual(d["power"], 50)
+        self.assertEqual(d["power"], 40)  # 선공 50 에서 효과 둘 (−10)
         self.check(d)
 
     def test_slow_only_on_w_is_paralysis(self):
         d = draft("MAGE", "W", "N의 스킬 피해를 입히고 이동 속도를 N 감소시킵니다.", "(+스킬 증폭의 N)")
-        self.assertEqual(d["effect"], "피해 + 30% 둔화")
+        self.assertEqual(d["effect"], "피해 + 20% 둔화")
         self.check(d)
 
     def test_status_skills(self):
@@ -55,6 +55,14 @@ class DraftRules(unittest.TestCase):
         self.assertEqual(d["effect"], "피해 + 피해의 50% 회복")
         self.assertGreaterEqual(d["power"], 90)
         self.check(d)
+
+    def test_two_extras_at_most_and_floor(self):
+        desc = "N의 스킬 피해를 입히고 N초 동안 기절시키며 이동 속도를 N 감소시킵니다. 이동 속도가 N 증가하고 체력을 N 회복합니다."
+        d = draft("TANK", "Q", desc, "(+공격력의 N)")
+        self.assertEqual(d["effect"], "피해 + 30% 스턴 + 상대 속도 1단계 ↓")
+        self.assertEqual(d["power"], 45)  # 65 − 10(탱커) − 15 = 40 → 최소 45
+        d = draft("MAGE", "R", "N의 스킬 피해를 입히고 N초 동안 속박합니다.", "(+스킬 증폭의 N)")
+        self.assertEqual((d["effect"], d["power"]), ("피해 + 10% 속박", 140))
 
     def test_forced_attack(self):
         d = draft("SUPPORT", "R", "N초 동안 무적 상태가 됩니다.", "", force_attack=True)

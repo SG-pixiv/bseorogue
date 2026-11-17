@@ -16,7 +16,9 @@ export interface SheetCharacter {
   final: Stats6;
   /** 도트 키 등급 (S 60 · M 68 · L 74px) */
   size: "S" | "M" | "L";
+  /** 스킨 진화 1 · 2 스킨 번호 (진화2 가 0 이면 진화는 한 번) */
   skins: readonly [number, number];
+  /** 스킨 진화 1 · 2 레벨 (진화가 한 번이면 진화2 는 0) */
   levels: readonly [number, number];
   roles: readonly [ErRoleKey | null, ErRoleKey | null];
 }
@@ -886,8 +888,8 @@ export const SHEET_CHARACTERS: Readonly<Record<number, SheetCharacter>> = {
     cost: 2,
     final: [64, 51, 63, 142, 83, 97],
     size: "M",
-    skins: [1, 2],
-    levels: [12, 24],
+    skins: [1, 0],
+    levels: [18, 0],
     roles: [null, null],
   },
   84: {
@@ -906,8 +908,8 @@ export const SHEET_CHARACTERS: Readonly<Record<number, SheetCharacter>> = {
     cost: 2,
     final: [118, 72, 111, 39, 101, 59],
     size: "M",
-    skins: [1, 2],
-    levels: [12, 24],
+    skins: [1, 0],
+    levels: [18, 0],
     roles: [null, null],
   },
   86: {
@@ -916,8 +918,8 @@ export const SHEET_CHARACTERS: Readonly<Record<number, SheetCharacter>> = {
     cost: 4,
     final: [99, 109, 92, 37, 77, 86],
     size: "M",
-    skins: [1, 2],
-    levels: [12, 24],
+    skins: [1, 0],
+    levels: [18, 0],
     roles: [null, null],
   },
   87: {
@@ -936,8 +938,8 @@ export const SHEET_CHARACTERS: Readonly<Record<number, SheetCharacter>> = {
     cost: 2,
     final: [99, 109, 86, 40, 72, 94],
     size: "M",
-    skins: [1, 2],
-    levels: [12, 24],
+    skins: [1, 0],
+    levels: [18, 0],
     roles: [null, null],
   },
   89: {
@@ -946,8 +948,8 @@ export const SHEET_CHARACTERS: Readonly<Record<number, SheetCharacter>> = {
     cost: 2,
     final: [68, 52, 66, 135, 86, 93],
     size: "M",
-    skins: [1, 2],
-    levels: [12, 24],
+    skins: [1, 0],
+    levels: [18, 0],
     roles: [null, null],
   },
   90: {
@@ -956,8 +958,8 @@ export const SHEET_CHARACTERS: Readonly<Record<number, SheetCharacter>> = {
     cost: 1,
     final: [67, 51, 65, 126, 85, 106],
     size: "M",
-    skins: [1, 2],
-    levels: [12, 24],
+    skins: [1, 0],
+    levels: [18, 0],
     roles: [null, null],
   },
   91: {
@@ -966,8 +968,8 @@ export const SHEET_CHARACTERS: Readonly<Record<number, SheetCharacter>> = {
     cost: 3,
     final: [113, 84, 109, 38, 99, 57],
     size: "M",
-    skins: [1, 2],
-    levels: [12, 24],
+    skins: [1, 0],
+    levels: [18, 0],
     roles: [null, null],
   },
 };
@@ -988,14 +990,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
     {
       category: "PHYSICAL",
@@ -1010,7 +1012,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 100,
+      power: 105,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1023,7 +1025,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   2: [
     {
       category: "PHYSICAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1034,7 +1036,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 60,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1056,20 +1058,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 135,
+      power: 140,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 혼란",
-      fx: { chance: 30, confuse: true },
-      desc: "상대를 공격한다. 30% 확률로 상대를 혼란에 빠뜨린다.",
+      effect: "피해 + 20% 혼란",
+      fx: { chance: 20, confuse: true },
+      desc: "상대를 공격한다. 20% 확률로 상대를 혼란에 빠뜨린다.",
     },
   ],
   3: [
     {
       category: "SPECIAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1080,7 +1082,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1102,7 +1104,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1115,7 +1117,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   4: [
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1126,7 +1128,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 55,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1137,7 +1139,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 55,
+      power: 60,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -1148,7 +1150,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 100,
+      power: 105,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1161,7 +1163,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   5: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1172,7 +1174,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 75,
+      power: 80,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1183,7 +1185,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 75,
+      power: 80,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -1194,7 +1196,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 140,
+      power: 145,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1207,7 +1209,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   6: [
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1218,14 +1220,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화 + 쓴 뒤 공격 1단계 ↑",
-      fx: { chance: 30, status: "PARALYSIS", stats: [{ self: true, stats: ["ATK"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다. 자신의 공격력을 1단계 올린다.",
+      effect: "피해 + 20% 둔화 + 쓴 뒤 공격 1단계 ↑",
+      fx: { chance: 20, status: "PARALYSIS", stats: [{ self: true, stats: ["ATK"], stages: 1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다. 자신의 공격력을 1단계 올린다.",
     },
     {
       category: "STATUS",
@@ -1240,7 +1242,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 120,
+      power: 125,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1253,7 +1255,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   7: [
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1286,7 +1288,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 105,
+      power: 110,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1299,7 +1301,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   8: [
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1345,18 +1347,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   9: [
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1378,7 +1380,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 130,
+      power: 135,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1391,7 +1393,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   10: [
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1402,7 +1404,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1413,7 +1415,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -1424,7 +1426,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1437,7 +1439,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   11: [
     {
       category: "PHYSICAL",
-      power: 45,
+      power: 50,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1448,7 +1450,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 40,
+      power: 50,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1470,20 +1472,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
   ],
   12: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1494,14 +1496,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
     {
       category: "SPECIAL",
@@ -1516,7 +1518,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 140,
+      power: 145,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1529,7 +1531,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   13: [
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1562,7 +1564,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 100,
+      power: 105,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1575,7 +1577,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   14: [
     {
       category: "SPECIAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1586,7 +1588,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 50,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1597,18 +1599,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 65,
+      power: 70,
       accuracy: 95,
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
     {
       category: "SPECIAL",
-      power: 105,
+      power: 115,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1621,7 +1623,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   15: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1632,7 +1634,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 60,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1654,7 +1656,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 140,
+      power: 145,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1667,7 +1669,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   16: [
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1678,18 +1680,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
     {
       category: "SPECIAL",
-      power: 80,
+      power: 85,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -1713,7 +1715,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   17: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1746,7 +1748,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 140,
+      power: 145,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1759,7 +1761,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   18: [
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1770,7 +1772,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1792,20 +1794,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
   ],
   19: [
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1816,7 +1818,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 75,
+      power: 80,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1827,7 +1829,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -1838,20 +1840,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 125,
+      power: 130,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 20% 속박 + 상대 속도 1단계 ↓",
-      fx: { chance: 20, status: "FREEZE", stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다. 상대의 속도을 1단계 떨어뜨린다.",
+      effect: "피해 + 10% 속박 + 상대 속도 1단계 ↓",
+      fx: { chance: 10, status: "FREEZE", stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다. 상대의 속도을 1단계 떨어뜨린다.",
     },
   ],
   20: [
     {
       category: "SPECIAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1862,18 +1864,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 60,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -1884,7 +1886,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 100,
+      power: 105,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -1897,7 +1899,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   21: [
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1908,7 +1910,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 55,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1930,20 +1932,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화 + 쓴 뒤 속도 1단계 ↑",
-      fx: { chance: 30, status: "PARALYSIS", stats: [{ self: true, stats: ["SPD"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다. 자신의 속도을 1단계 올린다.",
+      effect: "피해 + 20% 둔화 + 쓴 뒤 속도 1단계 ↑",
+      fx: { chance: 20, status: "PARALYSIS", stats: [{ self: true, stats: ["SPD"], stages: 1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다. 자신의 속도을 1단계 올린다.",
     },
   ],
   22: [
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -1954,7 +1956,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -1965,7 +1967,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -1976,14 +1978,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
   ],
   23: [
@@ -2000,18 +2002,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
     {
       category: "SPECIAL",
-      power: 65,
+      power: 70,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -2022,7 +2024,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 120,
+      power: 125,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -2035,7 +2037,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   24: [
     {
       category: "SPECIAL",
-      power: 50,
+      power: 60,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2046,7 +2048,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -2068,7 +2070,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 140,
+      power: 145,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -2081,25 +2083,25 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   25: [
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박 + 상대 속도 1단계 ↓",
-      fx: { chance: 20, status: "FREEZE", stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다. 상대의 속도을 1단계 떨어뜨린다.",
+      effect: "피해 + 10% 속박 + 상대 속도 1단계 ↓",
+      fx: { chance: 10, status: "FREEZE", stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다. 상대의 속도을 1단계 떨어뜨린다.",
     },
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
     {
       category: "STATUS",
@@ -2114,20 +2116,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 125,
+      power: 130,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
   ],
   26: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2138,7 +2140,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 75,
+      power: 80,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -2149,7 +2151,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 75,
+      power: 80,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -2160,27 +2162,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 115,
+      power: 130,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 스턴 + 상대 속도 1단계 ↓ + 쓴 뒤 공격 1단계 ↑",
-      fx: {
-        chance: 30,
-        flinch: true,
-        stats: [
-          { self: false, stats: ["SPD"], stages: -1, chance: 100 },
-          { self: true, stats: ["ATK"], stages: 1, chance: 100 },
-        ],
-      },
-      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다. 자신의 공격력을 1단계 올린다.",
+      effect: "피해 + 30% 스턴 + 상대 속도 1단계 ↓",
+      fx: { chance: 30, flinch: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다.",
     },
   ],
   27: [
     {
       category: "PHYSICAL",
-      power: 45,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2191,7 +2186,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -2219,20 +2214,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
   ],
   28: [
     {
       category: "SPECIAL",
-      power: 45,
+      power: 50,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2243,7 +2238,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 40,
+      power: 50,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -2265,34 +2260,26 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 1,
       level: 5,
-      effect: "선공(+1) 피해 + 30% 스턴 + 상대 속도 1단계 ↓ + 자기 체력 25% 회복",
-      fx: { chance: 30, heal: 0.25, flinch: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
-      desc: "반드시 먼저 공격할 수 있다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다. 최대 체력의 25%만큼 체력을 회복한다.",
+      effect: "선공(+1) 피해 + 30% 스턴 + 상대 속도 1단계 ↓",
+      fx: { chance: 30, flinch: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "반드시 먼저 공격할 수 있다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다.",
     },
     {
       category: "SPECIAL",
-      power: 90,
+      power: 110,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 스턴 + 상대 속도 1단계 ↓ + 자기 체력 25% 회복 + 쓴 뒤 방어 1단계 ↑",
-      fx: {
-        chance: 30,
-        heal: 0.25,
-        flinch: true,
-        stats: [
-          { self: false, stats: ["SPD"], stages: -1, chance: 100 },
-          { self: true, stats: ["DEF"], stages: 1, chance: 100 },
-        ],
-      },
-      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다. 최대 체력의 25%만큼 체력을 회복한다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 30% 스턴 + 상대 속도 1단계 ↓",
+      fx: { chance: 30, flinch: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다.",
     },
   ],
   29: [
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2314,7 +2301,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 65,
+      power: 70,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -2325,7 +2312,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -2338,7 +2325,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   30: [
     {
       category: "PHYSICAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2349,14 +2336,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 혼란 + 상대 속도 1단계 ↓",
-      fx: { chance: 30, confuse: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 혼란에 빠뜨린다. 상대의 속도을 1단계 떨어뜨린다.",
+      effect: "피해 + 20% 혼란 + 상대 속도 1단계 ↓",
+      fx: { chance: 20, confuse: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 혼란에 빠뜨린다. 상대의 속도을 1단계 떨어뜨린다.",
     },
     {
       category: "PHYSICAL",
@@ -2371,7 +2358,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 90,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -2384,7 +2371,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   31: [
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 60,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2395,14 +2382,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
     {
       category: "PHYSICAL",
@@ -2417,7 +2404,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -2430,7 +2417,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   32: [
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 60,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2441,21 +2428,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 40,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 스턴 + 상대 속도 1단계 ↓ + 쓴 뒤 방어 1단계 ↑",
-      fx: {
-        chance: 30,
-        flinch: true,
-        stats: [
-          { self: false, stats: ["SPD"], stages: -1, chance: 100 },
-          { self: true, stats: ["DEF"], stages: 1, chance: 100 },
-        ],
-      },
-      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 30% 스턴 + 상대 속도 1단계 ↓",
+      fx: { chance: 30, flinch: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다.",
     },
     {
       category: "STATUS",
@@ -2470,20 +2450,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 125,
+      power: 130,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
   ],
   33: [
     {
       category: "SPECIAL",
-      power: 45,
+      power: 50,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2494,18 +2474,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 45,
+      power: 55,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화 + 쓴 뒤 방어 1단계 ↑",
-      fx: { chance: 30, status: "PARALYSIS", stats: [{ self: true, stats: ["DEF"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 20% 둔화 + 쓴 뒤 방어 1단계 ↑",
+      fx: { chance: 20, status: "PARALYSIS", stats: [{ self: true, stats: ["DEF"], stages: 1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다. 자신의 방어력을 1단계 올린다.",
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 60,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -2516,7 +2496,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -2529,7 +2509,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   34: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2540,18 +2520,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박 + 상대 속도 1단계 ↓",
-      fx: { chance: 20, status: "FREEZE", stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다. 상대의 속도을 1단계 떨어뜨린다.",
+      effect: "피해 + 10% 속박 + 상대 속도 1단계 ↓",
+      fx: { chance: 10, status: "FREEZE", stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다. 상대의 속도을 1단계 떨어뜨린다.",
     },
     {
       category: "SPECIAL",
-      power: 80,
+      power: 85,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -2575,7 +2555,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   35: [
     {
       category: "PHYSICAL",
-      power: 45,
+      power: 50,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2586,7 +2566,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -2608,27 +2588,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 95,
+      power: 110,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 20% 스턴 + 상대 속도 1단계 ↓ + 쓴 뒤 속도 1단계 ↑",
-      fx: {
-        chance: 20,
-        flinch: true,
-        stats: [
-          { self: false, stats: ["SPD"], stages: -1, chance: 100 },
-          { self: true, stats: ["SPD"], stages: 1, chance: 100 },
-        ],
-      },
-      desc: "상대를 공격한다. 20% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다. 자신의 속도을 1단계 올린다.",
+      effect: "피해 + 20% 스턴 + 상대 속도 1단계 ↓",
+      fx: { chance: 20, flinch: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다.",
     },
   ],
   36: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2639,7 +2612,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -2650,7 +2623,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 65,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -2667,7 +2640,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 140,
+      power: 145,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -2680,7 +2653,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   37: [
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2691,14 +2664,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
     {
       category: "PHYSICAL",
@@ -2713,7 +2686,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 110,
+      power: 115,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -2726,7 +2699,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   38: [
     {
       category: "SPECIAL",
-      power: 50,
+      power: 60,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2737,7 +2710,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -2759,20 +2732,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 혼란 + 상대 속도 1단계 ↓",
-      fx: { chance: 30, confuse: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 혼란에 빠뜨린다. 상대의 속도을 1단계 떨어뜨린다.",
+      effect: "피해 + 20% 혼란 + 상대 속도 1단계 ↓",
+      fx: { chance: 20, confuse: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 혼란에 빠뜨린다. 상대의 속도을 1단계 떨어뜨린다.",
     },
   ],
   39: [
     {
       category: "PHYSICAL",
-      power: 45,
+      power: 50,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2783,7 +2756,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -2805,20 +2778,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 90,
+      power: 110,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 스턴 + 자기 체력 25% 회복 + 쓴 뒤 방어 1단계 ↑",
-      fx: { chance: 30, heal: 0.25, flinch: true, stats: [{ self: true, stats: ["DEF"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 최대 체력의 25%만큼 체력을 회복한다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 30% 스턴 + 자기 체력 25% 회복",
+      fx: { chance: 30, heal: 0.25, flinch: true },
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 최대 체력의 25%만큼 체력을 회복한다.",
     },
   ],
   40: [
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2829,21 +2802,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 40,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 스턴 + 상대 속도 1단계 ↓ + 쓴 뒤 속도 1단계 ↑",
-      fx: {
-        chance: 30,
-        flinch: true,
-        stats: [
-          { self: false, stats: ["SPD"], stages: -1, chance: 100 },
-          { self: true, stats: ["SPD"], stages: 1, chance: 100 },
-        ],
-      },
-      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다. 자신의 속도을 1단계 올린다.",
+      effect: "피해 + 30% 스턴 + 상대 속도 1단계 ↓",
+      fx: { chance: 30, flinch: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다.",
     },
     {
       category: "PHYSICAL",
@@ -2858,7 +2824,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 120,
+      power: 125,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -2871,14 +2837,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   41: [
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 25,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박 + 자기 체력 25% 회복",
-      fx: { chance: 20, heal: 0.25, status: "FREEZE" },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다. 최대 체력의 25%만큼 체력을 회복한다.",
+      effect: "피해 + 10% 속박 + 자기 체력 25% 회복",
+      fx: { chance: 10, heal: 0.25, status: "FREEZE" },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다. 최대 체력의 25%만큼 체력을 회복한다.",
     },
     {
       category: "STATUS",
@@ -2893,7 +2859,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -2910,27 +2876,27 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 90,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 20% 스턴 + 자기 체력 25% 회복 + 쓴 뒤 방어 1단계 ↑",
-      fx: { chance: 20, heal: 0.25, flinch: true, stats: [{ self: true, stats: ["DEF"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 20% 확률로 상대를 스턴시킨다. 최대 체력의 25%만큼 체력을 회복한다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 20% 스턴 + 자기 체력 25% 회복",
+      fx: { chance: 20, heal: 0.25, flinch: true },
+      desc: "상대를 공격한다. 20% 확률로 상대를 스턴시킨다. 최대 체력의 25%만큼 체력을 회복한다.",
     },
   ],
   42: [
     {
       category: "SPECIAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 25,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
     {
       category: "STATUS",
@@ -2956,20 +2922,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 120,
+      power: 130,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화 + 자기 체력 25% 회복",
-      fx: { chance: 30, heal: 0.25, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다. 최대 체력의 25%만큼 체력을 회복한다.",
+      effect: "피해 + 20% 둔화 + 자기 체력 25% 회복",
+      fx: { chance: 20, heal: 0.25, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다. 최대 체력의 25%만큼 체력을 회복한다.",
     },
   ],
   43: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -2991,7 +2957,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 75,
+      power: 80,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -3002,7 +2968,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 140,
+      power: 145,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3015,7 +2981,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   44: [
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3048,7 +3014,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 110,
+      power: 115,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3061,7 +3027,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   45: [
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3072,7 +3038,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 40,
+      power: 50,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3088,9 +3054,9 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 1,
       level: 5,
-      effect: "선공(+1) 피해 + 30% 혼란 + 쓴 뒤 방어 1단계 ↑",
-      fx: { chance: 30, confuse: true, stats: [{ self: true, stats: ["DEF"], stages: 1, chance: 100 }] },
-      desc: "반드시 먼저 공격할 수 있다. 30% 확률로 상대를 혼란에 빠뜨린다. 자신의 방어력을 1단계 올린다.",
+      effect: "선공(+1) 피해 + 20% 혼란 + 쓴 뒤 방어 1단계 ↑",
+      fx: { chance: 20, confuse: true, stats: [{ self: true, stats: ["DEF"], stages: 1, chance: 100 }] },
+      desc: "반드시 먼저 공격할 수 있다. 20% 확률로 상대를 혼란에 빠뜨린다. 자신의 방어력을 1단계 올린다.",
     },
     {
       category: "STATUS",
@@ -3107,7 +3073,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   46: [
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3118,14 +3084,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
     {
       category: "PHYSICAL",
@@ -3140,7 +3106,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3153,7 +3119,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   47: [
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3164,7 +3130,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3186,7 +3152,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 105,
+      power: 110,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3199,7 +3165,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   48: [
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3232,7 +3198,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 135,
+      power: 140,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3245,7 +3211,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   49: [
     {
       category: "PHYSICAL",
-      power: 55,
+      power: 60,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3256,14 +3222,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
     {
       category: "PHYSICAL",
@@ -3278,7 +3244,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3291,7 +3257,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   50: [
     {
       category: "SPECIAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3302,7 +3268,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3324,7 +3290,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 95,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3337,7 +3303,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   51: [
     {
       category: "SPECIAL",
-      power: 45,
+      power: 50,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3348,7 +3314,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 40,
+      power: 50,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3359,18 +3325,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 40,
+      power: 50,
       accuracy: 95,
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 20% 속박 + 쓴 뒤 속도 1단계 ↑",
-      fx: { chance: 20, status: "FREEZE", stats: [{ self: true, stats: ["SPD"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다. 자신의 속도을 1단계 올린다.",
+      effect: "피해 + 10% 속박 + 쓴 뒤 속도 1단계 ↑",
+      fx: { chance: 10, status: "FREEZE", stats: [{ self: true, stats: ["SPD"], stages: 1, chance: 100 }] },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다. 자신의 속도을 1단계 올린다.",
     },
     {
       category: "SPECIAL",
-      power: 90,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3383,7 +3349,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   52: [
     {
       category: "SPECIAL",
-      power: 50,
+      power: 60,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3394,7 +3360,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3405,7 +3371,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 65,
+      power: 70,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -3429,7 +3395,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   53: [
     {
       category: "PHYSICAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3440,7 +3406,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3462,7 +3428,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 90,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3475,7 +3441,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   54: [
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3486,14 +3452,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
     {
       category: "PHYSICAL",
@@ -3508,7 +3474,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3521,7 +3487,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   55: [
     {
       category: "SPECIAL",
-      power: 45,
+      power: 50,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3532,7 +3498,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3554,27 +3520,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 90,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 스턴 + 상대 속도 1단계 ↓ + 쓴 뒤 방어 1단계 ↑",
-      fx: {
-        chance: 30,
-        flinch: true,
-        stats: [
-          { self: false, stats: ["SPD"], stages: -1, chance: 100 },
-          { self: true, stats: ["DEF"], stages: 1, chance: 100 },
-        ],
-      },
-      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 30% 스턴 + 상대 속도 1단계 ↓",
+      fx: { chance: 30, flinch: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다.",
     },
   ],
   56: [
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3585,7 +3544,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3596,7 +3555,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 65,
+      power: 70,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -3607,7 +3566,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 110,
+      power: 115,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3620,7 +3579,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   57: [
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 60,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3631,14 +3590,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
     {
       category: "STATUS",
@@ -3653,7 +3612,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3666,7 +3625,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   58: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3677,7 +3636,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3699,20 +3658,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 135,
+      power: 140,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
   ],
   59: [
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3723,7 +3682,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3739,20 +3698,13 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 1,
       level: 5,
-      effect: "선공(+1) 피해 + 30% 스턴 + 상대 방어 1단계 ↓ + 쓴 뒤 방어 1단계 ↑",
-      fx: {
-        chance: 30,
-        flinch: true,
-        stats: [
-          { self: false, stats: ["DEF"], stages: -1, chance: 100 },
-          { self: true, stats: ["DEF"], stages: 1, chance: 100 },
-        ],
-      },
-      desc: "반드시 먼저 공격할 수 있다. 30% 확률로 상대를 스턴시킨다. 상대의 방어력을 1단계 떨어뜨린다. 자신의 방어력을 1단계 올린다.",
+      effect: "선공(+1) 피해 + 30% 스턴 + 상대 방어 1단계 ↓",
+      fx: { chance: 30, flinch: true, stats: [{ self: false, stats: ["DEF"], stages: -1, chance: 100 }] },
+      desc: "반드시 먼저 공격할 수 있다. 30% 확률로 상대를 스턴시킨다. 상대의 방어력을 1단계 떨어뜨린다.",
     },
     {
       category: "PHYSICAL",
-      power: 105,
+      power: 110,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3765,7 +3717,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   60: [
     {
       category: "SPECIAL",
-      power: 55,
+      power: 60,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3776,7 +3728,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3787,38 +3739,31 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 45,
+      power: 65,
       accuracy: 95,
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 상대 속도 1단계 ↓ + 자기 체력 25% 회복 + 쓴 뒤 방어 1단계 ↑",
-      fx: {
-        chance: -1,
-        heal: 0.25,
-        stats: [
-          { self: false, stats: ["SPD"], stages: -1, chance: 100 },
-          { self: true, stats: ["DEF"], stages: 1, chance: 100 },
-        ],
-      },
-      desc: "상대를 공격한다. 상대의 속도을 1단계 떨어뜨린다. 최대 체력의 25%만큼 체력을 회복한다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 상대 속도 1단계 ↓ + 자기 체력 25% 회복",
+      fx: { chance: -1, heal: 0.25, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 상대의 속도을 1단계 떨어뜨린다. 최대 체력의 25%만큼 체력을 회복한다.",
     },
     {
       category: "SPECIAL",
-      power: 135,
+      power: 140,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
   ],
   61: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3829,14 +3774,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 혼란 + 상대 속도 1단계 ↓",
-      fx: { chance: 30, confuse: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 혼란에 빠뜨린다. 상대의 속도을 1단계 떨어뜨린다.",
+      effect: "피해 + 20% 혼란 + 상대 속도 1단계 ↓",
+      fx: { chance: 20, confuse: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 혼란에 빠뜨린다. 상대의 속도을 1단계 떨어뜨린다.",
     },
     {
       category: "STATUS",
@@ -3851,7 +3796,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 140,
+      power: 145,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3864,7 +3809,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   62: [
     {
       category: "SPECIAL",
-      power: 55,
+      power: 60,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3875,7 +3820,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3886,18 +3831,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 95,
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
     {
       category: "SPECIAL",
-      power: 120,
+      power: 125,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -3910,29 +3855,29 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   63: [
     {
       category: "PHYSICAL",
-      power: 55,
+      power: 60,
       accuracy: 100,
       pp: 25,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
     {
       category: "PHYSICAL",
-      power: 45,
+      power: 55,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화 + 쓴 뒤 속도 1단계 ↑",
-      fx: { chance: 30, status: "PARALYSIS", stats: [{ self: true, stats: ["SPD"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다. 자신의 속도을 1단계 올린다.",
+      effect: "피해 + 20% 둔화 + 쓴 뒤 속도 1단계 ↑",
+      fx: { chance: 20, status: "PARALYSIS", stats: [{ self: true, stats: ["SPD"], stages: 1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다. 자신의 속도을 1단계 올린다.",
     },
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -3943,20 +3888,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 105,
+      power: 110,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 혼란 + 쓴 뒤 공격 1단계 ↑",
-      fx: { chance: 30, confuse: true, stats: [{ self: true, stats: ["ATK"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 혼란에 빠뜨린다. 자신의 공격력을 1단계 올린다.",
+      effect: "피해 + 20% 혼란 + 쓴 뒤 공격 1단계 ↑",
+      fx: { chance: 20, confuse: true, stats: [{ self: true, stats: ["ATK"], stages: 1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 혼란에 빠뜨린다. 자신의 공격력을 1단계 올린다.",
     },
   ],
   64: [
     {
       category: "SPECIAL",
-      power: 45,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -3967,7 +3912,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 50,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -3978,7 +3923,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -3989,20 +3934,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 잠듦",
-      fx: { chance: 30, status: "SLEEP" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 잠듦 상태로 만든다.",
+      effect: "피해 + 20% 잠듦",
+      fx: { chance: 20, status: "SLEEP" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 잠듦 상태로 만든다.",
     },
   ],
   65: [
     {
       category: "PHYSICAL",
-      power: 45,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4013,7 +3958,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -4029,20 +3974,13 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 1,
       level: 5,
-      effect: "선공(+1) 피해 + 30% 스턴 + 상대 속도 1단계 ↓ + 쓴 뒤 속도 1단계 ↑",
-      fx: {
-        chance: 30,
-        flinch: true,
-        stats: [
-          { self: false, stats: ["SPD"], stages: -1, chance: 100 },
-          { self: true, stats: ["SPD"], stages: 1, chance: 100 },
-        ],
-      },
-      desc: "반드시 먼저 공격할 수 있다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다. 자신의 속도을 1단계 올린다.",
+      effect: "선공(+1) 피해 + 30% 스턴 + 상대 속도 1단계 ↓",
+      fx: { chance: 30, flinch: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "반드시 먼저 공격할 수 있다. 30% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다.",
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4055,7 +3993,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   66: [
     {
       category: "SPECIAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4066,7 +4004,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -4077,7 +4015,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 60,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -4088,7 +4026,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 95,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4101,7 +4039,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   67: [
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4112,7 +4050,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 50,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -4134,7 +4072,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 120,
+      power: 125,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4147,7 +4085,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   68: [
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4158,7 +4096,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 40,
+      power: 50,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -4174,26 +4112,26 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 1,
       level: 5,
-      effect: "선공(+1) 피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "반드시 먼저 공격할 수 있다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "선공(+1) 피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "반드시 먼저 공격할 수 있다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
     {
       category: "SPECIAL",
-      power: 90,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 20% 스턴 + 상대 속도 1단계 ↓ + 자기 체력 25% 회복",
-      fx: { chance: 20, heal: 0.25, flinch: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
-      desc: "상대를 공격한다. 20% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다. 최대 체력의 25%만큼 체력을 회복한다.",
+      effect: "피해 + 20% 스턴 + 상대 속도 1단계 ↓",
+      fx: { chance: 20, flinch: true, stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 스턴시킨다. 상대의 속도을 1단계 떨어뜨린다.",
     },
   ],
   69: [
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4204,18 +4142,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화 + 쓴 뒤 속도 1단계 ↑",
-      fx: { chance: 30, status: "PARALYSIS", stats: [{ self: true, stats: ["SPD"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다. 자신의 속도을 1단계 올린다.",
+      effect: "피해 + 20% 둔화 + 쓴 뒤 속도 1단계 ↑",
+      fx: { chance: 20, status: "PARALYSIS", stats: [{ self: true, stats: ["SPD"], stages: 1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다. 자신의 속도을 1단계 올린다.",
     },
     {
       category: "SPECIAL",
-      power: 40,
+      power: 50,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -4226,7 +4164,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 90,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4239,7 +4177,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   70: [
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4272,7 +4210,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 130,
+      power: 135,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4285,7 +4223,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   71: [
     {
       category: "PHYSICAL",
-      power: 45,
+      power: 50,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4318,7 +4256,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4331,7 +4269,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   72: [
     {
       category: "PHYSICAL",
-      power: 65,
+      power: 70,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4353,7 +4291,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 75,
+      power: 80,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -4364,7 +4302,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 130,
+      power: 135,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4377,7 +4315,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   73: [
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4410,7 +4348,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 90,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4423,7 +4361,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   74: [
     {
       category: "PHYSICAL",
-      power: 45,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4456,7 +4394,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 105,
+      power: 110,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4469,7 +4407,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   75: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4480,18 +4418,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박 + 쓴 뒤 방어 1단계 ↑",
-      fx: { chance: 20, status: "FREEZE", stats: [{ self: true, stats: ["DEF"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 10% 속박 + 쓴 뒤 방어 1단계 ↑",
+      fx: { chance: 10, status: "FREEZE", stats: [{ self: true, stats: ["DEF"], stages: 1, chance: 100 }] },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다. 자신의 방어력을 1단계 올린다.",
     },
     {
       category: "SPECIAL",
-      power: 65,
+      power: 70,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -4502,20 +4440,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 135,
+      power: 140,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
   ],
   76: [
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4526,22 +4464,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 20% 속박 + 상대 속도 1단계 ↓ + 자기 체력 25% 회복 + 쓴 뒤 방어 1단계 ↑",
-      fx: {
-        chance: 20,
-        heal: 0.25,
-        status: "FREEZE",
-        stats: [
-          { self: false, stats: ["SPD"], stages: -1, chance: 100 },
-          { self: true, stats: ["DEF"], stages: 1, chance: 100 },
-        ],
-      },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다. 상대의 속도을 1단계 떨어뜨린다. 최대 체력의 25%만큼 체력을 회복한다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 10% 속박 + 상대 속도 1단계 ↓",
+      fx: { chance: 10, status: "FREEZE", stats: [{ self: false, stats: ["SPD"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다. 상대의 속도을 1단계 떨어뜨린다.",
     },
     {
       category: "SPECIAL",
@@ -4556,20 +4486,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 90,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 20% 속박 + 쓴 뒤 속도 1단계 ↑",
-      fx: { chance: 20, status: "FREEZE", stats: [{ self: true, stats: ["SPD"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다. 자신의 속도을 1단계 올린다.",
+      effect: "피해 + 10% 속박 + 쓴 뒤 속도 1단계 ↑",
+      fx: { chance: 10, status: "FREEZE", stats: [{ self: true, stats: ["SPD"], stages: 1, chance: 100 }] },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다. 자신의 속도을 1단계 올린다.",
     },
   ],
   77: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4580,7 +4510,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -4602,7 +4532,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 125,
+      power: 130,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4615,7 +4545,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   78: [
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4626,18 +4556,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 40,
+      power: 55,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 스턴 + 피해의 50% 회복 + 쓴 뒤 방어 1단계 ↑",
-      fx: { chance: 30, drain: 0.5, flinch: true, stats: [{ self: true, stats: ["DEF"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 준 피해의 50%만큼 체력을 회복한다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 30% 스턴 + 피해의 50% 회복",
+      fx: { chance: 30, drain: 0.5, flinch: true },
+      desc: "상대를 공격한다. 30% 확률로 상대를 스턴시킨다. 준 피해의 50%만큼 체력을 회복한다.",
     },
     {
       category: "PHYSICAL",
-      power: 70,
+      power: 75,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -4648,7 +4578,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 120,
+      power: 125,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4661,7 +4591,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   79: [
     {
       category: "SPECIAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4672,7 +4602,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 75,
+      power: 80,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -4694,20 +4624,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 135,
+      power: 140,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
   ],
   80: [
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4718,7 +4648,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 40,
+      power: 50,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -4740,7 +4670,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 120,
+      power: 125,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4753,7 +4683,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   81: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4764,7 +4694,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -4775,7 +4705,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 65,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -4786,7 +4716,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 125,
+      power: 130,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4799,7 +4729,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   82: [
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4810,7 +4740,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -4832,20 +4762,20 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 115,
+      power: 120,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
   ],
   83: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4856,14 +4786,14 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 20,
       priority: 0,
       level: 1,
-      effect: "피해 + 30% 둔화",
-      fx: { chance: 30, status: "PARALYSIS" },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다.",
+      effect: "피해 + 20% 둔화",
+      fx: { chance: 20, status: "PARALYSIS" },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다.",
     },
     {
       category: "SPECIAL",
@@ -4872,13 +4802,13 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 1,
       level: 5,
-      effect: "선공(+1) 피해 + 20% 속박",
-      fx: { chance: 20, status: "FREEZE" },
-      desc: "반드시 먼저 공격할 수 있다. 20% 확률로 상대를 속박 상태로 만든다.",
+      effect: "선공(+1) 피해 + 10% 속박",
+      fx: { chance: 10, status: "FREEZE" },
+      desc: "반드시 먼저 공격할 수 있다. 10% 확률로 상대를 속박 상태로 만든다.",
     },
     {
       category: "SPECIAL",
-      power: 125,
+      power: 130,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4891,7 +4821,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   84: [
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4902,7 +4832,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 55,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -4913,7 +4843,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 95,
       pp: 15,
       priority: 0,
@@ -4924,7 +4854,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 95,
+      power: 105,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4937,7 +4867,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   85: [
     {
       category: "SPECIAL",
-      power: 45,
+      power: 50,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4970,7 +4900,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 95,
+      power: 100,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -4983,7 +4913,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   86: [
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -4994,7 +4924,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 60,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -5016,7 +4946,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 110,
+      power: 115,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -5029,7 +4959,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   87: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -5051,25 +4981,18 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 50,
+      power: 70,
       accuracy: 95,
       pp: 15,
       priority: 0,
       level: 5,
-      effect: "피해 + 20% 속박 + 상대 방어 1단계 ↓ + 쓴 뒤 방어 1단계 ↑",
-      fx: {
-        chance: 20,
-        status: "FREEZE",
-        stats: [
-          { self: false, stats: ["DEF"], stages: -1, chance: 100 },
-          { self: true, stats: ["DEF"], stages: 1, chance: 100 },
-        ],
-      },
-      desc: "상대를 공격한다. 20% 확률로 상대를 속박 상태로 만든다. 상대의 방어력을 1단계 떨어뜨린다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 10% 속박 + 상대 방어 1단계 ↓",
+      fx: { chance: 10, status: "FREEZE", stats: [{ self: false, stats: ["DEF"], stages: -1, chance: 100 }] },
+      desc: "상대를 공격한다. 10% 확률로 상대를 속박 상태로 만든다. 상대의 방어력을 1단계 떨어뜨린다.",
     },
     {
       category: "SPECIAL",
-      power: 140,
+      power: 145,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -5082,7 +5005,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   88: [
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -5093,7 +5016,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "PHYSICAL",
-      power: 50,
+      power: 60,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -5109,26 +5032,26 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
       pp: 15,
       priority: 1,
       level: 5,
-      effect: "선공(+1) 피해 + 30% 혼란",
-      fx: { chance: 30, confuse: true },
-      desc: "반드시 먼저 공격할 수 있다. 30% 확률로 상대를 혼란에 빠뜨린다.",
+      effect: "선공(+1) 피해 + 20% 혼란",
+      fx: { chance: 20, confuse: true },
+      desc: "반드시 먼저 공격할 수 있다. 20% 확률로 상대를 혼란에 빠뜨린다.",
     },
     {
       category: "PHYSICAL",
-      power: 105,
+      power: 110,
       accuracy: 90,
       pp: 5,
       priority: 0,
       level: 10,
-      effect: "피해 + 30% 둔화 + 쓴 뒤 방어 1단계 ↑",
-      fx: { chance: 30, status: "PARALYSIS", stats: [{ self: true, stats: ["DEF"], stages: 1, chance: 100 }] },
-      desc: "상대를 공격한다. 30% 확률로 상대를 둔화 상태로 만든다. 자신의 방어력을 1단계 올린다.",
+      effect: "피해 + 20% 둔화 + 쓴 뒤 방어 1단계 ↑",
+      fx: { chance: 20, status: "PARALYSIS", stats: [{ self: true, stats: ["DEF"], stages: 1, chance: 100 }] },
+      desc: "상대를 공격한다. 20% 확률로 상대를 둔화 상태로 만든다. 자신의 방어력을 1단계 올린다.",
     },
   ],
   89: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -5139,7 +5062,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 55,
+      power: 65,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -5161,7 +5084,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 125,
+      power: 135,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -5174,7 +5097,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   90: [
     {
       category: "SPECIAL",
-      power: 70,
+      power: 75,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -5185,7 +5108,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 75,
+      power: 80,
       accuracy: 100,
       pp: 20,
       priority: 0,
@@ -5207,7 +5130,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 135,
+      power: 140,
       accuracy: 90,
       pp: 5,
       priority: 0,
@@ -5220,7 +5143,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
   91: [
     {
       category: "SPECIAL",
-      power: 40,
+      power: 45,
       accuracy: 100,
       pp: 25,
       priority: 0,
@@ -5231,7 +5154,7 @@ export const SHEET_SKILLS: Readonly<Record<number, readonly [SheetSkill, SheetSk
     },
     {
       category: "SPECIAL",
-      power: 50,
+      power: 55,
       accuracy: 100,
       pp: 20,
       priority: 0,

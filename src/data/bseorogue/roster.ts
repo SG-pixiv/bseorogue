@@ -66,6 +66,11 @@ export interface BseoCharacter {
   focus: string;
   /** [기본, 스킨 진화 1, 스킨 진화 2] */
   forms: readonly [BseoForm, BseoForm, BseoForm];
+  /**
+   * 마지막 모습 단계: 2 = 진화 두 번, 1 = 진화 한 번 (ER 스킨이 1개뿐인 실험체, 시트 진화2 칸이 빈칸).
+   * 한 번만 진화하면 스킨 진화 1 이 바로 다 큰 종족값이고, 스킨 진화 2 종은 쓰지 않아요 (스킨 진화 1 과 같게 만들어 둬요)
+   */
+  lastStage: 1 | 2;
   /** Q · W · E · R */
   skills: readonly [BseoSkill, BseoSkill, BseoSkill, BseoSkill];
   /** 고유 패시브 이름 (효과는 빌려 쓰는 특성, passive.ts) */
@@ -158,14 +163,17 @@ function buildCharacter(erCode: number, cfg: PlayableConfig | undefined): BseoCh
   for (const r of evo.roles) {
     roles.push(r ? Role[r] : (roles.at(-1) ?? role));
   }
+  // 진화2 스킨이 0(시트 빈칸)이면 진화는 한 번: 스킨 진화 1 이 다 큰 모습이에요 (11-17 SG "스킨이 1개밖에없는건 진화도 1개밖에없는걸로")
+  const lastStage: 1 | 2 = evo.skins[1] > 0 ? 2 : 1;
+  const look = (stage: number) => Math.min(stage, lastStage);
   const formName = (stage: number) =>
-    stage === 0 ? er.name : (er.skins[evo.skins[stage - 1]] ?? `${er.name}${"★".repeat(stage)}`);
+    stage === 0 ? er.name : (er.skins[evo.skins[look(stage) - 1]] ?? `${er.name}${"★".repeat(look(stage))}`);
   const forms = [0, 1, 2].map(stage => ({
     id: bseoSpeciesId(erCode, stage),
     name: formName(stage),
-    role: roles[stage],
-    stats: stages[stage],
-    level: stage === 0 ? 0 : evo.levels[stage - 1],
+    role: roles[look(stage)],
+    stats: stages[stage === 0 ? 0 : lastStage === 1 ? 2 : stage],
+    level: stage === 0 ? 0 : evo.levels[look(stage) - 1],
   })) as unknown as BseoCharacter["forms"];
   return {
     id: forms[0].id,
@@ -179,6 +187,7 @@ function buildCharacter(erCode: number, cfg: PlayableConfig | undefined): BseoCh
     stages,
     focus: cfg?.focus ?? (sheet ? "시트" : "역할군 기본"),
     forms,
+    lastStage,
     passive: SHEET_PASSIVES[erCode]?.name || (er.skills[0] ?? ""),
     skins: er.skins,
     skills: moves.map((move, i) => ({

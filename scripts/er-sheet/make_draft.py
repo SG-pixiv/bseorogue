@@ -176,7 +176,10 @@ for i, c in enumerate(chars):
     vals = [c["erCode"], c["name"], ROLE_KO[c["erRole"]], ROLE_KO[role], c["weapon"], ", ".join(c["weapons"]),
             c["cost"] if c["erCode"] in HAND else draft_cost(c["erCode"]), round(score[c["erCode"]], 3), *shape, None,
             None, None, None, shape_near(shape),
-            "M", c["evo"]["skins"][0], c["evo"]["levels"][0], c["evo"]["skins"][1], c["evo"]["levels"][1], "", "", skin_txt, why, ""]
+            # ER 스킨이 1개뿐이면 진화는 한 번 (Lv18, 진화2 칸은 빈칸, 11-17)
+            *(("M", 1, 18, None, None) if len(skins) == 2 else
+              ("M", c["evo"]["skins"][0], c["evo"]["levels"][0], c["evo"]["skins"][1], c["evo"]["levels"][1])),
+            "", "", skin_txt, why, ""]
     for col, v in enumerate(vals, 1):
         edit = col in (4, 5, 7, 9, 10, 11, 12, 13, 14, 20, 21, 22, 23, 24, 25, 26, 29)
         put(ws, r, col, v, edit=edit, wrap=(col in (19, 27)), small=(col in (8, 19, 28)))

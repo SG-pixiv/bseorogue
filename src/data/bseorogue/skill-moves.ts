@@ -13,7 +13,7 @@ import { MoveId } from "#enums/move-id";
  * 한 기술은 한 실험체만 써야 해요 (야생동물 · 보스 · 추가 스킬과도 겹치면 안 돼요. 테스트가 확인해요).
  */
 export const SKILL_MOVES: Readonly<Record<number, readonly [MoveId, MoveId, MoveId, MoveId]>> = {
-  1: [MoveId.POISON_FANG, MoveId.FORCE_PALM, MoveId.ZIPPY_ZAP, MoveId.BITTER_BLADE], // 재키
+  1: [MoveId.POISON_FANG, MoveId.FORCE_PALM, MoveId.ZIPPY_ZAP, MoveId.AQUA_STEP], // 재키
   2: [MoveId.MAGICAL_LEAF, MoveId.MYSTICAL_POWER, MoveId.QUIVER_DANCE, MoveId.MAGICAL_TORQUE], // 아야
   3: [MoveId.CHILLING_WATER, MoveId.INFERNAL_PARADE, MoveId.VACUUM_WAVE, MoveId.DRILL_RUN], // 피오라
   4: [MoveId.PAY_DAY, MoveId.ROCK_THROW, MoveId.HEART_STAMP, MoveId.BEHEMOTH_BASH], // 매그너스
@@ -27,7 +27,7 @@ export const SKILL_MOVES: Readonly<Record<number, readonly [MoveId, MoveId, Move
   12: [MoveId.OVERDRIVE, MoveId.DRAGON_BREATH, MoveId.FIRE_BLAST, MoveId.DARK_PULSE], // 혜진
   13: [MoveId.BUBBLE, MoveId.SOFT_BOILED, MoveId.ZEN_HEADBUTT, MoveId.DRAGON_HAMMER], // 쇼우
   14: [MoveId.DRAINING_KISS, MoveId.SONIC_BOOM, MoveId.OBLIVION_WING, MoveId.AQUA_CUTTER], // 키아라
-  15: [MoveId.SWIFT, MoveId.BOUNCY_BUBBLE, MoveId.TWISTER, MoveId.LIGHT_OF_RUIN], // 시셀라
+  15: [MoveId.SWIFT, MoveId.TORCH_SONG, MoveId.TWISTER, MoveId.LIGHT_OF_RUIN], // 시셀라
   16: [MoveId.HIDDEN_POWER, MoveId.SPLISHY_SPLASH, MoveId.HYPERSPACE_HOLE, MoveId.ACID_ARMOR], // 실비아
   17: [MoveId.HYPER_VOICE, MoveId.SCARY_FACE, MoveId.ACID_SPRAY, MoveId.BLAST_BURN], // 아드리아나
   18: [MoveId.NIGHT_SLASH, MoveId.FLAME_WHEEL, MoveId.JET_PUNCH, MoveId.PSYCHO_CUT], // 쇼이치
@@ -47,18 +47,18 @@ export const SKILL_MOVES: Readonly<Record<number, readonly [MoveId, MoveId, Move
   32: [MoveId.FELL_STINGER, MoveId.ASTONISH, MoveId.ROCK_POLISH, MoveId.BOLT_STRIKE], // 윌리엄
   33: [MoveId.SALT_CURE, MoveId.TWIN_BEAM, MoveId.ELECTROWEB, MoveId.CRABHAMMER], // 니키
   34: [MoveId.ORIGIN_PULSE, MoveId.OCTAZOOKA, MoveId.MIGHTY_CLEAVE, MoveId.BARRIER], // 나타폰
-  35: [MoveId.BREAKING_SWIPE, MoveId.NEEDLE_ARM, MoveId.HORN_LEECH, MoveId.AQUA_STEP], // 얀
+  35: [MoveId.BREAKING_SWIPE, MoveId.NEEDLE_ARM, MoveId.HORN_LEECH, MoveId.SAPPY_SEED], // 얀
   36: [MoveId.FLAME_BURST, MoveId.LUMINA_CRASH, MoveId.ICY_WIND, MoveId.SPARKLY_SWIRL], // 이바
   37: [MoveId.MAGNET_BOMB, MoveId.LICK, MoveId.FEINT, MoveId.SPIRIT_BREAK], // 다니엘
   38: [MoveId.TRUMP_CARD, MoveId.SNARL, MoveId.DRAGON_CLAW, MoveId.SIGNAL_BEAM], // 제니
-  39: [MoveId.STOMP, MoveId.SACRED_SWORD, MoveId.SECRET_POWER, MoveId.PSYSHIELD_BASH], // 카밀로
-  40: [MoveId.EGG_BOMB, MoveId.SCALE_SHOT, MoveId.AQUA_JET, MoveId.ROAR_OF_TIME], // 클로에
-  41: [MoveId.POWDER_SNOW, MoveId.SWORDS_DANCE, MoveId.MYSTICAL_FIRE, MoveId.TORCH_SONG], // 요한
+  39: [MoveId.STOMP, MoveId.SACRED_SWORD, MoveId.SECRET_POWER, MoveId.FOUL_PLAY], // 카밀로
+  40: [MoveId.EGG_BOMB, MoveId.DUAL_WINGBEAT, MoveId.AQUA_JET, MoveId.ROAR_OF_TIME], // 클로에
+  41: [MoveId.POWDER_SNOW, MoveId.SWORDS_DANCE, MoveId.MYSTICAL_FIRE, MoveId.DREAM_EATER], // 요한
   42: [MoveId.DRAIN_PUNCH, MoveId.AMNESIA, MoveId.EMBER, MoveId.THUNDER], // 비앙카
   43: [MoveId.FREEZE_DRY, MoveId.TAIL_GLOW, MoveId.MATCHA_GOTCHA, MoveId.FRENZY_PLANT], // 셀린
   44: [MoveId.SHADOW_PUNCH, MoveId.COTTON_GUARD, MoveId.BULLET_PUNCH, MoveId.AURA_WHEEL], // 에키온
   45: [MoveId.GRASSY_GLIDE, MoveId.SMOG, MoveId.CONFUSION, MoveId.MILK_DRINK], // 마이
-  46: [MoveId.VINE_WHIP, MoveId.REVENGE, MoveId.DUAL_WINGBEAT, MoveId.MOUNTAIN_GALE], // 에이든
+  46: [MoveId.VINE_WHIP, MoveId.REVENGE, MoveId.SCALE_SHOT, MoveId.MOUNTAIN_GALE], // 에이든
   47: [MoveId.BUG_BITE, MoveId.INCINERATE, MoveId.BRICK_BREAK, MoveId.STRANGE_STEAM], // 라우라
   48: [MoveId.HEX, MoveId.WORK_UP, MoveId.WATER_GUN, MoveId.BLUE_FLARE], // 띠아
   49: [MoveId.STEAMROLLER, MoveId.THIEF, MoveId.ICE_SHARD, MoveId.MULTI_ATTACK], // 펠릭스
@@ -98,7 +98,7 @@ export const SKILL_MOVES: Readonly<Record<number, readonly [MoveId, MoveId, Move
   83: [MoveId.JAW_LOCK, MoveId.NUZZLE, MoveId.SECRET_SWORD, MoveId.HIGH_JUMP_KICK], // 헨리
   84: [MoveId.SCRATCH, MoveId.RAZOR_SHELL, MoveId.SKITTER_SMACK, MoveId.GLAIVE_RUSH], // 블레어
   85: [MoveId.RUINATION, MoveId.WITHDRAW, MoveId.ICICLE_CRASH, MoveId.INFERNO], // 미르카
-  86: [MoveId.RAGE_FIST, MoveId.ROLLING_KICK, MoveId.CEASELESS_EDGE, MoveId.PSYCHIC_FANGS], // 펜리르
+  86: [MoveId.RAGE_FIST, MoveId.ROLLING_KICK, MoveId.CEASELESS_EDGE, MoveId.PSYSHIELD_BASH], // 펜리르
   87: [MoveId.CHATTER, MoveId.NASTY_PLOT, MoveId.SHADOW_BONE, MoveId.ELECTRO_DRIFT], // 코렐라인
   88: [MoveId.STONE_AXE, MoveId.STEEL_WING, MoveId.DIZZY_PUNCH, MoveId.DIAMOND_STORM], // 비형
   89: [MoveId.PSYBLADE, MoveId.BARB_BARRAGE, MoveId.POPULATION_BOMB, MoveId.NIHIL_LIGHT], // 크레이버
