@@ -39,7 +39,7 @@ describe("블서로그 기술 연출", () => {
     expect(bseoSkillAnim(MoveId.SPLASH)).toBeNull();
   });
 
-  it("무기 · 분류로 고르기 (유키 양손검 → 베기, 일레븐 망치 → 타격, 나딘 석궁 → 투사체, 재키 W 강화)", () => {
+  it("무기 · 분류로 고르기 (유키 양손검 → 베기, 일레븐 망치 → 타격, 나딘 석궁 → 투사체, 자기 강화 스킬 → 강화)", () => {
     const skill = (code: number, i: number) => bseoSkillAnim(SKILL_MOVES[code][i]);
     const weapon = (code: number) => BSEO_CHARACTERS.find(c => c.erCode === code)?.weapon;
     expect(weapon(11)).toBe("양손검");
@@ -48,8 +48,14 @@ describe("블서로그 기술 연출", () => {
     expect(skill(30, 0)).toBe(BSEO_ANIM.STRIKE);
     expect(weapon(6)).toBe("석궁");
     expect(skill(6, 0)).toBe(BSEO_ANIM.SHOT);
-    expect(SHEET_SKILLS[1][1].category).toBe("STATUS");
-    expect(skill(1, 1)).toBe(BSEO_ANIM.BUFF);
+    // 자기 강화 변화 스킬 하나 (시트 값이 바뀌어도 되게 시트에서 찾아요): 나딘 E
+    const buff = Object.entries(SHEET_SKILLS).flatMap(([code, list]) =>
+      list
+        .map((sk, i) => ({ code: Number(code), i, sk }))
+        .filter(x => x.sk.category === "STATUS" && !x.sk.fx.heal && x.sk.fx.stats?.every(st => st.self)),
+    )[0];
+    expect(buff).toBeDefined();
+    expect(skill(buff.code, buff.i)).toBe(BSEO_ANIM.BUFF);
     if (SHEET_SKILLS[1][3].power >= 100) {
       expect(skill(1, 3)).toBe(BSEO_ANIM.BLAST);
     }
