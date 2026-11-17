@@ -6,13 +6,19 @@
 import { BSEO_ART_SKINS } from "#data/bseorogue/art-manifest";
 import { bseoSpeciesId } from "#data/bseorogue/roster";
 import { SKILL_MOVES } from "#data/bseorogue/skill-moves";
-import { bseoSkillVoiceKey, bseoVoiceFile, nextBseoVoiceIndex, playBseoVoice } from "#data/bseorogue/voice";
+import {
+  bseoSkillVoiceKey,
+  bseoVoiceFile,
+  nextBseoVoiceIndex,
+  playBseoVoice,
+  stopBseoVoices,
+} from "#data/bseorogue/voice";
 import { BSEO_VOICES } from "#data/bseorogue/voice-manifest";
 import { MoveId } from "#enums/move-id";
 // 블서로그 실험체 음성 · 그림: 스킬 Q W E R → 스킬 음성, 목록에 적힌 파일이 진짜 있는지
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 const ASSETS = resolve(__dirname, "../../../assets");
 
@@ -58,6 +64,23 @@ describe("블서로그 실험체 음성", () => {
       expect(seen.size).toBe(count);
     }
     expect(nextBseoVoiceIndex(1, 0)).toBe(0);
+  });
+
+  it("새 음성이 나오기 전에 나오고 있던 실험체 음성만 끊어요 (효과음 · 배경음은 그대로)", () => {
+    const sound = (key: string, isPlaying = true) => ({ key, isPlaying, stop: vi.fn(), destroy: vi.fn() });
+    const old = sound("se/bseo_1_select_0");
+    const skill = sound("se/bseo_30_q_2");
+    const hit = sound("se/hit");
+    const bgm = sound("bgm/title");
+    const done = sound("se/bseo_2_die_0", false);
+    expect(stopBseoVoices([old, skill, hit, bgm, done])).toBe(2);
+    for (const s of [old, skill]) {
+      expect(s.stop).toHaveBeenCalled();
+      expect(s.destroy).toHaveBeenCalled();
+    }
+    for (const s of [hit, bgm, done]) {
+      expect(s.stop).not.toHaveBeenCalled();
+    }
   });
 
   it("목록(voice-manifest.ts)에 적힌 음성 파일이 모두 있어요 (스킬 · 등장 · 쓰러질 때)", () => {

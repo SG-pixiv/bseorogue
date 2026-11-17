@@ -46,6 +46,12 @@ PREFER_BATTLE = {"full": 0, "half": 1, "sd": 2, "mini": 9}
 PREFER_ICON = {"mini": 0, "half": 1, "full": 2, "sd": 3}
 
 
+
+def save_icon_sheet(sheet: Image.Image, path: Path) -> None:
+    """아이콘 한 장을 256색으로 줄여 저장해요 (처음 열 때 받는 무게: 740KB → 170KB 쯤, 11-18).
+    아이콘은 작게 보여서 색을 줄여도 거의 같아 보여요."""
+    sheet.quantize(256, method=Image.Quantize.FASTOCTREE, dither=Image.Dither.FLOYDSTEINBERG).save(path, optimize=True)
+
 def norm(name: str) -> str:
     name = unicodedata.normalize("NFKD", name)
     name = "".join(c for c in name if not unicodedata.combining(c))
@@ -248,7 +254,7 @@ def main(argv: list[str]) -> None:
         x, y = (i % ICON_COLS) * ICON_W, (i // ICON_COLS) * ICON_H
         sheet.alpha_composite(cell, (x, y))
         frames.setdefault(key, {})[skin] = [x, y]
-    sheet.save(ICONS, optimize=True)
+    save_icon_sheet(sheet, ICONS)
 
     def ts_record(d: dict) -> str:
         lines = []

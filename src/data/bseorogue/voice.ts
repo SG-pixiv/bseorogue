@@ -11,6 +11,8 @@
  * - 쓰러질 때는 쓰러지는 대사 (pokemon.ts 의 faintCry)
  * 키마다 대사가 최대 3개라 매번 무작위로 고르고, 바로 전에 나온 대사는 다시 고르지 않아요.
  * 소리 크기는 게임 설정의 효과음 크기를 따라요. 음성 파일이 없으면 조용히 넘어가요.
+ * 새 음성이 나오면 앞 음성은 끊어요 (캐릭터를 빨리 넘겨도 대사가 겹치지 않게, 11-18 SG).
+ * 아직 받는 중인 음성은 그 사이 다른 음성을 틀었으면 받고 나서도 안 틀어요.
  */
 import { audioManager } from "#app/global-audio-manager";
 import { globalScene } from "#app/global-scene";
@@ -29,6 +31,32 @@ const SKILL_KEYS: readonly BseoVoiceKey[] = ["q", "w", "e", "r"];
 
 /** "ER번호_키" → 바로 전에 튼 대사 번호 */
 const lastPlayed = new Map<string, number>();
+
+/** 음성 소리 열쇠 앞부분 */
+const VOICE_PREFIX = "se/bseo_";
+
+/** 음성을 틀어 달라고 한 횟수 (받는 중이던 음성이 아직 마지막 요청인지 볼 때) */
+let voiceRequest = 0;
+
+type PlayingSound = { key: string; isPlaying?: boolean; stop: () => unknown; destroy: () => unknown };
+
+/** 지금 나오고 있는 실험체 음성을 다 끊어요 (끊은 수) */
+export function stopBseoVoices(
+  sounds: readonly PlayingSound[] = (
+    globalScene?.sound as unknown as { getAllPlaying?: () => PlayingSound[] } | undefined
+  )?.getAllPlaying?.() ?? [],
+): number {
+  let n = 0;
+  for (const s of [...sounds]) {
+    if (s.key.startsWith(VOICE_PREFIX) && s.isPlaying !== false) {
+      s.stop();
+      // play() 로 만든 소리는 끝나야 지워지는데, 끊으면 안 끝나서 직접 지워요
+      s.destroy();
+      n++;
+    }
+  }
+  return n;
+}
 
 /** 스킬 → 음성 키 (그 실험체의 Q W E R 이 아니면 null) */
 export function bseoSkillVoiceKey(speciesId: SpeciesId, moveId: MoveId): BseoVoiceKey | null {
@@ -65,7 +93,7 @@ export function nextBseoVoiceIndex(count: number, last: number | undefined): num
 
 /** Phaser 소리 열쇠. "se/" 로 시작해서 효과음 크기를 따라요 */
 function soundKey(file: string): string {
-  return `se/bseo_${file.replace(/^er\/voice\//, "").replace(/\.m4a$/, "")}`;
+  return `${VOICE_PREFIX}${file.replace(/^er\/voice\//, "").replace(/\.m4a$/, "")}`;
 }
 
 function canPlay(): boolean {
@@ -100,10 +128,19 @@ export function playBseoVoice(speciesId: SpeciesId, key: BseoVoiceKey): AnySound
   lastPlayed.set(slot, index);
   const file = `er/voice/${code}_${key}_${index}.m4a`;
   const sk = soundKey(file);
+  // 앞 음성은 바로 끊어요 (새 음성을 아직 받는 중이어도)
+  stopBseoVoices();
+  const request = ++voiceRequest;
   if (globalScene.cache.audio.exists(sk)) {
     return audioManager.playSound(sk);
   }
-  globalScene.load.once(`filecomplete-audio-${sk}`, () => audioManager.playSound(sk));
+  globalScene.load.once(`filecomplete-audio-${sk}`, () => {
+    // 받는 사이에 다른 음성을 틀었으면 이건 안 틀어요 (늦게 받은 대사가 뒤늦게 겹쳐 나오지 않게)
+    if (request === voiceRequest) {
+      stopBseoVoices();
+      audioManager.playSound(sk);
+    }
+  });
   globalScene.load.audio(sk, getCachedUrl(file));
   if (!globalScene.load.isLoading()) {
     globalScene.load.start();
