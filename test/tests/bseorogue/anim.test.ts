@@ -29,6 +29,35 @@ describe("블서로그 기술 연출", () => {
     }
   });
 
+  it("공용 연출 7개마다 소리가 있고, 그 소리는 임시(무음) 파일이 아니에요 (scripts/sound/make_sfx.py)", () => {
+    const placeholders = new Set<string>(JSON.parse(readFileSync("assets/.placeholders.json", "utf-8")));
+    for (const id of Object.values(BSEO_ANIM)) {
+      const anim = JSON.parse(readFileSync(`assets/battle-anims/${toKebabCase(MoveId[id])}.json`, "utf-8"));
+      const sounds = Object.values(
+        anim.frameTimedEvents as Record<string, { eventType: string; resourceName: string }[]>,
+      )
+        .flat()
+        .filter(e => e.eventType === "AnimTimedSoundEvent");
+      expect(sounds, MoveId[id]).toHaveLength(1);
+      const rel = `audio/battle_anims/${sounds[0].resourceName}`;
+      expect(existsSync(`assets/${rel}`), rel).toBe(true);
+      expect(placeholders.has(rel), rel).toBe(false);
+    }
+  });
+
+  it("게임이 쓰는 효과음 · 버튼 소리가 임시(무음) 파일이 아니에요", () => {
+    const placeholders = new Set<string>(JSON.parse(readFileSync("assets/.placeholders.json", "utf-8")));
+    const loading = readFileSync("src/loading-scene.ts", "utf-8");
+    const keys = [...loading.matchAll(/loadSe\("([a-z_0-9]+)"(?:, "(ui|se)")?/g)].map(
+      m => `audio/${m[2] ?? "se"}/${m[1]}.wav`,
+    );
+    expect(keys.length).toBeGreaterThan(30);
+    for (const rel of keys) {
+      expect(existsSync(`assets/${rel}`), rel).toBe(true);
+      expect(placeholders.has(rel), rel).toBe(false);
+    }
+  });
+
   it("모든 실험체 스킬이 공용 연출 중 하나", () => {
     const anims = new Set<MoveId>(Object.values(BSEO_ANIM));
     for (const moves of Object.values(SKILL_MOVES)) {

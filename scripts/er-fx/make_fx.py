@@ -262,8 +262,28 @@ def frame(user=(0, 0), target=(128, -64), *gfx):
     return [who(0, *user), who(1, *target), *gfx]
 
 
+# 연출 소리 (scripts/sound/make_sfx.py 가 assets/audio/battle_anims/ 에 만들어요): 연출 파일 → (소리 파일, 틀 프레임)
+ANIM_SOUNDS = {
+    "slash.json": ("bseo-slash.wav", 1),
+    "tackle.json": ("bseo-strike.wav", 1),
+    "shadow-ball.json": ("bseo-shot.wav", 1),
+    "explosion.json": ("bseo-blast.wav", 1),
+    "recover.json": ("bseo-heal.wav", 1),
+    "focus-energy.json": ("bseo-buff.wav", 1),
+    "tail-whip.json": ("bseo-debuff.wav", 1),
+}
+
+
+def timed_sound(file):
+    if file not in ANIM_SOUNDS:
+        return {}
+    name, at = ANIM_SOUNDS[file]
+    ev = {"frameIndex": at, "resourceName": name, "volume": 100, "pitch": 100, "eventType": "AnimTimedSoundEvent"}
+    return {str(at): [ev]}
+
+
 def anim(file, graphic, frames, position):
-    data = {"id": -1, "graphic": graphic, "frames": frames, "frameTimedEvents": {}, "position": position, "hue": 0}
+    data = {"id": -1, "graphic": graphic, "frames": frames, "frameTimedEvents": timed_sound(file), "position": position, "hue": 0}
     path = ANIM_DIR / file
     path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     done.append(str(path.relative_to(ROOT / "assets")).replace("\\", "/"))
