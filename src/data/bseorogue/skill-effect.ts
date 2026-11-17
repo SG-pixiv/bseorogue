@@ -8,6 +8,7 @@ import { MoveCategory } from "#enums/move-category";
 import { MoveTarget } from "#enums/move-target";
 import { type BattleStat, Stat } from "#enums/stat";
 import { StatusEffect } from "#enums/status-effect";
+import type { Pokemon } from "#field/pokemon";
 import {
   ConfuseAttr,
   FlinchAttr,
@@ -46,6 +47,20 @@ const STATUS: Readonly<Record<NonNullable<SheetSkillEffect["status"]>, StatusEff
   SLEEP: StatusEffect.SLEEP,
   FREEZE: StatusEffect.FREEZE,
 };
+
+/**
+ * 공격 스킬에 붙는 자기 회복 (예: "피해 + 자기 체력 25% 회복").
+ * 체력이 가득이면 회복은 조용히 건너뛰어요 — 원래 HealAttr 은 "그러나 체력이 가득 찬 상태다!" 를 띄워서
+ * 공격이 실패한 것처럼 보였어요 (11-17 검수).
+ */
+export class BseoAttackHealAttr extends HealAttr {
+  override apply(user: Pokemon, target: Pokemon, move: Move, args: unknown[]): boolean {
+    if ((this.selfTarget ? user : target).isFullHp()) {
+      return false;
+    }
+    return super.apply(user, target, move, args);
+  }
+}
 
 /** 원래 기술의 효과 · 조건 칸 (포켓로그 Move 안쪽 칸이라 이름으로 꺼내요) */
 interface MoveInsides {
@@ -101,7 +116,11 @@ export function applyBseoSkillEffect(move: Move, sheet: SheetSkill): void {
   }
   if (fx.heal) {
     // 공격 스킬의 회복은 체력이 가득이어도 공격은 해요
-    move.attr(HealAttr, fx.heal, false, true, move.category === MoveCategory.STATUS);
+    if (move.category === MoveCategory.STATUS) {
+      move.attr(HealAttr, fx.heal, false, true, true);
+    } else {
+      move.attr(BseoAttackHealAttr, fx.heal, false, true, false);
+    }
   }
   if (fx.recoil) {
     move.attr(RecoilAttr, false, fx.recoil);

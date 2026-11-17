@@ -55,7 +55,14 @@ for (const c of raw("Character")) {
     continue;
   }
   const pad = String(c.code).padStart(3, "0");
-  const skill = slot => l10n.get(`Skill/Group/Name/1${pad}${slot}00`) || "";
+  // 스킬 번호가 다른 실험체: 띠아는 Q 400 · W 500 · E 600 · R 700 (색마다 이름 뒤에 " - 노란색" 이 붙어요), 다니엘 R 은 510
+  const SKILL_CODES = { 48: [100, 400, 500, 600, 700], 37: [100, 200, 300, 400, 510] };
+  const skill = slot => {
+    const code = SKILL_CODES[c.code]?.[slot - 1] ?? slot * 100;
+    return (l10n.get(`Skill/Group/Name/1${pad}${code}`) || "")
+      .replace(/\s+-\s+(노란색|빨간색|파란색|무색)$/, "")
+      .trim();
+  };
   characters[c.code] = {
     name,
     en: c.name,

@@ -4,7 +4,7 @@
  */
 
 // 이 파일은 scripts/er-data/build.mjs 가 만들어요. 직접 고치지 마세요.
-// 출처: 이터널 리턴 공식 API (2026-11-02T22:11:43.384Z 받음) · 이름과 숫자의 권리는 님블뉴런에 있어요.
+// 출처: 이터널 리턴 공식 API (2026-11-16T14:41:35.356Z 받음) · 이름과 숫자의 권리는 님블뉴런에 있어요.
 
 export type ErRoleKey = "TANK" | "BRUISER" | "ASSASSIN" | "MARKSMAN" | "MAGE" | "SUPPORT";
 
@@ -36,7 +36,7 @@ export interface ErMonster {
 }
 
 /** 전체 실험체 평균 (스탯 환산 기준) */
-export const ER_MEANS = { hp20: 2551.1, ap20: 118.6, def20: 108.8, moveSpeed: 3.6, attackSpeed: 0.117 } as const;
+export const ER_MEANS = { hp20: 2550.5, ap20: 118.6, def20: 108.8, moveSpeed: 3.6, attackSpeed: 0.117 } as const;
 
 export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
   "1": {
@@ -50,7 +50,15 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     moveSpeed: 3.5,
     attackSpeed: 0.1,
     skills: ["피의 축제", "연참", "힘줄 절단", "습격", "전기톱 살인마"],
-    skins: ["재키", "처형자 재키", "스칼렛 코사지 재키", "시스템쇼크 재키", "사관후보생 재키", "고스트헌터 재키"],
+    skins: [
+      "재키",
+      "처형자 재키",
+      "스칼렛 코사지 재키",
+      "시스템쇼크 재키",
+      "사관후보생 재키",
+      "고스트헌터 재키",
+      "메이드 재키",
+    ],
   },
   "2": {
     name: "아야",
@@ -604,7 +612,7 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     moveSpeed: 3.6,
     attackSpeed: 0.12,
     skills: ["열혈의 의지", "니 스트라이크", "토마호크 스핀", "위빙", "쿼드라곤"],
-    skins: ["얀", "무에타이 챔피언 얀", "챌린지 리퍼 얀", "언더보스 얀"],
+    skins: ["얀", "무에타이 챔피언 얀", "챌린지 리퍼 얀", "언더보스 얀", "사관후보생 얀"],
   },
   "36": {
     name: "이바",
@@ -637,7 +645,7 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     def20: 108,
     moveSpeed: 3.6,
     attackSpeed: 0.07,
-    skills: ["고독한 예술가", "그림자 가위", "영감", "그림자 이동", ""],
+    skills: ["고독한 예술가", "그림자 가위", "영감", "그림자 이동", "걸작"],
     skins: ["다니엘", "역병의사 다니엘", "마스커레이드 다니엘", "화이트데이 다니엘"],
   },
   "38": {
@@ -690,7 +698,7 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     moveSpeed: 3.6,
     attackSpeed: 0.1,
     skills: ["빛의 가호", "찬란한 광휘", "신성의 향로", "인도하는 빛", "구원의 성역"],
-    skins: ["요한", "대행자 요한", "악마사냥꾼 요한"],
+    skins: ["요한", "대행자 요한", "악마사냥꾼 요한", "암행어사 요한"],
   },
   "42": {
     name: "비앙카",
@@ -794,7 +802,7 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     def20: 114,
     moveSpeed: 3.5,
     attackSpeed: 0.07,
-    skills: ["알록달록 컬러믹스", "", "", "브러쉬 스트로크 - 노란색", "팔레트 - 노란색"],
+    skills: ["알록달록 컬러믹스", "브러쉬 스트로크", "팔레트", "색칠놀이", "무지개 드로잉"],
     skins: [
       "띠아",
       "거리의 화가 띠아",
@@ -896,7 +904,7 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     moveSpeed: 3.5,
     attackSpeed: 0.03,
     skills: ["작살 장전", "관통 작살", "회수", "작살 기동", "구속의 사슬"],
-    skins: ["칼라", "해상구조요원 칼라", "뒷골목 칼라"],
+    skins: ["칼라", "해상구조요원 칼라", "뒷골목 칼라", "하이틴 피스 칼라"],
   },
   "55": {
     name: "에스텔",
@@ -909,7 +917,7 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     moveSpeed: 3.6,
     attackSpeed: 0.09,
     skills: ["사명감", "진압", "선제대응", "방패방어", "헬기호출"],
-    skins: ["에스텔", "소방기동대 에스텔", "교내소방부 에스텔", "앙스텔", "안전 교관 에스텔"],
+    skins: ["에스텔", "소방기동대 에스텔", "교내소방부 에스텔", "앙스텔", "안전 교관 에스텔", "성전의 영웅 에스텔"],
   },
   "56": {
     name: "피올로",
@@ -1079,7 +1087,13 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     moveSpeed: 3.6,
     attackSpeed: 0.12,
     skills: ["티어링 블레이드", "바이너리 스핀", "호라이즌 클리브", "워프 슬래시", "디멘션 스트라이크"],
-    skins: ["아비게일", "프리즌 키퍼 아비게일", "포커페이스 바니 아비게일", "트로피컬 디멘션 아비게일"],
+    skins: [
+      "아비게일",
+      "프리즌 키퍼 아비게일",
+      "포커페이스 바니 아비게일",
+      "트로피컬 디멘션 아비게일",
+      "헌신하는 빛 아비게일",
+    ],
   },
   "68": {
     name: "알론소",
@@ -1144,7 +1158,7 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     moveSpeed: 3.5,
     attackSpeed: 0.13,
     skills: ["잿빛 사신", "조준 사격", "목표물 포착", "접근 금지", "정밀 조준"],
-    skins: ["카티야", "밤까마귀 카티야", "훈련소장 카티야", "카페 알바 카티야"],
+    skins: ["카티야", "밤까마귀 카티야", "훈련소장 카티야", "카페 알바 카티야", "은하의 종말 카티야"],
   },
   "73": {
     name: "샬럿",
@@ -1248,7 +1262,7 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     moveSpeed: 3.5,
     attackSpeed: 0.15,
     skills: ["연산", "관측", "양자 얽힘", "경로 적분", "파동 함수 붕괴"],
-    skins: ["이슈트반", "집사 이슈트반"],
+    skins: ["이슈트반", "집사 이슈트반", "신념의 창 이슈트반"],
   },
   "81": {
     name: "니아",
@@ -1306,7 +1320,7 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
       "절단 베기 / 반격 베기",
       "XMS-5 활성화 / 끝없는 추적",
     ],
-    skins: ["블레어", "포디엄 피니시 블레어"],
+    skins: ["블레어", "포디엄 피니시 블레어", "심판하는 검 블레어"],
   },
   "85": {
     name: "미르카",
@@ -1345,7 +1359,7 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     moveSpeed: 3.6,
     attackSpeed: 0.14,
     skills: ["인과의 이면", "단죄의 섬광", "진실의 거울 / 거짓의 거울", "죄의 굴레", "이세계의 잔영"],
-    skins: ["코렐라인", "설렘 가득 코렐라인"],
+    skins: ["코렐라인", "설렘 가득 코렐라인", "성역의 구원 코렐라인"],
   },
   "88": {
     name: "비형",
@@ -1378,13 +1392,13 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     en: "Lucia",
     role: "MAGE",
     weapons: ["저격총"],
-    hp20: 2449,
+    hp20: 2392,
     ap20: 114.7,
     def20: 107.1,
     moveSpeed: 3.5,
     attackSpeed: 0.2,
     skills: ["영애의 소양", "화려한 낭만 / 찬란한 낭만", "일제 사격!", "무엄하시네요!", "총사의 예법"],
-    skins: ["루치아"],
+    skins: ["루치아", "티타임 레이디 루치아"],
   },
   "91": {
     name: "세레스",
@@ -1397,7 +1411,7 @@ export const ER_CHARACTERS: Readonly<Record<number, ErCharacter>> = {
     moveSpeed: 3.6,
     attackSpeed: 0.12,
     skills: ["낭만을 지키는 검", "쇄도 / 관철", "파쇄의 진", "경호", "빛에게 바치는 맹세"],
-    skins: ["세레스"],
+    skins: ["세레스", "원더 래빗 세레스"],
   },
 };
 

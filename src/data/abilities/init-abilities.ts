@@ -215,7 +215,8 @@ import i18next from "i18next";
 
 export function initAbilities() {
   (allAbilities as Ability[]).push(
-    new AbBuilder(AbilityId.NONE, 3).build(),
+    // 블서로그: 야생동물 · 보스는 특성이 NONE 이라, 트레이스가 NONE 을 따라 하면 (NONE = 0 이라 "없음" 으로 보고) 다시 트레이스가 켜져 끝없이 돌아요 (11-17)
+    new AbBuilder(AbilityId.NONE, 3).uncopiable().build(),
     new AbBuilder(AbilityId.STENCH, 3) //
       .attr(
         PostAttackApplyBattlerTagAbAttr,
