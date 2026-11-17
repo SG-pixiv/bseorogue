@@ -136,12 +136,19 @@ def main():
         at = f"실험체 {r}줄 ({row[1]})"
         skin_list = str(row[col["스킨 목록 (번호 이름, ✓ 그림 있음)"]] or "")
         n_skins = len([s for s in skin_list.split(" / ") if s.strip()])
-        evo_skins = [num(row[col["진화1 스킨"]], at + " 진화1 스킨", 1, 99), num(row[col["진화2 스킨"]], at + " 진화2 스킨", 1, 99)]
+        # 진화2 스킨 · 레벨이 빈칸이면 진화는 한 번 (0 으로 적어요): ER 스킨이 1개뿐인 실험체 (11-17)
+        evo_skins = [num(row[col["진화1 스킨"]], at + " 진화1 스킨", 1, 99), num(row[col["진화2 스킨"]], at + " 진화2 스킨", 1, 99, blank=0)]
         for k, sk in enumerate(evo_skins, 1):
             if sk > n_skins:
                 warnings.append(f"{at}: 진화{k} 스킨 {sk}번이 ER 스킨 목록에 없어요 (스킨 {n_skins}개) → 게임에서는 이름 뒤 ★, 그림은 기본 모습")
-        levels = [num(row[col["진화1 레벨"]], at + " 진화1 레벨", 2, 99), num(row[col["진화2 레벨"]], at + " 진화2 레벨", 3, 100)]
-        if levels[0] >= levels[1]:
+        single = evo_skins[1] == 0
+        levels = [num(row[col["진화1 레벨"]], at + " 진화1 레벨", 2, 99),
+                  num(row[col["진화2 레벨"]], at + " 진화2 레벨", 3, 100, blank=0)]
+        if single:
+            levels[1] = 0
+        elif levels[1] == 0:
+            errors.append(f"{at}: 진화2 스킨이 있으면 진화2 레벨도 적어요 (진화를 한 번만 하려면 둘 다 빈칸)")
+        elif levels[0] >= levels[1]:
             errors.append(f"{at}: 진화2 레벨이 진화1 레벨보다 커야 해요")
         size = str(row[col["키 등급"]] or "M").strip().upper()
         if size not in ("S", "M", "L"):
@@ -223,7 +230,9 @@ def main():
         "  final: Stats6;",
         "  /** 도트 키 등급 (S 60 · M 68 · L 74px) */",
         '  size: "S" | "M" | "L";',
+        "  /** 스킨 진화 1 · 2 스킨 번호 (진화2 가 0 이면 진화는 한 번) */",
         "  skins: readonly [number, number];",
+        "  /** 스킨 진화 1 · 2 레벨 (진화가 한 번이면 진화2 는 0) */",
         "  levels: readonly [number, number];",
         "  roles: readonly [ErRoleKey | null, ErRoleKey | null];",
         "}",

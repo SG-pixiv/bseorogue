@@ -15,9 +15,9 @@ er-data 폴더(scripts/er-data/fetch.mjs 로 받은 것)의 l10n-Korean.txt 에�
 
 옮기는 규칙 (초안이에요. SG가 시트에서 고쳐요):
   기절 · 공중에 띄움 · 제압          → 30% 스턴        밀어냄 · 끌어당김만        → 20% 스턴
-  속박 · 빙결                        → 20% 속박        수면 → 30% 잠듦 · 매혹/공포/도발 → 30% 혼란
-  출혈 · 중독 · 화상                 → 30% 그 상태이상
-  이동 속도 감소(둔화)               → 상대 속도 1단계 ↓ (W · R 이고 다른 확률 효과가 없으면 30% 둔화)
+  속박 · 빙결                        → 10% 속박        수면 → 20% 잠듦 · 매혹/공포/도발 → 20% 혼란
+  출혈 · 중독 · 화상                 → 30% 그 상태이상   (확률은 11-17 포켓몬 기준으로 검토: 얼음 10% · 마비 10~30%)
+  이동 속도 감소(둔화)               → 상대 속도 1단계 ↓ (W · R 이고 다른 확률 효과가 없으면 20% 둔화)
   방어력 감소 · 받는 피해 증가       → 상대 방어 1단계 ↓   침묵 → 상대 스킬 증폭 1단계 ↓   실명 → 상대 명중 1단계 ↓
   보호막 · 받는 피해 감소            → 방어 ↑ (변화 스킬이면 방어 · 스킬 저항)   무적 · 저지 불가 → 방어 2단계 ↑ (변화)
   이동 속도 증가 → 속도 ↑ · 공격 속도/공격력 증가 → 공격 ↑ · 스킬 증폭 증가 → 스킬 증폭 ↑ · 은신 → 회피 ↑
@@ -25,7 +25,9 @@ er-data 폴더(scripts/er-data/fetch.mjs 로 받은 것)의 l10n-Korean.txt 에�
   돌진 · 도약 · 순간이동 + 피해      → E 스킬(암살자는 Q 도)이면 선공(+1), 위력 낮춤
   치명타 → 급소에 잘 맞음 · 체력 소모 → 반동 25%
   분류: 설명에 '피해를 입' 이 없으면 변화. 계수에 '스킬 증폭의' 가 있으면 스증, '공격력의' 면 물리, 둘 다 없으면 역할군
-  위력: Q 60 · W 65 · E 70 · R 120 에서 역할군(탱커 · 서포터 −10, 평원딜 +5, 스증딜러 +10)과 붙은 효과만큼 낮춰요
+  위력: Q 65 · W 70 · E 75 · R 125 에서 역할군(탱커 · 서포터 −10, 평원딜 +5, 스증딜러 +10, R 은 두 배)을 더하고
+        붙은 효과만큼 낮춰요 (확률 −5 · 상대 능력 ↓ −10 · 회복 −10 · 자기 능력 ↑ −10, 합쳐서 최대 −20 · R −25).
+        덧붙는 효과는 둘까지. 최소 45 · R 100. 선공 스킬은 50 (효과가 붙으면 40~45)
 """
 import re
 import sys
@@ -147,11 +149,11 @@ def draft(role, slot, desc, coef, force_attack=False):
     if T & {"기절", "띄움", "제압"}:
         chance = "30% 스턴"
     elif "속박" in T:
-        chance = "20% 속박"
+        chance = "10% 속박"  # 속박 = 포켓몬 얼음: 냉동빔 · 눈보라도 10%
     elif "수면" in T:
-        chance = "30% 잠듦"
+        chance = "20% 잠듦"  # 잠듦은 세서 공격에 붙는 건 낮게
     elif T & {"매혹", "공포", "도발"}:
-        chance = "30% 혼란"
+        chance = "20% 혼란"
     elif "출혈" in T:
         chance = "30% 출혈"
     elif "중독" in T:
@@ -164,7 +166,7 @@ def draft(role, slot, desc, coef, force_attack=False):
     foe, me = [], []  # 능력 변화
     if "둔화" in T:
         if chance is None and slot in ("W", "R"):
-            chance = "30% 둔화"
+            chance = "20% 둔화"  # 둔화 = 포켓몬 마비 (W · R 둔화가 많아서 20%)
         else:
             foe.append("속도")
     if "방어 감소" in T:
@@ -188,38 +190,52 @@ def draft(role, slot, desc, coef, force_attack=False):
     power = acc = None
     prio = 0
     if attack:
-        base = {"Q": 60, "W": 65, "E": 70, "R": 120}[slot]
+        # 11-17 검토: 예전 초안(Q 62 · E 72 · R 127 평균)보다 낮아져서 기본을 올리고, 붙는 효과 값은 포켓몬 기술에 맞춰요
+        #   (아이언헤드 80 + 30% 풀죽음 · 얼다바람 55 + 상대 스피드 ↓ · 니트로차지 50 + 자기 스피드 ↑ · 기가드레인 75 + 흡수 · 전광석화 40 선공)
+        base = {"Q": 65, "W": 70, "E": 75, "R": 125}[slot]
         adj = ROLE_ADJ.get(role, 0)
         power = base + (adj * 2 if slot == "R" else adj)
         acc = {"Q": 100, "W": 100, "E": 95, "R": 90}[slot]
         pp = {"Q": 25, "W": 20, "E": 15, "R": 5}[slot]
         foe, me = foe[:1], me[:1]  # 공격 스킬은 상대 쪽 하나 · 자기 쪽 하나까지
         dash = "돌진" in T and (slot == "E" or (slot == "Q" and role == "ASSASSIN"))
-        if dash:
-            prio = 1
-            power = min(power, 60) - 10
+        heal = "흡수" if "흡수" in T else "회복" if "회복" in T else None
+        # 덧붙는 효과는 둘까지 (확률 > 상대 능력 ↓ > 회복 > 자기 능력 ↑ 순서로 남겨요)
+        keep = [k for k, on in (("chance", chance), ("foe", foe), ("heal", heal), ("me", me)) if on][:2]
+        chance = chance if "chance" in keep else None
+        foe = foe if "foe" in keep else []
+        heal = heal if "heal" in keep else None
+        me = me if "me" in keep else []
+        cost = 0
         parts.append("선공(+1) 피해" if dash else "피해")
         if chance:
             parts.append(chance)
-            power -= 5
+            cost += 5
         if foe:
             parts.append(f"상대 {foe[0]} 1단계 ↓")
-            power -= 10
-        if "흡수" in T:
+            cost += 10
+        if heal == "흡수":
             parts.append("피해의 50% 회복")
-            power -= 5 if slot != "R" else 10
-        elif "회복" in T:
+            cost += 10
+        elif heal:
             parts.append("자기 체력 25% 회복")
-            power -= 10 if slot != "R" else 15
+            cost += 10
         if me:
             parts.append(f"쓴 뒤 {me[0]} 1단계 ↑")
-            power -= 15 if slot != "R" else 10
+            cost += 10
         if "치명타" in T:
             parts.append("급소에 잘 맞음")
+        if dash:
+            # 선공 스킬은 전광석화 · 아쿠아제트(40)처럼 낮게: 50 에서 효과마다 5씩, 40 아래로는 안 내려가요
+            prio = 1
+            power = max(40, 50 - min(cost, 10))
+        else:
+            power -= min(cost, 25 if slot == "R" else 20)  # 효과가 많아도 너무 약해지지 않게
         if "체력 소모" in T:
             parts.append("반동 25%")
             power += 10
-        power = max(90 if slot == "R" else 40, min(150, power))
+        if not dash:
+            power = max(100 if slot == "R" else 45, min(150, power))
     else:
         pp = {"Q": 20, "W": 15, "E": 15, "R": 10}[slot]
         heal = bool(T & {"회복", "흡수"})
