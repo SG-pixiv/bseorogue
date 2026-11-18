@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>블서로그 사운드 목록</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  /* VOICE: 게임 설정 창처럼 차분하게, 소리 한 줄씩 듣고 확인하는 표
+     IDEA: 게임 안 정보 창 (남색 판 · 주황 커서)
+     PICTURE: 줄마다 재생 버튼 + 파형, 위에는 출처별 개수 띠
+     COLOUR and TYPE: 남색 · 흰 판 + 주황 강조, 출처 색 3개 (팬키트 파랑 · 합성 회색 · 게임 소리 주황), Do Hyeon 제목 + Noto Sans KR
+     LAYOUT: 머리글 → 출처 띠 → 분류 · 출처 거르기 → 분류별 판 → BGM 자리 */
+  :root {
+    --bg: #eef0f6; --panel: #ffffff; --panel-2: #f5f6fb; --fg: #171a2b; --muted: #5d627a; --line: #d7dae6;
+    --accent: #e08a12; --accent-ink: #1a1306; --wave: #9aa3c4; --wave-on: #e08a12;
+    --pending: #8a6d1d; --pending-bg: #fbf1d6;
+    --fan: #1f5fbf; --fan-bg: #e3edfb; --syn: #4b5068; --syn-bg: #e9eaf1; --ost: #b5560b; --ost-bg: #fde9d6;
+    --display: "Do Hyeon", "Noto Sans KR", system-ui, sans-serif;
+    --body: "Noto Sans KR", system-ui, -apple-system, "Malgun Gothic", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10131f; --panel: #181c2c; --panel-2: #1e2336; --fg: #e9ebf5; --muted: #9ba1bd; --line: #2c3250;
+      --accent: #f5a623; --wave: #4b5378; --wave-on: #f5a623; --pending: #f0cd6b; --pending-bg: #2e2816;
+      --fan: #8fb8f5; --fan-bg: #1b2a45; --syn: #c3c7da; --syn-bg: #262b40; --ost: #ffb877; --ost-bg: #3a2715;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10131f; --panel: #181c2c; --panel-2: #1e2336; --fg: #e9ebf5; --muted: #9ba1bd; --line: #2c3250;
+    --accent: #f5a623; --wave: #4b5378; --wave-on: #f5a623; --pending: #f0cd6b; --pending-bg: #2e2816;
+    --fan: #8fb8f5; --fan-bg: #1b2a45; --syn: #c3c7da; --syn-bg: #262b40; --ost: #ffb877; --ost-bg: #3a2715;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; min-width: 0; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.55;
+    padding: max(28px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(56px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+    overflow-x: clip;
+  }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+  .wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 20px; }
+  header { display: grid; gap: 10px; }
+  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 6vw, 42px); line-height: 1.1; margin: 0; text-wrap: balance; }
+  .lead { margin: 0; color: var(--muted); max-width: 66ch; }
+  .band { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .src-card { border-radius: 12px; padding: 12px 14px; display: grid; gap: 2px; border: 1px solid var(--line); background: var(--panel); }
+  .src-card b { font-family: var(--display); font-weight: 400; font-size: 28px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .src-card span { font-size: 13px; color: var(--muted); }
+  .src-card.fankit b { color: var(--fan); } .src-card.synth b { color: var(--syn); } .src-card.ost b { color: var(--ost); }
+  nav { display: grid; gap: 6px; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; padding-block: 8px; background: var(--bg); }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+  nav button {
+    font: 500 14px var(--body); color: var(--fg); background: var(--panel); border: 1px solid var(--line);
+    padding: 6px 12px; min-height: 36px; border-radius: 8px; cursor: pointer;
+  }
+  nav button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  nav .tabs.src button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  nav button:focus-visible, .play:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  section { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  section h2 { font-family: var(--display); font-weight: 400; font-size: 22px; margin: 0; padding: 14px 18px 10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+  section h2 small { font-family: var(--body); font-size: 13px; color: var(--muted); }
+  .row { display: grid; grid-template-columns: 40px 120px minmax(0, 1fr); gap: 4px 14px; align-items: center; padding: 10px 18px; border-top: 1px solid var(--line); }
+  .row:nth-child(even) { background: var(--panel-2); }
+  .row.unused .where { color: var(--muted); }
+  .play { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--accent); background: transparent; color: var(--accent); cursor: pointer; display: grid; place-items: center; padding: 0; }
+  .play svg { width: 14px; height: 14px; fill: currentColor; }
+  .row.on .play { background: var(--accent); color: var(--accent-ink); }
+  canvas { width: 120px; height: 32px; display: block; }
+  .info { display: grid; gap: 2px; }
+  .where { font-weight: 500; }
+  .meta { font-size: 12.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; }
+  .meta code { font-family: var(--mono); font-size: 12px; overflow-wrap: anywhere; }
+  .tag { font-size: 12px; padding: 1px 8px; border-radius: 999px; white-space: nowrap; font-weight: 500; }
+  .tag.fankit { background: var(--fan-bg); color: var(--fan); }
+  .tag.synth { background: var(--syn-bg); color: var(--syn); }
+  .tag.ost { background: var(--ost-bg); color: var(--ost); }
+  .tag.wait { background: var(--pending-bg); color: var(--pending); }
+  .bgm .row { grid-template-columns: 40px minmax(0, 1fr); }
+  .slot { width: 36px; height: 36px; border-radius: 50%; border: 1.5px dashed var(--line); }
+  .empty { padding: 16px 18px; color: var(--muted); border-top: 1px solid var(--line); }
+  footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
+  footer code { font-family: var(--mono); font-size: 12px; }
+  @media (max-width: 600px) {
+    nav { position: static; }
+    .band { grid-template-columns: minmax(0, 1fr); }
+    .src-card { grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 10px; }
+    .row { grid-template-columns: 40px minmax(0, 1fr); }
+    canvas { width: 100%; max-width: 220px; }
+    .info { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>블서로그 사운드 목록</h1>
+    <p class="lead">게임 어디에서 어떤 소리가 나는지 한 줄씩 들어 볼 수 있어요. ▶ 를 누르면 재생, 한 번 더 누르면 멈춰요. 줄마다 출처(이터널 리턴 게임 · 팬키트 · 직접 합성)가 붙어 있어요.</p>
+    <div class="band" id="band"></div>
+  </header>
+  <nav aria-label="거르기">
+    <div class="tabs" id="tabs" aria-label="분류"></div>
+    <div class="tabs src" id="srcTabs" aria-label="출처"></div>
+  </nav>
+  <div id="list" style="display:grid; gap:18px"></div>
+  <footer>
+    <span><b>팬키트</b>: 님블뉴런 이터널 리턴 팬키트 소리 (안내 방송 <code>assets/er/announce/</code> · 실험체 음성 <code>assets/er/voice/</code>). 팬키트에는 BGM · 효과음이 없어요 (11-18 노트북 <code>er</code> 폴더 전부 확인).</span>
+    <span><b>이터널 리턴 게임</b>: 이터널 리턴 설치 폴더에서 꺼낸 소리 (<code>scripts/sound/build_er_sound.py</code>). 자리마다 어느 게임 소리인지 줄에 적혀 있어요.</span>
+    <span><b>직접 합성</b>: 코드로 만든 소리 (<code>scripts/sound/make_sfx.py</code>). 지금은 전부 게임 소리로 바뀌어 예비로만 남아 있어요. 목록은 <code>scripts/sound/sound_page.py</code> 로 다시 만들어요.</span>
+  </footer>
+</div>
+<script>
+{
+const DATA = __DATA__;
+const PLAY = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
+const STOP = '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx="1"/></svg>';
+const audio = new Audio();
+let playing = null;
+let group = "all";
+let source = "all";
+const allRows = [...DATA.sfx, ...DATA.bgm];
+
+function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function esc(t) { return String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]); }
+
+function drawWave(canvas, peaks, on) {
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth || 120;
+  const h = canvas.clientHeight || 32;
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  const g = canvas.getContext("2d");
+  g.scale(dpr, dpr);
+  g.fillStyle = css(on ? "--wave-on" : "--wave");
+  const bw = w / peaks.length;
+  peaks.forEach((p, i) => {
+    const bh = Math.max(1.5, p * (h - 4));
+    g.fillRect(i * bw + 0.5, (h - bh) / 2, Math.max(1, bw - 1.2), bh);
+  });
+}
+
+function stop() {
+  audio.pause();
+  if (playing) {
+    playing.row.classList.remove("on");
+    playing.btn.innerHTML = PLAY;
+    playing.btn.setAttribute("aria-label", playing.label + " 듣기");
+    drawWave(playing.canvas, playing.peaks, false);
+  }
+  playing = null;
+}
+
+function toggle(item) {
+  const was = playing && playing.row === item.row;
+  stop();
+  if (was) { return; }
+  audio.src = item.src;
+  audio.currentTime = 0;
+  audio.play().catch(() => {});
+  playing = item;
+  item.row.classList.add("on");
+  item.btn.innerHTML = STOP;
+  item.btn.setAttribute("aria-label", item.label + " 멈추기");
+  drawWave(item.canvas, item.peaks, true);
+}
+audio.addEventListener("ended", stop);
+
+function soundRow(s) {
+  const row = document.createElement("div");
+  row.className = "row" + (s.unused ? " unused" : "");
+  const btn = document.createElement("button");
+  btn.className = "play"; btn.type = "button"; btn.innerHTML = PLAY;
+  btn.setAttribute("aria-label", s.where + " 듣기");
+  const canvas = document.createElement("canvas");
+  const info = document.createElement("div");
+  info.className = "info";
+  const extra = [s.unused ? '<span class="tag wait">아직 안 씀</span>' : "", s.note ? `<span>${esc(s.note)}</span>` : ""].join("");
+  info.innerHTML = `<span class="where">${esc(s.where)}</span><span class="meta"><span class="tag ${s.source}">${DATA.sources[s.source]}</span>${extra}<code>${esc(s.file)}</code><span>${s.dur.toFixed(2)}초</span></span>`;
+  row.append(btn, canvas, info);
+  const item = { row, btn, canvas, peaks: s.peaks, src: s.src, label: s.where };
+  btn.addEventListener("click", () => toggle(item));
+  requestAnimationFrame(() => drawWave(canvas, s.peaks, false));
+  return row;
+}
+
+function render() {
+  const list = document.getElementById("list");
+  list.textContent = "";
+  const groups = [...DATA.groups, ["bgm", "BGM"]];
+  let shown = 0;
+  for (const [key, label] of groups) {
+    if (group !== "all" && group !== key) { continue; }
+    const pool = key === "bgm" ? DATA.bgm : DATA.sfx.filter(s => s.group === key);
+    const items = pool.filter(s => source === "all" || s.source === source);
+    if (items.length === 0) { continue; }
+    shown += items.length;
+    const sec = document.createElement("section");
+    if (key === "bgm") {
+      sec.className = "bgm";
+      const wait = items.filter(b => b.missing).length;
+      sec.innerHTML = `<h2>BGM<small>${items.length}자리${wait ? ` · ${wait}자리 파일 기다리는 중` : ""}</small></h2>`;
+      for (const b of items) {
+        if (!b.missing) { sec.append(soundRow(b)); continue; }
+        const row = document.createElement("div");
+        row.className = "row";
+        row.innerHTML = `<span class="slot" aria-hidden="true"></span><div class="info"><span class="where">${esc(b.where)}</span><span class="meta"><span class="tag wait">파일 대기</span><code>${esc(b.key)}</code></span></div>`;
+        sec.append(row);
+      }
+    } else {
+      const unused = items.filter(s => s.unused).length;
+      sec.innerHTML = `<h2>${label}<small>${items.length}개${unused ? ` · ${unused}개는 아직 안 씀` : ""}</small></h2>`;
+      for (const s of items) { sec.append(soundRow(s)); }
+    }
+    list.append(sec);
+  }
+  if (!shown) {
+    const sec = document.createElement("section");
+    sec.innerHTML = `<div class="empty">이 분류 · 출처에는 소리가 없어요.</div>`;
+    list.append(sec);
+  }
+}
+
+function tabRow(el, entries, get, set) {
+  el.textContent = "";
+  for (const [key, label] of entries) {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = label;
+    b.setAttribute("aria-pressed", String(key === get()));
+    b.addEventListener("click", () => {
+      stop(); set(key);
+      el.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      render();
+    });
+    el.append(b);
+  }
+}
+
+function band() {
+  const count = s => allRows.filter(r => r.source === s && !r.missing).length;
+  const ann = DATA.sfx.filter(r => r.group === "announce");
+  const desc = {
+    fankit: `안내 방송 ${ann.length}종 (${ann.filter(r => !r.unused).length}종 게임에서 씀) · 실험체 음성 예시`,
+    synth: "게임 소리가 없는 자리만 (합성 소리는 예비로 남겨 둠)",
+    ost: `효과음 · 스킬 소리 예시 · BGM ${DATA.bgm.filter(b => !b.missing).length}곡 (설치 폴더에서 꺼냄)`,
+  };
+  document.getElementById("band").innerHTML = Object.entries(DATA.sources)
+    .map(([k, label]) => `<div class="src-card ${k}"><b>${count(k)}</b><span><strong>${label}</strong> · ${desc[k]}</span></div>`)
+    .join("");
+}
+
+band();
+tabRow(document.getElementById("tabs"), [["all", "전체"], ...DATA.groups, ["bgm", "BGM"]], () => group, k => { group = k; });
+tabRow(document.getElementById("srcTabs"), [["all", "출처 전체"], ...Object.entries(DATA.sources)], () => source, k => { source = k; });
+render();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => render());
+}
+</script>
+</body>
+</html>

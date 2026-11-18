@@ -3,6 +3,7 @@ import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { activeOverrides } from "#app/overrides";
 import { handleTutorial, Tutorial } from "#app/tutorial";
+import { bseoAnnounce } from "#data/bseorogue/announce";
 import type { IEggOptions } from "#data/egg";
 import { Egg, getLegendaryGachaSpeciesForTimestamp } from "#data/egg";
 import { Button } from "#enums/buttons";
@@ -396,6 +397,8 @@ export class EggGachaUiHandler extends MessageUiHandler {
         delay: this.getDelayValue(1250),
         onStart: () => {
           audioManager.playSound("se/gacha_dispense");
+          // 블서로그: "항공 보급이 도착합니다" (팬키트 안내 방송)
+          bseoAnnounce("supply");
         },
         targets: { dummy: 0 },
         dummy: 1,

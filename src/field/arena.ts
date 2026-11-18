@@ -7,6 +7,7 @@ import { NIGHT_TIME } from "#constants/game-constants";
 import type { ArenaTag, ArenaTagTypeMap } from "#data/arena-tag";
 import { getArenaTag } from "#data/arena-tag";
 import { biomeBgmLoopPoints } from "#data/biome-bgm-loop-points";
+import { ER_BGM_FILES, ER_BGM_LOOP } from "#data/bseorogue/er-sound-manifest";
 import { bseoWildSpecies } from "#data/bseorogue/hooks";
 import { getDailyForcedWaveBiomePoolTier } from "#data/daily-run";
 import { allBiomes } from "#data/data-lists";
@@ -122,7 +123,9 @@ export class Arena {
 
   /** A float representing the loop point of the current biome's bgm in seconds */
   public get bgmLoopPoint(): number {
-    return biomeBgmLoopPoints[getBiomeKey(this.biomeId)];
+    const key = getBiomeKey(this.biomeId);
+    // 블서로그: 지역 곡(이터널 리턴)은 지역 곡이 끝난 뒤 전투 곡부터 반복해요
+    return key in ER_BGM_FILES ? (ER_BGM_LOOP[key] ?? 0) : biomeBgmLoopPoints[key];
   }
 
   public get bgTerrainColorRatioForBiome(): number {

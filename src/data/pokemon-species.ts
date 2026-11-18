@@ -10,6 +10,7 @@ import { speciesEggMoves } from "#balance/egg-moves";
 import { isBseoSpecies } from "#data/bseorogue/hooks";
 import { ensureBseoIcons, ensureBseoSprite, REAL_ART } from "#data/bseorogue/placeholder-art";
 import { loadBseoSkillIcons } from "#data/bseorogue/skill-icon";
+import { loadBseoSkillSfx } from "#data/bseorogue/skill-sfx";
 import { loadBseoVoices, playBseoVoice } from "#data/bseorogue/voice";
 import type { GrowthRate } from "#data/exp";
 import { Gender } from "#data/gender";
@@ -724,6 +725,7 @@ export abstract class PokemonSpeciesForm {
     if (isBseoSpecies(this.speciesId) && ensureBseoSprite(spriteKey, this.speciesId, back)) {
       // 블서로그: 실험체 음성(스킬 · 등장 대사) · 스킬 아이콘도 같이 받아 둬요
       loadBseoVoices(this.speciesId);
+      loadBseoSkillSfx(this.speciesId);
       loadBseoSkillIcons(this.speciesId);
       if (startLoad && !globalScene.load.isLoading()) {
         globalScene.load.start();

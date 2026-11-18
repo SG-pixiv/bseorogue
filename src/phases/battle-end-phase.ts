@@ -1,5 +1,6 @@
 import { applyAbAttrs } from "#abilities/apply-ab-attrs";
 import { globalScene } from "#app/global-scene";
+import { bseoAnnounceBattleEnd } from "#data/bseorogue/announce";
 import { LapsingPersistentModifier, LapsingPokemonHeldItemModifier } from "#modifiers/modifier";
 import { BattlePhase } from "#phases/battle-phase";
 
@@ -31,6 +32,9 @@ export class BattleEndPhase extends BattlePhase {
     if (isEndless && waveIndex + 1 > gameStats.highestEndlessWave) {
       gameStats.highestEndlessWave = waveIndex + 1;
     }
+
+    // 블서로그: 이긴 뒤 안내 방송 (금지구역 · 남은 생존자 · 연승). 쓰러진 실험체가 있으면 연승은 0부터
+    bseoAnnounceBattleEnd(this.isVictory, waveIndex, currentBattle.playerFaintsHistory.length > 0);
 
     if (this.isVictory) {
       currentBattle.addBattleScore();

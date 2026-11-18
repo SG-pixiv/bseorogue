@@ -11,6 +11,7 @@
  * - 오른쪽 클릭: 취소 · 뒤로 (키보드 B / Esc 와 같아요)
  * - 휠: 위 · 아래 (가로 휠 · Shift+휠은 왼쪽 · 오른쪽)
  * - 가운데 클릭: 메뉴
+ * - 화면 구석의 "뒤로" 버튼: 오른쪽 클릭과 같아요 (마우스 · 터치만 쓰는 사람도 나갈 수 있게, 11-18)
  * 터치 화면에서는 한 번 누르면 고르고, 한 번 더 누르면 결정해요.
  * 직접 누르는 칸을 아직 안 만든 화면에서는 휠로 고르고 왼쪽 클릭으로 결정해요.
  * 키보드(스페이스 · 방향키 등)는 원래대로 다 돼요.
@@ -45,10 +46,35 @@ type Awaiting = { awaitingActionInput?: boolean; tutorialActive?: boolean; pendi
 /** 메뉴 버튼을 보여 주는 화면 (키보드 M · Esc 로 메뉴가 열리는 화면. 메뉴 안에서는 오른쪽 클릭으로 닫아요) */
 const MENU_MODES: readonly UiMode[] = [UiMode.COMMAND, UiMode.MODIFIER_SELECT];
 
+/**
+ * "뒤로" 버튼을 보여 주는 화면과 그 자리 (게임 좌표 320 × 180, 버튼 왼쪽 위).
+ * 화면마다 비어 있는 구석에 둬요. 실험체 화면은 원래 "취소" 칸이 있어서 빼요.
+ * 고르기 창(예/아니요 등)은 "취소" 줄이 있거나 꼭 골라야 하는 창이라 빼요.
+ */
+export const BACK_SPOTS: Partial<Record<UiMode, readonly [x: number, y: number, label?: string]>> = {
+  [UiMode.FIGHT]: [1, 1],
+  [UiMode.BALL]: [1, 1],
+  [UiMode.TARGET_SELECT]: [1, 1],
+  [UiMode.SUMMARY]: [288, 1],
+  [UiMode.STARTER_SELECT]: [1, 165],
+  [UiMode.POKEDEX]: [1, 165],
+  [UiMode.MENU]: [245, 160, "닫기"],
+  [UiMode.SETTINGS_GENERAL]: [3, 162],
+  [UiMode.SETTINGS_DISPLAY]: [3, 162],
+  [UiMode.SETTINGS_AUDIO]: [3, 162],
+  [UiMode.SETTINGS_GAMEPAD]: [3, 162],
+  [UiMode.SETTINGS_KEYBOARD]: [3, 162],
+  [UiMode.ACHIEVEMENTS]: [287, 163],
+  [UiMode.GAME_STATS]: [287, 3],
+  [UiMode.RUN_HISTORY]: [1, 165],
+};
+
 class MouseController {
   private hoverKey: string | null = null;
   private hovered: MouseTarget | null = null;
   private menuButton: Phaser.GameObjects.Container | null = null;
+  private backButton: Phaser.GameObjects.Container | null = null;
+  private backLabel: Phaser.GameObjects.Text | null = null;
   private wheelX = 0;
   private wheelY = 0;
   private started = false;
@@ -69,7 +95,59 @@ class MouseController {
     input.on("pointerdown", (p: Phaser.Input.Pointer, over: Phaser.GameObjects.GameObject[]) => this.onDown(p, over));
     input.on("wheel", (p: Phaser.Input.Pointer, _over: unknown, dx: number, dy: number) => this.onWheel(p, dx, dy));
     this.setupMenuButton();
-    globalScene.events.on("update", () => this.updateMenuButton());
+    this.setupBackButton();
+    globalScene.events.on("update", () => {
+      this.updateMenuButton();
+      this.updateBackButton();
+    });
+  }
+
+  /** 화면 구석 "뒤로" 버튼 (누르면 오른쪽 클릭 · 키보드 B 와 같아요) */
+  private setupBackButton(): void {
+    const container = globalScene.add.container(1, 1).setName("bseo-back-button").setVisible(false);
+    const bg = addWindow(0, 0, 30, 14).setOrigin(0);
+    const label = addTextObject(15, 7, "뒤로", TextStyle.WINDOW, { fontSize: "60px" }).setOrigin(0.5);
+    container.add([bg, label]);
+    globalScene.uiContainer.add(container);
+    this.backButton = container;
+    this.backLabel = label;
+  }
+
+  /** 지금 화면에 "뒤로" 버튼을 둘 자리 (없으면 null) */
+  backSpot(): readonly [number, number, string] | null {
+    const ui = globalScene.ui;
+    if (!ui || uiBusy()) {
+      return null;
+    }
+    const spot = BACK_SPOTS[ui.mode];
+    const handler = ui.getHandler() as unknown as Awaiting;
+    if (!spot || handler?.tutorialActive) {
+      return null;
+    }
+    return [spot[0], spot[1], spot[2] ?? "뒤로"];
+  }
+
+  private updateBackButton(): void {
+    const button = this.backButton;
+    if (!button) {
+      return;
+    }
+    const spot = this.backSpot();
+    if (button.visible !== !!spot) {
+      button.setVisible(!!spot);
+    }
+    if (!spot) {
+      return;
+    }
+    if (button.x !== spot[0] || button.y !== spot[1]) {
+      button.setPosition(spot[0], spot[1]);
+    }
+    if (this.backLabel && this.backLabel.text !== spot[2]) {
+      this.backLabel.setText(spot[2]);
+    }
+    if (globalScene.uiContainer.last !== button) {
+      globalScene.uiContainer.bringToTop(button);
+    }
   }
 
   /** 왼쪽 위 "메뉴" 버튼 (마우스만 쓰는 사람도 메뉴를 열 수 있게) */
@@ -143,6 +221,14 @@ class MouseController {
         rect: objRect(this.menuButton),
         instant: true,
         click: () => globalScene.uiInputs.buttonMenu(),
+      });
+    }
+    if (this.backButton?.visible && this.backSpot()) {
+      targets.push({
+        label: "back-button",
+        rect: objRect(this.backButton),
+        instant: true,
+        click: () => press(Button.CANCEL),
       });
     }
     return targets;

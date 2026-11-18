@@ -2,6 +2,7 @@ import { timedEventManager } from "#app/global-event-manager";
 import { globalScene } from "#app/global-scene";
 import { BackgroundMusic } from "#audio/background-music";
 import { PRSFX_SOUND_ADJUSTMENT_RATIO } from "#constants/app-constants";
+import { ER_BGM_FILES, ER_BGM_LOOP } from "#data/bseorogue/er-sound-manifest";
 import { VolumeSetting } from "#enums/volume-setting";
 import { fixedInt } from "#utils/common";
 
@@ -244,6 +245,10 @@ export class AudioManager {
 
   /** The loop point of any given battle, mystery encounter, or title track, read as seconds and milliseconds. */
   private getBgmLoopPoint(bgmName: string): number {
+    // 블서로그: 이터널 리턴 BGM 은 반복 시작점이 따로 있어요 (없으면 처음부터)
+    if (bgmName in ER_BGM_FILES) {
+      return ER_BGM_LOOP[bgmName] ?? 0;
+    }
     switch (bgmName) {
       case "title": //Firel PokéRogue Title
         return 46.5;

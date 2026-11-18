@@ -1,0 +1,233 @@
+{
+ "start": {
+  "what": "실험 시작 안내",
+  "scene": "판 시작 (1웨이브)",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_게임 시작_01.wav",
+   "01. Announce/KOR/ER 어나운스_게임 시작_02.wav"
+  ]
+ },
+ "win": {
+  "what": "승리 안내",
+  "scene": "50웨이브 클리어",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_게임 종료_01.wav",
+   "01. Announce/KOR/ER 어나운스_게임 종료_02.wav"
+  ]
+ },
+ "dead": {
+  "what": "생존자 사망 안내",
+  "scene": "판 실패 (파티 전멸)",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_누군가 사망_01.wav",
+   "01. Announce/KOR/ER 어나운스_누군가 사망_02.wav"
+  ]
+ },
+ "zone1": {
+  "what": "첫 번째 금지구역 지정",
+  "scene": "10웨이브 보스를 이겼을 때",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_금지구역1_01.wav",
+   "01. Announce/KOR/ER 어나운스_금지구역1_02.wav"
+  ]
+ },
+ "zone2": {
+  "what": "두 번째 금지구역 지정",
+  "scene": "20웨이브 보스를 이겼을 때",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_금지구역2_01.wav",
+   "01. Announce/KOR/ER 어나운스_금지구역2_02.wav"
+  ]
+ },
+ "zone3": {
+  "what": "세 번째 금지구역 지정",
+  "scene": "30웨이브 보스를 이겼을 때",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_금지구역3_01.wav",
+   "01. Announce/KOR/ER 어나운스_금지구역3_02.wav"
+  ]
+ },
+ "zone4": {
+  "what": "네 번째 금지구역 지정",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_금지구역4_01.wav",
+   "01. Announce/KOR/ER 어나운스_금지구역4_02.wav"
+  ]
+ },
+ "zone5": {
+  "what": "다섯 번째 금지구역 지정",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_금지구역5_01.wav",
+   "01. Announce/KOR/ER 어나운스_금지구역5_02.wav"
+  ]
+ },
+ "zone6": {
+  "what": "여섯 번째 금지구역 지정",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_금지구역6_01.wav",
+   "01. Announce/KOR/ER 어나운스_금지구역6_02.wav"
+  ]
+ },
+ "zone7": {
+  "what": "일곱 번째 금지구역 지정",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_금지구역7_01.wav",
+   "01. Announce/KOR/ER 어나운스_금지구역7_02.wav"
+  ]
+ },
+ "zone8": {
+  "what": "여덟 번째 금지구역 지정",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_금지구역8_01.wav",
+   "01. Announce/KOR/ER 어나운스_금지구역8_02.wav"
+  ]
+ },
+ "zone9": {
+  "what": "아홉 번째 금지구역 지정",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_금지구역9_01.wav",
+   "01. Announce/KOR/ER 어나운스_금지구역9_02.wav"
+  ]
+ },
+ "zone": {
+  "what": "새 금지구역 지정",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_금지구역_01.wav",
+   "01. Announce/KOR/ER 어나운스_금지구역_02.wav"
+  ]
+ },
+ "hurry": {
+  "what": "생존자가 적어 금지구역 가속",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_금지구역 가속_01.wav",
+   "01. Announce/KOR/ER 어나운스_금지구역 가속_02.wav"
+  ]
+ },
+ "left10": {
+  "what": "생존자 10명 남음",
+  "scene": "40웨이브를 이겼을 때 (10웨이브 남음)",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_생존자 10명 남음_01.wav",
+   "01. Announce/KOR/ER 어나운스_생존자 10명 남음_02.wav"
+  ]
+ },
+ "left5": {
+  "what": "생존자 5명 남음",
+  "scene": "45웨이브를 이겼을 때",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_생존자 5명 남음_01.wav",
+   "01. Announce/KOR/ER 어나운스_생존자 5명 남음_02.wav"
+  ]
+ },
+ "left3": {
+  "what": "최종 생존자 3명",
+  "scene": "47웨이브를 이겼을 때",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_생존자 3명 남음_01.wav",
+   "01. Announce/KOR/ER 어나운스_생존자 3명 남음_02.wav"
+  ]
+ },
+ "left2": {
+  "what": "최종 생존자 2명",
+  "scene": "48웨이브를 이겼을 때",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_생존자 2명 남음_01.wav",
+   "01. Announce/KOR/ER 어나운스_생존자 2명 남음_02.wav"
+  ]
+ },
+ "safe_off": {
+  "what": "임시 안전지대 해제 (더 이상 안전한 곳이 없음)",
+  "scene": "49웨이브를 이겼을 때 (다음은 최종 보스)",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_안전지대 해제 안내_01.wav",
+   "01. Announce/KOR/ER 어나운스_안전지대 해제 안내_02.wav"
+  ]
+ },
+ "hack": {
+  "what": "시스템 비정상 접근 감지",
+  "scene": "50웨이브 최종 보스(루미)가 나올 때",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_누군가 해킹1_01.wav"
+  ]
+ },
+ "kill3": {
+  "what": "누군가 연쇄 처치 중",
+  "scene": "쓰러지지 않고 5연승",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_누군가 3, 4킬을 기록_01.wav",
+   "01. Announce/KOR/ER 어나운스_누군가 3, 4킬을 기록_02.wav"
+  ]
+ },
+ "kill5": {
+  "what": "누군가 루미아 섬을 지배 중",
+  "scene": "쓰러지지 않고 15연승",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_누군가 5, 6킬을 기록_01.wav",
+   "01. Announce/KOR/ER 어나운스_누군가 5, 6킬을 기록_02.wav"
+  ]
+ },
+ "kill7": {
+  "what": "누군가 생존자의 절반을 처치",
+  "scene": "25웨이브를 이겼을 때 (판의 절반)",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_누군가 7킬을 기록_01.wav",
+   "01. Announce/KOR/ER 어나운스_누군가 7킬을 기록_02.wav"
+  ]
+ },
+ "kill8": {
+  "what": "전설이 탄생 중",
+  "scene": "쓰러지지 않고 35연승",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_누군가 8킬 이상을 기록_01.wav",
+   "01. Announce/KOR/ER 어나운스_누군가 8킬 이상을 기록_02.wav"
+  ]
+ },
+ "supply": {
+  "what": "항공 보급 도착",
+  "scene": "보급 요청(뽑기)에서 보급 상자가 나올 때",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_항공보급 실시_01.wav",
+   "01. Announce/KOR/ER 어나운스_항공보급 실시_02.wav"
+  ]
+ },
+ "supply_soon": {
+  "what": "1분 뒤 항공 보급 도착",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_항공보급 예고_01.wav",
+   "01. Announce/KOR/ER 어나운스_항공보급 예고_02.wav"
+  ]
+ },
+ "safe_soon": {
+  "what": "1분 뒤 마지막 금지구역 · 임시 안전지대 예고",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_안전지대 예고 안내_01.wav",
+   "01. Announce/KOR/ER 어나운스_안전지대 예고 안내_02.wav"
+  ]
+ },
+ "safe_set": {
+  "what": "마지막 금지구역 지정 · 임시 안전지대",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_안전지대 지정 안내_01.wav",
+   "01. Announce/KOR/ER 어나운스_안전지대 지정 안내_02.wav"
+  ]
+ },
+ "safe_off_soon": {
+  "what": "1분 뒤 임시 안전지대 해제",
+  "scene": "",
+  "files": [
+   "01. Announce/KOR/ER 어나운스_안전지대 해제 예고 안내_01.wav",
+   "01. Announce/KOR/ER 어나운스_안전지대 해제 예고 안내_02.wav"
+  ]
+ }
+}

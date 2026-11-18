@@ -6,6 +6,7 @@ import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { bypassLogin } from "#constants/app-constants";
+import { bseoAnnounceGameOver } from "#data/bseorogue/announce";
 import { offerRanking } from "#data/bseorogue/ranking";
 import { modifierTypes } from "#data/data-lists";
 import { getCharVariantFromDialogue } from "#data/dialogue";
@@ -69,6 +70,9 @@ export class GameOverPhase extends BattlePhase {
       return;
     }
     // Otherwise, continue standard Game Over logic
+
+    // 블서로그: 판 끝 안내 방송 (이기면 "승리했습니다" · 지면 "생존자가 사망했습니다")
+    bseoAnnounceGameOver(this.isVictory);
 
     if (this.isVictory && globalScene.gameMode.isEndless) {
       const genderIndex = settings.general.playerGender;

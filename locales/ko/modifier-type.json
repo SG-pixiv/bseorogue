@@ -15,17 +15,17 @@
       }
     },
     "PokemonHpRestoreModifierType": {
-      "description": "실험체 1마리의 HP를 {{restorePoints}} 또는 {{restorePercent}}% 중\n높은 수치만큼 회복한다.",
+      "description": "실험체 1명의 HP를 {{restorePoints}} 또는 {{restorePercent}}% 중\n높은 수치만큼 회복한다.",
       "extra": {
-        "fully": "실험체 1마리의 HP를 모두 회복한다.",
-        "fullyWithStatus": "실험체 1마리의 HP와 상태 이상을 모두 회복한다."
+        "fully": "실험체 1명의 HP를 모두 회복한다.",
+        "fullyWithStatus": "실험체 1명의 HP와 상태 이상을 모두 회복한다."
       }
     },
     "PokemonReviveModifierType": {
       "description": "기절한 실험체 1명의 HP를 {{restorePercent}}%까지 회복한다."
     },
     "PokemonStatusHealModifierType": {
-      "description": "실험체 1마리의 상태 이상을 모두 회복한다."
+      "description": "실험체 1명의 상태 이상을 모두 회복한다."
     },
     "PokemonPpRestoreModifierType": {
       "description": "실험체가 기억하고 있는 스킬 중 1개의 PP를 {{restorePoints}}만큼 회복한다.",
@@ -44,13 +44,13 @@
     },
     "PokemonNatureChangeModifierType": {
       "name": "{{natureName}}민트",
-      "description": "실험체의 성격을 {{natureName}}[[로]] 바꾸고 스타팅에도 등록한다."
+      "description": "실험체의 성향을 {{natureName}}[[로]] 바꾸고 스타팅에도 등록한다."
     },
     "DoubleBattleChanceBoosterModifierType": {
-      "description": "{{battleCount}}번의 배틀 동안 더블 배틀이 등장할 확률이 4배가 된다."
+      "description": "{{battleCount}}번의 전투 동안 2:2 전투가 등장할 확률이 4배가 된다."
     },
     "TempStatStageBoosterModifierType": {
-      "description": "자신의 모든 실험체가 5번의 배틀 동안 {{stat}}[[가]] {{amount}} 증가한다.",
+      "description": "자신의 모든 실험체가 5번의 전투 동안 {{stat}}[[가]] {{amount}} 증가한다.",
       "extra": {
         "stage": "1단계",
         "percentage": "20%"
@@ -60,7 +60,7 @@
       "description": "지니게 하면 {{moveType}}타입 스킬의 위력이 20% 상승한다."
     },
     "PokemonLevelIncrementModifierType": {
-      "description": "실험체 1마리의 레벨이 {{levels}}만큼 상승한다."
+      "description": "실험체 1명의 레벨이 {{levels}}만큼 상승한다."
     },
     "AllPokemonLevelIncrementModifierType": {
       "description": "자신의 모든 실험체의 레벨이 {{levels}}만큼 상승한다."
@@ -224,7 +224,7 @@
     },
     "EXP_SHARE": {
       "name": "휴대용 생성기",
-      "description": "배틀에 참여하지 않아도 20%의 경험치를 받을 수 있게 된다."
+      "description": "전투에 참여하지 않아도 20%의 경험치를 받을 수 있게 된다."
     },
     "EXP_BALANCE": {
       "name": "균형 학습 장치",
@@ -232,7 +232,7 @@
     },
     "OVAL_CHARM": {
       "name": "둥근부적",
-      "description": "여러 마리의 실험체가 배틀에 참여할 경우, 전체 경험치의 10%씩을 추가로 획득한다."
+      "description": "여러 명의 실험체가 전투에 참여할 경우, 전체 경험치의 10%씩을 추가로 획득한다."
     },
     "EXP_CHARM": {
       "name": "아글라이아의 선물"
@@ -272,7 +272,7 @@
     },
     "SOUL_DEW": {
       "name": "마음의물방울",
-      "description": "지닌 실험체의 성격의 효과가 10% 증가한다. (합연산)"
+      "description": "지닌 실험체의 성향의 효과가 10% 증가한다. (합연산)"
     },
     "NUGGET": {
       "name": "크레딧+"
@@ -293,7 +293,7 @@
     },
     "COIN_CASE": {
       "name": "동전케이스",
-      "description": "매 열 번째 배틀마다, 가진 돈의 10%를 이자로 획득한다."
+      "description": "매 열 번째 전투마다, 가진 돈의 10%를 이자로 획득한다."
     },
     "LOCK_CAPSULE": {
       "name": "휴대용 생성기",
@@ -318,7 +318,7 @@
     },
     "BERRY_POUCH": {
       "name": "열매주머니",
-      "description": "사용한 나무열매가 소모되지 않을 확률이 30% 추가된다."
+      "description": "사용한 음식이 소모되지 않을 확률이 30% 추가된다."
     },
     "FOCUS_BAND": {
       "name": "기합의머리띠",
