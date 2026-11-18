@@ -10,7 +10,7 @@
   /* VOICE: 게임 설정 창처럼 차분하게, 소리 한 줄씩 듣고 확인하는 표
      IDEA: 게임 안 정보 창 (남색 판 · 주황 커서)
      PICTURE: 줄마다 재생 버튼 + 파형, 위에는 출처별 개수 띠
-     COLOUR and TYPE: 남색 · 흰 판 + 주황 강조, 출처 색 3개 (팬키트 파랑 · 합성 회색 · OST 주황), Do Hyeon 제목 + Noto Sans KR
+     COLOUR and TYPE: 남색 · 흰 판 + 주황 강조, 출처 색 3개 (팬키트 파랑 · 합성 회색 · 게임 소리 주황), Do Hyeon 제목 + Noto Sans KR
      LAYOUT: 머리글 → 출처 띠 → 분류 · 출처 거르기 → 분류별 판 → BGM 자리 */
   :root {
     --bg: #eef0f6; --panel: #ffffff; --panel-2: #f5f6fb; --fg: #171a2b; --muted: #5d627a; --line: #d7dae6;
@@ -99,7 +99,7 @@
 <div class="wrap">
   <header>
     <h1>블서로그 사운드 목록</h1>
-    <p class="lead">게임 어디에서 어떤 소리가 나는지 한 줄씩 들어 볼 수 있어요. ▶ 를 누르면 재생, 한 번 더 누르면 멈춰요. 줄마다 출처(팬키트 · 직접 합성 · 공식 OST)가 붙어 있어요.</p>
+    <p class="lead">게임 어디에서 어떤 소리가 나는지 한 줄씩 들어 볼 수 있어요. ▶ 를 누르면 재생, 한 번 더 누르면 멈춰요. 줄마다 출처(이터널 리턴 게임 · 팬키트 · 직접 합성)가 붙어 있어요.</p>
     <div class="band" id="band"></div>
   </header>
   <nav aria-label="거르기">
@@ -109,8 +109,8 @@
   <div id="list" style="display:grid; gap:18px"></div>
   <footer>
     <span><b>팬키트</b>: 님블뉴런 이터널 리턴 팬키트 소리 (안내 방송 <code>assets/er/announce/</code> · 실험체 음성 <code>assets/er/voice/</code>). 팬키트에는 BGM · 효과음이 없어요 (11-18 노트북 <code>er</code> 폴더 전부 확인).</span>
-    <span><b>직접 합성</b>: 코드로 만든 소리 (<code>scripts/sound/make_sfx.py</code>). 같은 자리 공식 소리를 받으면 그 파일로 바꿔 끼워요.</span>
-    <span><b>공식 OST</b>: SG가 공식 사운드트랙 파일을 주면 BGM 자리마다 넣고 이 목록을 다시 만들어요 (<code>scripts/sound/sound_page.py</code>).</span>
+    <span><b>이터널 리턴 게임</b>: 이터널 리턴 설치 폴더에서 꺼낸 소리 (<code>scripts/sound/build_er_sound.py</code>). 자리마다 어느 게임 소리인지 줄에 적혀 있어요.</span>
+    <span><b>직접 합성</b>: 코드로 만든 소리 (<code>scripts/sound/make_sfx.py</code>). 지금은 전부 게임 소리로 바뀌어 예비로만 남아 있어요. 목록은 <code>scripts/sound/sound_page.py</code> 로 다시 만들어요.</span>
   </footer>
 </div>
 <script>
@@ -206,7 +206,7 @@ function render() {
         if (!b.missing) { sec.append(soundRow(b)); continue; }
         const row = document.createElement("div");
         row.className = "row";
-        row.innerHTML = `<span class="slot" aria-hidden="true"></span><div class="info"><span class="where">${esc(b.where)}</span><span class="meta"><span class="tag wait">공식 OST 파일 대기</span><code>${esc(b.key)}</code></span></div>`;
+        row.innerHTML = `<span class="slot" aria-hidden="true"></span><div class="info"><span class="where">${esc(b.where)}</span><span class="meta"><span class="tag wait">파일 대기</span><code>${esc(b.key)}</code></span></div>`;
         sec.append(row);
       }
     } else {
@@ -243,8 +243,8 @@ function band() {
   const ann = DATA.sfx.filter(r => r.group === "announce");
   const desc = {
     fankit: `안내 방송 ${ann.length}종 (${ann.filter(r => !r.unused).length}종 게임에서 씀) · 실험체 음성 예시`,
-    synth: "버튼 · 전투 · 보상 · 볼 · 보급 상자 · 스킬 연출 효과음",
-    ost: `BGM ${DATA.bgm.length}자리 중 ${DATA.bgm.filter(b => !b.missing).length}자리 들어감`,
+    synth: "게임 소리가 없는 자리만 (합성 소리는 예비로 남겨 둠)",
+    ost: `효과음 · 스킬 소리 예시 · BGM ${DATA.bgm.filter(b => !b.missing).length}곡 (설치 폴더에서 꺼냄)`,
   };
   document.getElementById("band").innerHTML = Object.entries(DATA.sources)
     .map(([k, label]) => `<div class="src-card ${k}"><b>${count(k)}</b><span><strong>${label}</strong> · ${desc[k]}</span></div>`)

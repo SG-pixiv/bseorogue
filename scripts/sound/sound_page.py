@@ -4,9 +4,9 @@
 블서로그 사운드 목록 페이지 만들기 (SG에게 보내는 "어디에 어떤 소리" 페이지)
 
 게임에 들어간 소리를 모아서 한 장짜리 HTML 페이지(재생 버튼 · 파형 · 어디서 나는지 · 출처)로 만들어요.
-  - 직접 합성: scripts/sound/make_sfx.py --list 의 효과음 (assets/audio/...)
+  - 이터널 리턴 게임: 효과음 · BGM · 실험체 스킬 소리 (scripts/sound/build_er_sound.py → assets/er/sound-sources.json)
   - 팬키트:    안내 방송 assets/er/announce/ (assets/er/announce-sources.json) · 실험체 음성 몇 개 예시
-  - 공식 OST:  BGM 자리 (assets/audio/bgm/<열쇠>.mp3 가 있으면 넣고, 없으면 "파일 대기")
+  - 직접 합성: scripts/sound/make_sfx.py --list 의 효과음 중 게임 소리가 없는 자리 (assets/audio/...)
 
   python3 -I -B scripts/sound/sound_page.py <출력 폴더>
     → <출력 폴더>/index.html + <출력 폴더>/sounds/... (재생용 소리 복사본)
@@ -15,6 +15,7 @@
 """
 
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -36,10 +37,11 @@ GROUPS = [
     ("ball", "영입 볼"),
     ("box", "보급 상자"),
     ("skill", "스킬 연출"),
+    ("skillsfx", "실험체 스킬 소리 (예시)"),
     ("announce", "안내 방송"),
     ("voice", "실험체 음성 (예시)"),
 ]
-SOURCES = {"fankit": "팬키트", "synth": "직접 합성", "ost": "공식 OST"}
+SOURCES = {"ost": "이터널 리턴 게임", "fankit": "팬키트", "synth": "직접 합성"}
 
 BATTLE = {"hit", "hit_strong", "hit_weak", "faint", "flee", "low_hp"}
 LIGHT = {"sparkle", "shine", "shing", "charge", "beam"}
@@ -52,17 +54,9 @@ VOICE_SAMPLES = [
     (11, "유키", "r", "스킬 R 를 쓸 때"),
 ]
 
-# BGM 자리: (열쇠 · 파일 이름, 어디서). 파일은 assets/audio/bgm/<열쇠>.mp3
-BGM = [
-    ("title", "타이틀 화면"),
-    ("menu", "시작 실험체 고르기 · 메뉴"),
-    ("지역 21곳", "일반 웨이브 (지역마다: 골목길 · 양궁장 · 개울 · 숲 · 고급 주택가 · 항구 · 연못 · 모래사장 · 절 · 주유소 · 창고 · 학교 · 공장 · 소방서 · 묘지 · 경찰서 · 성당 · 병원 · 연구소 · 바지선 · 호텔)"),
-    ("battle_trainer", "팀 전투 (마스터즈 · KEL 팀)"),
-    ("관장", "관장 전투 (8 · 18 · 28 · 38 · 48웨이브)"),
-    ("최종 보스", "50웨이브 루미"),
-    ("bw/heal", "회복할 때 짧은 곡"),
-    ("bw/evolution", "스킨 진화할 때"),
-]
+# 실험체 스킬 소리 예시 (ER 번호). 전부는 87명 343개라 몇 명만
+SKILL_SAMPLES = [1, 2, 7, 11, 21, 30, 33, 64]
+ER_SOURCES = ASSETS / "er" / "sound-sources.json"
 
 
 def group_of(path: str) -> str:
@@ -149,10 +143,25 @@ def main(argv: list[str]) -> None:
         text=True,
         check=True,
     ).stdout
+    er = json.loads(ER_SOURCES.read_text(encoding="utf-8")) if ER_SOURCES.exists() else {"sfx": {}, "bgm": {}, "skill": {}}
     for line in listing.splitlines():
         path, where = line.split("\t", 1)
-        file = ASSETS / "audio" / (path if path.endswith(".wav") else f"{path}.wav")
-        rows.append(entry(group_of(path), where, file, out, "synth"))
+        key = path if path.endswith(".wav") else f"{path}.wav"
+        game = er["sfx"].get(key)
+        if game:  # 이터널 리턴 게임 소리가 있으면 그것 (합성 소리는 예비)
+            note = f"게임 소리 {game['from'].rsplit('/', 1)[1]}"
+            rows.append(entry(group_of(path), where, ASSETS / "er" / "audio" / key, out, "ost", note=note))
+        else:
+            rows.append(entry(group_of(path), where, ASSETS / "audio" / key, out, "synth"))
+
+    names = dict(re.findall(r'\n  "(\d+)": \{\n    name: "([^"]+)"', (ROOT / "src/data/bseorogue/er-data.ts").read_text(encoding="utf-8")))
+    total = len(er["skill"])
+    for code in SKILL_SAMPLES:
+        for key in "qwer":
+            if f"{code}_{key}" in er["skill"]:
+                file = ASSETS / "er" / "sfx" / f"{code}_{key}.m4a"
+                note = f"{total}개 중 예시 · 게임 소리 {er['skill'][f'{code}_{key}'].rsplit('/', 1)[1]}"
+                rows.append(entry("skillsfx", f"{names[str(code)]}: 스킬 {key.upper()} 를 쓸 때", file, out, "ost", note=note))
 
     announce = json.loads((ASSETS / "er" / "announce-sources.json").read_text(encoding="utf-8"))
     # 게임에서 쓰는 방송 먼저, 안 쓰는 방송은 뒤에 (방송 내용을 제목으로)
@@ -177,12 +186,11 @@ def main(argv: list[str]) -> None:
             rows.append(entry("voice", f"{name}: {where}", file, out, "fankit", note="실험체 음성 (90명 1,595개 중 예시)"))
 
     bgm = []
-    for key, where in BGM:
-        file = ASSETS / "audio" / "bgm" / f"{key}.mp3"
-        if file.exists():
-            bgm.append(entry("bgm", where, file, out, "ost", key=key))
-        else:
-            bgm.append({"key": key, "where": where, "source": "ost", "missing": True})
+    for name, info in er["bgm"].items():
+        note = f"게임 곡 {' + '.join(c.rsplit('/', 1)[1] for c in info['from'])}"
+        if info["loop"]:
+            note += f" · {info['loop']:.1f}초부터 반복"
+        bgm.append(entry("bgm", info["where"], ASSETS / "er" / "audio" / "bgm" / f"{name}.mp3", out, "ost", key=name, note=note))
 
     data = {"groups": GROUPS, "sources": SOURCES, "sfx": rows, "bgm": bgm}
     html = TEMPLATE.read_text(encoding="utf-8").replace("__DATA__", json.dumps(data, ensure_ascii=False))
