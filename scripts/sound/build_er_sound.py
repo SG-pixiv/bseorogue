@@ -149,6 +149,14 @@ CAST = [("attack", 6), ("fire", 6), ("shot", 6), ("swing", 6), ("throw", 5), ("a
         ("cast", 5), ("start", 4), ("effect", 3), ("on", 2)]
 HIT = [("hit", 6), ("explode", 6), ("impact", 6), ("bump", 4), ("collision", 4), ("boom", 5)]
 SKILL_MAX = 2.2
+# 이름 규칙으로는 못 고르는 자리 (게임에 시전 소리가 따로 없거나 빈 파일이에요): (ER 번호, 키) → sound/fx/ 아래 폴더
+SKILL_OVERRIDE = {
+    (1, "q"): "jackie/s003/skilldualsword_1",  # 재키 Q: 무기 공용 소리를 써서 재키 폴더의 쌍검 스킬 소리
+    (3, "e"): "fiora/s000/fiora_skill03_move",  # 피오라 E: 돌진 소리뿐
+    (32, "e"): "william/s000/william_skill03_move",  # 윌리엄 E: 달리기 소리뿐
+    (34, "w"): "nathapon/s000/nathapon_skill02_active",  # 나타폰 W: attack 은 빈 파일
+    (65, "e"): "debimarlene/s000/debi_skill03_dash",  # 데비&마를렌 E: attack 은 빈 파일
+}
 
 
 # ── 소리 다루기 ─────────────────────────────────────
@@ -341,7 +349,12 @@ def build(root: Path) -> None:
 
     skill: dict[int, str] = {}
     for code, fx in sorted(er_characters().items()):
-        for key, src in pick_skill(root, fx).items():
+        picked = pick_skill(root, fx)
+        for (c, key), path in SKILL_OVERRIDE.items():
+            src = find_src(root, f"sound/fx/{path}") if c == code and key not in picked else None
+            if src:
+                picked[key] = src
+        for key, src in sorted(picked.items(), key=lambda kv: "qwer".index(kv[0])):
             x, sr = decode(src)
             x = level(tidy(x.mean(axis=1, keepdims=True), sr, SKILL_MAX), sr)
             with tempfile.TemporaryDirectory() as tmp:
