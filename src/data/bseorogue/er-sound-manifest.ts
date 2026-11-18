@@ -148,9 +148,9 @@ export const ER_BGM_LOOP: Readonly<Record<string, number>> = {
 
 /** 실험체 스킬 효과음이 있는 키 (ER 번호 → "qwer" 중 있는 것). 파일: er/sfx/<ER번호>_<키>.m4a */
 export const ER_SKILL_SFX: Readonly<Record<number, string>> = {
-  1: "wer",
+  1: "qwer",
   2: "qwer",
-  3: "qwr",
+  3: "qwer",
   4: "qwer",
   5: "qwer",
   6: "qwer",
@@ -179,9 +179,9 @@ export const ER_SKILL_SFX: Readonly<Record<number, string>> = {
   29: "qwer",
   30: "qwer",
   31: "qwer",
-  32: "qwr",
+  32: "qwer",
   33: "qwer",
-  34: "qer",
+  34: "qwer",
   35: "qwer",
   36: "qwer",
   37: "qwer",
@@ -212,7 +212,7 @@ export const ER_SKILL_SFX: Readonly<Record<number, string>> = {
   62: "qwer",
   63: "qwer",
   64: "qwer",
-  65: "qwr",
+  65: "qwer",
   66: "qwer",
   67: "qwer",
   68: "qwer",
@@ -235,4 +235,8 @@ export const ER_SKILL_SFX: Readonly<Record<number, string>> = {
   85: "qwer",
   86: "qwer",
   87: "qwer",
+  88: "qwer",
+  89: "qwer",
+  90: "qwer",
+  91: "qwer",
 };

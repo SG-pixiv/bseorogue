@@ -82,7 +82,11 @@ describe("블서로그 이터널 리턴 소리", () => {
 
   it("실험체 스킬 Q W E R 효과음: 자기 스킬만, 파일이 진짜 있어요", () => {
     const codes = Object.keys(ER_SKILL_SFX).map(Number);
-    expect(codes.length).toBeGreaterThan(80);
+    // 최신 게임(13.0.0)에서 꺼내서 실험체 전부(비형 · 크레이버 · 루치아 · 세레스까지) Q W E R 이 다 있어요
+    expect(codes.length).toBe(Object.keys(SKILL_MOVES).length);
+    for (const code of codes) {
+      expect(ER_SKILL_SFX[code], String(code)).toBe("qwer");
+    }
     for (const code of codes) {
       const moves = SKILL_MOVES[code];
       "qwer".split("").forEach((key, i) => {
