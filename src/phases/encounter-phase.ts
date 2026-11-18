@@ -8,6 +8,7 @@ import { getPokemonNameWithAffix } from "#app/messages";
 import { activeOverrides } from "#app/overrides";
 import { handleTutorial, Tutorial } from "#app/tutorial";
 import { initEncounterAnims, loadEncounterAnimAssets } from "#data/battle-anims";
+import { bseoAnnounceEncounterStart } from "#data/bseorogue/announce";
 import { promotionMessage } from "#data/bseorogue/league";
 import { getCharVariantFromDialogue } from "#data/dialogue";
 import { getNatureName } from "#data/nature";
@@ -61,6 +62,9 @@ export class EncounterPhase extends BattlePhase {
     globalScene.initSession();
 
     globalScene.eventTarget.dispatchEvent(new EncounterPhaseEvent());
+
+    // 블서로그: 루미아 섬 안내 방송 (판 시작 · 최종 보스)
+    bseoAnnounceEncounterStart(globalScene.currentBattle.waveIndex, this.loaded);
 
     // Failsafe if players somehow skip the final floor in classic mode (블서로그: 50)
     if (globalScene.gameMode.isClassic && globalScene.currentBattle.waveIndex > BSEO.classicFinalWave) {

@@ -13,6 +13,7 @@
  * 소리 크기는 게임 설정의 효과음 크기를 따라요. 음성 파일이 없으면 조용히 넘어가요.
  * 새 음성이 나오면 앞 음성은 끊어요 (캐릭터를 빨리 넘겨도 대사가 겹치지 않게, 11-18 SG).
  * 아직 받는 중인 음성은 그 사이 다른 음성을 틀었으면 받고 나서도 안 틀어요.
+ * 안내 방송(announce.ts)이 나오는 동안은 실험체 대사를 새로 틀지 않아요 (11-18, 방송과 대사가 겹치지 않게).
  */
 import { audioManager } from "#app/global-audio-manager";
 import { globalScene } from "#app/global-scene";
@@ -35,17 +36,27 @@ const lastPlayed = new Map<string, number>();
 /** 음성 소리 열쇠 앞부분 */
 const VOICE_PREFIX = "se/bseo_";
 
+/** 안내 방송 소리 열쇠 앞부분 (announce.ts). "se/bseo_" 로 시작하지 않아서 stopBseoVoices 가 끊지 않아요 */
+export const BSEO_ANNOUNCE_PREFIX = "se/bseo-ann_";
+
 /** 음성을 틀어 달라고 한 횟수 (받는 중이던 음성이 아직 마지막 요청인지 볼 때) */
 let voiceRequest = 0;
 
 type PlayingSound = { key: string; isPlaying?: boolean; stop: () => unknown; destroy: () => unknown };
 
+function playingSounds(): readonly PlayingSound[] {
+  return (
+    (globalScene?.sound as unknown as { getAllPlaying?: () => PlayingSound[] } | undefined)?.getAllPlaying?.() ?? []
+  );
+}
+
+/** 안내 방송이 나오고 있는지 */
+export function bseoAnnouncing(sounds: readonly PlayingSound[] = playingSounds()): boolean {
+  return sounds.some(s => s.key.startsWith(BSEO_ANNOUNCE_PREFIX) && s.isPlaying !== false);
+}
+
 /** 지금 나오고 있는 실험체 음성을 다 끊어요 (끊은 수) */
-export function stopBseoVoices(
-  sounds: readonly PlayingSound[] = (
-    globalScene?.sound as unknown as { getAllPlaying?: () => PlayingSound[] } | undefined
-  )?.getAllPlaying?.() ?? [],
-): number {
+export function stopBseoVoices(sounds: readonly PlayingSound[] = playingSounds()): number {
   let n = 0;
   for (const s of [...sounds]) {
     if (s.key.startsWith(VOICE_PREFIX) && s.isPlaying !== false) {
@@ -120,7 +131,7 @@ export function loadBseoVoices(speciesId: SpeciesId): void {
 export function playBseoVoice(speciesId: SpeciesId, key: BseoVoiceKey): AnySound | null {
   const code = erCodeOfSpecies(speciesId);
   const count = bseoVoiceCount(speciesId, key);
-  if (code == null || count === 0 || !canPlay()) {
+  if (code == null || count === 0 || !canPlay() || bseoAnnouncing()) {
     return null;
   }
   const slot = `${code}_${key}`;
