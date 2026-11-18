@@ -1,3 +1,4 @@
+import { BSEO } from "#app/bseorogue";
 import { Nature } from "#enums/nature";
 import { EFFECTIVE_STATS, getShortenedStatKey, Stat } from "#enums/stat";
 import { TextStyle } from "#enums/text-style";
@@ -31,7 +32,10 @@ export function getNatureName(
     const getTextFrag = ignoreBBCode
       ? (text: string, _style: TextStyle) => text
       : (text: string, style: TextStyle) => getBBCodeFrag(text, style);
-    if (increasedStat && decreasedStat) {
+    if (increasedStat && decreasedStat && BSEO.classicOnly) {
+      // 블서로그: 성향 이름이 곧 효과("공격↑ 방어↓", locales/ko/nature.json)라 뒤에 효과를 또 붙이지 않고 색만 입혀요
+      ret = `${getTextFrag(`${i18next.t(getShortenedStatKey(increasedStat))}↑`, TextStyle.SUMMARY_PINK)}${getTextFrag(" ", textStyle)}${getTextFrag(`${i18next.t(getShortenedStatKey(decreasedStat))}↓`, TextStyle.SUMMARY_BLUE)}`;
+    } else if (increasedStat && decreasedStat) {
       ret = `${getTextFrag(`${ret}${forStarterSelect ? " " : "\n"}(`, textStyle)}${getTextFrag(`+${i18next.t(getShortenedStatKey(increasedStat))}`, TextStyle.SUMMARY_PINK)}${getTextFrag("/", textStyle)}${getTextFrag(`-${i18next.t(getShortenedStatKey(decreasedStat))}`, TextStyle.SUMMARY_BLUE)}${getTextFrag(")", textStyle)}`;
     } else {
       ret = getTextFrag(`${ret}${forStarterSelect ? " " : "\n"}(-)`, textStyle);

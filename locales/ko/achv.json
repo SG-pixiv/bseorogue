@@ -43,7 +43,7 @@
     "name_female": "원펀맨"
   },
   "healAchv": {
-    "description": "스킬이나 특성, 지닌 도구로 한 번에 {{healAmount}} {{HP}} 회복"
+    "description": "스킬이나 패시브, 지닌 도구로 한 번에 {{healAmount}} {{HP}} 회복"
   },
   "250Heal": {
     "name": "견습 힐러",
@@ -131,19 +131,19 @@
   },
   "catchMythical": {
     "name": "환상",
-    "description": "환상의 실험체 포획"
+    "description": "환상의 실험체 영입"
   },
   "catchSubLegendary": {
     "name": "(준)전설",
-    "description": "준전설 실험체 포획"
+    "description": "준전설 실험체 영입"
   },
   "catchLegendary": {
     "name": "전설",
-    "description": "전설의 실험체 포획"
+    "description": "전설의 실험체 영입"
   },
   "seeShiny": {
     "name": "다른 색",
-    "description": "야생의 색이 다른 실험체 발견"
+    "description": "색이 다른 실험체 발견"
   },
   "shinyParty": {
     "name": "찐사랑",
@@ -152,23 +152,23 @@
   },
   "hatchMythical": {
     "name": "환상의 알",
-    "description": "알에서 환상의 실험체가 부화"
+    "description": "보급 상자에서 환상의 실험체가 나옴"
   },
   "hatchSubLegendary": {
     "name": "준전설 알",
-    "description": "알에서 준전설 실험체가 부화"
+    "description": "보급 상자에서 준전설 실험체가 나옴"
   },
   "hatchLegendary": {
     "name": "전설의 알",
-    "description": "알에서 전설의 실험체가 부화"
+    "description": "보급 상자에서 전설의 실험체가 나옴"
   },
   "hatchShiny": {
     "name": "빛나는 알",
-    "description": "알에서 색이 다른 실험체가 부화"
+    "description": "보급 상자에서 색이 다른 실험체가 나옴"
   },
   "hiddenAbility": {
     "name": "숨은 잠재력",
-    "description": "숨겨진 특성을 지닌 실험체를 포획"
+    "description": "숨겨진 패시브를 지닌 실험체를 영입"
   },
   "perfectIvs": {
     "name": "진짜배기 증명서",
@@ -282,7 +282,7 @@
   },
   "inverseBattle": {
     "name": "상성 전문가(였던 것)",
-    "description": "거꾸로 배틀 챌린지 모드 클리어."
+    "description": "거꾸로 전투 챌린지 모드 클리어."
   },
   "flipStats": {
     "name": "등가교환",
@@ -290,11 +290,11 @@
   },
   "flipInverse": {
     "name": "전역로꾸거",
-    "description": "거꾸로 배틀과 능력치 역전 챌린지 모드를 동시에 클리어."
+    "description": "거꾸로 전투와 능력치 역전 챌린지 모드를 동시에 클리어."
   },
   "nuzlocke": {
     "name": "너즐록 성공!",
-    "description": "새 출발과 하드코어, 포획 제한 챌린지 모드를 동시에 클리어."
+    "description": "새 출발과 하드코어, 영입 제한 챌린지 모드를 동시에 클리어."
   },
   "breedersInSpace": {
     "name": "충격!우주에 브리더 진짜 계심ㄷㄷ",
