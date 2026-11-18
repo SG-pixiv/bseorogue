@@ -1,5 +1,6 @@
 import { audioManager } from "#app/global-audio-manager";
 import { timedEventManager } from "#app/global-event-manager";
+import { ER_BGM_FILES, ER_SOUND_FILES } from "#data/bseorogue/er-sound-manifest";
 import { coerceArray } from "#utils/array";
 import { getCachedUrl } from "#utils/fetch-utils";
 import Phaser from "phaser";
@@ -94,7 +95,8 @@ export class SceneBase extends Phaser.Scene {
     filenames = coerceArray(filenames);
     for (const f of filenames as string[]) {
       // TODO: Use actual path joining logic
-      this.load.audio(folder + key, getCachedUrl(`audio/${folder}${f}`));
+      // 블서로그: 이터널 리턴 게임 소리가 있는 자리는 그 파일로 (er-sound-manifest.ts)
+      this.load.audio(folder + key, getCachedUrl(ER_SOUND_FILES[`${folder}${f}`] ?? `audio/${folder}${f}`));
     }
     return this;
   }
@@ -104,7 +106,7 @@ export class SceneBase extends Phaser.Scene {
       return;
     }
 
-    this.load.audio(key, getCachedUrl(`audio/bgm/${key}.mp3`));
+    this.load.audio(key, getCachedUrl(ER_BGM_FILES[key] ?? `audio/bgm/${key}.mp3`));
     await new Promise<void>((resolve, reject) => {
       const onError = (file: Phaser.Loader.File) => {
         if (file.key === key) {

@@ -121,6 +121,9 @@ class LeaderTrainerConfig extends TrainerConfig {
     const name = bseoCharacter(leader.erCode)?.name ?? "";
     this.setName(`${roleName(leader.role)} 관장 ${name}`);
     this.setMoneyMultiplier(2);
+    // 관장 전투 곡 (이터널 리턴 마지막 금지구역 곡, er-sound-manifest.ts)
+    this.setBattleBgm("bseo_leader");
+    this.setMixedBattleBgm("bseo_leader");
     this.setPartyTemplates(
       new TrainerPartyCompoundTemplate(
         new TrainerPartyTemplate(members.length - 1, PartyMemberStrength.AVERAGE),

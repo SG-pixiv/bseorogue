@@ -4,7 +4,8 @@
 블서로그 효과음 만들기 — 코드로 합성하는 8비트 느낌 소리 (남의 소리 파일을 쓰지 않아서 저작권 걱정이 없어요)
 
 11-18 SG: 공식 효과음이 없는 자리는 채우기로. 포켓로그 효과음은 원래 포켓몬 게임 소리라 안 써요 (assets/README.md).
-팬키트 · 공식 음원에서 같은 자리 소리를 받으면 그 파일로 바꿔 끼우면 돼요 (그 자리는 SOUNDS 에서 빼요).
+11-18 저녁: 이터널 리턴 게임 소리가 있는 자리는 scripts/sound/build_er_sound.py 가 assets/er/audio/ 에 넣고,
+게임은 그쪽을 먼저 받아요 (src/data/bseorogue/er-sound-manifest.ts). 여기 합성 소리는 예비로 둬요.
 
   python3 -I -B scripts/sound/make_sfx.py            → assets/audio/{ui,se,battle_anims}/*.wav 를 새로 써요
   python3 -I -B scripts/sound/make_sfx.py --list     → 만들 소리 목록만

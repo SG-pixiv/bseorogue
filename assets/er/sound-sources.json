@@ -1,0 +1,818 @@
+{
+ "sfx": {
+  "ui/select.wav": {
+   "from": "sound/ui/oui_tabclick",
+   "where": "버튼 · 칸 고르기",
+   "sec": 0.058
+  },
+  "ui/menu_open.wav": {
+   "from": "sound/ui/oui_windowopen",
+   "where": "메뉴 · 창 열기",
+   "sec": 0.084
+  },
+  "ui/error.wav": {
+   "from": "sound/ui/cannotdeploy",
+   "where": "안 되는 칸을 눌렀을 때",
+   "sec": 0.512
+  },
+  "se/hit.wav": {
+   "from": "sound/fx/common/hit_punch",
+   "where": "스킬에 맞을 때 (보통)",
+   "sec": 0.344
+  },
+  "se/hit_strong.wav": {
+   "from": "sound/fx/common/hitskilltwohandsword_r1",
+   "where": "스킬에 크게 맞을 때",
+   "sec": 1.24
+  },
+  "se/hit_weak.wav": {
+   "from": "sound/fx/common/hitskillhammer_r1",
+   "where": "스킬에 약하게 맞을 때",
+   "sec": 0.382
+  },
+  "se/faint.wav": {
+   "from": "sound/fx/common/death",
+   "where": "실험체가 쓰러질 때",
+   "sec": 1.664
+  },
+  "se/flee.wav": {
+   "from": "sound/fx/common/tacticalskill_blink",
+   "where": "도망칠 때",
+   "sec": 1.088
+  },
+  "se/exp.wav": {
+   "from": "sound/ui/autodisintegratecountup",
+   "where": "경험치 막대가 찰 때",
+   "sec": 0.941
+  },
+  "se/level_up.wav": {
+   "from": "sound/ui/skillup",
+   "where": "레벨이 오를 때",
+   "sec": 1.398
+  },
+  "se/level_up_fanfare.wav": {
+   "from": "sound/ui/oui_levelup_v1",
+   "where": "레벨업 · 해금 팡파르",
+   "sec": 1.6
+  },
+  "se/item_fanfare.wav": {
+   "from": "sound/ui/oui_reward_v1",
+   "where": "아이템 · 보상을 받을 때",
+   "sec": 1.058
+  },
+  "se/stat_up.wav": {
+   "from": "sound/ui/researchupgrade",
+   "where": "능력이 오를 때",
+   "sec": 1.075
+  },
+  "se/stat_down.wav": {
+   "from": "sound/ui/tierchange_demotion",
+   "where": "능력이 내려갈 때",
+   "sec": 2.0
+  },
+  "se/restore.wav": {
+   "from": "sound/ui/consume_drink_1",
+   "where": "회복 아이템 · 체력 회복",
+   "sec": 0.733
+  },
+  "se/low_hp.wav": {
+   "from": "sound/ui/minimap_under_attack",
+   "where": "체력이 적을 때 경고음",
+   "sec": 1.072
+  },
+  "se/sparkle.wav": {
+   "from": "sound/ui/infusion_highlight",
+   "where": "반짝일 때",
+   "sec": 0.169
+  },
+  "se/shine.wav": {
+   "from": "sound/ui/equipmentinstall_legend",
+   "where": "진화 · 모습이 바뀔 때 빛",
+   "sec": 1.837
+  },
+  "se/shing.wav": {
+   "from": "sound/ui/skilllvupopen",
+   "where": "짧은 반짝 쇳소리 (잠재력 · 사탕 막대)",
+   "sec": 0.844
+  },
+  "se/charge.wav": {
+   "from": "sound/ui/disintegratestart",
+   "where": "진화 전에 힘 모으기",
+   "sec": 3.0
+  },
+  "se/beam.wav": {
+   "from": "sound/ui/skillevoupopen",
+   "where": "진화 · 모습 바뀌는 순간",
+   "sec": 1.109
+  },
+  "se/upgrade.wav": {
+   "from": "sound/ui/equipmentinstall_epic",
+   "where": "보상 등급이 오를 때 · 잠금 풀기",
+   "sec": 1.269
+  },
+  "se/buy.wav": {
+   "from": "sound/ui/infusion_buy",
+   "where": "상점에서 살 때",
+   "sec": 0.943
+  },
+  "se/achv.wav": {
+   "from": "sound/ui/oui_seasoncollection_completed",
+   "where": "업적 달성",
+   "sec": 2.161
+  },
+  "se/pb_throw.wav": {
+   "from": "sound/fx/common/attackthrow",
+   "where": "영입 볼을 던질 때",
+   "sec": 0.244
+  },
+  "se/pb_rel.wav": {
+   "from": "sound/ui/boxopen",
+   "where": "볼이 열릴 때 · 실험체가 나올 때",
+   "sec": 0.573
+  },
+  "se/pb_bounce_1.wav": {
+   "from": "sound/ui/card_flip_start",
+   "where": "볼이 튈 때 · 보상 칸 뒤집기",
+   "sec": 0.453
+  },
+  "se/pb_bounce_2.wav": {
+   "from": "sound/ui/dropitem",
+   "where": "볼이 튈 때 (낮은 톡)",
+   "sec": 0.19
+  },
+  "se/pb_move.wav": {
+   "from": "sound/fx/common/kiosk_panelrattle",
+   "where": "볼 · 보급 상자가 흔들릴 때",
+   "sec": 0.555
+  },
+  "se/pb_catch.wav": {
+   "from": "sound/ui/mission_completed_minor",
+   "where": "영입 성공",
+   "sec": 0.891
+  },
+  "se/pb_lock.wav": {
+   "from": "sound/ui/mark_select",
+   "where": "볼이 잠길 때",
+   "sec": 0.746
+  },
+  "se/crit_throw.wav": {
+   "from": "sound/fx/common/throw_weapon_fire",
+   "where": "영입 볼이 크게 날아갈 때",
+   "sec": 1.5
+  },
+  "se/pb_tray_enter.wav": {
+   "from": "sound/ui/oui_modeslideopen_v1",
+   "where": "남은 볼 줄이 들어올 때",
+   "sec": 0.113
+  },
+  "se/pb_tray_ball.wav": {
+   "from": "sound/ui/pickupitem",
+   "where": "볼 줄에 볼 하나",
+   "sec": 0.244
+  },
+  "se/pb_tray_empty.wav": {
+   "from": "sound/ui/oui_btnclick_v1",
+   "where": "볼 줄에 빈칸 하나",
+   "sec": 0.043
+  },
+  "se/egg_crack.wav": {
+   "from": "sound/fx/common/opensound_box_01",
+   "where": "보급 상자에 금이 갈 때",
+   "sec": 0.665
+  },
+  "se/egg_hatch.wav": {
+   "from": "sound/ui/lootbox_basic_start",
+   "where": "보급 상자가 열릴 때",
+   "sec": 3.0
+  },
+  "se/gacha_dial.wav": {
+   "from": "sound/ui/autodisintegratecounter",
+   "where": "보급 요청 손잡이 돌리기",
+   "sec": 0.559
+  },
+  "se/gacha_running.wav": {
+   "from": "sound/fx/common/kiosk_ing",
+   "where": "보급 요청 기계가 돌아갈 때",
+   "sec": 1.177
+  },
+  "se/gacha_dispense.wav": {
+   "from": "sound/fx/common/mobilekiosk_createbox_sfx",
+   "where": "보급 상자가 나올 때",
+   "sec": 2.392
+  },
+  "battle_anims/bseo-slash.wav": {
+   "from": "sound/fx/common/skillonehandsword",
+   "where": "스킬 연출: 베기 (실험체 스킬 소리가 없을 때)",
+   "sec": 0.894
+  },
+  "battle_anims/bseo-strike.wav": {
+   "from": "sound/fx/common/skillhammer",
+   "where": "스킬 연출: 타격",
+   "sec": 0.739
+  },
+  "battle_anims/bseo-shot.wav": {
+   "from": "sound/fx/common/skillpistol_v1",
+   "where": "스킬 연출: 투사체",
+   "sec": 0.844
+  },
+  "battle_anims/bseo-blast.wav": {
+   "from": "sound/fx/common/battlezoneobject_explode",
+   "where": "스킬 연출: 폭발",
+   "sec": 1.592
+  },
+  "battle_anims/bseo-heal.wav": {
+   "from": "sound/fx/common/selfcure_start",
+   "where": "스킬 연출: 회복",
+   "sec": 1.036
+  },
+  "battle_anims/bseo-buff.wav": {
+   "from": "sound/fx/common/itemskill_alacrity_buff",
+   "where": "스킬 연출: 강화",
+   "sec": 0.978
+  },
+  "battle_anims/bseo-debuff.wav": {
+   "from": "sound/fx/common/infusion_ephemeralnightmare_debuff",
+   "where": "스킬 연출: 약화",
+   "sec": 1.704
+  }
+ },
+ "bgm": {
+  "title": {
+   "from": [
+    "sound/bgm/bgm_lobby"
+   ],
+   "where": "타이틀 화면",
+   "sec": 131.788,
+   "loop": 0.0
+  },
+  "menu": {
+   "from": [
+    "sound/bgm/bser_bgm_strategymap_lumia"
+   ],
+   "where": "시작 실험체 고르기 · 메뉴",
+   "sec": 64.444,
+   "loop": 0.0
+  },
+  "battle_wild": {
+   "from": [
+    "sound/bgm/p0"
+   ],
+   "where": "1~4웨이브 전투",
+   "sec": 30.041,
+   "loop": 0.0
+  },
+  "battle_trainer": {
+   "from": [
+    "sound/bgm/p3"
+   ],
+   "where": "팀 전투 (마스터즈 · KEL 팀)",
+   "sec": 30.041,
+   "loop": 0.0
+  },
+  "bseo_leader": {
+   "from": [
+    "sound/bgm/endgame_bgm_a"
+   ],
+   "where": "관장 전투",
+   "sec": 32.026,
+   "loop": 0.0
+  },
+  "bseo_final": {
+   "from": [
+    "sound/bgm/endgame_bgm_b"
+   ],
+   "where": "50웨이브 최종 보스",
+   "sec": 32.026,
+   "loop": 0.0
+  },
+  "victory": {
+   "from": [
+    "sound/bgm/victorycutscene_bgm"
+   ],
+   "where": "팀 · 관장 전투 이겼을 때",
+   "sec": 10.371,
+   "loop": 0.0
+  },
+  "heal": {
+   "from": [
+    "sound/fx/common/revival"
+   ],
+   "where": "전원 회복할 때",
+   "sec": 3.944,
+   "loop": 0.0
+  },
+  "evolution": {
+   "from": [
+    "sound/bgm/bgm_lobby_seasonreward_v1"
+   ],
+   "where": "스킨 진화하는 동안",
+   "sec": 16.039,
+   "loop": 0.0
+  },
+  "evolution_fanfare": {
+   "from": [
+    "sound/ui/resultvictory"
+   ],
+   "where": "스킨 진화 끝",
+   "sec": 5.642,
+   "loop": 0.0
+  },
+  "minor_fanfare": {
+   "from": [
+    "sound/ui/oui_reward_v1"
+   ],
+   "where": "작은 팡파르",
+   "sec": 1.541,
+   "loop": 0.0
+  },
+  "area_alley_p21": {
+   "from": [
+    "sound/bgm/bser_areabgm_alley",
+    "sound/bgm/p2-1"
+   ],
+   "where": "골목길",
+   "sec": 47.36,
+   "loop": 17.31
+  },
+  "area_archery_p22": {
+   "from": [
+    "sound/bgm/bser_areabgm_archery",
+    "sound/bgm/p2-2"
+   ],
+   "where": "양궁장",
+   "sec": 46.289,
+   "loop": 16.25
+  },
+  "area_forest_p1": {
+   "from": [
+    "sound/bgm/bser_areabgm_forest",
+    "sound/bgm/p1"
+   ],
+   "where": "개울",
+   "sec": 52.271,
+   "loop": 22.233
+  },
+  "area_uptown_p21": {
+   "from": [
+    "sound/bgm/bser_areabgm_uptown",
+    "sound/bgm/p2-1"
+   ],
+   "where": "고급 주택가",
+   "sec": 48.457,
+   "loop": 18.422
+  },
+  "area_harbor_p22": {
+   "from": [
+    "sound/bgm/bser_areabgm_harbor",
+    "sound/bgm/p2-2"
+   ],
+   "where": "항구",
+   "sec": 52.297,
+   "loop": 22.249
+  },
+  "area_pond_p1": {
+   "from": [
+    "sound/bgm/bser_areabgm_pond",
+    "sound/bgm/p1"
+   ],
+   "where": "연못",
+   "sec": 51.174,
+   "loop": 21.128
+  },
+  "area_sandybeach_p21": {
+   "from": [
+    "sound/bgm/bser_areabgm_sandybeach",
+    "sound/bgm/p2-1"
+   ],
+   "where": "모래사장",
+   "sec": 50.678,
+   "loop": 20.626
+  },
+  "area_temple_p22": {
+   "from": [
+    "sound/bgm/bser_areabgm_temple",
+    "sound/bgm/p2-2"
+   ],
+   "where": "절",
+   "sec": 47.073,
+   "loop": 17.046
+  },
+  "area_downtown_p1": {
+   "from": [
+    "sound/bgm/bser_areabgm_downtown",
+    "sound/bgm/p1"
+   ],
+   "where": "주유소",
+   "sec": 50.939,
+   "loop": 20.906
+  },
+  "area_factory_p21": {
+   "from": [
+    "sound/bgm/bser_areabgm_factory",
+    "sound/bgm/p2-1"
+   ],
+   "where": "창고",
+   "sec": 48.849,
+   "loop": 18.809
+  },
+  "area_school_p22": {
+   "from": [
+    "sound/bgm/bser_areabgm_school",
+    "sound/bgm/p2-2"
+   ],
+   "where": "학교",
+   "sec": 48.3,
+   "loop": 18.25
+  },
+  "area_cemetery_p21": {
+   "from": [
+    "sound/bgm/bser_areabgm_cemetery",
+    "sound/bgm/p2-1"
+   ],
+   "where": "묘지",
+   "sec": 51.2,
+   "loop": 21.172
+  },
+  "area_church_p22": {
+   "from": [
+    "sound/bgm/bser_areabgm_church",
+    "sound/bgm/p2-2"
+   ],
+   "where": "성당",
+   "sec": 46.263,
+   "loop": 16.223
+  },
+  "area_hospital_p1": {
+   "from": [
+    "sound/bgm/bser_areabgm_hospital",
+    "sound/bgm/p1"
+   ],
+   "where": "병원",
+   "sec": 51.618,
+   "loop": 21.583
+  },
+  "area_laboratory_p21": {
+   "from": [
+    "sound/bgm/bser_areabgm_laboratory",
+    "sound/bgm/p2-1"
+   ],
+   "where": "연구소",
+   "sec": 48.953,
+   "loop": 18.917
+  },
+  "area_hotel_p1": {
+   "from": [
+    "sound/bgm/bser_areabgm_hotel",
+    "sound/bgm/p1"
+   ],
+   "where": "호텔",
+   "sec": 49.136,
+   "loop": 19.107
+  }
+ },
+ "skill": {
+  "1_w": "sound/fx/jackie/s000/jackie_skill02_attack_2hand",
+  "1_e": "sound/fx/jackie/s000/jackie_skill03_bump",
+  "1_r": "sound/fx/jackie/s000/jackie_skill04_activation_v2",
+  "2_q": "sound/fx/aya/s000/aya_skill01_attack_v2",
+  "2_w": "sound/fx/aya/s000/aya_skill02_fire_3",
+  "2_e": "sound/fx/aya/s000/aya_skill03_activation",
+  "2_r": "sound/fx/aya/s000/aya_skill04_activation",
+  "3_q": "sound/fx/fiora/s000/fiora_skill01_attack",
+  "3_w": "sound/fx/fiora/s000/fiora_skill02_attack_2",
+  "3_r": "sound/fx/fiora/s000/fiora_skill04_attack",
+  "4_q": "sound/fx/magnus/s000/magnus_skill01_attack",
+  "4_w": "sound/fx/magnus/s000/magnus_skill02_attack",
+  "4_e": "sound/fx/magnus/s000/magnus_skill03_hit",
+  "4_r": "sound/fx/magnus/s000/magnus_skill04_attack",
+  "5_q": "sound/fx/zahir/s000/zahir_skill01_shot",
+  "5_w": "sound/fx/zahir/s000/zahir_skill02_shot",
+  "5_e": "sound/fx/zahir/s000/zahir_skill03_shot",
+  "5_r": "sound/fx/zahir/s000/zahir_skill04_shot",
+  "6_q": "sound/fx/nadine/s000/nadine_skill01_shot",
+  "6_w": "sound/fx/nadine/s000/nadine_skill02_shot",
+  "6_e": "sound/fx/nadine/s000/nadine_skill03_shot",
+  "6_r": "sound/fx/nadine/s000/nadine_skill04_shot",
+  "7_q": "sound/fx/hyunwoo/s000/hyunwoo_skill01_attack_v2",
+  "7_w": "sound/fx/hyunwoo/s000/hyunwoo_skill02_activation",
+  "7_e": "sound/fx/hyunwoo/s000/hyunwoo_skill03_hit",
+  "7_r": "sound/fx/hyunwoo/s000/hyunwoo_skill04_attack",
+  "8_q": "sound/fx/hart/s000/hart_skill01_attack",
+  "8_w": "sound/fx/hart/s000/hart_skill02_active",
+  "8_e": "sound/fx/hart/s000/hart_skill03_attack",
+  "8_r": "sound/fx/hart/s000/hart_skill04_active",
+  "9_q": "sound/fx/isol/s000/isol_skill01_attack",
+  "9_w": "sound/fx/isol/s000/isol_skill02_attack_ing",
+  "9_e": "sound/fx/isol/s000/isol_skill03_active",
+  "9_r": "sound/fx/isol/s000/isol_skill04_active",
+  "10_q": "sound/fx/lidailin/s000/lidailin_skill01_attack03",
+  "10_w": "sound/fx/lidailin/s000/lidailin_skill02_active",
+  "10_e": "sound/fx/lidailin/s000/lidailin_skill03_attack",
+  "10_r": "sound/fx/lidailin/s000/lidailin_skill04_attack",
+  "11_q": "sound/fx/yuki/s000/yuki_skill01_attack",
+  "11_w": "sound/fx/yuki/s000/yuki_skill02_active",
+  "11_e": "sound/fx/yuki/s000/yuki_skill03_attack",
+  "11_r": "sound/fx/yuki/s000/yuki_skill04_attack",
+  "12_q": "sound/fx/hyejin/s000/hyejin_skill01_fire",
+  "12_w": "sound/fx/hyejin/s000/hyejin_skill02_bow_fire",
+  "12_e": "sound/fx/hyejin/s000/hyejin_skill03_fire",
+  "12_r": "sound/fx/hyejin/s000/hyejin_skill04_active",
+  "13_q": "sound/fx/xiukai/s000/xiukai_skill01_hit",
+  "13_w": "sound/fx/xiukai/s000/xiukai_skill02_fire",
+  "13_e": "sound/fx/xiukai/s000/xiukai_skill03_start",
+  "13_r": "sound/fx/xiukai/s000/xiukai_skill04_fire",
+  "14_q": "sound/fx/chiara/s000/chiara_skill01_shot",
+  "14_w": "sound/fx/chiara/s000/chiara_skill02_fire",
+  "14_e": "sound/fx/chiara/s000/chiara_skill03_fire",
+  "14_r": "sound/fx/chiara/s000/chiara_skill04_start",
+  "15_q": "sound/fx/sissela/s000/sissela_skill01_fire",
+  "15_w": "sound/fx/sissela/s000/sissela_skill02_start",
+  "15_e": "sound/fx/sissela/s000/sissela_skill03_fire",
+  "15_r": "sound/fx/sissela/s000/sissela_skill04_start",
+  "16_q": "sound/fx/silvia/s000/silvia_skill01_fire",
+  "16_w": "sound/fx/silvia/s000/silvia_skill02_fire",
+  "16_e": "sound/fx/silvia/s000/silvia_skill03_start",
+  "16_r": "sound/fx/silvia/s000/silvia_skill04_fog",
+  "17_q": "sound/fx/adriana/s000/adriana_skill01_start",
+  "17_w": "sound/fx/adriana/s000/adriana_skill02",
+  "17_e": "sound/fx/adriana/s000/adriana_skill03_start",
+  "17_r": "sound/fx/adriana/s000/adriana_skill04_hit",
+  "18_q": "sound/fx/shoichi/s000/shoichi_skill01_hit",
+  "18_w": "sound/fx/shoichi/s000/shoichi_skill02_hit",
+  "18_e": "sound/fx/shoichi/s000/shoichi_skill03_fire",
+  "18_r": "sound/fx/shoichi/s000/shoichi_skill04_hit",
+  "19_q": "sound/fx/emma/s000/emma_skill01_fire",
+  "19_w": "sound/fx/emma/s000/emma_skill02_fire",
+  "19_e": "sound/fx/emma/s000/emma_skill03_fire",
+  "19_r": "sound/fx/emma/s000/emma_skill04_hat_hit",
+  "20_q": "sound/fx/lenox/s000/lenox_skill01_hit",
+  "20_w": "sound/fx/lenox/s000/lenox_skill02_01_hit",
+  "20_e": "sound/fx/lenox/s000/lenox_skill03_hit",
+  "20_r": "sound/fx/lenox/s000/lenox_skill04_start",
+  "21_q": "sound/fx/rozzi/s000/rozzi_skill01_fire",
+  "21_w": "sound/fx/rozzi/s000/rozzi_skill02_fire",
+  "21_e": "sound/fx/rozzi/s000/rozzi_skill03_start",
+  "21_r": "sound/fx/rozzi/s000/rozzi_skill04_fire",
+  "22_q": "sound/fx/luke/s000/luke_skill01_03_hit",
+  "22_w": "sound/fx/luke/s000/luke_skill02_attack_02",
+  "22_e": "sound/fx/luke/s000/luke_skill03_attack_01",
+  "22_r": "sound/fx/luke/s000/luke_skill04_hit",
+  "23_q": "sound/fx/cathy/s000/cathy_skill01_attack02",
+  "23_w": "sound/fx/cathy/s000/cathy_skill02_hit",
+  "23_e": "sound/fx/cathy/s000/cathy_skill03_fire",
+  "23_r": "sound/fx/cathy/s000/cathy_skill04_attack",
+  "24_q": "sound/fx/adela/s000/adela_skill01_fire",
+  "24_w": "sound/fx/adela/s000/adela_skill02_fire",
+  "24_e": "sound/fx/adela/s000/adela_skill03_fire",
+  "24_r": "sound/fx/adela/s000/adela_skill04_start",
+  "25_q": "sound/fx/bernice/s000/bernice_skill01_fire",
+  "25_w": "sound/fx/bernice/s000/bernice_skill02_attack",
+  "25_e": "sound/fx/bernice/s000/bernice_skill03_01",
+  "25_r": "sound/fx/bernice/s000/bernice_skill04_fire",
+  "26_q": "sound/fx/barbara/s000/babara_skill01_hit",
+  "26_w": "sound/fx/barbara/s000/turret_skill02_fire",
+  "26_e": "sound/fx/barbara/s000/babara_skill03_shot",
+  "26_r": "sound/fx/barbara/s000/babara_skill04_start",
+  "27_q": "sound/fx/alex/s000/alex_skill01_fire",
+  "27_w": "sound/fx/alex/s000/alex_skill02_fire",
+  "27_e": "sound/fx/alex/s000/alex_skill03_fire",
+  "27_r": "sound/fx/alex/s000/alex_skill04_fire",
+  "28_q": "sound/fx/sua/s000/sua_hammer_skill01_start",
+  "28_w": "sound/fx/sua/s000/sua_hammer_skill02_ally_start",
+  "28_e": "sound/fx/sua/s000/sua_hammer_skill03_start",
+  "28_r": "sound/fx/sua/s000/sua_hammer_skill04_r",
+  "29_q": "sound/fx/leon/s000/leon_skill01_fire",
+  "29_w": "sound/fx/leon/s000/leon_skill02_hit",
+  "29_e": "sound/fx/leon/s000/leon_skill03_start",
+  "29_r": "sound/fx/leon/s000/leon_skill04_start",
+  "30_q": "sound/fx/eleven/s000/eleven_skill01_hit",
+  "30_w": "sound/fx/eleven/s000/eleven_skill02_hit",
+  "30_e": "sound/fx/eleven/s000/eleven_skill03_hit",
+  "30_r": "sound/fx/eleven/s000/eleven_skill04_hit",
+  "31_q": "sound/fx/rio/s000/rio_bow_skill01_longhit",
+  "31_w": "sound/fx/rio/s000/rio_longbow_skill02_shot",
+  "31_e": "sound/fx/rio/s000/rio_longbow_skill03_shot",
+  "31_r": "sound/fx/rio/s000/rio_longbow_skill04_hit",
+  "32_q": "sound/fx/william/s000/william_skill01_fire",
+  "32_w": "sound/fx/william/s000/william_skill02_fire",
+  "32_r": "sound/fx/william/s000/william_skill04_start",
+  "33_q": "sound/fx/nicky/s000/nicky_skill01_attack",
+  "33_w": "sound/fx/nicky/s000/nicky_skill02_gaurd",
+  "33_e": "sound/fx/nicky/s000/nicky_skill03_attack",
+  "33_r": "sound/fx/nicky/s000/nicky_skill04_attack",
+  "34_q": "sound/fx/nathapon/s000/nathapon_skill01_attack",
+  "34_e": "sound/fx/nathapon/s000/nathapon_skill03_fire",
+  "34_r": "sound/fx/nathapon/s000/nathapon_skill04_attack",
+  "35_q": "sound/fx/jan/s000/jan_skill01_02_hit",
+  "35_w": "sound/fx/jan/s000/jan_skill02_hit",
+  "35_e": "sound/fx/jan/s000/jan_skill03_hit",
+  "35_r": "sound/fx/jan/s000/jan_skill04_start",
+  "36_q": "sound/fx/eva/s000/eva_skill01_fire",
+  "36_w": "sound/fx/eva/s000/eva_skill02_fire",
+  "36_e": "sound/fx/eva/s000/eva_skill03_fire",
+  "36_r": "sound/fx/eva/s000/eva_skill04_fire",
+  "37_q": "sound/fx/daniel/s000/daniel_skill01_hit",
+  "37_w": "sound/fx/daniel/s000/daniel_skill02_hit",
+  "37_e": "sound/fx/daniel/s000/daniel_skill03_hit",
+  "37_r": "sound/fx/daniel/s000/daniel_skill04_start",
+  "38_q": "sound/fx/jenny/s000/jenny_skill01_hit",
+  "38_w": "sound/fx/jenny/s000/jenny_skill02_wave_hit",
+  "38_e": "sound/fx/jenny/s000/jenny_skill03_attack",
+  "38_r": "sound/fx/jenny/s000/jenny_skill04_start",
+  "39_q": "sound/fx/camilo/s000/camilo_skill01_01_hit",
+  "39_w": "sound/fx/camilo/s000/camilo_skill02_hit",
+  "39_e": "sound/fx/camilo/s000/camilo_skill03_02_hit",
+  "39_r": "sound/fx/camilo/s000/camilo_skill04_dance_hit",
+  "40_q": "sound/fx/chloe/s000/chloe_skill01_throw",
+  "40_w": "sound/fx/chloe/s000/chloe_skill02_nina_attack",
+  "40_e": "sound/fx/chloe/s000/chloe_skill03_attack",
+  "40_r": "sound/fx/chloe/s000/chloe_skill04_line_hit",
+  "41_q": "sound/fx/johann/s000/johann_skill01_shot",
+  "41_w": "sound/fx/johann/s000/johann_skill02_finish",
+  "41_e": "sound/fx/johann/s000/johann_skill03_start",
+  "41_r": "sound/fx/johann/s000/johann_skill04_start",
+  "42_q": "sound/fx/bianca/s000/bianca_skill01_active",
+  "42_w": "sound/fx/bianca/s000/bianca_skill02",
+  "42_e": "sound/fx/bianca/s000/bianca_skill03_attack",
+  "42_r": "sound/fx/bianca/s000/bianca_skill04_active",
+  "43_q": "sound/fx/celine/s000/celine_skill01_shot",
+  "43_w": "sound/fx/celine/s000/celine_skill02_fire",
+  "43_e": "sound/fx/celine/s000/celine_skill03_fire",
+  "43_r": "sound/fx/celine/s000/celine_skill04_start",
+  "44_q": "sound/fx/echion/s000/echion_skill01_01_hit",
+  "44_w": "sound/fx/echion/s000/echion_skill02",
+  "44_e": "sound/fx/echion/s000/echion_skill03_hit",
+  "44_r": "sound/fx/echion/s000/echion_skill04_start",
+  "45_q": "sound/fx/mai/s000/mai_skill01_fire",
+  "45_w": "sound/fx/mai/s000/mai_skill02_hit",
+  "45_e": "sound/fx/mai/s000/mai_skill03_fire",
+  "45_r": "sound/fx/mai/s000/mai_skill04_fire",
+  "46_q": "sound/fx/aiden/s000/aiden_skill01_gun_shot",
+  "46_w": "sound/fx/aiden/s000/aiden_skill02_attack",
+  "46_e": "sound/fx/aiden/s000/aiden_skill03_rush_start",
+  "46_r": "sound/fx/aiden/s000/aiden_skill04_02_thunder_attack",
+  "47_q": "sound/fx/laura/s000/laura_skill01_attack03",
+  "47_w": "sound/fx/laura/s000/laura_skill02_hit",
+  "47_e": "sound/fx/laura/s000/laura_skill03_dash",
+  "47_r": "sound/fx/laura/s000/laura_skill04_arrive_attack",
+  "48_q": "sound/fx/tia/s000/tia_skill01_q1_throw",
+  "48_w": "sound/fx/tia/s000/tia_skill02_change",
+  "48_e": "sound/fx/tia/s000/tia_skill03_hit",
+  "48_r": "sound/fx/tia/s000/tia_skill04_start",
+  "49_q": "sound/fx/felix/s000/felix_skill01_hit",
+  "49_w": "sound/fx/felix/s000/felix_skill02_hit",
+  "49_e": "sound/fx/felix/s000/felix_skill03_hit",
+  "49_r": "sound/fx/felix/s000/felix_skill04_hit",
+  "50_q": "sound/fx/elena/s000/zahir_skill01_fire",
+  "50_w": "sound/fx/elena/s000/zahir_skill02_shot",
+  "50_e": "sound/fx/elena/s000/elena_skill03_fire",
+  "50_r": "sound/fx/elena/s000/elena_skill04_fire",
+  "51_q": "sound/fx/priya/s000/priya_skill01_fire_3",
+  "51_w": "sound/fx/priya/s000/priya_skill02_fire_2",
+  "51_e": "sound/fx/priya/s000/priya_skill03_fire_3",
+  "51_r": "sound/fx/priya/s000/priya_skill04_fire_2",
+  "52_q": "sound/fx/adina/s000/adina_skill01_sun_shot",
+  "52_w": "sound/fx/adina/s000/adina_skill02_sun_hit",
+  "52_e": "sound/fx/adina/s000/adina_skill03_sun_shot",
+  "52_r": "sound/fx/adina/s000/adina_skill04",
+  "53_q": "sound/fx/markus/s000/markus_skill01_attack03_axe",
+  "53_w": "sound/fx/markus/s000/markus_skill02_attack_axe",
+  "53_e": "sound/fx/markus/s000/markus_skill03_hit",
+  "53_r": "sound/fx/markus/s000/markus_skill04_attack_axe",
+  "54_q": "sound/fx/karla/s000/karla_skill01_shot_01",
+  "54_w": "sound/fx/karla/s000/karla_skill02_shot",
+  "54_e": "sound/fx/karla/s000/karla_skill03_hit",
+  "54_r": "sound/fx/karla/s000/karla_skill04_shot",
+  "55_q": "sound/fx/estelle/s000/estelle_skill01_axe_hit",
+  "55_w": "sound/fx/estelle/s000/estelle_skill02_spray_hit",
+  "55_e": "sound/fx/estelle/s000/estelle_skill03_dash_hit",
+  "55_r": "sound/fx/estelle/s000/estelle_skill04_global_attack",
+  "56_q": "sound/fx/piolo/s000/piolo_skill01_attack",
+  "56_w": "sound/fx/piolo/s000/piolo_skill02_w_attack",
+  "56_e": "sound/fx/piolo/s000/piolo_skill03_e_attack",
+  "56_r": "sound/fx/piolo/s000/piolo_skill04_punish_hit",
+  "57_q": "sound/fx/martina/s000/martina_skill01_fire",
+  "57_w": "sound/fx/martina/s000/martina_skill02_fire",
+  "57_e": "sound/fx/martina/s000/martina_skill03_hit",
+  "57_r": "sound/fx/martina/s000/martina_skill04_hit",
+  "58_q": "sound/fx/haze/s000/haze_skill01_shot",
+  "58_w": "sound/fx/haze/s000/haze_skill02_shot",
+  "58_e": "sound/fx/haze/s000/haze_skill03_shot",
+  "58_r": "sound/fx/haze/s000/haze_skill04_shot",
+  "59_q": "sound/fx/isaac/s000/isaac_skill01_02_attack",
+  "59_w": "sound/fx/isaac/s000/isaac_skill02_start",
+  "59_e": "sound/fx/isaac/s000/isaac_skill03_attack",
+  "59_r": "sound/fx/isaac/s000/isaac_skill04_01_start",
+  "60_q": "sound/fx/tazia/s000/tazia_skill01_02_shot",
+  "60_w": "sound/fx/tazia/s000/tazia_skill02_active",
+  "60_e": "sound/fx/tazia/s000/tazia_skill03_02_attack",
+  "60_r": "sound/fx/tazia/s000/tazia_skill04_active",
+  "61_q": "sound/fx/irem/s000/irem_cat_skill01_hit2",
+  "61_w": "sound/fx/irem/s000/irem_cat_skill02_hit",
+  "61_e": "sound/fx/irem/s000/irem_cat_skill03_hit",
+  "61_r": "sound/fx/irem/s000/irem_human_skill04_hit",
+  "62_q": "sound/fx/theodore/s000/theodore_skill01_fire",
+  "62_w": "sound/fx/theodore/s000/theodore_skill02_fire",
+  "62_e": "sound/fx/theodore/s000/theodore_skill03_fire",
+  "62_r": "sound/fx/theodore/s000/theodore_skill04_fire",
+  "63_q": "sound/fx/lyanh/s000/lyanh_human_skill01_onehandsword_attack",
+  "63_w": "sound/fx/lyanh/s000/lyanh_possession_skill02_attack",
+  "63_e": "sound/fx/lyanh/s000/lyanh_human_skill03_onehandsword_attack",
+  "63_r": "sound/fx/lyanh/s000/lyanh_possession_skill04_crossing_hit",
+  "64_q": "sound/fx/vanya/s000/vanya_skill01_shot",
+  "64_w": "sound/fx/vanya/s000/vanya_skill02_start",
+  "64_e": "sound/fx/vanya/s000/vanya_skill03_start",
+  "64_r": "sound/fx/vanya/s000/vanya_skill04_shot",
+  "65_q": "sound/fx/debimarlene/s000/debi_skill01_hit",
+  "65_w": "sound/fx/debimarlene/s000/debi_skill02_attack",
+  "65_r": "sound/fx/debimarlene/s000/debimarlene_skill04_02_slash_hit",
+  "66_q": "sound/fx/arda/s000/arda_skill01_shot",
+  "66_w": "sound/fx/arda/s000/arda_skill02_attack",
+  "66_e": "sound/fx/arda/s000/arda_skill03_attack",
+  "66_r": "sound/fx/arda/s000/arda_skill04_active",
+  "67_q": "sound/fx/abigail/s000/abigail_skill01_start",
+  "67_w": "sound/fx/abigail/s000/abigail_skill02_start",
+  "67_e": "sound/fx/abigail/s000/abigail_skill03_start",
+  "67_r": "sound/fx/abigail/s000/abigail_skill04_start",
+  "68_q": "sound/fx/alonso/s000/alonso_skill01_shot",
+  "68_w": "sound/fx/alonso/s000/alonso_skill02_start",
+  "68_e": "sound/fx/alonso/s000/alonso_skill03_hit",
+  "68_r": "sound/fx/alonso/s000/alonso_skill04_start",
+  "69_q": "sound/fx/leni/s000/leni_pistol_skill01_shot",
+  "69_w": "sound/fx/leni/s000/leni_pistol_skill02_hit",
+  "69_e": "sound/fx/leni/s000/leni_pistol_skill03_shot",
+  "69_r": "sound/fx/leni/s000/leni_pistol_skill04_hit",
+  "70_q": "sound/fx/tsubame/s000/tsubame_skill01_fire",
+  "70_w": "sound/fx/tsubame/s000/tsubame_skill02_specialattack_shot",
+  "70_e": "sound/fx/tsubame/s000/tsubame_skill03_stealthend",
+  "70_r": "sound/fx/tsubame/s000/tsubame_skill04_attack",
+  "71_q": "sound/fx/kenneth/s000/kenneth_skill01_hit",
+  "71_w": "sound/fx/kenneth/s000/kenneth_skill02_start",
+  "71_e": "sound/fx/kenneth/s000/kenneth_skill03_firsthit",
+  "71_r": "sound/fx/kenneth/s000/kenneth_skill04_04_ground_hit",
+  "72_q": "sound/fx/katja/s000/katja_sniperrifle_skill01_shot",
+  "72_w": "sound/fx/katja/s000/katja_sniperrifle_skill02_shot",
+  "72_e": "sound/fx/katja/s000/katja_sniperrifle_skill03_shot",
+  "72_r": "sound/fx/katja/s000/katja_sniperrifle_skill04_shot",
+  "73_q": "sound/fx/charlotte/s000/charlotte_arcana_skill01_boom",
+  "73_w": "sound/fx/charlotte/s000/charlotte_arcana_skill02_heal",
+  "73_e": "sound/fx/charlotte/s000/charlotte_arcana_skill03_start",
+  "73_r": "sound/fx/charlotte/s000/charlotte_arcana_skill04_start",
+  "74_q": "sound/fx/darko/s000/darko_bat_skill01_hit",
+  "74_w": "sound/fx/darko/s000/darko_bat_skill02_buff",
+  "74_e": "sound/fx/darko/s000/darko_bat_skill03_start",
+  "74_r": "sound/fx/darko/s000/darko_bat_skill04_start",
+  "75_q": "sound/fx/lenore/s000/lenore_guitar_skill01_shot",
+  "75_w": "sound/fx/lenore/s000/lenore_guitar_skill02_hit",
+  "75_e": "sound/fx/lenore/s000/lenore_guitar_skill03_hit",
+  "75_r": "sound/fx/lenore/s000/lenore_guitar_skill04_shot",
+  "76_q": "sound/fx/garnet/s000/garnet_bat_skill01_firsthit",
+  "76_w": "sound/fx/garnet/s000/garnet_bat_skill02_start",
+  "76_e": "sound/fx/garnet/s000/garnet_bat_skill03_hit",
+  "76_r": "sound/fx/garnet/s000/garnet_bat_skill04_timer",
+  "77_q": "sound/fx/yumin/s000/yumin_skill01_shot",
+  "77_w": "sound/fx/yumin/s000/yumin_skill02_hit",
+  "77_e": "sound/fx/yumin/s000/yumin_skill03_fire",
+  "77_r": "sound/fx/yumin/s000/yumin_skill04_hit",
+  "78_q": "sound/fx/hisui/s000/hisui_skill01_hit",
+  "78_w": "sound/fx/hisui/s000/hisui_skill02_3_hit",
+  "78_e": "sound/fx/hisui/s000/hisui_skill03_hit",
+  "78_r": "sound/fx/hisui/s000/hisui_skill04_2_hit",
+  "79_q": "sound/fx/justyna/s000/justyna_crossbow_skill01_hit",
+  "79_w": "sound/fx/justyna/s000/justyna_crossbow_skill02_shot",
+  "79_e": "sound/fx/justyna/s000/justyna_crossbow_skill03_reinforceattack_shot",
+  "79_r": "sound/fx/justyna/s000/justyna_crossbow_skill04_shot",
+  "80_q": "sound/fx/istvan/s000/istvan_spear_skill01_attack",
+  "80_w": "sound/fx/istvan/s000/istvan_spear_skill02_attack",
+  "80_e": "sound/fx/istvan/s000/istvan_spear_skill03_dash_start",
+  "80_r": "sound/fx/istvan/s000/istvan_spear_skill04_dash_start",
+  "81_q": "sound/fx/niah/s000/niah_skill01_06_projectile_shot",
+  "81_w": "sound/fx/niah/s000/niah_skill02_04_hit",
+  "81_e": "sound/fx/niah/s000/niah_skill03_01_casting",
+  "81_r": "sound/fx/niah/s000/niah_skill04_09_world_damage_hit",
+  "82_q": "sound/fx/xuelin/s000/xuelin_rapier_skill01_shot",
+  "82_w": "sound/fx/xuelin/s000/xuelin_rapier_skill02_shot",
+  "82_e": "sound/fx/xuelin/s000/xuelin_rapier_skill03_sword",
+  "82_r": "sound/fx/xuelin/s000/xuelin_rapier_skill04_start",
+  "83_q": "sound/fx/henry/s000/henry_skill01_fire",
+  "83_w": "sound/fx/henry/s000/henry_skill02_hit",
+  "83_e": "sound/fx/henry/s000/henry_skill03_start_point",
+  "83_r": "sound/fx/henry/s000/henry_skill04_start",
+  "84_q": "sound/fx/blair/s000/blair_twin_skill01_hit",
+  "84_w": "sound/fx/blair/s000/blair_twin_skill02_start",
+  "84_e": "sound/fx/blair/s000/blair_twin_skill03_hit",
+  "84_r": "sound/fx/blair/s000/blair_common_skill04_dash_start",
+  "85_q": "sound/fx/mirka/s000/mirka_hammer_skill01_02_hit",
+  "85_w": "sound/fx/mirka/s000/mirka_hammer_skill02_dash",
+  "85_e": "sound/fx/mirka/s000/mirka_hammer_skill03_attack",
+  "85_r": "sound/fx/mirka/s000/mirka_hammer_skill04_attack",
+  "86_q": "sound/fx/fenrir/s000/fenrir_skill01_attack2",
+  "86_w": "sound/fx/fenrir/s000/fenrir_skill02_fire",
+  "86_e": "sound/fx/fenrir/s000/fenrir_skill03_attack",
+  "86_r": "sound/fx/fenrir/s000/fenrir_skill04_attack",
+  "87_q": "sound/fx/coraline/s000/coraline_skill01_fire",
+  "87_w": "sound/fx/coraline/s000/coraline_skill02_mirror_appear_black",
+  "87_e": "sound/fx/coraline/s000/coraline_skill03_fire",
+  "87_r": "sound/fx/coraline/s000/coraline_skill04_start"
+ }
+}

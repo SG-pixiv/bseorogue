@@ -275,6 +275,10 @@ export class Battle {
         return "end_summit";
       }
     }
+    // 블서로그: 50웨이브 최종 보스(루미)는 따로 (이터널 리턴 마지막 금지구역 곡)
+    if (!BSEO.pokerogueFinale && this.gameMode.isClassic && this.gameMode.isWaveFinal(this.waveIndex)) {
+      return "bseo_final";
+    }
     const wildOpponents = globalScene.getEnemyParty();
     for (const pokemon of wildOpponents) {
       if (this.isClassicFinalBoss) {

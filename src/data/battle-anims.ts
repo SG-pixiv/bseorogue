@@ -3,6 +3,7 @@ import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
 import { erCodeOfSpecies } from "#data/bseorogue/roster";
 import { bseoSkillAnim } from "#data/bseorogue/skill-anim";
+import { loadedBseoSkillSfx } from "#data/bseorogue/skill-sfx";
 import { allMoves } from "#data/data-lists";
 import type { BattlerIndex } from "#enums/battler-index";
 import { BattlerTagType } from "#enums/battler-tag-type";
@@ -295,13 +296,19 @@ class AnimTimedSoundEvent extends AnimTimedEvent {
   execute(battleAnim: BattleAnim): number {
     const soundConfig = { rate: this.pitch * 0.01, volume: this.volume * 0.01 };
     if (this.resourceName) {
+      // 블서로그: 실험체 스킬이면 공용 연출 소리(bseo-*) 대신 그 스킬의 게임 소리 (skill-sfx.ts)
+      const own =
+        this.resourceName.startsWith("bseo-") && battleAnim instanceof MoveAnim && battleAnim.user
+          ? loadedBseoSkillSfx(battleAnim.user.species.speciesId, battleAnim.move)
+          : null;
+      const soundKey = own ?? `battle_anims/${this.resourceName}`;
       // TODO: this `try` shouldn't be necessary, `playSound()` already encases itself in a `try`/`catch`
       try {
-        audioManager.playSound(`battle_anims/${this.resourceName}`, soundConfig);
+        audioManager.playSound(soundKey, soundConfig);
       } catch (err) {
         console.error(err);
       }
-      const sound = globalScene.sound.get(`battle_anims/${this.resourceName}`);
+      const sound = globalScene.sound.get(soundKey);
       if (!sound) {
         return 0;
       }
