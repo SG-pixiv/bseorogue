@@ -13,6 +13,9 @@
 
 아이템을 더하거나 구분을 바꾸려면 아래 ROWS 표를 고쳐요.
 '고정' 줄은 포켓몬에만 맞아서 처음부터 빠져 있는 것 (init-modifier-pools.ts 의 BSEO_NO_REWARD), 시트에서 못 바꿔요.
+GONE 은 게임에서 뺀 것이 확정된 아이템 (11-19 SG: 목록에서 지우기). 시트에는 안 나오고 늘 reward-trim.ts 에 들어가요.
+다시 넣으려면 GONE 에서 지우고 이 도구를 다시 돌려요 (시트에 '남김' 줄로 돌아와요).
+그리고 '아이템 그림' 시트(게임에 나오는 아이템의 지금 그림 · 출처 · 노란 '바꿀 그림')도 같이 새로 써요 (SG가 적은 칸은 그림 파일로 찾아 그대로).
 """
 import json
 import re
@@ -29,6 +32,9 @@ XLSX = ROOT / "docs/sheets/SG-정할-것.xlsx"
 OUT = ROOT / "src/data/bseorogue/reward-trim.ts"
 SHEET = "아이템 줄이기"
 KEEP, CUT, FIXED = "남김", "뺌", "뺌 (고정)"
+ART_SHEET = "아이템 그림"
+ITEM_SOURCES = ROOT / "assets/er/item-sources.json"
+ITEM_DOTS = ROOT / "assets/er/item"
 
 ROLE_TYPES = {"ROCK": "탱커", "FIGHTING": "브루저", "DARK": "암살자", "DRAGON": "평원딜", "PSYCHIC": "스증딜러", "FAIRY": "서포터"}
 OTHER_TYPES = ["NORMAL", "BUG", "FLYING", "POISON", "GROUND", "GHOST", "STEEL", "FIRE", "WATER", "GRASS", "ELECTRIC", "ICE"]
@@ -121,11 +127,11 @@ ROWS = [
     ("지닌 물건", "QUICK_CLAW", "10% 확률로 먼저 행동", "희귀", KEEP, KEEP, ""),
     ("지닌 물건", "KINGS_ROCK", "공격하면 10% 확률로 스턴", "로그", KEEP, KEEP, ""),
     ("지닌 물건", "GRIP_CLAW", "공격하면 10% 확률로 상대 물건을 빼앗음", "로그", KEEP, KEEP, ""),
-    ("지닌 물건", "BATON", "교체할 때 능력 변화를 넘겨줌", "로그", KEEP, KEEP, ""),
+    ("지닌 물건", "BATON", "교체할 때 능력 변화를 넘겨줌", "로그", KEEP, CUT, "교체로 능력 변화를 넘기는 포켓몬 전략용. 1:1 · 3명 파티에서는 거의 안 씀 (11-19)"),
     ("지닌 물건", "WIDE_LENS", "명중률 +5", "희귀", KEEP, KEEP, ""),
     ("지닌 물건", "SCOPE_LENS", "급소 ↑", "로그", KEEP, KEEP, ""),
     ("지닌 물건", "MULTI_LENS", "공격이 한 번 더 맞음 (약하게)", "마스터", KEEP, KEEP, ""),
-    ("지닌 물건", "BERRY_POUCH", "먹은 음식이 30% 확률로 안 없어짐", "로그", KEEP, KEEP, ""),
+    ("지닌 물건", "BERRY_POUCH", "먹은 음식이 30% 확률로 안 없어짐", "로그", KEEP, CUT, "음식이 5종만 남아 효과가 작고 맞는 ER 아이템이 없음 (11-19)"),
     ("지닌 물건", "HEALING_CHARM", "회복 효과 +10%", "마스터", KEEP, KEEP, ""),
     ("볼", "POKEBALL", "실험체를 잡는 볼 (지금은 포획이 꺼져 있어 안 나옴)", "일반", KEEP, KEEP, "볼 통합 · 포획 작업 때 켜요 (4-16)"),
     # --- 처음부터 빠져 있는 것 (포켓몬 전용, 고정)
@@ -138,6 +144,22 @@ ROWS = [
     ("포켓몬 전용 (처음부터 빠져 있음)", "진화 아이템 · 특정 포켓몬 전용", "진화 · 전용 강화", "", FIXED, "", ""),
     ("포켓몬 전용 (처음부터 빠져 있음)", "미니 블랙홀", "매 턴 상대 물건을 빼앗음", "", FIXED, "", ""),
 ]
+
+# 게임에서 뺀 것 (확정) — 시트 목록에는 안 나와요 (11-19 SG "내가 정할 것에 있는 아이템 … 너가 빼야한다고 생각하는것들은 전부 제거")
+GONE = {
+    # 11-12 SG 가 정함
+    "EVIOLITE", "LEEK", "MYSTICAL_ROCK", "TOXIC_ORB", "FLAME_ORB", ",".join(f"ATTACK_TYPE_BOOSTER:{t}" for t in OTHER_TYPES),
+    "GREAT_BALL", "ULTRA_BALL", "ROGUE_BALL", "MASTER_BALL",
+    # 11-12 SG 시트: 추천대로 뺌 (4-18 ①)
+    "SUPER_POTION", "MAX_POTION", "SACRED_ASH", "MAX_ETHER", "ELIXIR", "PP_MAX",
+    "BERRY:LIECHI", "BERRY:GANLON", "BERRY:PETAYA", "BERRY:APICOT", "BERRY:SALAC", "BERRY:LANSAT",
+    "TEMP_STAT_STAGE_BOOSTER:DEF", "TEMP_STAT_STAGE_BOOSTER:SPDEF", "TEMP_STAT_STAGE_BOOSTER:ACC", "DIRE_HIT",
+    "SUPER_EXP_CHARM", "MINT", "SOUL_DEW", "IV_SCANNER", "SOOTHE_BELL", "SHINY_CHARM", "MEMORY_MUSHROOM",
+    # 11-12 SG 메모 "스킬저항업그레이드는 제거"
+    "BASE_STAT_BOOSTER:SPDEF",
+    # 11-19 제가 고름 (SG가 맡김)
+    "BATON", "BERRY_POUCH",
+}
 
 HEADERS = ["구분", "아이템", "효과", "나오는 곳", "결정 (남김 / 뺌)", "추천", "추천 이유", "메모", "키 (고치지 마세요)"]
 WIDTHS = [22, 24, 40, 13, 13, 8, 34, 24, 30]
@@ -154,7 +176,7 @@ README = [
     ("· 보상 · 상점에 나오는 아이템을 구분별로 모았어요. 노란 '결정' 칸에 남김 / 뺌 만 고르면 돼요 (칸을 누르면 고르는 목록이 나와요).", False),
     ("· 노란 '아이템' 칸의 이름을 고치면 게임 안 이름도 그렇게 바뀌어요.", False),
     ("· '뺌' 으로 하면 보상 · 상점 · 적이 지닌 물건에서 모두 안 나와요. '추천' 은 제 의견이고, 결정 칸이 실제로 들어가는 값이에요.", False),
-    ("· 맨 위 '뺀 것' 은 SG가 11-12 에 빼기로 한 것, 맨 아래 회색은 포켓몬 전용이라 처음부터 빠져 있는 것 (못 바꿔요).", False),
+    ("· 11-19 부터 지금 게임에 나오는 아이템만 보여요. 뺀 아이템(SG가 11-12 에 정한 것 · 11-19 에 제가 고른 것 · 포켓몬 전용)은 목록에서 지웠어요.", False),
 ]
 
 
@@ -241,8 +263,10 @@ def build_sheet(wb) -> None:
     berry = json.loads((ROOT / "locales/ko/berry.json").read_text(encoding="utf-8"))
     vouchers = json.loads((ROOT / "locales/ko/voucher.json").read_text(encoding="utf-8"))
     balls = json.loads((ROOT / "locales/ko/pokeball.json").read_text(encoding="utf-8"))
-    last = FIRST_ROW + len(ROWS) - 1
-    ws["A1"] = "아이템 줄이기 — 노란 '결정' 칸에 남김 / 뺌 을 골라요. 뺌 이면 보상 · 상점 · 적이 지닌 물건에서 안 나와요."
+    rows = shown_rows()
+    last = FIRST_ROW + len(rows) - 1
+    ws["A1"] = (f"아이템 줄이기 — 지금 게임에 나오는 아이템 {len(rows)}개만 있어요 (뺀 아이템은 11-19 목록에서 지움). "
+                "노란 '결정' 칸에 남김 / 뺌 을 골라요. 뺌 이면 보상 · 상점 · 적이 지닌 물건에서 안 나와요.")
     ws["A1"].font = Font(name=F, size=11, bold=True)
     ws["A2"] = "남김"
     ws["B2"] = f'=COUNTIF($E${FIRST_ROW}:$E${last},"{KEEP}")'
@@ -261,7 +285,7 @@ def build_sheet(wb) -> None:
     dv = DataValidation(type="list", formula1=f'"{KEEP},{CUT}"', allow_blank=True)
     ws.add_data_validation(dv)
     band, prev = 0, None
-    for i, (group, key, effect, where, decision, rec, why) in enumerate(ROWS):
+    for i, (group, key, effect, where, decision, rec, why) in enumerate(rows):
         r = FIRST_ROW + i
         fixed = decision == FIXED
         if group != prev:
@@ -284,16 +308,108 @@ def build_sheet(wb) -> None:
             dv.add(ws.cell(r, 5))
     if "읽어 주세요" in wb.sheetnames:
         readme = wb["읽어 주세요"]
+        for c in readme["A"]:
+            if "맨 위 '뺀 것'" in str(c.value):
+                c.value = README[-1][0]
         if not any("아이템 줄이기 시트" in str(c.value) for c in readme["A"]):
             start = readme.max_row + 2
             for i, (text, bold) in enumerate(README):
                 readme.cell(start + i, 1, text).font = Font(name=F, size=11 if bold else 10, bold=bold)
 
 
+VOUCHER_ICON = {"VOUCHER": "coupon", "VOUCHER_PLUS": "pair_of_tickets", "VOUCHER_PREMIUM": "mystic_ticket"}
+ICON = {"POKEBALL": "pb", "MULTI_LENS": "zoom_lens", **VOUCHER_ICON}
+ART_HEADERS = ["번호", "구분", "게임 이름", "그림 파일 (items/)", "지금 그림", "그림 출처", "바꿀 그림 (노란 칸)", "메모"]
+ART_WIDTHS = [6, 22, 26, 22, 18, 46, 30, 30]
+
+
+def icon_of(key: str) -> str:
+    """시트 키 → 아이템 그림 파일 이름 (items 아틀라스, assets/er/item/<이름>.png)"""
+    head, _, sub = key.partition(":")
+    if head == "BERRY":
+        return f"{BERRY_KEY[sub]}_berry"
+    if head == "TEMP_STAT_STAGE_BOOSTER":
+        return TEMP_KEY[sub]
+    if head == "BASE_STAT_BOOSTER":
+        return BASE_KEY[sub]
+    if head == "ATTACK_TYPE_BOOSTER":
+        return TYPE_KEY[sub]
+    return ICON.get(head, head.lower())
+
+
+def build_art_sheet(wb, off: set[str]) -> None:
+    """'아이템 그림' 시트: 지금 게임에 나오는 아이템만, 지금 그림 · 출처 + 노란 '바꿀 그림' (SG가 적은 칸은 그림 파일로 찾아 그대로)"""
+    answers, index = {}, None
+    if ART_SHEET in wb.sheetnames:
+        old = wb[ART_SHEET]
+        index = wb.sheetnames.index(ART_SHEET)
+        for row in old.iter_rows(min_row=2, values_only=True):
+            if row and row[3] and (row[6] or row[7]):
+                answers[str(row[3]).removesuffix(".png")] = (row[6], row[7])
+        del wb[ART_SHEET]
+    ws = wb.create_sheet(ART_SHEET, index=index if index is not None else len(wb.sheetnames))
+    sources = json.loads(ITEM_SOURCES.read_text(encoding="utf-8")) if ITEM_SOURCES.exists() else {}
+    names = {key: (row_name or "") for key, row_name in ((r[8], r[1]) for r in wb[SHEET].iter_rows(min_row=FIRST_ROW, values_only=True)) if key}
+    for c, (h, w) in enumerate(zip(ART_HEADERS, ART_WIDTHS), 1):
+        cell = ws.cell(1, c, h)
+        cell.font = Font(name=F, size=10, bold=True, color="FFFFFF")
+        cell.fill = HEAD
+        cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+        cell.border = B
+        ws.column_dimensions[get_column_letter(c)].width = w
+    ws.freeze_panes = "C2"
+    r = 2
+    for group, key, *_ in shown_rows():
+        if any(k in off for k in key.split(",")):
+            continue
+        icon = icon_of(key)
+        src = sources.get(icon, {})
+        dot = (ITEM_DOTS / f"{icon}.png").exists()
+        file = str(src.get("file", ""))
+        if not dot:
+            kind = "코드 그림"
+        elif file.startswith("나무위키"):
+            kind = "나무위키 도트"
+        else:
+            kind = "팬키트 도트 (색 바꿈)" if src.get("tint") else "팬키트 도트"
+        want, memo = answers.get(icon, (None, None))
+        vals = [r - 1, group, names.get(key, ""), f"{icon}.png", kind, file if dot else "", want or "", memo or ""]
+        for c, v in enumerate(vals, 1):
+            cell = ws.cell(r, c, v)
+            cell.font = Font(name=F, size=10, color="B00020" if c == 5 and kind == "코드 그림" else "000000")
+            cell.border = B
+            cell.alignment = Alignment(vertical="center", wrap_text=c in (2, 6, 7, 8))
+            if c in (7, 8):
+                cell.fill = EDIT
+        r += 1
+    note = r + 1
+    ws.cell(note, 1, "· 지금 게임에 나오는 아이템만 있어요 (11-19). 그림을 바꾸고 싶으면 노란 칸에 팬키트 파일 이름이나 ER 아이템 이름을 적어 주세요.").font = Font(name=F, size=10)
+    ws.cell(note + 1, 1, "· 출처 '나무위키 …' 는 나무위키 이터널 리턴 문서의 아이템 그림을 도트로 바꾼 것, '코드 그림' 은 아직 임시 그림이에요.").font = Font(name=F, size=10)
+
+
+def shown_rows() -> list[tuple]:
+    """시트에 보일 줄: 게임에 나오는 것만 (뺀 것 확정 · 포켓몬 전용 고정 줄은 빼요)"""
+    return [row for row in ROWS if row[4] != FIXED and row[1] not in GONE]
+
+
+def gone_names() -> list[tuple[str, str]]:
+    """GONE → [(키, 이름)] (reward-trim.ts 주석용)"""
+    locale = json.loads((ROOT / "locales/ko/modifier-type.json").read_text(encoding="utf-8"))
+    berry = json.loads((ROOT / "locales/ko/berry.json").read_text(encoding="utf-8"))
+    vouchers = json.loads((ROOT / "locales/ko/voucher.json").read_text(encoding="utf-8"))
+    balls = json.loads((ROOT / "locales/ko/pokeball.json").read_text(encoding="utf-8"))
+    out = []
+    for _, key, *_ in ROWS:
+        if key in GONE:
+            name = item_name(key, locale["ModifierType"], berry, locale, vouchers, balls)
+            out.extend((k, name) for k in key.split(","))
+    return out
+
+
 def read_decisions(wb) -> tuple[list[tuple[str, str]], list[str]]:
     """→ (뺄 것 [(키, 이름)], 틀린 줄)"""
-    known = {key for _, key, _, _, d, _, _ in ROWS if d != FIXED}
-    off, errors = [], []
+    known = {key for _, key, _, _, d, _, _ in ROWS if d != FIXED and key not in GONE}
+    off, errors = gone_names(), []
     for r, row in enumerate(wb[SHEET].iter_rows(min_row=FIRST_ROW, values_only=True), FIRST_ROW):
         key, said = row[8], str(row[4] or "").strip()
         if not key:
@@ -342,7 +458,9 @@ def main() -> None:
     for group, key, *_ in ROWS:
         groups.setdefault(group, []).append(key)
     cut = {k for k, _ in off}
-    print(f"{path.name}: '{SHEET}' 시트 {len(ROWS)}줄 · 뺌 {len(off)}개 → {OUT.relative_to(ROOT)}")
+    build_art_sheet(wb, {k for k, _ in off})
+    wb.save(path)
+    print(f"{path.name}: '{SHEET}' 시트 {len(shown_rows())}줄 (뺀 것 확정 {len(GONE)}줄은 목록에서 지움) · 뺌 {len(off)}개 → {OUT.relative_to(ROOT)}")
     for group, keys in groups.items():
         n = sum(1 for k in keys if any(x in cut for x in k.split(",")))
         if n:

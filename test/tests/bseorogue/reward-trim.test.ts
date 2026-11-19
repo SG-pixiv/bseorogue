@@ -80,6 +80,19 @@ describe("블서로그 아이템 줄이기", () => {
     }
   });
 
+  it("11-19 에 더 뺀 것(배턴 · 열매주머니)도 보상 풀에 없고, 남긴 지닌 물건은 그대로예요", () => {
+    const ids = Object.values(modifierPool)
+      .flat()
+      .map(w => w.modifierType.id);
+    for (const id of ["BATON", "BERRY_POUCH"]) {
+      expect(bseoRewardOff(id), id).toBe(true);
+      expect(ids, id).not.toContain(id);
+    }
+    for (const id of ["LEFTOVERS", "FOCUS_BAND", "KINGS_ROCK", "MULTI_LENS", "CANDY_JAR", "NUGGET", "MAP"]) {
+      expect(ids, id).toContain(id);
+    }
+  });
+
   it("전부 뺀 종류: 내 보상은 빈 목록, 적이 지닐 물건은 원래 목록", () => {
     OFF.clear();
     cut("X:A", "X:B");

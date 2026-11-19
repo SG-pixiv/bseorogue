@@ -24,6 +24,10 @@
   "file": "03. Consumables/Food/017. Grilled Mushroom Skewers.png",
   "name": "기억버섯"
  },
+ "big_nugget": {
+  "file": "나무위키 이터널 리턴/아이템/재료: 다이아몬드",
+  "name": "크레딧++"
+ },
  "black_belt": {
   "file": "05. Material/062. Tac. Skill Module.png",
   "name": "강화 모듈 (fighting)",
@@ -54,6 +58,10 @@
  "calcium": {
   "file": "03. Consumables/Boost/06. Tear of Selene.png",
   "name": "셀레네의 눈물 - 스킬증폭 (11-12 SG)"
+ },
+ "candy_jar": {
+  "file": "나무위키 이터널 리턴/아이템/소비: 꿀",
+  "name": "부거단지 (꿀단지)"
  },
  "carbos": {
   "file": "03. Consumables/Boost/07. Combat Epinephrine.png",
@@ -330,6 +338,10 @@
    56
   ]
  },
+ "map": {
+  "file": "나무위키 이터널 리턴/아이템/특수: 루프 카드키",
+  "name": "루미아 섬 지도 (ER 에서 갈 지역을 고르는 루프 카드키)"
+ },
  "max_elixir": {
   "file": "03. Consumables/Food/020. Flower Liquor.png",
   "name": "백일취"
@@ -398,6 +410,10 @@
    156,
    140
   ]
+ },
+ "nugget": {
+  "file": "나무위키 이터널 리턴/아이템/재료: 원석",
+  "name": "크레딧+"
  },
  "oval_charm": {
   "file": "01. Weapons/13. Shuriken/010. Mystic Jade Charm.png",
@@ -650,6 +666,10 @@
  "x_sp_atk": {
   "file": "03. Consumables/Boost/03. Capsule_Galaxy.png",
   "name": "캡슐-우주 (스킬 증폭 강화제)"
+ },
+ "x_speed": {
+  "file": "나무위키 이터널 리턴/아이템/소비: 콜라",
+  "name": "속도 강화제 (5웨이브 동안 속도 ↑)"
  },
  "zinc": {
   "file": "03. Consumables/Boost/01. Capsule_Essence.png",

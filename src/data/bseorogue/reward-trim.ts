@@ -52,4 +52,6 @@ export const BSEO_REWARD_OFF: ReadonlySet<string> = new Set([
   "SHINY_CHARM", // 빛나는 부적
   "MEMORY_MUSHROOM", // 기억버섯
   "BASE_STAT_BOOSTER:SPDEF", // 캡슐 - 생명
+  "BATON", // 배턴
+  "BERRY_POUCH", // 열매주머니
 ]);
