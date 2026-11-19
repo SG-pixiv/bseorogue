@@ -10,6 +10,7 @@ AI 가 만든 도트 밑그림 → 블서로그 실험체 도트 규격으로 �
 쓰는 법:
   python3 scripts/er-dot/clean_dot.py <AI 그림.png> <나올 이름.png> [--icon] [--size S|M|L] [--colors 15] [--no-lock] [--box]
   --icon      아이콘 (40×30, 위쪽을 잘라 써요)
+  --back      뒷모습 (우리 팀, 80×80 을 꽉 채우고 아래는 칸 끝에서 잘려요. AI 에게 머리 ~ 허벅지까지만 부탁)
   --size      키 등급: S 60px · M 68px (기본) · L 74px (칸은 80×80). --height N 으로 직접 줘도 돼요
   --no-lock   외곽선 2색 · 피부 3색을 팔레트 색으로 맞추지 않기 (기본은 맞춰요)
   --box       예전 줄이기 (평균). 기본은 큰 그림에서 15색으로 묶고 칸마다 제일 많은 색 (11-19), 어두운 선은 지켜요
@@ -232,6 +233,15 @@ def main():
         if line:
             part = add_outline(part)
         canvas = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
+        canvas.alpha_composite(part, ((cw - part.width) // 2, ch - part.height))
+    elif "--back" in sys.argv:
+        # 11-19 SG 뒷모습(우리 팀): 머리 ~ 허벅지, 칸을 꽉 채우고 아래는 칸 끝에서 잘려요 (아래 외곽선 줄은 칸 밖으로)
+        cw = ch = 80
+        part = fit(im, cw - 2 * line, ch - line, colors)
+        if line:
+            part = add_outline(part)
+        canvas = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
+        part = part.crop((0, 0, part.width, part.height - line))  # 아래 외곽선 줄은 버려요 (잘린 쪽)
         canvas.alpha_composite(part, ((cw - part.width) // 2, ch - part.height))
     else:
         cw = ch = 80
