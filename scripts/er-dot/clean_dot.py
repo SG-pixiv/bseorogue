@@ -12,8 +12,9 @@ AI 가 만든 도트 밑그림 → 블서로그 실험체 도트 규격으로 �
   --icon      아이콘 (40×30, 위쪽을 잘라 써요)
   --size      키 등급: S 60px · M 68px (기본) · L 74px (칸은 80×80). --height N 으로 직접 줘도 돼요
   --no-lock   외곽선 2색 · 피부 3색을 팔레트 색으로 맞추지 않기 (기본은 맞춰요)
-  --box       예전 줄이기 (평균). 기본은 큰 그림에서 15색으로 묶고 칸마다 제일 많은 색 (11-19)
-배경: 투명이면 그대로, 아니면 네 귀퉁이 색을 배경으로 보고 지워요. 가장자리 번짐도 지워요
+  --box       예전 줄이기 (평균). 기본은 큰 그림에서 15색으로 묶고 칸마다 제일 많은 색 (11-19), 어두운 선은 지켜요
+  --no-outline 바깥 1px 외곽선(#1a1c2c)을 안 붙이기 (기본은 붙여요, 키는 외곽선까지 포함)
+배경: 투명이면 그대로, 아니면 테두리 색(중간값)을 배경으로 보고 지워요. 가장자리 번짐도 지워요
       (AI 에게 단색 배경을 부탁: 보통 #ff00ff, 보라 · 분홍 옷이면 #00ff00)
 """
 import sys
@@ -25,7 +26,8 @@ from PIL import Image
 SIZES = {"S": 60, "M": 68, "L": 74}
 # 모든 실험체가 같이 쓰는 색 (docs/dot-guide/palette-15.png): 외곽선 2 + 피부 3
 LOCK = [(0x1A, 0x1C, 0x2C), (0x3B, 0x3F, 0x5C), (0xFF, 0xE0, 0xC8), (0xF2, 0xB8, 0x96), (0xC9, 0x7E, 0x6A)]
-LOCK_DIST = 48  # r·g·b 차이 합이 이 안이면 팔레트 색으로 바꿔요
+LOCK_DIST = 30  # r·g·b 차이 합이 이 안이면 팔레트 색으로 바꿔요 (11-19: 48 이면 흰 머리가 피부색이 돼서 줄임)
+DARK_LUMA = 70  # 이보다 어두우면 선으로 봐요 (줄일 때 지키기)
 
 
 def lock_colors(im: Image.Image) -> Image.Image:
@@ -161,7 +163,27 @@ def downsample_mode(im: Image.Image, size) -> Image.Image:
             if cnt.get(None, 0) * 2 > total:
                 continue
             cnt.pop(None, None)
-            op[tx, ty] = cnt.most_common(1)[0][0]
+            # 11-19: 어두운 선이 칸의 1/4 이상이면 선 색으로 (AI 그림의 선은 가늘어서 다수결이면 사라져요)
+            opaque = sum(cnt.values())
+            dark = [(n, c) for c, n in cnt.items() if c[0] * 0.3 + c[1] * 0.59 + c[2] * 0.11 < DARK_LUMA]
+            if dark and sum(n for n, _ in dark) * 4 >= opaque:
+                op[tx, ty] = max(dark)[1]
+            else:
+                op[tx, ty] = cnt.most_common(1)[0][0]
+    return out
+
+
+def add_outline(im: Image.Image, color=None) -> Image.Image:
+    """캐릭터 바깥 1px 외곽선 (가이드: #1a1c2c). 투명 칸 중 위아래양옆에 캐릭터가 있는 칸을 칠해요"""
+    color = (*(color or LOCK[0]), 255)
+    out = Image.new("RGBA", (im.width + 2, im.height + 2), (0, 0, 0, 0))
+    out.alpha_composite(im, (1, 1))
+    px = out.load()
+    w, h = out.size
+    edge = [(x, y) for y in range(h) for x in range(w) if not px[x, y][3]
+            and any(0 <= x + dx < w and 0 <= y + dy < h and px[x + dx, y + dy][3] for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))]
+    for x, y in edge:
+        px[x, y] = color
     return out
 
 
@@ -196,17 +218,22 @@ def main():
     src, dst = sys.argv[1], sys.argv[2]
     icon = "--icon" in sys.argv
     colors = arg("--colors", 15)
+    line = 0 if "--no-outline" in sys.argv else 1
     im = remove_background(Image.open(src))
     if icon:
         cw, ch = 40, 30
         part = crop_bbox(im)
         part = part.crop((0, 0, part.width, min(part.height, round(part.width * 0.9))))  # 머리 ~ 가슴
-        part = fit(part, cw, ch - 1, colors)
+        part = fit(part, cw - 2 * line, ch - 1 - 2 * line, colors)
+        if line:
+            part = add_outline(part)
         canvas = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
         canvas.alpha_composite(part, ((cw - part.width) // 2, ch - part.height))
     else:
         cw = ch = 80
-        part = fit(im, cw, arg("--height", SIZES[arg("--size", "M").upper()]), colors)
+        part = fit(im, cw - 2 * line, arg("--height", SIZES[arg("--size", "M").upper()]) - 2 * line, colors)
+        if line:
+            part = add_outline(part)
         canvas = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
         canvas.alpha_composite(part, ((cw - part.width) // 2, ch - 1 - part.height))
     out = quantize(canvas, colors)
