@@ -1,0 +1,580 @@
+{
+  "_설명": "AI 도트 밑그림 캡션 (FLUX 3 Image Klein 빠른판, 4-29). 앞: intro_front + 자세 + NOT + WEAP + 생김새 + style_front/back + background(배경색). 뒤: intro_back + 자세 + NOT + WEAP_back + 생김새(back) + style. 참고 그림 = 캐릭터 작은 그림(input/bseo/ref/c00/<slug>_00s.png) + 마네킹(input/bseo/ref/pose_r<f|b>_<a~e>.png). 생김새 글은 Claude 가 팬키트 기본 전신 그림을 보고 쓴 것",
+  "intro_front": "Create a pixel art battle sprite of the character from the first image.",
+  "intro_back": "Create a pixel art battle sprite of the character from the first image seen from behind.",
+  "style_front": "Render as a retro handheld RPG pixel art battle sprite of a trainer that matches the pixel grid, size and framing of the pixel-art mannequin in the second image: an 80 by 80 pixel sprite enlarged twelve times with nearest-neighbor scaling so every pixel is a crisp 12 by 12 square, the whole figure about 74 pixels tall, slightly stylized proportions about five heads tall with a large head and a clearly readable face: two distinct dark eyes with a one-pixel white highlight, eyebrows and a small mouth showing the character's expression, a one-pixel pure black outline around the outer silhouette and darker-shade one-pixel lines between inner shapes, flat cel shading with two or three tones per color, about fifteen colors in total, light from the upper left, no anti-aliasing, no dithering, no gradients, no blur, no text, no ground shadow.",
+  "style_back": "Render as a retro handheld RPG pixel art battle sprite of a trainer seen from behind that matches the pixel grid, size and framing of the pixel-art mannequin in the second image: an 80 by 120 pixel sprite enlarged ten times with nearest-neighbor scaling so every pixel is a crisp 10 by 10 square, the figure from the top of the head down to the thighs about 115 pixels tall and cut off by the bottom edge, a large head turned to the side so the profile shows one clearly drawn eye, eyebrow and mouth, a one-pixel pure black outline around the outer silhouette and darker-shade one-pixel lines between inner shapes, flat cel shading with two or three tones per color, about fifteen colors in total, light from the upper left, no anti-aliasing, no dithering, no gradients, no blur, no text, no ground shadow.",
+  "background": {
+    "green": "Centered on a plain flat solid pure green (#00FF00) background.",
+    "magenta": "Centered on a plain flat solid pure magenta (#FF00FF) background."
+  },
+  "size_front": [960, 960],
+  "size_back": [800, 1200],
+  "pose_image": "bseo/ref/pdot/<f|b>_<a~e>_<green|magenta>.png  (마네킹 도트: 앞 80×80 ×12 · 뒤 80×120 ×10, clean_dot 으로 만든 것)",
+  "not_pose": "Do not use the pose of the first image; take only the character's appearance from the first image, and do not copy the mannequin's gray color, joints or blank face.",
+  "weapon_front": "If the character carries a weapon, hold it in the raised hand or rest it on the shoulder.",
+  "weapon_back": "If the character carries a weapon, keep it visible in hand, on the shoulder or on the back.",
+  "poses": {
+    "fa": "Use the pose of the gray mannequin in the second image: the whole figure standing from head to feet, feet planted wide apart in an A-shape, the body facing the viewer at a slight three-quarter angle toward frame-left, one hand raised beside the shoulder at head height, the other arm hanging slightly back with the hand near the thigh, the head facing the viewer with a slight tilt.",
+    "fb": "Use the pose of the gray mannequin in the second image: the whole figure standing from head to feet, the weight on one straight leg and the other knee bent inward, the hips cocked to one side, one hand resting on the hip, the other hand raised to the cheek, the body twisted slightly toward frame-left and the head facing the viewer.",
+    "fc": "Use the pose of the gray mannequin in the second image: the whole figure standing from head to feet, feet planted apart, the body facing the viewer with the shoulders twisted slightly toward frame-left, the near arm raised and stretched out toward frame-left at head height as if about to throw, the other hand resting on the hip with the elbow pointing out, the head turned toward frame-left.",
+    "fd": "Use the pose of the gray mannequin in the second image: the whole figure standing from head to feet, feet planted apart, the body facing the viewer with a slight twist, one hand resting on the hip on the frame-left side with the elbow pointing out, the other arm stretched straight out and down toward frame-right with the palm open, the head facing the viewer.",
+    "fe": "Use the pose of the gray mannequin in the second image: the whole figure standing from head to feet in a wide stride, the body turned almost sideways toward frame-left, the front arm stretched straight out toward frame-left at shoulder height, the back arm bent with the hand near the chest, the head in profile looking toward frame-left.",
+    "ba": "Use the pose and framing of the gray mannequin in the second image: seen from behind and to the side, the body turned almost sideways toward the right so the back, the near shoulder and the side of the chest show, the head in profile looking right at an opponent, the near arm hanging down with the hand by the thigh, framed from the top of the head down to the upper thighs so the legs are cut off by the bottom edge. Show the back of the hair, the back of the outfit and anything carried on the back.",
+    "bb": "Use the pose and framing of the gray mannequin in the second image: seen from behind with the back toward the viewer, the body turned slightly to the right, the head turned to the right so only a little of the cheek shows, one arm hanging at the side and the other bent with the hand at the hip, framed from the top of the head down to the upper thighs so the legs are cut off by the bottom edge. Show the back of the hair, the back of the outfit and anything carried on the back.",
+    "bc": "Use the pose and framing of the gray mannequin in the second image: seen from behind in a three-quarter back view with the body turned toward the right, the head turned to the right in profile, both arms hanging relaxed at the sides, framed from the top of the head down to the upper thighs so the legs are cut off by the bottom edge. Show the back of the hair, the back of the outfit and anything carried on the back.",
+    "bd": "Use the pose and framing of the gray mannequin in the second image: seen from behind and to the side with the body turned toward the right so the back and the near shoulder show, the head in profile looking right, the near arm hanging straight down with the hand loosely by the thigh, framed from the top of the head down to the upper thighs so the legs are cut off by the bottom edge. Show the back of the hair, the back of the outfit and anything carried on the back.",
+    "be": "Use the pose and framing of the gray mannequin in the second image: seen from behind and to the side with the body turned toward the right, the head in profile looking right, the near arm stretched forward toward the right at chest height as if holding something out toward the opponent, framed from the top of the head down to the upper thighs so the legs are cut off by the bottom edge. Show the back of the hair, the back of the outfit and anything carried on the back."
+  },
+  "characters": {
+    "jackie": {
+      "er": 1,
+      "name": "재키",
+      "bg": "green",
+      "look": "Preserve her pale skin, short tousled white hair with long pointed bangs, red eyes, confident grin, black choker, black strappy crop top, black forearm guards with zigzag markings, black gloves, orange-brown layered skirt panels over short black shorts, utility belt with black pouches, and tall black boots. One hand holds the large red axe with its wooden handle, resting it on her shoulder with the blade behind her.",
+      "look_back": "Keep her short tousled white hair with long pointed tufts, pale skin, black choker, black strappy crop top with crossing straps on her bare back, black forearm guards and gloves, orange-brown layered skirt panels with a utility belt and black pouches. The large red axe with its wooden handle rests on her shoulder."
+    },
+    "aya": {
+      "er": 2,
+      "name": "아야",
+      "bg": "magenta",
+      "look": "Keep her long dark brown hair in two low braids with a white hairband, round glasses, brown eyes, olive green bomber jacket with a fur collar over a white dress, black tights, brown boots, and the black assault rifle held in both hands."
+    },
+    "hyunwoo": {
+      "er": 7,
+      "name": "현우",
+      "bg": "green",
+      "look": "Preserve his short spiky bright-red hair, amber eyes, white bandage across his nose, black hoop earring, determined expression, dark brown school blazer with a small crest, white shirt, red tie, dark brown trousers, red fingerless gloves with white hand wraps, and red high-top sneakers. The gray backpack hangs from one shoulder behind him. Remove all lettering and logos.",
+      "look_back": "Keep his short spiky bright-red hair, dark brown school blazer, white shirt collar, dark brown trousers, red fingerless gloves with white hand wraps. The large gray backpack with black straps and red accents is on his back. Remove all lettering and logos."
+    },
+    "magnus": {
+      "er": 4,
+      "name": "매그너스",
+      "bg": "magenta",
+      "look": "Keep his spiky blond undercut, stubble, tattoos on his muscular bare chest and arms, black open leather vest, studded belt, black cargo pants, black boots, fingerless gloves, and the huge steel bat resting on his shoulder."
+    },
+    "fiora": {
+      "er": 3,
+      "name": "피오라",
+      "bg": "magenta",
+      "look": "Keep her very long brown ponytail with a light blue ribbon, green eyes, cropped blue jacket, white bodysuit, white stockings, white sneakers, and the thin rapier sword."
+    },
+    "nadine": {
+      "er": 6,
+      "name": "나딘",
+      "bg": "green",
+      "look": "Keep her long dark hair tied up, wide-brimmed tan hat with a feather, orange hooded cape, black top, dark leggings, brown boots, utility belt, and the crossbow."
+    },
+    "zahir": {
+      "er": 5,
+      "name": "자히르",
+      "bg": "green",
+      "look": "Keep his dark skin, long black hair, gold headband, white and crimson robes with a long red sash, red boots, and the two large golden crescent chakram blades."
+    },
+    "hart": {
+      "er": 8,
+      "name": "하트",
+      "bg": "green",
+      "look": "Keep her short blonde bob with a black beret, red eyes, black and red jacket, black shorts, fishnet stockings, red and black boots, and the red electric guitar."
+    },
+    "isol": {
+      "er": 9,
+      "name": "아이솔",
+      "bg": "magenta",
+      "look": "Keep his short brown hair, red bandana scarf, sleeveless top, olive military apron, utility belts, black combat boots, the folding shovel on his shoulder and the coil of wire on his hip."
+    },
+    "lidailin": {
+      "er": 10,
+      "name": "리 다이린",
+      "bg": "magenta",
+      "look": "Keep her long black hair in twin buns with tassels, orange and yellow wide trousers, black and orange cropped jacket, red tassel cords, and the gourd at her belt; she fights with her fists."
+    },
+    "yuki": {
+      "er": 11,
+      "name": "유키",
+      "bg": "magenta",
+      "look": "Preserve his short layered black hair with blue-gray highlights, blue eyes, calm expression, charcoal-gray high-collared school uniform with gold floral collar ornaments and round gold buttons, charcoal trousers, gray, white and blue sneakers, the blue-and-white patterned crossbody strap, and the black case on his back. One hand rests on the hilt of the sheathed katana with gold fittings and blue braided cords hanging at his hip.",
+      "look_back": "Keep his short layered black hair with blue-gray highlights, charcoal-gray high-collared school uniform, the blue-and-white patterned crossbody strap, the tall black case on his back, and the sheathed katana with gold fittings and blue braided cords at his hip."
+    },
+    "hyejin": {
+      "er": 12,
+      "name": "혜진",
+      "bg": "magenta",
+      "look": "Keep her long dark purple hair, purple eyes, white cardigan with a black and purple pleated skirt, purple bow, white socks, lavender sneakers, and the glowing purple paper talisman charm."
+    },
+    "xiukai": {
+      "er": 13,
+      "name": "쇼우",
+      "bg": "green",
+      "look": "Keep his very large round body, smiling face, straw hat with a red ribbon, white chef jacket with a red neckerchief, red and gold apron with cloud patterns, black sandals, the wok on his back, and the kitchen knife."
+    },
+    "sissela": {
+      "er": 15,
+      "name": "시셀라",
+      "bg": "magenta",
+      "look": "Keep her short white hair with a black headband, pale skin with bandages on her arms and legs, loose white and gray hooded dress, white boots, the metal IV drip stand beside her, and the small round white ghost doll floating near her hand."
+    },
+    "chiara": {
+      "er": 14,
+      "name": "키아라",
+      "bg": "magenta",
+      "look": "Keep her very long pastel pink and white hair, pale skin, long black gothic dress with a lavender-white feathered skirt, purple jewel brooch, white gloves, and the white holy book."
+    },
+    "adriana": {
+      "er": 17,
+      "name": "아드리아나",
+      "bg": "green",
+      "look": "Keep her bright orange-red ponytail, dark olive jacket with a red top, ripped dark pants, red and black boots, the yellow fuel tank with a hose on her back, and the glass bottle in her hand."
+    },
+    "shoichi": {
+      "er": 18,
+      "name": "쇼이치",
+      "bg": "magenta",
+      "look": "Keep his short brown hair, glasses, tan business suit with an olive tie, ID badge, gloves, brown leather shoes, and the brown leather briefcase."
+    },
+    "silvia": {
+      "er": 16,
+      "name": "실비아",
+      "bg": "magenta",
+      "look": "Keep her short dark navy hair, black and cyan cycling bodysuit, white jacket with cyan trim, black gloves, knee pads, and white sneakers."
+    },
+    "emma": {
+      "er": 19,
+      "name": "엠마",
+      "bg": "magenta",
+      "look": "Keep her long teal hair in two tails with a large teal ribbon, teal eyes, white and pale teal magician dress, black tights, teal ribbon shoes, playing cards, and the black top hat in her hand."
+    },
+    "lenox": {
+      "er": 20,
+      "name": "레녹스",
+      "bg": "green",
+      "look": "Keep her short green hair, purple eyes, black crop top, dark red jacket over one shoulder, red-brown trousers with straps, black shoes, tattooed arm, and the whip in her hand."
+    },
+    "rozzi": {
+      "er": 21,
+      "name": "로지",
+      "bg": "magenta",
+      "look": "Keep her short black bob, black sleeveless dress with a large brown and black moth-wing cape, black thigh-high boots, and the two black pistols."
+    },
+    "luke": {
+      "er": 22,
+      "name": "루크",
+      "bg": "magenta",
+      "look": "Keep his messy light pinkish-brown hair, goggles on his forehead, white and orange flame-print shirt, dark gray overalls, brown gloves, brown work boots, and the long mop."
+    },
+    "cathy": {
+      "er": 23,
+      "name": "캐시",
+      "bg": "magenta",
+      "look": "Keep her dark skin, long brown ponytail, long white doctor's coat with blue trim, blue top, black skirt, brown stockings, high heels, and the surgical scalpels in her hands."
+    },
+    "adela": {
+      "er": 24,
+      "name": "아델라",
+      "bg": "magenta",
+      "look": "Keep her long black hair in a high ponytail, glasses, black military-style jacket with silver chains and chess-piece badges, black shorts, black thigh-high boots, a long gray checkered cape, and the black walking cane."
+    },
+    "bernice": {
+      "er": 25,
+      "name": "버니스",
+      "bg": "magenta",
+      "look": "Keep his long blond hair, fur-hooded tan parka over a green camouflage shirt, camouflage trousers, tan boots, binoculars, a hawk perched on his gloved arm, and the long shotgun."
+    },
+    "barbara": {
+      "er": 26,
+      "name": "바바라",
+      "bg": "magenta",
+      "look": "Keep her red-brown hair in a side ponytail, white goggle cap, green eyes, blue padded jacket with a tactical vest, black leggings with yellow print, black boots, a large backpack, and the wrench tool."
+    },
+    "alex": {
+      "er": 27,
+      "name": "알렉스",
+      "bg": "magenta",
+      "look": "Keep his short blond hair, black sunglasses, long black leather trench coat, black outfit with blue accents, black boots, a newspaper in one hand, and a small throwing knife."
+    },
+    "sua": {
+      "er": 28,
+      "name": "수아",
+      "bg": "magenta",
+      "look": "Keep her very long dark brown hair with a green leaf hairpin, green eyes, light green frilled floral dress, beige sandals, the green leaf-shaped paper knife, and the green book."
+    },
+    "leon": {
+      "er": 29,
+      "name": "레온",
+      "bg": "magenta",
+      "look": "Keep his brown hair, white headphones, dark blue hooded swim jacket with white letters, black and blue swim leggings, black sneakers, an orange sports bag, and the white surfboard."
+    },
+    "eleven": {
+      "er": 30,
+      "name": "일레븐",
+      "bg": "green",
+      "look": "Keep her short pink hair, pink eyes, white and pink frilly outfit with heart details, white socks, pink sneakers, and the giant hamburger-shaped hammer."
+    },
+    "rio": {
+      "er": 31,
+      "name": "리오",
+      "bg": "magenta",
+      "look": "Keep her long straight white hair, black school jacket with a yellow emblem, white sailor top with a yellow scarf, gray pleated skirt, dark socks, black shoes, and the traditional longbow with arrows."
+    },
+    "william": {
+      "er": 32,
+      "name": "윌리엄",
+      "bg": "magenta",
+      "look": "Keep his dark skin, short black hair, blue baseball cap, white baseball jersey with blue trim, black pants with blue stripes, blue cleats, and the brown baseball glove."
+    },
+    "nicky": {
+      "er": 33,
+      "name": "니키",
+      "bg": "green",
+      "look": "Keep her blonde hair in long twin tails with bunny-face hair ties, blue eyes, orange cropped jacket, black shorts with harness straps, a knee pad, orange sneakers, and orange boxing gloves."
+    },
+    "nathapon": {
+      "er": 34,
+      "name": "나타폰",
+      "bg": "magenta",
+      "look": "Keep his tan skin, brown hair with a white cap, light blue denim vest over a white shirt, olive cargo shorts, white sneakers, and the large black camera."
+    },
+    "jan": {
+      "er": 35,
+      "name": "얀",
+      "bg": "magenta",
+      "look": "Keep his dark skin, white hair tied up, muscular bare chest, black fingerless fighting gloves, white cargo shorts with black belts, and black shin wraps; he fights bare-handed."
+    },
+    "eva": {
+      "er": 36,
+      "name": "이바",
+      "bg": "magenta",
+      "look": "Keep her extremely long light brown hair, pink eyes, white blouse with a black corset, long black skirt with white patterns, white stockings, and black shoes."
+    },
+    "daniel": {
+      "er": 37,
+      "name": "다니엘",
+      "bg": "magenta",
+      "look": "Keep his long straight purple-black hair, pale face, long black buckled coat with purple accents, black trousers, black shoes, and the dagger in his hand."
+    },
+    "jenny": {
+      "er": 38,
+      "name": "제니",
+      "bg": "magenta",
+      "look": "Keep her long wavy blonde hair with red sunglasses on her head, dark red dress, huge white fur stole, black high heels, a shopping bag, and the silver pistol."
+    },
+    "camilo": {
+      "er": 39,
+      "name": "카밀로",
+      "bg": "magenta",
+      "look": "Keep his shoulder-length ash-blond hair, black shirt with wide ruffled sleeves, gray high-waisted flared trousers with suspenders, black shoes, and the two long rapiers, one in each hand."
+    },
+    "chloe": {
+      "er": 40,
+      "name": "클로에",
+      "bg": "magenta",
+      "look": "Keep her very long light gray-brown hair, white blouse, black corset belt, long brown pleated skirt, black boots, and the small white-haired doll companion floating beside her with a silver cross-shaped needle."
+    },
+    "johann": {
+      "er": 41,
+      "name": "요한",
+      "bg": "magenta",
+      "look": "Keep his short black hair, black priest cassock with a blue and gold stole, white gloves, black shoes, the golden lantern censer on a chain, and the golden scepter."
+    },
+    "bianca": {
+      "er": 42,
+      "name": "비앙카",
+      "bg": "magenta",
+      "look": "Keep her long dark teal hair with a black lace headpiece, red eyes, black gothic dress with red lining, black stockings, black platform boots, a blood bag, and the black lace parasol."
+    },
+    "celine": {
+      "er": 43,
+      "name": "셀린",
+      "bg": "magenta",
+      "look": "Keep her short light blue bob, orange jumpsuit with a black top, yellow gloves, utility belt, black boots, the orange case with hexagon panels, and the glowing blue bomb device."
+    },
+    "echion": {
+      "er": 44,
+      "name": "에키온",
+      "bg": "magenta",
+      "look": "Keep his spiky light gray-purple hair, dark red sleeveless shirt, black combat jacket, baggy black cargo pants, dark red boots, and the mechanical arm gauntlet with pink glowing lights."
+    },
+    "mai": {
+      "er": 45,
+      "name": "마이",
+      "bg": "green",
+      "look": "Keep her short red hair, red eyes, white top with bare shoulders, black and white shorts, a large teal and black striped shawl cape, and brown boots."
+    },
+    "aiden": {
+      "er": 46,
+      "name": "에이든",
+      "bg": "magenta",
+      "look": "Keep his short white hair, tan skin, long white double-breasted coat with black accents, black trousers, black boots, blue electric sparks at his hand, and the large black two-handed sword."
+    },
+    "laura": {
+      "er": 47,
+      "name": "라우라",
+      "bg": "magenta",
+      "look": "Keep her long lavender-purple hair, sleek black bodysuit with silver details, black high heels, a purple flower bouquet, and the long silver chain whip with a hook blade."
+    },
+    "tia": {
+      "er": 48,
+      "name": "띠아",
+      "bg": "magenta",
+      "look": "Keep her long orange-brown hair in a side bun, brown oversized jacket with a yellow ribbon, brown shorts, white socks, orange sneakers, and the giant paintbrush staff with glowing yellow paint."
+    },
+    "felix": {
+      "er": 49,
+      "name": "펠릭스",
+      "bg": "magenta",
+      "look": "Keep his short light brown hair, olive green open jacket over a white shirt, light blue wide cropped trousers with green straps, green and white sneakers, and the long spear with a glowing green blade."
+    },
+    "elena": {
+      "er": 50,
+      "name": "엘레나",
+      "bg": "magenta",
+      "look": "Keep her very long light blue-silver twin tails, blue frilled figure-skating dress, pale tights, ice skates, and the thin ice-blue rapier."
+    },
+    "priya": {
+      "er": 51,
+      "name": "프리야",
+      "bg": "magenta",
+      "look": "Keep her tan skin, short dark green hair with a white flower, long teal dress with orange and gold trim and white frills, brown sandals, and the teal sitar."
+    },
+    "adina": {
+      "er": 52,
+      "name": "아디나",
+      "bg": "magenta",
+      "look": "Keep her long silver hair, dark navy hooded cloak covered in star patterns with gold trim, white dress, black boots, and the glowing blue star orb in her hand."
+    },
+    "markus": {
+      "er": 53,
+      "name": "마커스",
+      "bg": "magenta",
+      "look": "Keep his short dark hair and stubble, muscular build, gray metal shoulder armor and harness, olive green tattered trousers, black boots, and the large battle axe on a long pole."
+    },
+    "karla": {
+      "er": 54,
+      "name": "칼라",
+      "bg": "green",
+      "look": "Keep her long red braided hair, red beret, red eyes, black and red crop top, red jacket, black shorts, brown boots, and the huge harpoon crossbow cannon on her shoulder."
+    },
+    "estelle": {
+      "er": 55,
+      "name": "에스텔",
+      "bg": "green",
+      "look": "Keep her short brown bob, orange-red firefighter jacket with a fur collar and a gas mask around her neck, black skirt, black stockings, red boots, the red fire axe, and the large black riot shield."
+    },
+    "piolo": {
+      "er": 56,
+      "name": "피올로",
+      "bg": "magenta",
+      "look": "Keep his tan skin, short brown hair, muscular bare chest under an open black hooded vest, black baggy pants with blue lines, ankle wraps, black wrist gauntlets, and the spiked nunchaku."
+    },
+    "martina": {
+      "er": 57,
+      "name": "마르티나",
+      "bg": "magenta",
+      "look": "Keep her long ash-blonde hair, black eyepatch, mustard yellow long coat, black top, ripped light blue jeans, brown heeled boots, and the large video camera on her shoulder."
+    },
+    "haze": {
+      "er": 58,
+      "name": "헤이즈",
+      "bg": "magenta",
+      "look": "Keep her long straight gray hair with a black headband, gray suit with a red tie, gray trousers, black shoes, a black rifle case on her back, and the black assault rifle."
+    },
+    "isaac": {
+      "er": 59,
+      "name": "아이작",
+      "bg": "magenta",
+      "look": "Keep his slicked-back silver hair and white mustache, red plaid coat with cream lining, brown vest, dark red shirt, brown trousers, brown shoes, and the black tonfa batons."
+    },
+    "tazia": {
+      "er": 60,
+      "name": "타지아",
+      "bg": "green",
+      "look": "Keep her short red hair, black jacket with wide sleeves, red and black plaid skirt with gold trim, black tights, black heels, and the floating ice-crystal swords around her."
+    },
+    "irem": {
+      "er": 61,
+      "name": "이렘",
+      "bg": "green",
+      "look": "Keep her short orange-blonde hair with cat ears and a red hairband, blue eyes, big yellow jacket with a white sailor collar and red bow, red top, gray pleated skirt, white socks, brown shoes, a red backpack, and the red yarn ball."
+    },
+    "theodore": {
+      "er": 62,
+      "name": "테오도르",
+      "bg": "magenta",
+      "look": "Keep his short black hair, long black coat with dark blue lining, black tactical outfit, black boots, and the huge black rifle cannon."
+    },
+    "lyanh": {
+      "er": 63,
+      "name": "이안",
+      "bg": "green",
+      "look": "Keep her long wavy pale green hair, cream dress with a brown corset and brown frills, wide sleeves, brown socks and shoes, and the small golden dagger."
+    },
+    "vanya": {
+      "er": 64,
+      "name": "바냐",
+      "bg": "magenta",
+      "look": "Keep her short light blue hair, white off-shoulder dress with a black ribbon belt, large blue butterfly-wing skirt, blue butterflies around her, and blue strappy heels."
+    },
+    "debimarlene": {
+      "er": 65,
+      "name": "데비&마를렌",
+      "bg": "green",
+      "look": "Keep the two twin girls standing side by side: both have short black hair and caps; Debi wears blue and black with a blue blade, Marlene wears red and black with a red blade; both wear black shorts and sneakers."
+    },
+    "arda": {
+      "er": 66,
+      "name": "아르다",
+      "bg": "magenta",
+      "look": "Keep his short orange-brown hair, green checkered scarf, beige shirt with a brown vest, rolled-up brown trousers, white socks, sandals, a backpack, and the antique lantern with a glowing teal flame."
+    },
+    "abigail": {
+      "er": 67,
+      "name": "아비게일",
+      "bg": "magenta",
+      "look": "Keep her long black hair with a green clip, dark blue and white long-sleeved outfit with a short skirt, white boots, and the large silver scythe."
+    },
+    "alonso": {
+      "er": 68,
+      "name": "알론소",
+      "bg": "magenta",
+      "look": "Keep his huge muscular build, wild spiky orange-blond hair, dark blue mechanical face mask, gray long coat with orange stripes, dark blue baggy trousers, black boots, and the two giant blue mechanical fists with glowing yellow lights."
+    },
+    "leni": {
+      "er": 69,
+      "name": "레니",
+      "bg": "magenta",
+      "look": "Keep her long light brown hair in a side ponytail with a black bunny-ear cap, black oversized jacket with colorful stripes, white shorts, mismatched striped socks, black and pink sneakers, the pink carrot water gun, and the microphone."
+    },
+    "tsubame": {
+      "er": 70,
+      "name": "츠바메",
+      "bg": "magenta",
+      "look": "Keep her long black hair in a high ponytail with a teal ribbon, purple jacket off the shoulders, black crop top, black shorts, fishnet stockings, black boots, and the kunai throwing knives."
+    },
+    "kenneth": {
+      "er": 71,
+      "name": "케네스",
+      "bg": "green",
+      "look": "Keep his gray hair, red and black hooded jacket, black armored pants, black boots, and the huge red and black flame-bladed sword."
+    },
+    "katja": {
+      "er": 72,
+      "name": "카티야",
+      "bg": "magenta",
+      "look": "Keep her long gray-white hair, dark teal tattered cloak, black tactical outfit, and the long black sniper rifle."
+    },
+    "charlotte": {
+      "er": 73,
+      "name": "샬럿",
+      "bg": "magenta",
+      "look": "Keep her long pink hair with a white bonnet, white and navy layered dress with lace frills, white stockings, gray boots, and the floating silver ring of crystal blades."
+    },
+    "darko": {
+      "er": 74,
+      "name": "다르코",
+      "bg": "magenta",
+      "look": "Keep his messy gray hair over one eye, dark teal long coat with patterned trim, navy shirt, black trousers, sneakers, and the golf club."
+    },
+    "lenore": {
+      "er": 75,
+      "name": "르노어",
+      "bg": "magenta",
+      "look": "Keep her long dark blue hair in a low braid with a blue hairband, dark blue fitted jacket with teal trim, dark blue skirt, brown tights, black boots, and the long ornate spear."
+    },
+    "garnet": {
+      "er": 76,
+      "name": "가넷",
+      "bg": "green",
+      "look": "Keep her long white-silver twin tails, black and white outfit, black boots, and the huge red and white case-shaped hammer."
+    },
+    "yumin": {
+      "er": 77,
+      "name": "유민",
+      "bg": "magenta",
+      "look": "Keep his shoulder-length black hair, black long coat over a dark blue vest and shirt, black trousers, black boots, and the black folding fan with blue swirling wind."
+    },
+    "hisui": {
+      "er": 78,
+      "name": "히스이",
+      "bg": "green",
+      "look": "Keep her short dark hair with a red streak and a side bun, white and red kimono-style outfit with a red sash, black platform sandals, and the long katana swords."
+    },
+    "justyna": {
+      "er": 79,
+      "name": "유스티나",
+      "bg": "magenta",
+      "look": "Keep her red hair in a high ponytail with goggles, gray long coat, white top, gray shorts, a bandage on her leg, gray sneakers, and the huge twin-barrel gatling cannon."
+    },
+    "istvan": {
+      "er": 80,
+      "name": "이슈트반",
+      "bg": "magenta",
+      "look": "Keep his long dark hair tied back, white and black long coat with red details, black trousers, black boots, and the long white spear with icy energy."
+    },
+    "niah": {
+      "er": 81,
+      "name": "니아",
+      "bg": "green",
+      "look": "Keep her short magenta-purple hair, pink bubble gum, pink and black plaid jacket, black top, sandals, and the black and pink gaming chair beside her."
+    },
+    "xuelin": {
+      "er": 82,
+      "name": "슈린",
+      "bg": "magenta",
+      "look": "Keep her very long dark teal hair with a bun, white and teal martial arts outfit with long ribbons, black boots, teal energy at her hand, and the long straight sword."
+    },
+    "henry": {
+      "er": 83,
+      "name": "헨리",
+      "bg": "magenta",
+      "look": "Keep his short gray-lavender hair, beige long coat with purple lining, black vest and red tie, brown trousers, black boots, and the dark gold blade gauntlet."
+    },
+    "blair": {
+      "er": 84,
+      "name": "블레어",
+      "bg": "magenta",
+      "look": "Keep her long blonde hair, black crop top and black jacket, black trousers, black boots, and the long thin sword with cyan glowing energy."
+    },
+    "mirka": {
+      "er": 85,
+      "name": "미르카",
+      "bg": "green",
+      "look": "Keep her long pink hair with a black cap, green and white jacket, black outfit and tights, black boots, and the huge black box-shaped hammer with a pink X mark."
+    },
+    "fenrir": {
+      "er": 86,
+      "name": "펜리르",
+      "bg": "magenta",
+      "look": "Keep his messy olive-brown hair, black shirt, gray armored coat skirt, black pants, black claw gloves, and the orange ring chain with a black spiked blade."
+    },
+    "coraline": {
+      "er": 87,
+      "name": "코렐라인",
+      "bg": "green",
+      "look": "Keep her long white hair with pink tips, white and black frilled dress, one black and one white stocking, black platform heels, and the black and pink ornate mirror with floating glass shards."
+    },
+    "bihyung": {
+      "er": 88,
+      "name": "비형",
+      "bg": "magenta",
+      "look": "Keep her long black hair with teal-green inner color and small red horns, white jacket, black crop top and shorts, red and white sneakers, and the large spiked black club."
+    },
+    "craver": {
+      "er": 89,
+      "name": "크레이버",
+      "bg": "green",
+      "look": "Keep his short red hair, red and black jacket with tattered black cloth, black pants, red boots, and the red bladed weapon."
+    },
+    "lucia": {
+      "er": 90,
+      "name": "루치아",
+      "bg": "magenta",
+      "look": "Keep her silver hair in buns with a purple beret, white and purple frilled outfit, white tights, purple shoes, the floating purple crystal wings, and the large white hammer."
+    },
+    "seres": {
+      "er": 91,
+      "name": "세레스",
+      "bg": "magenta",
+      "look": "Keep her silver-white hair with a maid headdress, black and white maid dress, white stockings, black shoes, and the long black and pink glowing greatsword."
+    }
+  }
+}

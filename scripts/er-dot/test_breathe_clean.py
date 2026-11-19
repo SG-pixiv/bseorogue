@@ -81,7 +81,37 @@ class CleanDotTest(unittest.TestCase):
         self.assertEqual(out.size, clean_dot.BACK)
         self.assertEqual(out.getchannel("A").getbbox()[3], 120)  # 맨 아래 줄까지
         self.assertEqual(out.getpixel((40, 119)), (40, 80, 200, 255))  # 맨 아래는 몸 색 (외곽선 아님)
-        self.assertEqual(out.getpixel((40, 0)), (*clean_dot.LOCK[0], 255))  # 머리 위는 외곽선
+        self.assertEqual(out.getchannel("A").getbbox()[1], clean_dot.BACK_TOP)  # 머리 위 여유
+        self.assertEqual(out.getpixel((40, clean_dot.BACK_TOP)), (*clean_dot.LOCK[0], 255))  # 머리 위는 외곽선
+
+    def test_face_marks_kept_across_cell_borders(self):
+        # 피부색 얼굴(240×240 → 20×20, 한 칸 12px)에 칸 경계를 가로지르는 작은 눈 두 개 (칸마다 1/4 도 안 돼요)
+        big = Image.new("RGBA", (240, 240), (240, 200, 180, 255))
+        for ex in (69, 153):
+            for y in range(57, 65):
+                for x in range(ex, ex + 6):
+                    big.putpixel((x, y), (30, 20, 40, 255))
+        small = clean_dot.downsample_mode(big, (20, 20))
+        self.assertFalse(any(clean_dot.luma(small.getpixel((x, y))) < 110 for x in range(20) for y in range(20)))  # 다수결만 하면 눈이 사라져요
+        self.assertEqual(clean_dot.keep_face_marks(big, small, 0.5), 2)
+        self.assertEqual(small.getpixel((5, 5)), (30, 20, 40, 255))  # 무게 중심 칸
+        self.assertEqual(small.getpixel((12, 5)), (30, 20, 40, 255))
+
+    def test_face_marks_skip_big_dark_hair(self):
+        big = Image.new("RGBA", (240, 240), (240, 200, 180, 255))
+        for y in range(0, 60):
+            for x in range(0, 240):
+                big.putpixel((x, y), (30, 20, 40, 255))  # 머리카락 (큰 덩어리)
+        small = clean_dot.downsample_mode(big, (20, 20))
+        self.assertEqual(clean_dot.keep_face_marks(big, small, 0.5), 0)
+
+    def test_despeckle_keeps_dark_points(self):
+        im = Image.new("RGBA", (5, 5), (200, 120, 60, 255))
+        im.putpixel((2, 2), (150, 140, 130, 255))  # 자글자글한 중간색 점 → 둘레 색으로
+        im.putpixel((0, 0), (20, 20, 30, 255))  # 어두운 점(눈 · 선)은 그대로
+        self.assertEqual(clean_dot.despeckle(im), 1)
+        self.assertEqual(im.getpixel((2, 2)), (200, 120, 60, 255))
+        self.assertEqual(im.getpixel((0, 0)), (20, 20, 30, 255))
 
     def test_dark_lines_survive_when_half(self):
         # 칸(4×4) 안에 어두운 색이 절반이면 어두운 색, 1/4 이면 밝은 색

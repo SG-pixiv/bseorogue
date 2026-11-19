@@ -16,6 +16,9 @@ AI 가 만든 도트 밑그림 → 블서로그 실험체 도트 규격으로 �
   --box       예전 줄이기 (평균). 기본은 큰 그림에서 15색으로 묶고 칸마다 제일 많은 색 (11-19), 어두운 선은 지켜요
   --no-outline 바깥 1px 외곽선(#1a1c2c)을 안 붙이기 (기본은 붙여요, 키는 외곽선까지 포함)
   --pre-colors 줄이기 전에 묶는 색 수 (기본 48, 마지막은 --colors)
+  --no-face   얼굴 살리기 끄기 (11-20 기본 켬: 머리 부분은 어두운 색 40% 만 넘어도 남기고, 칸 경계에 걸려 지워진 눈 · 입을 다시 찍어요)
+  --face-top · --face-dark  머리 부분 비율 (앞 0.22 · 뒤 0.3) · 머리 부분 어두운 색 기준 (0.4)
+  --no-despeckle 자글자글한 점 지우기 끄기 (기본 켬: 같은 색 이웃이 없는 중간색 점을 둘레 색으로)
 배경: 투명이면 그대로, 아니면 테두리 색(중간값)을 배경으로 보고 지워요. 가장자리 번짐도 지워요
       (AI 에게 단색 배경을 부탁: 보통 #ff00ff, 보라 · 분홍 옷이면 #00ff00)
 """
@@ -28,10 +31,14 @@ from PIL import Image
 SIZES = {"S": 60, "M": 68, "L": 74}
 # 11-19 SG: 뒷모습은 레퍼런스 도트처럼 앞모습보다 1.5배 크게 (머리 ~ 허벅지, 아래는 칸 끝에서 잘림)
 BACK = (80, 120)
+BACK_TOP = 4  # 머리 위 여유 (틀의 위 여유선). 보이는 키 ≈ 115px = 레퍼런스 뒷모습 103~120px 사이
 # 모든 실험체가 같이 쓰는 색 (docs/dot-guide/palette-15.png): 외곽선 2 + 피부 3
 LOCK = [(0x1A, 0x1C, 0x2C), (0x3B, 0x3F, 0x5C), (0xFF, 0xE0, 0xC8), (0xF2, 0xB8, 0x96), (0xC9, 0x7E, 0x6A)]
 LOCK_DIST = 30  # r·g·b 차이 합이 이 안이면 팔레트 색으로 바꿔요 (11-19: 48 이면 흰 머리가 피부색이 돼서 줄임)
 DARK_LUMA = 70  # 이보다 어두우면 선으로 봐요 (줄일 때 지키기)
+# 11-20 SG "표정도 잘보이게끔": 머리 부분(위에서 FACE_TOP 비율)은 어두운 색이 칸의 FACE_DARK 만 넘어도 남겨요 (눈 · 눈썹 · 입이 안 지워지게)
+FACE_TOP = 0.22
+FACE_DARK = 0.4  # 0.3 은 유키처럼 어두운 머리가 얼굴을 덮었어요
 
 
 def lock_colors(im: Image.Image) -> Image.Image:
@@ -141,7 +148,7 @@ def crop_bbox(im: Image.Image) -> Image.Image:
     return im.crop(box) if box else im
 
 
-def fit(im: Image.Image, max_w: int, max_h: int, colors: int = 15) -> Image.Image:
+def fit(im: Image.Image, max_w: int, max_h: int, colors: int = 15, face_top: float | None = None) -> Image.Image:
     im = crop_bbox(im)
     s = min(max_w / im.width, max_h / im.height)
     size = (max(1, round(im.width * s)), max(1, round(im.height * s)))
@@ -150,11 +157,97 @@ def fit(im: Image.Image, max_w: int, max_h: int, colors: int = 15) -> Image.Imag
     # 11-19: 큰 그림에서 먼저 색을 묶고 → 칸마다 제일 많은 색으로 줄이기 (평균이 아니라 색이 또렷해요)
     # 큰 그림에서 15색으로 바로 묶으면 넓은 옷 색이 색을 다 먹어서 얼굴 · 단추 같은 작은 색이 사라져요 →
     # 넉넉하게(--pre-colors, 기본 48) 묶어서 줄이고, 마지막에 작은 그림에서 15색으로 (main 의 quantize)
-    return downsample_mode(quantize(im, max(colors, arg("--pre-colors", 48)), lone=False), size)
+    face_top = arg("--face-top", FACE_TOP) if face_top is None else face_top
+    q = quantize(im, max(colors, arg("--pre-colors", 48)), lone=False)
+    out = downsample_mode(q, size, round(size[1] * face_top), arg("--face-dark", FACE_DARK))
+    if "--no-despeckle" not in sys.argv:
+        despeckle(out)
+    if "--no-face" not in sys.argv:
+        keep_face_marks(q, out, face_top)
+    return out
 
 
-def downsample_mode(im: Image.Image, size) -> Image.Image:
-    """칸(작은 그림 한 픽셀이 덮는 큰 그림 영역)마다 제일 많은 색. 투명이 절반 넘으면 투명"""
+def despeckle(im: Image.Image) -> int:
+    """11-20: 자글자글한 점 지우기. 위아래양옆에 같은 색이 하나도 없고, 둘레 8칸 중 5칸 이상이 같은 색이면 그 색으로.
+    어두운 점(선 · 눈 · 단추)은 그대로 둬요. 바꾼 점 수를 돌려줘요"""
+    px = im.load()
+    w, h = im.size
+    changes = []
+    for y in range(h):
+        for x in range(w):
+            c = px[x, y]
+            if not c[3] or luma(c) < DARK_LUMA:
+                continue
+            if any(0 <= x + dx < w and 0 <= y + dy < h and px[x + dx, y + dy] == c for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+                continue
+            around = Counter(px[x + dx, y + dy] for dx in (-1, 0, 1) for dy in (-1, 0, 1)
+                             if (dx or dy) and 0 <= x + dx < w and 0 <= y + dy < h and px[x + dx, y + dy][3])
+            if around:
+                best, n = around.most_common(1)[0]
+                if n >= 5:
+                    changes.append((x, y, best))
+    for x, y, c in changes:
+        px[x, y] = c
+    return len(changes)
+
+
+def luma(c) -> float:
+    return c[0] * 0.3 + c[1] * 0.59 + c[2] * 0.11
+
+
+def keep_face_marks(big: Image.Image, small: Image.Image, face_top: float = FACE_TOP) -> int:
+    """11-20 SG "표정도 잘보이게끔": 머리 부분에서 밝은 피부 · 머리카락에 둘러싸인 작은 어두운 덩어리(눈 · 눈썹 · 입)를
+    작은 그림의 그 자리 칸에 다시 찍어요. 칸 경계에 걸쳐 칸마다 조금씩 나뉘면 다수결에서 지워지기 때문이에요.
+    찍은 덩어리 수를 돌려줘요"""
+    W, H = big.size
+    tw, th = small.size
+    cw, ch = W / tw, H / th
+    rows = int(H * face_top)
+    bp, sp = big.load(), small.load()
+    dark = [[bool(bp[x, y][3]) and luma(bp[x, y]) < 110 for x in range(W)] for y in range(rows)]
+    seen = [[False] * W for _ in range(rows)]
+    marks = 0
+    for y0 in range(rows):
+        for x0 in range(W):
+            if not dark[y0][x0] or seen[y0][x0]:
+                continue
+            stack, comp = [(x0, y0)], []
+            seen[y0][x0] = True
+            while stack:
+                x, y = stack.pop()
+                comp.append((x, y))
+                for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                    if 0 <= nx < W and 0 <= ny < rows and dark[ny][nx] and not seen[ny][nx]:
+                        seen[ny][nx] = True
+                        stack.append((nx, ny))
+            xs, ys = [c[0] for c in comp], [c[1] for c in comp]
+            bw, bh = max(xs) - min(xs) + 1, max(ys) - min(ys) + 1
+            # 눈 · 입 크기만 (칸 0.12개 ~ 3개, 가로 2.5칸 · 세로 3칸 이하). 머리카락 · 외곽선처럼 큰 덩어리는 빼요
+            if not (0.12 * cw * ch <= len(comp) <= 3 * cw * ch and bw <= 2.5 * cw and bh <= 3 * ch):
+                continue
+            # 둘레 한 칸 안이 절반 넘게 밝은 색(피부 · 흰자)이어야 해요 (옷 주름 · 무기 끝은 빼요)
+            rx0, rx1 = max(0, int(min(xs) - cw)), min(W - 1, int(max(xs) + cw))
+            ry0, ry1 = max(0, int(min(ys) - ch)), min(H - 1, int(max(ys) + ch))
+            ring = [bp[x, y] for y in range(ry0, ry1 + 1) for x in range(rx0, rx1 + 1)
+                    if not (min(xs) <= x <= max(xs) and min(ys) <= y <= max(ys))]
+            if not ring or sum(1 for c in ring if c[3] and luma(c) > 150) * 2 < len(ring):
+                continue
+            color = Counter(bp[x, y] for x, y in comp).most_common(1)[0][0]
+            cx, cy = sum(xs) / len(xs), sum(ys) / len(ys)
+            tx, ty = min(tw - 1, int(cx / cw)), min(th - 1, int(cy / ch))
+            if sp[tx, ty][3]:
+                sp[tx, ty] = color
+                marks += 1
+            if bh >= 1.5 * ch:  # 세로로 긴 눈은 두 칸
+                ty2 = min(th - 1, int((cy + ch / 2) / ch)) if ty == int(cy / ch) and (cy / ch) % 1 > 0.5 else max(0, ty - 1)
+                if ty2 != ty and sp[tx, ty2][3]:
+                    sp[tx, ty2] = color
+    return marks
+
+
+def downsample_mode(im: Image.Image, size, face_rows: int = 0, face_dark: float = FACE_DARK) -> Image.Image:
+    """칸(작은 그림 한 픽셀이 덮는 큰 그림 영역)마다 제일 많은 색. 투명이 절반 넘으면 투명.
+    위에서 face_rows 줄(머리)은 어두운 색이 face_dark 비율만 넘어도 어두운 색 (눈 · 입 지키기)"""
     W, H = im.size
     tw, th = size
     px = im.load()
@@ -173,7 +266,8 @@ def downsample_mode(im: Image.Image, size) -> Image.Image:
             # (1/4 로 했더니 유키처럼 옷이 어두우면 얼굴까지 까매졌어요)
             opaque = sum(cnt.values())
             dark = [(n, c) for c, n in cnt.items() if c[0] * 0.3 + c[1] * 0.59 + c[2] * 0.11 < DARK_LUMA]
-            if dark and sum(n for n, _ in dark) * 2 >= opaque:
+            need = face_dark if ty < face_rows else 0.5
+            if dark and sum(n for n, _ in dark) >= opaque * need:
                 op[tx, ty] = max(dark)[1]
             else:
                 op[tx, ty] = cnt.most_common(1)[0][0]
@@ -222,7 +316,7 @@ def quantize(im: Image.Image, colors: int, lone: bool = True) -> Image.Image:
 def place_back(im: Image.Image, colors: int = 15, line: int = 1) -> Image.Image:
     """뒷모습(우리 팀, 11-19 SG): 머리 ~ 허벅지를 BACK 칸에 꽉 채우고, 아래는 칸 끝에서 잘려요 (잘린 쪽엔 외곽선 없음)"""
     cw, ch = BACK
-    part = fit(im, cw - 2 * line, ch - line, colors)
+    part = fit(im, cw - 2 * line, ch - line - BACK_TOP, colors, arg("--face-top", 0.3))  # 뒷모습은 머리가 더 커요
     if line:
         part = add_outline(part)
         part = part.crop((0, 0, part.width, part.height - line))  # 아래 외곽선 줄은 버려요 (잘린 쪽)
