@@ -1,0 +1,182 @@
+{
+ "alley_day": {
+  "game": "Img_BG_Lumia_Alley_Day",
+  "name": "골목길 낮",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "alley_night": {
+  "game": "Img_BG_Lumia_Alley_Night",
+  "name": "골목길 밤",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "beach_day": {
+  "game": "Img_BG_Lumia_SandBeach_Day",
+  "name": "모래사장 낮",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "beach_night": {
+  "game": "Img_BG_Lumia_SandBeach_Night",
+  "name": "모래사장 밤",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "casino": {
+  "game": "Img_BG_Lumia_Casino",
+  "name": "카지노",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "cemetery_day": {
+  "game": "Img_BG_Lumia_Cemetery_Day",
+  "name": "묘지 낮",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "cemetery_s13": {
+  "game": "Img_BG_Lumia_Cemetery_S13",
+  "name": "묘지 (시즌 13)",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "chapel_day": {
+  "game": "Img_BG_Lumia_Denomination_Day",
+  "name": "성당 낮",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "chapel_night": {
+  "game": "Img_BG_Lumia_Denomination_Night",
+  "name": "성당 밤",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "factory_day": {
+  "game": "Img_BG_Lumia_Factory_Day",
+  "name": "공장 낮",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "forest_day": {
+  "game": "Img_BG_Lumia_Forestl_Day",
+  "name": "숲 낮",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "forest_night": {
+  "game": "Img_BG_Lumia_Forestl_Night",
+  "name": "숲 밤",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "harbor_day": {
+  "game": "Img_BG_Lumia_Harbor_Day",
+  "name": "항구 낮",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "hotel_day": {
+  "game": "Img_BG_Lumia_Hotel_Day",
+  "name": "호텔 낮",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "hotel_night": {
+  "game": "Img_BG_Lumia_Hotel_Night",
+  "name": "호텔 밤",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "lab_inside": {
+  "game": "Img_BG_Lumia_InsideLab_01",
+  "name": "연구소 안",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "lab_monitor": {
+  "game": "Img_BG_Lumia_MonitorLab",
+  "name": "연구소 관제실",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "raft": {
+  "game": "Img_BG_Lumia_Raft",
+  "name": "뗏목",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "rift": {
+  "game": "Img_BG_Lumia_Rift",
+  "name": "균열",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ },
+ "yacht": {
+  "game": "Img_BG_Lumia_Yacht",
+  "name": "요트",
+  "size": [
+   2044,
+   1020
+  ],
+  "from": "ER 13.0.0 Addressables (ArchiveDialogue)"
+ }
+}

@@ -16,6 +16,12 @@ src/data/bseorogue/regions.ts). 같은 지역에 붙은 바이옴은 같은 그�
   - <바이옴>_b_1~3    상대 발판 위 소품 (투명, 지금은 안 써요)
 도트 느낌으로 1배에 바로 그려요 (부드럽게 하지 않아요). 지역마다 함수 하나 (REGIONS).
 
+게임 일러스트 (11-19 SG "게임 파일 안의 지역 그림, 일러스트 찾아서 넣어줘"):
+  ILLUST 표의 지역 9곳은 배경을 이터널 리턴 스토리 모드 배경 그림(assets/er/area-illust/, build_area_illust.py)으로
+  써요: 16:9 로 잘라 320×180 · 48색 도트로 줄여 assets/er/arena/<지역>_bg.png 에 저장하고,
+  src/data/bseorogue/er-arena-manifest.ts (자동 생성) 로 게임이 그 파일을 받아요 (scene-base.ts 의 loadImage).
+  발판은 그림 아래쪽 땅 색을 따서 칠해요. 코드로 그린 배경은 assets/images/arenas 에 그대로 남겨요 (예비).
+
 쓰는 법 (저장소 맨 위에서): python3 -B scripts/er-ui/make_arenas.py [--preview docs/arenas-preview.png]
 그린 파일은 assets/.placeholders.json 에서 빠져요 (임시 그림 만들기가 덮어쓰지 않게).
 """
@@ -25,11 +31,14 @@ import random
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageEnhance
 
 ROOT = Path(__file__).resolve().parents[2]
 ARENA = ROOT / "assets" / "images" / "arenas"
 MARK = ROOT / "assets" / ".placeholders.json"
+ER_ARENA = ROOT / "assets" / "er" / "arena"
+ILLUST_DIR = ROOT / "assets" / "er" / "area-illust"
+MANIFEST = ROOT / "src" / "data" / "bseorogue" / "er-arena-manifest.ts"
 W, H = 320, 180
 HORIZON = 66
 OUTLINE = (26, 28, 44)
@@ -49,6 +58,21 @@ NAMES = {"alley": "골목길", "archery": "양궁장", "stream": "개울", "fore
          "pond": "연못", "beach": "모래사장", "temple": "절", "gas": "주유소", "warehouse": "창고", "school": "학교",
          "factory": "공장", "fire": "소방서", "cemetery": "묘지", "police": "경찰서", "chapel": "성당", "hospital": "병원",
          "lab": "연구소", "hotel": "호텔", "barge": "바지선"}
+
+# 게임 일러스트를 쓰는 지역: 지역 → (assets/er/area-illust 파일, 16:9 로 자를 때 가로 위치 0 왼쪽 ~ 1 오른쪽)
+# 일러스트가 없는 지역 12곳(양궁장 · 개울 · 고급 주택가 · 연못 · 절 · 주유소 · 창고 · 학교 · 소방서 · 경찰서 · 병원 · 바지선)은 코드 그림 그대로
+ILLUST = {
+    "alley": ("alley_day", 0.5),
+    "cemetery": ("cemetery_day", 0.5),
+    "chapel": ("chapel_day", 0.5),
+    "factory": ("factory_day", 0.5),
+    "forest": ("forest_day", 0.5),
+    "harbor": ("harbor_day", 0.5),
+    "hotel": ("hotel_day", 0.5),
+    "lab": ("lab_inside", 0.5),
+    "beach": ("beach_day", 0.5),
+}
+ILLUST_COLORS = 48
 
 done: list[str] = []
 
@@ -627,11 +651,36 @@ REGIONS = {"alley": alley, "archery": archery, "stream": stream, "forest": fores
            "hospital": hospital, "lab": lab, "hotel": hotel, "barge": barge}
 
 
+def illust_bg(file, cx):
+    """게임 일러스트 → 320×180 도트 (16:9 로 자르고 넓이 평균으로 줄인 뒤 48색, 번지기 없음)"""
+    im = Image.open(ILLUST_DIR / f"{file}.jpg").convert("RGB")
+    w, h = im.size
+    cw = min(w, round(h * W / H))
+    x = round((w - cw) * cx)
+    im = im.crop((x, 0, x + cw, h)).resize((W, H), Image.BOX)
+    im = ImageEnhance.Color(im).enhance(1.1)
+    return im.quantize(colors=ILLUST_COLORS, method=Image.MEDIANCUT, dither=Image.NONE).convert("RGBA")
+
+
+def ground_color(bg):
+    """발판 색: 내 발판이 놓이는 아래쪽 띠(전투 창에 안 가리는 곳)의 평균 색"""
+    band = bg.crop((40, 100, 170, 132)).convert("RGB")
+    px = list(band.get_flattened_data()) if hasattr(band, "get_flattened_data") else list(band.getdata())
+    c = tuple(sum(v[i] for v in px) // len(px) for i in range(3))
+    lum = 0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]
+    return shade(c, 100 / lum) if lum < 100 else c  # 너무 어두우면 발판이 안 보여서 밝게
+
+
 def draw_region(name):
     rng = random.Random(name)
     bg = Image.new("RGBA", (W, H), (0, 0, 0, 255))
     d = ImageDraw.Draw(bg)
     plat = REGIONS[name](d, rng)
+    if name in ILLUST:
+        art = illust_bg(*ILLUST[name])
+        top = shade(ground_color(art), 0.95)
+        plat = dict(top=top, rim=shade(top, 0.62), pattern=pat_dots([shade(top, 0.82), shade(top, 1.15)], 70))
+        bg = art
     a = Image.new("RGBA", (W, 132), (0, 0, 0, 0))
     platform(a, 104, 132, 62, 18, plat["top"], plat["rim"], plat.get("pattern"), seed=1)
     b = Image.new("RGBA", (W, 132), (0, 0, 0, 0))
@@ -639,18 +688,51 @@ def draw_region(name):
     return bg, a, b
 
 
+def draw_code_bg(name):
+    """코드로 그린 배경만 (게임 일러스트를 쓰는 지역의 예비 그림)"""
+    bg = Image.new("RGBA", (W, H), (0, 0, 0, 255))
+    REGIONS[name](ImageDraw.Draw(bg), random.Random(name))
+    return bg
+
+
 def save(img, path):
     img.save(path, optimize=True)
     done.append(str(path.relative_to(ROOT / "assets")).replace("\\", "/"))
 
 
+def write_manifest(er_bg: dict[str, str]) -> None:
+    lines = [
+        "/*",
+        " * SPDX-FileCopyrightText: 2026 SG",
+        " * SPDX-License-Identifier: AGPL-3.0-only",
+        " */",
+        "",
+        "// 이 파일은 scripts/er-ui/make_arenas.py 가 만들어요. 직접 고치지 마세요.",
+        "// 그림(assets/er/arena)은 이터널 리턴 스토리 모드 배경 그림을 도트로 줄인 것이에요 (님블뉴런 저작물).",
+        "",
+        "/** 전투 배경 열쇠(<바이옴>_bg) → 대신 받을 파일 (assets 기준). 여기 없는 배경은 assets/images/arenas 의 코드 그림 */",
+        "export const ER_ARENA_FILES: Readonly<Record<string, string>> = {",
+        *(f'  {k}: "{v}",' for k, v in sorted(er_bg.items())),
+        "};",
+        "",
+    ]
+    MANIFEST.write_text("\n".join(lines), encoding="utf-8")
+
+
 def main():
     drawn = {name: draw_region(name) for name in REGIONS}
     empty = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ER_ARENA.mkdir(parents=True, exist_ok=True)
+    er_bg = {}
+    for region in ILLUST:
+        drawn[region][0].convert("RGB").save(ER_ARENA / f"{region}_bg.png", optimize=True)
     for biome, region in BIOME_REGION.items():
         bg, a, b = drawn[region]
         if not (ARENA / f"{biome}_bg.png").exists():
             continue
+        if region in ILLUST:
+            er_bg[f"{biome}_bg"] = f"er/arena/{region}_bg.png"
+            bg = draw_code_bg(region)  # 예비 그림은 코드 그림 그대로
         save(bg, ARENA / f"{biome}_bg.png")
         save(a, ARENA / f"{biome}_a.png")
         save(b, ARENA / f"{biome}_b.png")
@@ -663,7 +745,8 @@ def main():
         marks -= set(done)
         json.dump(sorted(marks), open(MARK, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
         print(f"임시 그림 목록에서 뺀 것: {before - len(marks)}개")
-    print(f"지역 {len(drawn)}곳 · 그림 {len(done)}개")
+    write_manifest(er_bg)
+    print(f"지역 {len(drawn)}곳 · 그림 {len(done)}개 · 게임 일러스트 배경 {len(ILLUST)}곳 (바이옴 {len(er_bg)}개) → {ER_ARENA.relative_to(ROOT)}")
     if "--preview" in sys.argv:
         out = Path(sys.argv[sys.argv.index("--preview") + 1])
         cols = 4

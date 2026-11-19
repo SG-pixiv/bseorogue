@@ -1,5 +1,6 @@
 import { audioManager } from "#app/global-audio-manager";
 import { timedEventManager } from "#app/global-event-manager";
+import { ER_ARENA_FILES } from "#data/bseorogue/er-arena-manifest";
 import { ER_BGM_FILES, ER_SOUND_FILES } from "#data/bseorogue/er-sound-manifest";
 import { coerceArray } from "#utils/array";
 import { getCachedUrl } from "#utils/fetch-utils";
@@ -37,7 +38,9 @@ export class SceneBase extends Phaser.Scene {
       folder = "events";
       filename = `${eventReplacment}.png`;
     }
-    this.load.image(key, getCachedUrl(`images/${folder}/${filename}`));
+    // 블서로그: 이터널 리턴 스토리 모드 배경 그림이 있는 지역은 그 도트 배경 (assets/er/arena, make_arenas.py)
+    const erArena = folder === "arenas" ? ER_ARENA_FILES[key] : undefined;
+    this.load.image(key, getCachedUrl(erArena ?? `images/${folder}/${filename}`));
     if (folder.startsWith("ui")) {
       folder = folder.replace("ui", "ui/legacy");
       this.load.image(`${key}_legacy`, getCachedUrl(`images/${folder}/${filename}`));
