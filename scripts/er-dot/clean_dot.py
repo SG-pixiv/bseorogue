@@ -166,10 +166,11 @@ def downsample_mode(im: Image.Image, size) -> Image.Image:
             if cnt.get(None, 0) * 2 > total:
                 continue
             cnt.pop(None, None)
-            # 11-19: 어두운 선이 칸의 1/4 이상이면 선 색으로 (AI 그림의 선은 가늘어서 다수결이면 사라져요)
+            # 11-19: 어두운 색들을 합쳐 칸의 절반 이상이면 그중 제일 많은 어두운 색 (선 · 머리가 여러 어두운 색으로 갈라져도 지켜요)
+            # (1/4 로 했더니 유키처럼 옷이 어두우면 얼굴까지 까매졌어요)
             opaque = sum(cnt.values())
             dark = [(n, c) for c, n in cnt.items() if c[0] * 0.3 + c[1] * 0.59 + c[2] * 0.11 < DARK_LUMA]
-            if dark and sum(n for n, _ in dark) * 4 >= opaque:
+            if dark and sum(n for n, _ in dark) * 2 >= opaque:
                 op[tx, ty] = max(dark)[1]
             else:
                 op[tx, ty] = cnt.most_common(1)[0][0]
