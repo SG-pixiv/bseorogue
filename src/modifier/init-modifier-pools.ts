@@ -822,12 +822,10 @@ export function initModifierPools() {
 
 /**
  * 블서로그에서 보상으로 안 나오는 것
- * 기술머신(포켓몬 기술) · 테라스탈 · 메가 · 다이맥스 · 합체 · 특성(실험체는 특성이 없어요) · 더블배틀(1:1만) · 포획 관련
+ * (기술머신은 11-19 부터 '스킬 기록' 으로 다시 나와요 — 같은 역할군 실험체 스킬, skill-record.ts)
+ * 테라스탈 · 메가 · 다이맥스 · 합체 · 특성(실험체는 특성이 없어요) · 더블배틀(1:1만) · 포획 관련
  */
 const BSEO_NO_REWARD = new Set<string>([
-  "TM_COMMON",
-  "TM_GREAT",
-  "TM_ULTRA",
   "TERA_SHARD",
   "TERA_ORB",
   "MEGA_BRACELET",

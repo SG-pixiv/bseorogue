@@ -133,9 +133,9 @@ ROWS = [
     ("지닌 물건", "MULTI_LENS", "공격이 한 번 더 맞음 (약하게)", "마스터", KEEP, KEEP, ""),
     ("지닌 물건", "BERRY_POUCH", "먹은 음식이 30% 확률로 안 없어짐", "로그", KEEP, CUT, "음식이 5종만 남아 효과가 작고 맞는 ER 아이템이 없음 (11-19)"),
     ("지닌 물건", "HEALING_CHARM", "회복 효과 +10%", "마스터", KEEP, KEEP, ""),
-    ("볼", "POKEBALL", "실험체를 잡는 볼 (지금은 포획이 꺼져 있어 안 나옴)", "일반", KEEP, KEEP, "볼 통합 · 포획 작업 때 켜요 (4-16)"),
+    ("볼", "POKEBALL", "실험체를 잡는 볼 (판 중 영입)", "일반", KEEP, KEEP, ""),
+    ("스킬", "TM_COMMON,TM_GREAT,TM_ULTRA", "같은 역할군 다른 실험체의 Q W E R 스킬을 배움 (Q·W 일반 · E 좋음 · R 희귀)", "일반 · 좋음 · 희귀", KEEP, KEEP, "11-19 SG: 기술머신 방식으로 다시 (skill-record.ts)"),
     # --- 처음부터 빠져 있는 것 (포켓몬 전용, 고정)
-    ("포켓몬 전용 (처음부터 빠져 있음)", "스킬 기록 (기술머신)", "포켓몬 기술을 가르침", "", FIXED, "", ""),
     ("포켓몬 전용 (처음부터 빠져 있음)", "더블배틀코롱 · 실버코롱 · 골드코롱", "더블배틀 확률 ↑", "", FIXED, "", "1:1 전투만"),
     ("포켓몬 전용 (처음부터 빠져 있음)", "테라스탈오브 · 테라피스 19종", "타입(역할군)을 바꿈", "", FIXED, "", ""),
     ("포켓몬 전용 (처음부터 빠져 있음)", "메가링 · 다이맥스 밴드 · 메가스톤 등", "메가진화 · 거다이맥스", "", FIXED, "", ""),
@@ -229,6 +229,8 @@ def apply_names(wb) -> list[str]:
 
 
 def item_name(key: str, mt: dict, berry: dict, extra: dict, vouchers: dict, balls: dict) -> str:
+    if key.startswith("TM_"):
+        return "스킬 기록"
     if "," in key:
         return "야생 · 보스 · 그 밖 타입 강화 모듈"
     head, _, sub = key.partition(":")
@@ -300,7 +302,7 @@ def build_sheet(wb) -> None:
             cell.alignment = Alignment(vertical="center", wrap_text=c in (1, 3, 7, 8), horizontal="center" if c in (4, 5, 6) else None)
             if fixed:
                 cell.fill = GREY
-            elif c in (5, 8) or (c == 2 and "," not in key and not key.startswith("MINT")):
+            elif c in (5, 8) or (c == 2 and "," not in key and not key.startswith(("MINT", "TM_"))):
                 cell.fill = EDIT
             elif BAND[band % 2]:
                 cell.fill = BAND[band % 2]
@@ -325,6 +327,8 @@ ART_WIDTHS = [6, 22, 26, 22, 18, 46, 30, 30]
 
 def icon_of(key: str) -> str:
     """시트 키 → 아이템 그림 파일 이름 (items 아틀라스, assets/er/item/<이름>.png)"""
+    if key.startswith("TM_"):
+        return "tm_rock"  # 역할군마다 색만 달라요 (tm_rock · tm_fighting · …)
     head, _, sub = key.partition(":")
     if head == "BERRY":
         return f"{BERRY_KEY[sub]}_berry"

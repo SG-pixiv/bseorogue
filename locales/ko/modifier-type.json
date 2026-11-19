@@ -102,12 +102,12 @@
       "description": "지니게 된 실험체는 공격한 데미지의 25%로 한 번 더 공격한다."
     },
     "TmModifierType": {
-      "name": "No.{{moveId}} {{moveName}}",
-      "description": "실험체에게 {{moveName}}[[를]] 가르침."
+      "name": "스킬 기록: {{moveName}}",
+      "description": "같은 역할군 실험체에게 {{moveName}}[[를]] 가르쳐요. (Q W E R 중 하나와 바꿔요)"
     },
     "TmModifierTypeWithInfo": {
-      "name": "No.{{moveId}} {{moveName}}",
-      "description": "실험체에게 {{moveName}}[[를]] 가르침.\n(C 또는 Shift를 꾹 눌러 정보 확인)"
+      "name": "스킬 기록: {{moveName}}",
+      "description": "같은 역할군 실험체에게 {{moveName}}[[를]] 가르쳐요. (Q W E R 중 하나와 바꿔요)\n(C 또는 Shift를 꾹 눌러 정보 확인)"
     },
     "EvolutionItemModifierType": {
       "description": "어느 특정 실험체를 진화시킨다."

@@ -124,6 +124,12 @@ NAMU = {
     "big_nugget": ("diamond.png", "나무위키 이터널 리턴/아이템/재료: 다이아몬드", "크레딧++"),
     "map": ("loop_card_key.png", "나무위키 이터널 리턴/아이템/특수: 루프 카드키", "루미아 섬 지도 (ER 에서 갈 지역을 고르는 루프 카드키)"),
 }
+# 나무위키 그림에 역할군 색을 입혀서 쓰는 것: 아틀라스 이름 앞부분 → (파일, 출처, 블서로그 이름). tm_<타입> 마다 색이 달라요
+NAMU_TINTED = {
+    "tm_": ("hardcover.png", "나무위키 이터널 리턴/아이템/재료: 하드커버", "스킬 기록 (기술머신 자리, 11-19)"),
+}
+# 실험체 역할군 타입 (roles.ts: 탱커 rock · 브루저 fighting · 암살자 dark · 원거리 dragon · 마법사 psychic · 서포터 fairy)
+ROLE_TYPES = ("rock", "fighting", "dark", "dragon", "psychic", "fairy")
 NAMU_PREVIEW = ROOT / "docs" / "item-dots-namu-preview.png"
 # 색만 바꿔 쓰는 바탕 그림
 MODULE_SRC = M + "062. Tac. Skill Module.png"
@@ -247,6 +253,20 @@ def namu_dots(sources: dict) -> list[tuple[Image.Image, Image.Image]]:
             shown.append((src.convert("RGBA").copy(), dot))
         dot.save(OUT / f"{name}.png", optimize=True)
         sources[name] = {"file": where, "name": label}
+    mi = load_make_items()
+    order = [f["filename"] for f in json.load(open(ROOT / "assets/images/items.json", encoding="utf-8"))["textures"][0]["frames"]]
+    for prefix, (file, where, label) in NAMU_TINTED.items():
+        with Image.open(NAMU_DIR / file) as src:
+            for name in order:
+                if not name.startswith(prefix):
+                    continue
+                typ = name[len(prefix) :]
+                tint = mi.TYPE.get(typ, (200, 200, 210))
+                dot = to_dot(src, tint)
+                if typ in ROLE_TYPES:  # 미리보기에는 역할군 6색만
+                    shown.append((src.convert("RGBA").copy(), dot))
+                dot.save(OUT / f"{name}.png", optimize=True)
+                sources[name] = {"file": where, "name": f"{label} ({typ})", "tint": list(tint)}
     return shown
 
 

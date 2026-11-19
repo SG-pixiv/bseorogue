@@ -42,6 +42,7 @@ import {
   TrappedTag,
 } from "#data/battler-tags";
 import { erCodeOfSpecies } from "#data/bseorogue/roster";
+import { bseoSkillRecordMoves } from "#data/bseorogue/skill-record";
 import { playBseoVoice } from "#data/bseorogue/voice";
 import { getDailyEventSeedBoss, isDailyForcedWaveHiddenAbility } from "#data/daily-run";
 import { isDailyEventSeed, isDailyFinalBoss } from "#data/daily-seed-utils";
@@ -6066,7 +6067,9 @@ export class PlayerPokemon extends Pokemon {
    * @returns An array of all compatible TMs
    */
   public getCompatibleTms(excludeKnown = false, excludeLevelUp = false, excludeUsedTMs = false): MoveId[] {
-    const tms = new Set(this.species.getTms(this.getFormKey()));
+    // 블서로그: 실험체는 같은 역할군 실험체들의 Q W E R 을 스킬 기록으로 배워요 (skill-record.ts)
+    const bseoSkills = bseoSkillRecordMoves(this.species.speciesId, this.species.type1);
+    const tms = new Set(bseoSkills ?? this.species.getTms(this.getFormKey()));
 
     if (this.fusionSpecies) {
       this.fusionSpecies.getTms(this.getFusionFormKey() ?? undefined).forEach(tm => tms.add(tm));
