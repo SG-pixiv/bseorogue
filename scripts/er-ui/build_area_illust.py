@@ -13,7 +13,7 @@
   - 묶음(.bundle): UnityPy 로 스프라이트를 꺼내요
   - 폴더: AnimeStudio 등으로 꺼낸 Img_BG_Lumia_*.png 를 읽어요
   → assets/er/area-illust/<이름>.jpg (절반 크기 1022×510, 원본 비율) · area-illust-sources.json
-  그다음 python3 -B scripts/er-ui/make_arenas.py 로 전투 배경을 다시 만들어요.
+  (11-19 SG가 전투 배경을 포켓로그 방식으로 정해서 지금은 전투에 안 써요. 지역 색 참고 · 나중에 지역 카드용)
 """
 import json
 import sys
