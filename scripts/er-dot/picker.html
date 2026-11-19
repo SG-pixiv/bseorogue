@@ -1,0 +1,266 @@
+<title>블서로그 도트 고르기</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* 배치: 위 고정 막대(진행 · 거르기 · 무대색) + 실험체 카드 목록. 카드 = 이름줄, 앞모습 5칸(적 팀), 뒷모습 5칸(내 편) */
+:root {
+  --ground: #eceff4;
+  --panel: #ffffff;
+  --ink: #1a1e29;
+  --muted: #5b6477;
+  --line: #d5dae4;
+  --stage: #566b8c;
+  --pick: #e39b2d;
+  --pick-ink: #3a2400;
+  --redo: #c2453a;
+  --ok: #3b8a57;
+  --display: "Do Hyeon", "Noto Sans KR", system-ui, sans-serif;
+  --body: "Noto Sans KR", system-ui, -apple-system, "Malgun Gothic", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #10131a; --panel: #191e29; --ink: #e8ebf2; --muted: #9aa3b5; --line: #2b3242;
+    --stage: #3c4c66; --pick: #f2b24a; --pick-ink: #2a1a00; --redo: #e26b5f; --ok: #62b37f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #10131a; --panel: #191e29; --ink: #e8ebf2; --muted: #9aa3b5; --line: #2b3242;
+  --stage: #3c4c66; --pick: #f2b24a; --pick-ink: #2a1a00; --redo: #e26b5f; --ok: #62b37f;
+  color-scheme: dark;
+}
+body { background: var(--ground); color: var(--ink); font-family: var(--body); line-height: 1.5; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--panel); }
+.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  padding-block: 12px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.bar-in { max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+h1 { font-family: var(--display); font-weight: 400; font-size: 26px; margin: 0; letter-spacing: 0.01em; }
+.count { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 14px; }
+.count b { color: var(--ink); }
+.meter { flex: 1 1 160px; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; min-width: 120px; }
+.meter i { display: block; height: 100%; width: 0; background: var(--ok); transition: width .3s; }
+.group { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.group span { font-size: 12px; color: var(--muted); letter-spacing: .04em; margin-right: 2px; }
+.chip {
+  font: 600 13px var(--body); padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line);
+  background: transparent; color: var(--ink); cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+.chip:focus-visible, .tile:focus-visible, .redo:focus-visible, input:focus-visible { outline: 3px solid var(--pick); outline-offset: 2px; }
+.swatch { width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--line); cursor: pointer; padding: 0; }
+.swatch[aria-pressed="true"] { border-color: var(--ink); }
+input[type="search"] {
+  font: 14px var(--body); padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--ground); color: var(--ink); width: 150px;
+}
+.note { max-width: 1180px; margin: 10px auto 0; font-size: 13px; color: var(--muted); }
+.note.warn { color: var(--redo); }
+main {
+  max-width: 1180px; margin: 0 auto;
+  padding-block: 18px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr));
+}
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; min-width: 0; }
+.card.done { border-color: var(--ok); }
+.head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.er { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.name { font-family: var(--display); font-size: 22px; }
+.state { margin-left: auto; font-size: 12px; font-weight: 700; color: var(--muted); }
+.state.ok { color: var(--ok); }
+.row { display: grid; gap: 6px; }
+.rowhead { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); letter-spacing: .03em; }
+.rowhead .redo { margin-left: auto; }
+.tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.tile {
+  position: relative; border: 2px solid transparent; border-radius: 8px; padding: 0; cursor: pointer;
+  background: var(--stage); width: 100%; overflow: hidden; display: block;
+}
+.tile canvas { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; image-rendering: pixelated; }
+.tile.back canvas { aspect-ratio: 2 / 3; }
+.tile[aria-pressed="true"] { border-color: var(--pick); box-shadow: 0 0 0 2px var(--pick); }
+.tile .lab {
+  position: absolute; left: 4px; top: 3px; font: 500 11px var(--mono); color: #fff; opacity: .8;
+  text-shadow: 0 1px 0 rgba(0,0,0,.5);
+}
+.tile[aria-pressed="true"] .lab { background: var(--pick); color: var(--pick-ink); opacity: 1; padding: 0 4px; border-radius: 4px; text-shadow: none; }
+.tile .flag { position: absolute; right: 5px; top: 5px; width: 9px; height: 9px; border-radius: 50%; background: var(--redo); box-shadow: 0 0 0 2px var(--panel); }
+.tile.missing { cursor: default; opacity: .4; }
+.redo {
+  font: 600 12px var(--body); padding: 3px 10px; border-radius: 6px; border: 1px solid var(--line);
+  background: transparent; color: var(--muted); cursor: pointer;
+}
+.redo[aria-pressed="true"] { border-color: var(--redo); color: var(--redo); }
+.empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 40px 0; }
+@media (prefers-reduced-motion: reduce) { .meter i { transition: none; } }
+</style>
+
+<div class="bar">
+  <div class="bar-in">
+    <h1>블서로그 도트 고르기</h1>
+    <div class="count" id="count">불러오는 중</div>
+    <div class="meter" aria-hidden="true"><i id="meter"></i></div>
+    <fieldset class="group" aria-label="거르기">
+      <button type="button" class="chip" id="f-all" aria-pressed="true">전체</button>
+      <button type="button" class="chip" id="f-todo" aria-pressed="false">아직</button>
+      <button type="button" class="chip" id="f-redo" aria-pressed="false">다시 뽑기</button>
+    </fieldset>
+    <fieldset class="group" aria-label="무대 색">
+      <span>무대</span>
+      <button type="button" class="swatch" id="s-0" aria-pressed="true" title="전투 파랑" style="background:#566b8c"></button>
+      <button type="button" class="swatch" id="s-1" aria-pressed="false" title="풀밭" style="background:#7fae5a"></button>
+      <button type="button" class="swatch" id="s-2" aria-pressed="false" title="밝게" style="background:#f2efe6"></button>
+      <button type="button" class="swatch" id="s-3" aria-pressed="false" title="어둡게" style="background:#1d2230"></button>
+    </fieldset>
+    <input type="search" id="q" placeholder="이름 찾기" aria-label="이름 찾기">
+  </div>
+  <p class="note" id="note">실험체마다 앞모습(적 팀) 하나 · 뒷모습(내 편) 하나를 눌러요. 고른 것은 바로 저장돼요. 빨간 점은 자동 검사에 걸린 것 (점에 마우스를 올리면 이유). 다 별로면 "다시 뽑기".</p>
+</div>
+<main id="list"><p class="empty">도트 목록을 불러오는 중이에요.</p></main>
+
+<script>
+(() => {
+  const FRONT = ["fa", "fb", "fc", "fd", "fe"];
+  const BACK = ["ba", "bb", "bc", "bd", "be"];
+  const STAGES = ["#566b8c", "#7fae5a", "#f2efe6", "#1d2230"];
+  const list = document.getElementById("list");
+  const note = document.getElementById("note");
+  let roster = [];
+  let picks = {};
+  let filter = "all";
+  let query = "";
+  let db = null;
+  const saving = {};
+  const queued = {};
+
+  // 도트 모음 그림(front.png 80×80 칸 · back.png 80×120 칸)에서 칸을 그대로 잘라 캔버스에 그려요 (확대해도 옆 칸이 안 번져요)
+  const atlas = { front: new Image(), back: new Image() };
+  let atlasReady = 0;
+  const onAtlas = () => { atlasReady++; drawTiles(); };
+  atlas.front.onload = onAtlas;
+  atlas.back.onload = onAtlas;
+  atlas.front.src = "front.png"; atlas.back.src = "back.png";
+  function drawTiles() {
+    if (atlasReady < 2) { return; }
+    for (const c of list.querySelectorAll("canvas[data-row]")) {
+      if (c.dataset.drawn) { continue; }
+      const back = c.dataset.back === "1";
+      const h = back ? 120 : 80;
+      const ctx = c.getContext("2d");
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(back ? atlas.back : atlas.front, +c.dataset.col * 80, +c.dataset.row * h, 80, h, 0, 0, 80, h);
+      c.dataset.drawn = "1";
+    }
+  }
+
+  function render() {
+    const done = roster.filter(r => picks[r.slug]?.front && picks[r.slug]?.back).length;
+    const redo = roster.filter(r => picks[r.slug]?.redoFront || picks[r.slug]?.redoBack).length;
+    document.getElementById("count").innerHTML = `고름 <b>${done}</b> / ${roster.length} · 다시 뽑기 <b>${redo}</b>`;
+    document.getElementById("meter").style.width = roster.length > 0? (done / roster.length * 100) + "%" : "0";
+    const shown = roster.map((r, i) => [r, i]).filter(([r]) => {
+      const p = picks[r.slug] || {};
+      if (query && !(r.name.includes(query) || r.slug.includes(query.toLowerCase()) || String(r.er) === query)) { return false; }
+      if (filter === "todo") { return !(p.front && p.back); }
+      if (filter === "redo") { return p.redoFront || p.redoBack; }
+      return true;
+    });
+    if (shown.length === 0) { list.innerHTML = `<p class="empty">${roster.length > 0? "조건에 맞는 실험체가 없어요." : "도트 목록이 비어 있어요."}</p>`; return; }
+    list.innerHTML = shown.map(([r, i]) => {
+      const p = picks[r.slug] || {};
+      const ok = p.front && p.back;
+      const row = (poses, back) => poses.map((pose, col) => {
+        const has = pose in r.poses;
+        const flags = r.poses[pose] || [];
+        const on = (back ? p.back : p.front) === pose;
+        return `<button type="button" class="tile${back ? " back" : ""}${has ? "" : " missing"}" data-slug="${r.slug}" data-pose="${pose}" aria-pressed="${on}" ${has ? "" : "disabled"}
+          aria-label="${r.name} ${back ? "뒷모습" : "앞모습"} ${pose[1]}"><canvas width="80" height="${back ? 120 : 80}" ${has ? `data-row="${i}" data-col="${col}" data-back="${back ? 1 : 0}"` : ""}></canvas>
+          <span class="lab">${pose[1]}</span>${flags.length > 0? `<span class="flag" title="${flags.join(" · ")}"></span>` : ""}</button>`;
+      }).join("");
+      const state = ok ? "앞 · 뒤 고름" : p.front ? "앞만 고름" : p.back ? "뒤만 고름" : "";
+      return `<section class="card${ok ? " done" : ""}">
+        <div class="head"><span class="er">${String(r.er).padStart(3, "0")}</span><span class="name">${r.name}</span><span class="state${ok ? " ok" : ""}">${state}</span></div>
+        <div class="row"><div class="rowhead">앞모습 · 적 팀 80×80<button type="button" class="redo" data-slug="${r.slug}" data-redo="redoFront" aria-pressed="${!!p.redoFront}">다시 뽑기</button></div><div class="tiles">${row(FRONT, false)}</div></div>
+        <div class="row"><div class="rowhead">뒷모습 · 내 편 80×120<button type="button" class="redo" data-slug="${r.slug}" data-redo="redoBack" aria-pressed="${!!p.redoBack}">다시 뽑기</button></div><div class="tiles">${row(BACK, true)}</div></div>
+      </section>`;
+    }).join("");
+    drawTiles();
+  }
+
+  async function save(slug) {
+    if (!db) { return; }
+    if (saving[slug]) { queued[slug] = true; return; }
+    saving[slug] = true;
+    try {
+      const p = picks[slug] || {};
+      await db.doc("picks/" + slug).set({ front: p.front || null, back: p.back || null, redoFront: !!p.redoFront, redoBack: !!p.redoBack });
+    } catch (e) {
+      note.textContent = "저장이 안 됐어요: " + (e && e.code ? e.code : "연결 문제") + ". 고른 건 이 화면에만 남아 있어요.";
+      note.classList.add("warn");
+    } finally {
+      saving[slug] = false;
+      if (queued[slug]) { queued[slug] = false; save(slug); }
+    }
+  }
+
+  list.addEventListener("click", e => {
+    const t = e.target.closest("button");
+    if (!t || t.disabled) { return; }
+    const slug = t.dataset.slug;
+    const p = { ...(picks[slug] || {}) };
+    if (t.dataset.pose) {
+      const key = t.dataset.pose[0] === "b" ? "back" : "front";
+      p[key] = p[key] === t.dataset.pose ? null : t.dataset.pose;
+      if (p[key]) { p[key === "back" ? "redoBack" : "redoFront"] = false; }
+    } else if (t.dataset.redo) {
+      p[t.dataset.redo] = !p[t.dataset.redo];
+      if (p[t.dataset.redo]) { p[t.dataset.redo === "redoBack" ? "back" : "front"] = null; }
+    }
+    picks[slug] = p;
+    render();
+    save(slug);
+  });
+
+  const setFilter = f => { filter = f; for (const k of ["all", "todo", "redo"]) { document.getElementById("f-" + k).setAttribute("aria-pressed", String(k === f));  }render(); };
+  for (const k of ["all", "todo", "redo"]) { document.getElementById("f-" + k).addEventListener("click", () => setFilter(k)); }
+  STAGES.forEach((c, i) => document.getElementById("s-" + i).addEventListener("click", () => {
+    document.documentElement.style.setProperty("--stage", c);
+    STAGES.forEach((_, j) => document.getElementById("s-" + j).setAttribute("aria-pressed", String(i === j)));
+    try { localStorage.setItem("stage", String(i)); } catch {}
+  }));
+  try { const s = localStorage.getItem("stage"); if (s) { document.getElementById("s-" + s)?.click();  }} catch {}
+  let qt; document.getElementById("q").addEventListener("input", e => { clearTimeout(qt); qt = setTimeout(() => { query = e.target.value.trim(); render(); }, 150); });
+
+  fetch("roster.json").then(r => r.json()).then(data => { roster = data; render(); })
+    .catch(() => { list.innerHTML = '<p class="empty">도트 목록(roster.json)을 못 불러왔어요. 새로 고쳐 보세요.</p>'; });
+
+  (async () => {
+    db = window.claude && window.claude.use ? await window.claude.use("db") : null;
+    if (!db) {
+      note.textContent = "저장 기능을 쓸 수 없는 화면이에요 (로그인 필요). 눌러 볼 수는 있지만 고른 건 저장되지 않아요.";
+      note.classList.add("warn");
+      return;
+    }
+    const timer = setTimeout(() => { note.textContent = "저장된 고른 기록을 아직 못 불러왔어요. 잠시 뒤에 다시 보여요."; }, 10000);
+    db.collection("picks").onSnapshot(snap => {
+      if (!snap.metadata.fromCache) { clearTimeout(timer); }
+      const next = {};
+      for (const d of snap.docs) { next[d.id] = { ...d.data() }; }
+      for (const slug in saving) { if (saving[slug] && picks[slug]) { next[slug] = picks[slug]; } }
+      picks = next;
+      render();
+    }, err => {
+      clearTimeout(timer);
+      note.textContent = "고른 기록을 불러오지 못했어요 (" + (err && err.code) + ").";
+      note.classList.add("warn");
+    });
+  })();
+})();
+</script>
