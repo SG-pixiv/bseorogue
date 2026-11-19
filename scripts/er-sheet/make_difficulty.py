@@ -8,6 +8,10 @@
 지금 게임에 들어간 숫자(src/bseorogue.ts · tiers.ts · leaders.ts · kel.ts · src/battle.ts · src/field/trainer.ts)를
 그대로 옮겨 적고, 레벨은 수식으로 계산해요. SG는 노란 칸만 고치면 돼요.
 게임이 바뀌면 아래 숫자도 같이 고쳐요 (이 파일은 게임에서 읽지 않아요. SG가 보내 주면 제가 코드에 옮겨요).
+
+11-19 부터: SG가 고친 난이도.xlsx 가 저장소에 있어요 (SG 메모 · 새 시트). 이 도구로 다시 만들면 SG 값이 지워지니
+파일이 있으면 멈춰요 (--force 로만). 새 시트(마스터즈 팀 · 팀 전투 자리 · 사기 실험체 · 이터니티 조건)는
+scripts/er-sheet/difficulty_sheet.py 가 더하고 게임에 넣어요. '관장' 시트의 역할군 관장은 11-18 까지의 값이에요.
 """
 
 import re
@@ -21,7 +25,8 @@ from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "docs/sheets/난이도.xlsx"
+_ARGS = [a for a in sys.argv[1:] if not a.startswith("--")]
+OUT = Path(_ARGS[0]) if _ARGS else ROOT / "docs/sheets/난이도.xlsx"
 
 FONT = "Arial"
 BLUE = Font(name=FONT, color="0000FF")
@@ -102,6 +107,8 @@ def put(ws, row: int, col: int, value, font=BLACK, fill=None, fmt=None, wrap=Fal
 
 
 def main() -> None:
+    if OUT.exists() and "--force" not in sys.argv:
+        raise SystemExit(f"{OUT} 가 이미 있어요 (SG가 고친 값이 지워져요). 새 시트는 difficulty_sheet.py 로. 정말 새로 만들려면 --force")
     b = read_bseo()
     leaders = read_leaders()
     teams = read_teams()

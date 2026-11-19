@@ -4,8 +4,9 @@
  */
 
 // 블서로그 한 판 흐름: 스킨 진화 · 최종 보스 승리 · 전멸 패배
-import { LEADERS } from "#data/bseorogue/leaders";
-import { BSEO_STARTER_IDS, bseoCharacter, erCodeOfSpecies } from "#data/bseorogue/roster";
+import { isOpWave } from "#data/bseorogue/difficulty";
+import { MASTERS_TEAMS, OP_DEFAULT_SEGMENTS } from "#data/bseorogue/difficulty-sheet";
+import { BSEO_STARTER_IDS, erCodeOfSpecies } from "#data/bseorogue/roster";
 import { setRunTier } from "#data/bseorogue/tiers";
 import { allMoves } from "#data/data-lists";
 import { Egg } from "#data/egg";
@@ -32,6 +33,7 @@ describe("블서로그 한 판 흐름", () => {
   beforeEach(() => {
     game = new GameManager(phaserGame);
     game.override.enemyMoveset(MoveId.SPLASH);
+    setRunTier(0);
   });
 
   it("레벨 12가 되면 스킨 진화 1로 진화해요", async () => {
@@ -55,8 +57,23 @@ describe("블서로그 한 판 흐름", () => {
     expect(eleven.getMoveset().map(m => m.moveId)).toContain(MoveId.HAMMER_ARM);
   });
 
-  it("5웨이브는 마스터즈 팀 전투 (실험체 3명)", async () => {
+  it("아이언: 5웨이브 팀 전투 자리는 사기 실험체 보스 (영입 불가 · 체력 여러 줄)", async () => {
     game.override.moveset([MoveId.HAMMER_ARM]).startingWave(5);
+    await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
+
+    const battle = game.scene.currentBattle;
+    expect(isOpWave(5)).toBe(true);
+    expect(battle.battleType).toBe(BattleType.WILD);
+    const op = game.field.getEnemyPokemon();
+    expect(erCodeOfSpecies(op.species.speciesId)).not.toBeNull();
+    expect(op.isBoss()).toBe(true);
+    expect(op.bossSegments).toBe(OP_DEFAULT_SEGMENTS);
+    expect(game.scene.currentBattle.double).toBe(false);
+  });
+
+  it("미스릴: 15웨이브는 마스터즈 팀 3명 · 데미갓: 25웨이브는 KEL 팀 (난이도 시트 '팀 전투 자리')", async () => {
+    setRunTier(7);
+    game.override.moveset([MoveId.HAMMER_ARM]).startingWave(15);
     await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
 
     const battle = game.scene.currentBattle;
@@ -69,21 +86,23 @@ describe("블서로그 한 판 흐름", () => {
       expect(erCodeOfSpecies(p.species.speciesId)).not.toBeNull();
     }
     expect(new Set(party.map(p => p.species.getRootSpeciesId())).size).toBe(3);
-    expect(game.scene.currentBattle.double).toBe(false);
+    // 데미갓은 사기 실험체 없이 KEL 위주
+    expect([5, 15, 25, 35, 45].some(w => isOpWave(w, 8))).toBe(false);
+    expect(isOpWave(25, 7)).toBe(true);
   });
 
-  it("8웨이브는 역할군 관장 (같은 역할군 2명, 마지막이 관장 본인)", async () => {
+  it("8웨이브는 마스터즈 팀 (시트 '마스터즈 팀', 첫 관장 웨이브는 2명, 마지막이 에이스)", async () => {
     game.override.moveset([MoveId.HAMMER_ARM]).startingWave(8);
     await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
 
     const trainer = game.scene.currentBattle.trainer;
     expect(trainer?.config.trainerType).toBe(TrainerType.BSEO_LEADER);
-    const leader = LEADERS.find(l => trainer?.getName().endsWith(bseoCharacter(l.erCode)?.name ?? "?"));
-    expect(leader).toBeDefined();
+    const team = MASTERS_TEAMS.find(t => trainer?.getName() === `마스터즈 ${t.name}`);
+    expect(team).toBeDefined();
     const party = game.scene.getEnemyParty();
     expect(party.length).toBe(2);
-    expect(erCodeOfSpecies(party[1].species.speciesId)).toBe(leader?.erCode);
-    expect(new Set(party.map(p => p.species.type1)).size).toBe(1);
+    expect(erCodeOfSpecies(party[1].species.speciesId)).toBe(team?.members.at(-1));
+    expect(trainer?.config.battleBgm).toBe("bseo_leader");
   });
 
   it("50웨이브 루미를 이기면 클래식 클리어", async () => {
@@ -105,13 +124,13 @@ describe("블서로그 한 판 흐름", () => {
     expect((phase as unknown as { isVictory: boolean }).isVictory).toBe(true);
   });
 
-  it("1웨이브부터 50웨이브까지 끝까지 (동물 · KEL 팀 · 보스 · 지역 이동 · 최종 보스)", async () => {
+  it("1웨이브부터 50웨이브까지 끝까지 (아이언: 동물 · 사기 실험체 · 마스터즈 · 보스 · 지역 이동 · 최종 보스)", async () => {
     game.override.moveset([MoveId.BODY_SLAM]).startingWave(1).startingLevel(100);
     // 몸통박치기는 일레븐 E 스킬이라 시트 명중(100 아래)을 따라요. 검사에서는 반드시 맞게 (검사 난수는 빗나가는 쪽으로 굴러요)
     vi.spyOn(allMoves[MoveId.BODY_SLAM], "calculateBattleAccuracy").mockReturnValue(-1);
     await game.classicMode.startBattle(SpeciesId.BSEO_ELEVEN);
 
-    const seen = { kel: 0, leader: 0, boss: 0, character: 0, animal: 0, biomes: new Set<number>() };
+    const seen = { kel: 0, leader: 0, boss: 0, op: 0, character: 0, animal: 0, biomes: new Set<number>() };
     let lastWave = 0;
     for (let turn = 0; turn < 400; turn++) {
       const battle = game.scene.currentBattle;
@@ -128,18 +147,20 @@ describe("블서로그 한 판 흐름", () => {
           const type = battle.trainer?.config.trainerType;
           if (type === TrainerType.BSEO_LEADER) {
             seen.leader++;
-            expect(battle.trainer?.getName()).toContain("관장");
-            // 관장 팀은 같은 역할군
-            expect(new Set(game.scene.getEnemyParty().map(p => p.species.type1)).size).toBe(1);
+            // 관장 웨이브 = 마스터즈 팀 (11-19)
+            expect(battle.trainer?.getName().startsWith("마스터즈 ")).toBe(true);
           } else {
             expect(type).toBe(TrainerType.BSEO_KEL);
             expect(game.scene.getEnemyParty().length).toBe(3);
-            // 판 안 승단: 20웨이브까지는 마스터즈 팀, 그다음은 KEL 팀
-            expect(battle.trainer?.getName().startsWith(wave <= 20 ? "마스터즈 " : "KEL ")).toBe(true);
             seen.kel++;
           }
         } else if (enemy.isBoss()) {
           seen.boss++;
+          // 아이언: 팀 전투 자리(5 · 15 · 25 · 35 · 45)는 사기 실험체 보스
+          if (wave % 10 !== 0) {
+            expect(erCodeOfSpecies(enemy.species.speciesId)).not.toBeNull();
+            seen.op++;
+          }
         } else if (erCodeOfSpecies(enemy.species.speciesId) == null) {
           seen.animal++;
         } else {
@@ -160,13 +181,14 @@ describe("블서로그 한 판 흐름", () => {
       await game.toNextWave();
     }
     expect(game.scene.phaseManager.getCurrentPhase()).toBeInstanceOf(GameOverPhase);
-    expect(seen.kel).toBe(5);
+    expect(seen.kel).toBe(0);
+    expect(seen.op).toBe(5);
     expect(seen.leader).toBe(5);
-    expect(seen.boss).toBe(5);
+    expect(seen.boss).toBe(10);
     // 일반 웨이브는 실험체가 대부분
     expect(seen.character).toBeGreaterThan(seen.animal * 2);
     process.stdout.write(
-      `한 판: 실험체 ${seen.character} · 동물 ${seen.animal} · KEL ${seen.kel} · 관장 ${seen.leader} · 보스 ${seen.boss} · 지역 ${seen.biomes.size}\n`,
+      `한 판: 실험체 ${seen.character} · 동물 ${seen.animal} · 팀 ${seen.kel} · 사기 실험체 ${seen.op} · 마스터즈(관장) ${seen.leader} · 보스 ${seen.boss} · 지역 ${seen.biomes.size}\n`,
     );
     expect(seen.biomes.size).toBeGreaterThan(1);
   }, 240_000);
