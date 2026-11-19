@@ -17,7 +17,7 @@ FILES = [  # 작은 것부터 (동의 확인 겸)
     "text_encoders/qwen3vl_4b_int8_convrot.safetensors",
     "diffusion_models/flux3-image-klein-int8-convrot.safetensors",
     "diffusion_models/flux3-image-klein-base-int8-convrot.safetensors",
-    "text_encoders/qwen3.5_9b_flux3_prompt_upsampler_w4a8.safetensors",
+    "text_encoders/qwen3.5_9b_flux3_prompt_upsampler_int8_convrot.safetensors",
 ]
 
 
