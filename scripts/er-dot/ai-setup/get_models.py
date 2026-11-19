@@ -32,8 +32,6 @@ def main():
     if not os.path.isdir(MODELS):
         say("!! ComfyUI 가 아직 없어요. 1-comfyui.bat 먼저")
         return False
-    import getpass
-
     import huggingface_hub
     from huggingface_hub import get_token, hf_hub_download, login
 
@@ -46,9 +44,10 @@ def main():
     say("E 남은 공간: %.1f GB" % (shutil.disk_usage("E:\\").free / 1e9))
     if not get_token():
         say("")
-        say("Hugging Face 토큰(Read)을 붙여 넣고 Enter 를 눌러 주세요.")
-        say("  화면에 글자가 안 보이는 게 정상이에요. 붙여넣기는 마우스 오른쪽 클릭 또는 Ctrl+V")
-        tok = getpass.getpass("토큰: ").strip()
+        say("Hugging Face 토큰(Read, hf_ 로 시작)을 붙여 넣고 Enter 를 눌러 주세요.")
+        say("  붙여넣기: Ctrl+V 또는 마우스 오른쪽 클릭. 붙여 넣은 글자가 보여요 (Enter 를 누르면 화면을 지워요)")
+        tok = input("토큰: ").strip().strip('"').strip("'")
+        os.system("cls")
         if not tok.startswith("hf_"):
             say("!! hf_ 로 시작하는 토큰이 아니에요. 다시 실행해 주세요")
             return False
