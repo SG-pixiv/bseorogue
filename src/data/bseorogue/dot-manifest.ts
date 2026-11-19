@@ -8,5 +8,8 @@
 /** 전투 도트가 있는 스킨 (ER 번호 → 스킨 번호들). 그림: er/dot/<ER번호>_<스킨>.png (80×80, 1배) */
 export const BSEO_DOT_SKINS: Readonly<Record<number, readonly number[]>> = {};
 
+/** 뒷모습(우리 팀) 도트가 있는 스킨. 그림: er/dot/<ER번호>_<스킨>_back.png (80×120, 1배, 머리 ~ 허벅지) */
+export const BSEO_DOT_BACK_SKINS: Readonly<Record<number, readonly number[]>> = {};
+
 /** 아이콘 도트 자리 (er/dot-icons.png 안, ER 번호 → 스킨 → [x, y], 40×30) */
 export const BSEO_DOT_ICON_FRAMES: Readonly<Record<number, Readonly<Record<number, readonly [number, number]>>>> = {};

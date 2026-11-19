@@ -71,6 +71,18 @@ class CleanDotTest(unittest.TestCase):
         self.assertEqual(out.getpixel((20, 5))[3], 0)
         self.assertEqual(out.getpixel((20, 20))[3], 255)
 
+    def test_back_fills_80x120_and_is_cut_at_bottom(self):
+        # 머리 ~ 허벅지 (세로로 긴 사각형) → 80×120, 아래 줄까지 닿고 잘린 쪽엔 외곽선 없음
+        im = Image.new("RGBA", (300, 600), (0, 0, 0, 0))
+        for y in range(600):
+            for x in range(100, 200):
+                im.putpixel((x, y), (40, 80, 200, 255))
+        out = clean_dot.place_back(im)
+        self.assertEqual(out.size, clean_dot.BACK)
+        self.assertEqual(out.getchannel("A").getbbox()[3], 120)  # 맨 아래 줄까지
+        self.assertEqual(out.getpixel((40, 119)), (40, 80, 200, 255))  # 맨 아래는 몸 색 (외곽선 아님)
+        self.assertEqual(out.getpixel((40, 0)), (*clean_dot.LOCK[0], 255))  # 머리 위는 외곽선
+
     def test_dark_lines_survive_when_half(self):
         # 칸(4×4) 안에 어두운 색이 절반이면 어두운 색, 1/4 이면 밝은 색
         half = Image.new("RGBA", (4, 4), (240, 200, 180, 255))

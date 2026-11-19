@@ -10,7 +10,7 @@ AI 가 만든 도트 밑그림 → 블서로그 실험체 도트 규격으로 �
 쓰는 법:
   python3 scripts/er-dot/clean_dot.py <AI 그림.png> <나올 이름.png> [--icon] [--size S|M|L] [--colors 15] [--no-lock] [--box]
   --icon      아이콘 (40×30, 위쪽을 잘라 써요)
-  --back      뒷모습 (우리 팀, 80×80 을 꽉 채우고 아래는 칸 끝에서 잘려요. AI 에게 머리 ~ 허벅지까지만 부탁)
+  --back      뒷모습 (우리 팀, 80×120 을 꽉 채우고 아래는 칸 끝에서 잘려요. AI 에게 머리 ~ 허벅지까지만 부탁)
   --size      키 등급: S 60px · M 68px (기본) · L 74px (칸은 80×80). --height N 으로 직접 줘도 돼요
   --no-lock   외곽선 2색 · 피부 3색을 팔레트 색으로 맞추지 않기 (기본은 맞춰요)
   --box       예전 줄이기 (평균). 기본은 큰 그림에서 15색으로 묶고 칸마다 제일 많은 색 (11-19), 어두운 선은 지켜요
@@ -26,6 +26,8 @@ from PIL import Image
 
 
 SIZES = {"S": 60, "M": 68, "L": 74}
+# 11-19 SG: 뒷모습은 레퍼런스 도트처럼 앞모습보다 1.5배 크게 (머리 ~ 허벅지, 아래는 칸 끝에서 잘림)
+BACK = (80, 120)
 # 모든 실험체가 같이 쓰는 색 (docs/dot-guide/palette-15.png): 외곽선 2 + 피부 3
 LOCK = [(0x1A, 0x1C, 0x2C), (0x3B, 0x3F, 0x5C), (0xFF, 0xE0, 0xC8), (0xF2, 0xB8, 0x96), (0xC9, 0x7E, 0x6A)]
 LOCK_DIST = 30  # r·g·b 차이 합이 이 안이면 팔레트 색으로 바꿔요 (11-19: 48 이면 흰 머리가 피부색이 돼서 줄임)
@@ -217,6 +219,18 @@ def quantize(im: Image.Image, colors: int, lone: bool = True) -> Image.Image:
     return out
 
 
+def place_back(im: Image.Image, colors: int = 15, line: int = 1) -> Image.Image:
+    """뒷모습(우리 팀, 11-19 SG): 머리 ~ 허벅지를 BACK 칸에 꽉 채우고, 아래는 칸 끝에서 잘려요 (잘린 쪽엔 외곽선 없음)"""
+    cw, ch = BACK
+    part = fit(im, cw - 2 * line, ch - line, colors)
+    if line:
+        part = add_outline(part)
+        part = part.crop((0, 0, part.width, part.height - line))  # 아래 외곽선 줄은 버려요 (잘린 쪽)
+    canvas = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
+    canvas.alpha_composite(part, ((cw - part.width) // 2, ch - part.height))
+    return canvas
+
+
 def main():
     if len(sys.argv) < 3:
         sys.exit(__doc__)
@@ -235,14 +249,8 @@ def main():
         canvas = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
         canvas.alpha_composite(part, ((cw - part.width) // 2, ch - part.height))
     elif "--back" in sys.argv:
-        # 11-19 SG 뒷모습(우리 팀): 머리 ~ 허벅지, 칸을 꽉 채우고 아래는 칸 끝에서 잘려요 (아래 외곽선 줄은 칸 밖으로)
-        cw = ch = 80
-        part = fit(im, cw - 2 * line, ch - line, colors)
-        if line:
-            part = add_outline(part)
-        canvas = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
-        part = part.crop((0, 0, part.width, part.height - line))  # 아래 외곽선 줄은 버려요 (잘린 쪽)
-        canvas.alpha_composite(part, ((cw - part.width) // 2, ch - part.height))
+        cw, ch = BACK
+        canvas = place_back(im, colors, line)
     else:
         cw = ch = 80
         part = fit(im, cw - 2 * line, arg("--height", SIZES[arg("--size", "M").upper()]) - 2 * line, colors)

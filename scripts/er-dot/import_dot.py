@@ -4,14 +4,14 @@
 완성된 실험체 도트 → 게임에 넣기 (도트 가이드 docs/dot-guide, 가이드 문서의 검사 목록)
 
 받는 파일 이름 (둘 중 아무거나):
-  <ER번호>_<스킨>.png        예: 1_0.png  (전투 80×80)       1_0_icon.png  (아이콘 40×30)
-  <실험체 이름>_<스킨>.png   예: 재키_0.png · Jackie_1_icon.png
+  <ER번호>_<스킨>.png        예: 1_0.png  (전투 앞모습 80×80)   1_0_back.png  (전투 뒷모습 80×120)   1_0_icon.png  (아이콘 40×30)
+  <실험체 이름>_<스킨>.png   예: 재키_0.png · 재키_0_back.png · Jackie_1_icon.png
 검사 (하나라도 틀리면 넣지 않아요):
-  크기 (전투 80×80 · 아이콘 40×30) · 반투명 픽셀 없음 · 투명 빼고 15색 이하 · 빈 그림 아님 · 있는 ER 번호
-알려만 주는 것: 발끝이 맨 아래 1px 위인지 · 외곽선 색(#1a1c2c)을 썼는지 · 키(S 60 · M 68 · L 74)
+  크기 (앞모습 80×80 · 뒷모습 80×120 · 아이콘 40×30) · 반투명 픽셀 없음 · 투명 빼고 15색 이하 · 빈 그림 아님 · 있는 ER 번호
+알려만 주는 것: 발끝이 맨 아래 1px 위인지 (뒷모습은 맨 아래 줄에서 잘렸는지) · 외곽선 색(#1a1c2c)을 썼는지 · 키(S 60 · M 68 · L 74)
 
 넣는 곳:
-  assets/er/dot/<ER번호>_<스킨>.png · _icon.png    1배 그대로 (게임에서 확대 · 축소 없어요)
+  assets/er/dot/<ER번호>_<스킨>.png · _back.png · _icon.png    1배 그대로 (게임에서 확대 · 축소 없어요)
   assets/er/dot-icons.png                          아이콘을 한 장에 모은 것
   src/data/bseorogue/dot-manifest.ts               목록 (자동 생성)
 게임은 도트가 있는 실험체는 팬키트 그림보다 도트를 먼저 써요 (placeholder-art.ts).
@@ -35,12 +35,15 @@ ICON_SHEET = ROOT / "assets/er/dot-icons.png"
 MANIFEST = ROOT / "src/data/bseorogue/dot-manifest.ts"
 
 BATTLE = (80, 80)
+BACK = (80, 120)  # 11-19 SG: 뒷모습(우리 팀)은 앞모습보다 1.5배, 머리 ~ 허벅지 (clean_dot.py --back)
 ICON = (40, 30)
 ICON_COLS = 32
 MAX_COLORS = 15
 OUTLINE = (0x1A, 0x1C, 0x2C)
 HEIGHTS = {"S": 60, "M": 68, "L": 74}
-NAME = re.compile(r"^(.+?)_(\d{1,3})(_icon)?$", re.I)
+NAME = re.compile(r"^(.+?)_(\d{1,3})(?:_(icon|back))?$", re.I)
+SIZE = {"battle": BATTLE, "back": BACK, "icon": ICON}
+LABEL = {"battle": "전투 앞모습", "back": "전투 뒷모습", "icon": "아이콘"}
 
 
 def er_names() -> dict[str, int]:
@@ -53,25 +56,25 @@ def er_names() -> dict[str, int]:
     return out
 
 
-def check(path: Path, names: dict[str, int]) -> tuple[tuple[int, int, bool] | None, list[str], list[str]]:
-    """→ ((ER번호, 스킨, 아이콘인지) 또는 None, 틀린 것, 알림)"""
+def check(path: Path, names: dict[str, int]) -> tuple[tuple[int, int, str] | None, list[str], list[str]]:
+    """→ ((ER번호, 스킨, 종류 battle · back · icon) 또는 None, 틀린 것, 알림)"""
     errors, notes = [], []
     m = NAME.match(path.stem)
     if not m:
-        return None, ["파일 이름은 <ER번호 또는 이름>_<스킨>.png (아이콘은 _icon) 이어야 해요"], notes
+        return None, ["파일 이름은 <ER번호 또는 이름>_<스킨>.png (뒷모습은 _back · 아이콘은 _icon) 이어야 해요"], notes
     code = names.get(re.sub(r"[\s.\-']", "", m[1]).lower())
     if code is None:
         return None, [f"'{m[1]}' 라는 실험체가 없어요"], notes
-    skin, is_icon = int(m[2]), bool(m[3])
-    key = (code, skin, is_icon)
+    skin, kind = int(m[2]), (m[3] or "battle").lower()
+    key = (code, skin, kind)
     try:
         with Image.open(path) as src:
             im = src.convert("RGBA") if src.mode != "RGBA" else src.copy()
     except Exception as e:  # noqa: BLE001 — 그림이 아닌 파일
         return key, [f"그림을 못 열어요 ({e})"], notes
-    want = ICON if is_icon else BATTLE
+    want = SIZE[kind]
     if im.size != want:
-        errors.append(f"크기가 {im.size[0]}×{im.size[1]} 예요 ({'아이콘' if is_icon else '전투'}는 {want[0]}×{want[1]})")
+        errors.append(f"크기가 {im.size[0]}×{im.size[1]} 예요 ({LABEL[kind]}은 {want[0]}×{want[1]})")
     px = list(im.getdata()) if not hasattr(im, "get_flattened_data") else list(im.get_flattened_data())
     semi = sum(1 for p in px if 0 < p[3] < 255)
     if semi:
@@ -83,7 +86,13 @@ def check(path: Path, names: dict[str, int]) -> tuple[tuple[int, int, bool] | No
         errors.append(f"색이 {len(colors)}개예요 (투명 빼고 {MAX_COLORS}개 이하, clean_dot.py 로 줄일 수 있어요)")
     if colors and OUTLINE not in colors:
         notes.append("외곽선 색 #1a1c2c 를 안 썼어요 (가이드 팔레트)")
-    if colors and not is_icon and im.size == want:
+    if colors and kind == "back" and im.size == want:
+        w, h = im.size
+        rows = [y for y in range(h) if any(px[y * w + x][3] for x in range(w))]
+        if rows[-1] != h - 1:
+            notes.append(f"뒷모습인데 아래가 칸 끝에서 {h - 1 - rows[-1]}px 위에서 끝나요 (가이드: 허벅지에서 칸 끝으로 잘림)")
+        notes.append(f"보이는 키 {rows[-1] - rows[0] + 1}px (칸 {h}px)")
+    if colors and kind == "battle" and im.size == want:
         w, h = im.size
         rows = [y for y in range(h) if any(px[y * w + x][3] for x in range(w))]
         bottom, top = rows[-1], rows[0]
@@ -103,13 +112,13 @@ def gather(args: list[str]) -> list[Path]:
     return out
 
 
-def rebuild() -> tuple[int, int]:
+def rebuild() -> tuple[int, int, int]:
     """assets/er/dot 를 다시 읽어 목록 · 아이콘 한 장 만들기"""
-    battle, icons = {}, {}
+    battle, back, icons = {}, {}, {}
     for f in sorted(DOT_DIR.glob("*.png")) if DOT_DIR.exists() else []:
-        m = re.fullmatch(r"(\d+)_(\d+)(_icon)?", f.stem)
+        m = re.fullmatch(r"(\d+)_(\d+)(?:_(icon|back))?", f.stem)
         if m:
-            (icons if m[3] else battle).setdefault(int(m[1]), []).append(int(m[2]))
+            {"icon": icons, "back": back, None: battle}[m[3]].setdefault(int(m[1]), []).append(int(m[2]))
     frames = {}
     cells = [(c, s) for c in sorted(icons) for s in sorted(icons[c])]
     if cells:
@@ -140,6 +149,11 @@ def rebuild() -> tuple[int, int]:
         rec({c: f"[{', '.join(map(str, sorted(v)))}]" for c, v in sorted(battle.items())}),
         "};",
         "",
+        "/** 뒷모습(우리 팀) 도트가 있는 스킨. 그림: er/dot/<ER번호>_<스킨>_back.png (80×120, 1배, 머리 ~ 허벅지) */",
+        "export const BSEO_DOT_BACK_SKINS: Readonly<Record<number, readonly number[]>> = {",
+        rec({c: f"[{', '.join(map(str, sorted(v)))}]" for c, v in sorted(back.items())}),
+        "};",
+        "",
         "/** 아이콘 도트 자리 (er/dot-icons.png 안, ER 번호 → 스킨 → [x, y], 40×30) */",
         "export const BSEO_DOT_ICON_FRAMES: Readonly<Record<number, Readonly<Record<number, readonly [number, number]>>>> = {",
         rec({c: "{ " + ", ".join(f"{s}: [{x}, {y}]" for s, (x, y) in sorted(v.items())) + " }" for c, v in sorted(frames.items())}),
@@ -147,7 +161,7 @@ def rebuild() -> tuple[int, int]:
         "",
     ]
     MANIFEST.write_text("\n".join(lines).replace("{\n\n};", "{};"), encoding="utf-8")
-    return sum(len(v) for v in battle.values()), len(cells)
+    return sum(len(v) for v in battle.values()), sum(len(v) for v in back.values()), len(cells)
 
 
 def main() -> None:
@@ -158,7 +172,7 @@ def main() -> None:
     ok, bad = [], 0
     for f in files:
         key, errors, notes = check(f, names)
-        tag = f"{key[0]}_{key[1]}{'_icon' if key[2] else ''}" if key else "?"
+        tag = f"{key[0]}_{key[1]}{'' if key[2] == 'battle' else '_' + key[2]}" if key else "?"
         print(f"{'✔' if not errors else '✘'} {f.name} → {tag}")
         for e in errors:
             print(f"    ✘ {e}")
@@ -173,8 +187,8 @@ def main() -> None:
     DOT_DIR.mkdir(parents=True, exist_ok=True)
     for f, tag in ok:
         shutil.copyfile(f, DOT_DIR / f"{tag}.png")
-    n_battle, n_icon = rebuild()
-    print(f"넣음 {len(ok)}개 · 못 넣음 {bad}개 → 지금 도트: 전투 {n_battle}장 · 아이콘 {n_icon}장 ({MANIFEST.relative_to(ROOT)})")
+    n_battle, n_back, n_icon = rebuild()
+    print(f"넣음 {len(ok)}개 · 못 넣음 {bad}개 → 지금 도트: 앞모습 {n_battle}장 · 뒷모습 {n_back}장 · 아이콘 {n_icon}장 ({MANIFEST.relative_to(ROOT)})")
     if bad:
         sys.exit(1)
 

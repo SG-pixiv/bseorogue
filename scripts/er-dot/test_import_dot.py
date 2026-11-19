@@ -41,13 +41,14 @@ class ImportDotTest(unittest.TestCase):
 
     def test_good_battle_dot(self) -> None:
         key, errors, notes = import_dot.check(dot(self.dir / "1_0.png"), self.names)
-        self.assertEqual(key, (1, 0, False))
+        self.assertEqual(key, (1, 0, "battle"))
         self.assertEqual(errors, [])
         self.assertTrue(any("키 61px" in n for n in notes))
 
     def test_names(self) -> None:
-        self.assertEqual(import_dot.check(dot(self.dir / "재키_2.png"), self.names)[0], (1, 2, False))
-        self.assertEqual(import_dot.check(dot(self.dir / "Jackie_1_icon.png", (40, 30), bottom=28), self.names)[0], (1, 1, True))
+        self.assertEqual(import_dot.check(dot(self.dir / "재키_2.png"), self.names)[0], (1, 2, "battle"))
+        self.assertEqual(import_dot.check(dot(self.dir / "Jackie_1_icon.png", (40, 30), bottom=28), self.names)[0], (1, 1, "icon"))
+        self.assertEqual(import_dot.check(dot(self.dir / "재키_0_back.png", (80, 120), bottom=119), self.names)[0], (1, 0, "back"))
         self.assertTrue(import_dot.check(dot(self.dir / "없는사람_0.png"), self.names)[1])
         self.assertTrue(import_dot.check(dot(self.dir / "jackie.png"), self.names)[1])
 
@@ -57,6 +58,8 @@ class ImportDotTest(unittest.TestCase):
 
         self.assertIn("크기", errs("1_0.png", size=(96, 96)))
         self.assertIn("크기", errs("1_0_icon.png"))  # 아이콘인데 80×80
+        self.assertIn("크기", errs("1_0_back.png"))  # 뒷모습인데 80×80
+        self.assertEqual(errs("1_0_back.png", size=(80, 120), bottom=119), "")
         self.assertIn("반투명", errs("1_0.png", semi=True))
         self.assertIn("색이 16개", errs("1_0.png", colors=16))
         self.assertEqual(errs("1_0.png", colors=15), "")
@@ -64,6 +67,12 @@ class ImportDotTest(unittest.TestCase):
     def test_feet_note(self) -> None:
         notes = import_dot.check(dot(self.dir / "1_0.png", bottom=70), self.names)[2]
         self.assertTrue(any("발끝" in n for n in notes))
+
+    def test_back_notes(self) -> None:
+        cut = import_dot.check(dot(self.dir / "1_0_back.png", (80, 120), bottom=119), self.names)[2]
+        self.assertFalse(any("칸 끝에서" in n for n in cut))
+        floating = import_dot.check(dot(self.dir / "1_0_back.png", (80, 120), bottom=110), self.names)[2]
+        self.assertTrue(any("칸 끝에서 9px" in n for n in floating))
 
     def test_rebuild_manifest_and_icon_sheet(self) -> None:
         old = (import_dot.DOT_DIR, import_dot.ICON_SHEET, import_dot.MANIFEST)
@@ -76,10 +85,14 @@ class ImportDotTest(unittest.TestCase):
                 dot(import_dot.DOT_DIR / name)
             for name in ("1_0_icon.png", "30_0_icon.png"):
                 dot(import_dot.DOT_DIR / name, (40, 30), bottom=28)
-            self.assertEqual(import_dot.rebuild(), (3, 2))
+            dot(import_dot.DOT_DIR / "1_2_back.png", (80, 120), bottom=119)
+            self.assertEqual(import_dot.rebuild(), (3, 1, 2))
             ts = import_dot.MANIFEST.read_text(encoding="utf-8")
             self.assertIn("1: [0, 2],", ts)
             self.assertIn("30: [0],", ts)
+            back = ts.split("BSEO_DOT_BACK_SKINS")[1].split("};")[0]
+            self.assertIn("1: [2],", back)
+            self.assertNotIn("30:", back)
             self.assertIn("1: { 0: [0, 0] },", ts)
             self.assertIn("30: { 0: [40, 0] },", ts)
             with Image.open(import_dot.ICON_SHEET) as sheet:
