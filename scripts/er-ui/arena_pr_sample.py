@@ -64,6 +64,50 @@ stripes(d, HOR + 12, HOR + 18, WALK, WALK2)
 stripes(d, HOR + 18, HOR + 40, WALK2, ROAD[0])
 stripes(d, HOR + 40, HOR + 70, ROAD[0], ROAD[1])
 stripes(d, HOR + 70, H, ROAD[1], ROAD[2])
+
+
+# ── 빠르게 지나가는 느낌 (11-19 SG "뒷배경이 좀더 흐리고 빠르게 지나가는 느낌을 줘봐") ──
+# --speed=1 약하게 · --speed=2 강하게: 가로로만 번지게(먼 곳일수록 덜) + 옅은 안개 + 가로 속도선, 다시 적은 색으로
+SPEED = int(next((x.split("=")[1] for x in sys.argv if x.startswith("--speed=")), "0"))
+
+
+def speed_blur(img, level):
+    if not level:
+        return img
+    import numpy as np
+
+    a = np.asarray(img).astype(np.float32)
+    out = a.copy()
+    k_sky, k_ground, haze_t, lines = ((9, 15, 0.22, 16), (19, 31, 0.38, 30))[level - 1]
+
+    def hblur(rows, k):
+        blk = a[rows]
+        acc = np.zeros_like(blk)
+        for sft in range(-(k // 2), k // 2 + 1):
+            acc += np.roll(blk, sft, axis=1)
+        return acc / k
+
+    top = slice(0, HOR + 3)
+    out[top] = hblur(top, k_sky)
+    haze = np.array(SKY[3], np.float32)
+    out[top] = out[top] * (1 - haze_t) + haze * haze_t  # 먼 곳은 옅게
+    low = slice(HOR + 3, H)
+    out[low] = hblur(low, k_ground)
+    res = Image.fromarray(out.clip(0, 255).astype("uint8"))
+    res = res.quantize(colors=14 if level == 1 else 12, method=Image.MEDIANCUT, dither=Image.NONE).convert("RGB")
+    dd = ImageDraw.Draw(res)
+    rr = random.Random(11)
+    for _ in range(lines):  # 속도선: 밝은 가로줄 (하늘 · 건물) / 어두운 가로줄 (땅)
+        y = rr.randint(4, H - 50)
+        x0 = rr.randint(-40, W)
+        ln = rr.randint(18, 70) * (1 if y < HOR else 2)
+        c = res.getpixel((max(0, min(W - 1, x0)), y))
+        c = tuple(min(255, int(v + (255 - v) * 0.35)) for v in c) if y < HOR else tuple(int(v * 0.9) for v in c)
+        dd.line([(x0, y), (x0 + ln, y)], fill=c)
+    return res
+
+
+bg = speed_blur(bg, SPEED)
 bg.save(OUT / "alley_bg.png")
 
 # ── 발판 ──
