@@ -29,6 +29,7 @@ import { UiInputs } from "#app/ui-inputs";
 import { STARTING_WAVE } from "#balance/misc";
 import { FRIENDSHIP_GAIN_FROM_BATTLE } from "#balance/starters";
 import { initCommonAnims, initMoveAnim, loadCommonAnimAssets, loadMoveAnimAssets } from "#data/battle-anims";
+import { opBossSegments } from "#data/bseorogue/difficulty";
 import { isBseoSpecies } from "#data/bseorogue/hooks";
 import { leagueForWave } from "#data/bseorogue/league";
 import { ensureBseoSprite } from "#data/bseorogue/placeholder-art";
@@ -1990,6 +1991,11 @@ export class BattleScene extends SceneBase {
       // The rest of the code expects to be returned 0 and not 1 if the enemy is not a boss
       return 0;
     }
+    // 블서로그: 사기 실험체 (시트 '사기 실험체' 의 체력 줄 수, difficulty.ts)
+    const bseoOpSegments = opBossSegments(waveIndex);
+    if (bseoOpSegments > 0) {
+      return bseoOpSegments;
+    }
 
     if (this.gameMode.isDaily && this.gameMode.isWaveFinal(waveIndex)) {
       if (this.gameMode.dailyConfig?.boss?.segments != null) {
@@ -2193,7 +2199,7 @@ export class BattleScene extends SceneBase {
   }
 
   updateBiomeWaveText(): void {
-    const isBoss = !(this.currentBattle.waveIndex % 10);
+    const isBoss = this.gameMode.isBoss(this.currentBattle.waveIndex);
     const biomeString: string = getBiomeName(this.arena.biomeId);
     this.fieldUI.moveAbove(this.biomeWaveText, this.luckText);
     // 블서로그: 티어 · 리그도 같이 (예: 골드 · KEL · 골목길 - 25)

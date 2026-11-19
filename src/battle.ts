@@ -3,6 +3,7 @@ import { DAILY_BOSS_LEVEL } from "#app/constants";
 import type { GameMode } from "#app/game-mode";
 import { globalScene } from "#app/global-scene";
 import { settings } from "#app/global-settings-manager";
+import { isOpWave } from "#data/bseorogue/difficulty";
 import { applyTierToLevel } from "#data/bseorogue/tiers";
 import { isDailyFinalBoss } from "#data/daily-seed-utils";
 import { ArenaTagType } from "#enums/arena-tag-type";
@@ -278,6 +279,10 @@ export class Battle {
     // 블서로그: 50웨이브 최종 보스(루미)는 따로 (이터널 리턴 마지막 금지구역 곡)
     if (!BSEO.pokerogueFinale && this.gameMode.isClassic && this.gameMode.isWaveFinal(this.waveIndex)) {
       return "bseo_final";
+    }
+    // 블서로그: 사기 실험체 보스는 관장 곡 (difficulty.ts)
+    if (this.gameMode.isClassic && isOpWave(this.waveIndex)) {
+      return "bseo_leader";
     }
     const wildOpponents = globalScene.getEnemyParty();
     for (const pokemon of wildOpponents) {

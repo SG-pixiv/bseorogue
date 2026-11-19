@@ -4,6 +4,7 @@ import { CHALLENGE_MODE_MYSTERY_ENCOUNTER_WAVES, CLASSIC_MODE_MYSTERY_ENCOUNTER_
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { activeOverrides } from "#app/overrides";
+import { isOpWave } from "#data/bseorogue/difficulty";
 import { bseoBossSpecies } from "#data/bseorogue/hooks";
 import { isKelWave, kelFixedBattle } from "#data/bseorogue/kel";
 import { isLeaderWave, leaderFixedBattle } from "#data/bseorogue/leaders";
@@ -324,7 +325,8 @@ export class GameMode implements GameModeConfig {
    * @returns true if waveIndex is a multiple of 10
    */
   isBoss(waveIndex: number): boolean {
-    return waveIndex % 10 === 0;
+    // 블서로그: 티어에 따라 팀 전투 자리에 나오는 사기 실험체도 보스 (레벨 1.2배 · 체력 여러 줄, difficulty.ts)
+    return waveIndex % 10 === 0 || (this.isClassic && isOpWave(waveIndex));
   }
 
   /**
@@ -370,7 +372,7 @@ export class GameMode implements GameModeConfig {
   isFixedBattle(waveIndex: number): boolean {
     // 블서로그: 포켓몬 라이벌 · 관장 같은 고정 전투 대신 마스터즈 · KEL 팀 전투 (BSEO.teamWaves) · 역할군 관장 (BSEO.leaderWaves)
     if (BSEO.classicOnly) {
-      return this.isClassic && (isKelWave(waveIndex) || isLeaderWave(waveIndex));
+      return this.isClassic && ((isKelWave(waveIndex) && !isOpWave(waveIndex)) || isLeaderWave(waveIndex));
     }
     const dummyConfig = new FixedBattleConfig();
     return (
@@ -392,7 +394,8 @@ export class GameMode implements GameModeConfig {
       if (isLeaderWave(waveIndex)) {
         return leaderFixedBattle(waveIndex);
       }
-      return isKelWave(waveIndex) ? kelFixedBattle(waveIndex) : undefined;
+      // 사기 실험체 자리는 고정 전투가 아니라 보스 야생 전투 (hooks.ts 의 bseoWildSpecies)
+      return isKelWave(waveIndex) && !isOpWave(waveIndex) ? kelFixedBattle(waveIndex) : undefined;
     }
     const challengeConfig = new FixedBattleConfig();
     if (applyChallenges(ChallengeType.FIXED_BATTLES, waveIndex, challengeConfig)) {

@@ -15,7 +15,13 @@
 
 쓰는 법: python3 -I -B scripts/fankit/build_item_dots.py <팬키트 폴더> [<폴더> …]
          (폴더 안 어디든 "02. Ingame_Image" 가 있으면 돼요)
+         python3 -I -B scripts/fankit/build_item_dots.py --namu
+         (팬키트 없이 나무위키 그림(NAMU 표)만 다시. 다른 도트 · 출처는 그대로 둬요)
          그다음 python3 -I -B scripts/er-ui/make_items.py 로 아틀라스를 다시 만들어요
+
+나무위키 그림 (11-19 SG "도트 이미지화에 필요한 기존 아이템 이미지는 나무위키 이터널리턴항목에서 검색해서 이미지 갖고와"):
+  팬키트에 맞는 그림이 없던 아이템은 나무위키 '이터널 리턴/아이템/…' 문서의 아이템 그림(작은 그림, 128×71 · 256×142)을
+  assets/er/item-namu/ 에 받아 두고 도트로 바꿔요 (NAMU 표). 나무위키는 일반 가져오기를 막아서 데스크톱 앱 브라우저로 받았어요.
 """
 import importlib.util
 import json
@@ -109,6 +115,22 @@ ITEMS = {
     "focus_band": (A + "02. Head/001. Hairband.png", "기합의머리띠"),
     "baton": (W + "11. Bat/001. Short Rod.png", "배턴"),
 }
+# 나무위키 그림으로 만드는 것: 아이템 그림 파일 이름 → (assets/er/item-namu/ 파일, 나무위키 문서 · ER 아이템 이름, 블서로그 이름)
+NAMU_DIR = ROOT / "assets" / "er" / "item-namu"
+NAMU = {
+    "x_speed": ("cola.png", "나무위키 이터널 리턴/아이템/소비: 콜라", "속도 강화제 (5웨이브 동안 속도 ↑)"),
+    "candy_jar": ("honey.png", "나무위키 이터널 리턴/아이템/소비: 꿀", "부거단지 (꿀단지)"),
+    "nugget": ("gemstone.png", "나무위키 이터널 리턴/아이템/재료: 원석", "크레딧+"),
+    "big_nugget": ("diamond.png", "나무위키 이터널 리턴/아이템/재료: 다이아몬드", "크레딧++"),
+    "map": ("loop_card_key.png", "나무위키 이터널 리턴/아이템/특수: 루프 카드키", "루미아 섬 지도 (ER 에서 갈 지역을 고르는 루프 카드키)"),
+}
+# 나무위키 그림에 역할군 색을 입혀서 쓰는 것: 아틀라스 이름 앞부분 → (파일, 출처, 블서로그 이름). tm_<타입> 마다 색이 달라요
+NAMU_TINTED = {
+    "tm_": ("hardcover.png", "나무위키 이터널 리턴/아이템/재료: 하드커버", "스킬 기록 (기술머신 자리, 11-19)"),
+}
+# 실험체 역할군 타입 (roles.ts: 탱커 rock · 브루저 fighting · 암살자 dark · 원거리 dragon · 마법사 psychic · 서포터 fairy)
+ROLE_TYPES = ("rock", "fighting", "dark", "dragon", "psychic", "fairy")
+NAMU_PREVIEW = ROOT / "docs" / "item-dots-namu-preview.png"
 # 색만 바꿔 쓰는 바탕 그림
 MODULE_SRC = M + "062. Tac. Skill Module.png"
 SHARD_SRC = M + "034. Crimson Shard.png"
@@ -222,8 +244,55 @@ def pair(dot: Image.Image) -> Image.Image:
     return out
 
 
+def namu_dots(sources: dict) -> list[tuple[Image.Image, Image.Image]]:
+    """NAMU 표 → 도트 (assets/er/item/) · 출처 · 미리보기용 [(원본, 도트)]"""
+    shown = []
+    for name, (file, where, label) in NAMU.items():
+        with Image.open(NAMU_DIR / file) as src:
+            dot = to_dot(src)
+            shown.append((src.convert("RGBA").copy(), dot))
+        dot.save(OUT / f"{name}.png", optimize=True)
+        sources[name] = {"file": where, "name": label}
+    mi = load_make_items()
+    order = [f["filename"] for f in json.load(open(ROOT / "assets/images/items.json", encoding="utf-8"))["textures"][0]["frames"]]
+    for prefix, (file, where, label) in NAMU_TINTED.items():
+        with Image.open(NAMU_DIR / file) as src:
+            for name in order:
+                if not name.startswith(prefix):
+                    continue
+                typ = name[len(prefix) :]
+                tint = mi.TYPE.get(typ, (200, 200, 210))
+                dot = to_dot(src, tint)
+                if typ in ROLE_TYPES:  # 미리보기에는 역할군 6색만
+                    shown.append((src.convert("RGBA").copy(), dot))
+                dot.save(OUT / f"{name}.png", optimize=True)
+                sources[name] = {"file": where, "name": f"{label} ({typ})", "tint": list(tint)}
+    return shown
+
+
+def preview(shown: list[tuple[Image.Image, Image.Image]], path: Path, cols: int = 6) -> None:
+    """한눈에 보기: 원본(64) → 도트(4배 128)"""
+    cw, ch = 64 + 8 + 128 + 12, 136
+    sheet = Image.new("RGBA", (min(cols, len(shown)) * cw + 8, ((len(shown) + cols - 1) // cols) * ch + 8), (36, 40, 54, 255))
+    for i, (src, dot) in enumerate(shown):
+        x, y = 8 + (i % cols) * cw, 8 + (i // cols) * ch
+        box = src.getchannel("A").point(lambda a: 255 if a >= 96 else 0).getbbox()
+        thumb = src.crop(box) if box else src
+        thumb.thumbnail((64, 64))
+        sheet.alpha_composite(thumb, (x + (64 - thumb.width) // 2, y + (128 - thumb.height) // 2))
+        sheet.alpha_composite(dot.resize((128, 128), Image.NEAREST), (x + 72, y))
+    sheet.convert("RGB").save(path, optimize=True)
+
+
 def main() -> None:
     folders = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if "--namu" in sys.argv:
+        sources = json.load(open(SOURCES, encoding="utf-8")) if SOURCES.exists() else {}
+        shown = namu_dots(sources)
+        json.dump(dict(sorted(sources.items())), open(SOURCES, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        preview(shown, NAMU_PREVIEW)
+        print(f"나무위키 그림 도트 {len(shown)}개 → {OUT.relative_to(ROOT)} · 미리보기 {NAMU_PREVIEW.relative_to(ROOT)}")
+        return
     if not folders:
         raise SystemExit(__doc__)
     root = find_root(folders)
@@ -258,21 +327,10 @@ def main() -> None:
         if name in ITEMS:  # 따로 그림을 고른 부적 (예: 경험부적 → 아글라이아의 선물)
             continue
         put(name, CHARM_SRC, f"부적 ({name})", tint=c)
+    shown += namu_dots(sources)
     unknown = sorted(n for n in sources if n not in order)
     json.dump(dict(sorted(sources.items())), open(SOURCES, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-
-    # 한눈에 보기: 원본(64) → 도트(4배 128)
-    cols = 6
-    cw, ch = 64 + 8 + 128 + 12, 136
-    sheet = Image.new("RGBA", (cols * cw + 8, ((len(shown) + cols - 1) // cols) * ch + 8), (36, 40, 54, 255))
-    for i, (src, dot) in enumerate(shown):
-        x, y = 8 + (i % cols) * cw, 8 + (i // cols) * ch
-        box = src.getchannel("A").point(lambda a: 255 if a >= 96 else 0).getbbox()
-        thumb = src.crop(box) if box else src
-        thumb.thumbnail((64, 64))
-        sheet.alpha_composite(thumb, (x + (64 - thumb.width) // 2, y + (128 - thumb.height) // 2))
-        sheet.alpha_composite(dot.resize((128, 128), Image.NEAREST), (x + 72, y))
-    sheet.convert("RGB").save(PREVIEW, optimize=True)
+    preview(shown, PREVIEW)
     print(f"도트 {len(sources)}개 → {OUT.relative_to(ROOT)} · 미리보기 {PREVIEW.relative_to(ROOT)}")
     for m in missing:
         print("  (없음)", m)

@@ -6,6 +6,7 @@ import { speciesDataRegistry } from "#app/global-species-data-registry";
 import { getPokemonNameWithAffix } from "#app/messages";
 import { TrappedTag } from "#data/battler-tags";
 import { bseoCanCatchSpecies } from "#data/bseorogue/catch";
+import { isOpWave } from "#data/bseorogue/difficulty";
 import { getDailyEventSeedBoss } from "#data/daily-run";
 import { isDailyFinalBoss } from "#data/daily-seed-utils";
 import { AbilityId } from "#enums/ability-id";
@@ -365,6 +366,11 @@ export class CommandPhase extends FieldPhase {
     const bseoTarget = globalScene.getEnemyPokemon(false);
     if (bseoTarget && !bseoCanCatchSpecies(bseoTarget.species.speciesId)) {
       this.queueShowText("battle:bseoNoCatchTarget");
+      return false;
+    }
+    // 블서로그: 사기 실험체 보스는 영입 불가 (difficulty.ts)
+    if (globalScene.gameMode.isClassic && isOpWave(globalScene.currentBattle.waveIndex)) {
+      this.queueShowText("battle:bseoNoCatchOp");
       return false;
     }
     const { arena, currentBattle, gameData, gameMode } = globalScene;

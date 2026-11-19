@@ -6,6 +6,7 @@
 import { BSEO } from "#app/bseorogue";
 import { globalScene } from "#app/global-scene";
 import { speciesDataRegistry } from "#app/global-species-data-registry";
+import { opBossSpecies } from "#data/bseorogue/difficulty";
 import { loadKelTeams } from "#data/bseorogue/kel";
 import { applyBseoPassiveNames } from "#data/bseorogue/passive";
 import { REGION_ROLES } from "#data/bseorogue/regions";
@@ -39,6 +40,11 @@ export function isBseoSpecies(id: SpeciesId): boolean {
  * 실험체는 레벨에 맞춰 스킨 진화한 모습으로 나와요. 보스 웨이브는 따로예요.
  */
 export function bseoWildSpecies(waveIndex: number, level: number): PokemonSpecies | null {
+  // 티어에 따라 팀 전투 자리에 나오는 사기 실험체 (difficulty.ts)
+  const op = opBossSpecies(waveIndex, level);
+  if (op) {
+    return op;
+  }
   const animals = BSEO_WILD.filter(w => w.fromWave <= waveIndex);
   if (animals.length > 0 && randSeedInt(1000) < BSEO.wildAnimalRate * 1000) {
     // 최근에 열린 동물이 조금 더 자주 나와요

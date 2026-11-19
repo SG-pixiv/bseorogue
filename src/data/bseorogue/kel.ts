@@ -8,14 +8,17 @@ import { FixedBattleConfig } from "#app/battle";
  * 팀 전투 (마스터즈 팀 · KEL 팀)
  *
  * 정해진 웨이브(BSEO.teamWaves)마다 팀이 실험체 3명으로 싸움을 걸어요.
- * 마스터즈 구간(league.ts)에는 마스터즈 팀, KEL 승격 뒤에는 KEL 팀이 나와요.
+ * 어느 팀(마스터즈 · KEL)이 나올지는 티어마다 달라요 (11-19 SG, 난이도 시트 '팀 전투 자리' → difficulty.ts).
+ * 그 자리가 '사기 실험체' 면 팀 대신 보스 실험체가 나와요 (이 파일이 아니라 hooks.ts).
  * 팀 · 리그 · 실험체 · 로고는 무명섬 관리 화면(블서로그 → 팀)에서 정하고, 게임이 시작할 때 불러와요.
  * 무명섬과 연결이 안 되거나 팀 실험체를 아직 안 정했으면, 아래 팀 이름에 실험체를 무작위로 넣어요.
+ * 마스터즈 팀이 무명섬에 없으면 난이도 시트 '마스터즈 팀' (관장 웨이브와 같은 목록)을 써요.
  */
 import { BSEO } from "#app/bseorogue";
 import { fetchTeams, type KelTeam, mumeiConnected } from "#app/bseorogue-api";
 import { globalScene } from "#app/global-scene";
-import { teamLeagueForWave } from "#data/bseorogue/league";
+import { teamSlotKind, teamSlotOrder } from "#data/bseorogue/difficulty";
+import { MASTERS_TEAMS } from "#data/bseorogue/difficulty-sheet";
 import { ensureTeamSprite } from "#data/bseorogue/placeholder-art";
 import { BSEO_CHARACTERS, bseoCharacter } from "#data/bseorogue/roster";
 import { BattleType } from "#enums/battle-type";
@@ -46,11 +49,11 @@ const FALLBACK_TEAMS: readonly KelTeam[] = [
   ["Jeju Shadow", "제주"],
   ["Jeonnam Esports", "전남"],
 ].map(([name, region]) => ({ name, region, logo_url: "", members: [], league: "kel" as const }));
-const FALLBACK_MASTERS: readonly KelTeam[] = Array.from({ length: 8 }, (_, i) => ({
-  name: `마스터즈 ${i + 1}팀`,
+const FALLBACK_MASTERS: readonly KelTeam[] = MASTERS_TEAMS.map(t => ({
+  name: t.name,
   region: "",
   logo_url: "",
-  members: [],
+  members: [...t.members],
   league: "masters" as const,
 }));
 
@@ -104,9 +107,10 @@ export interface KelLineup {
 
 /** 이 판 · 이 웨이브에 나오는 팀 (판마다 순서가 달라요. 한 판에서 같은 팀은 안 나와요) */
 export function kelLineupForWave(waveIndex: number): KelLineup {
-  const league = teamLeagueForWave(waveIndex);
-  // 같은 리그의 팀 전투 웨이브 중 몇 번째인지
-  const slot = Math.max(0, BSEO.teamWaves.filter(w => teamLeagueForWave(w) === league).indexOf(waveIndex as never));
+  // 티어마다 정한 자리 (사기 실험체 자리는 여기 안 와요. 혹시 오면 KEL)
+  const league = teamSlotKind(waveIndex) === "masters" ? "masters" : "kel";
+  // 같은 종류의 팀 전투 웨이브 중 몇 번째인지
+  const slot = teamSlotOrder(waveIndex);
   const pool = teams.filter(t => t.league === league);
   const list = pool.length > 0 ? pool : teams;
   let lineup: KelLineup | null = null;

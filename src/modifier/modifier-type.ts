@@ -10,6 +10,7 @@ import { EvolutionItem } from "#balance/pokemon-evolutions";
 import { getTmNumber, tmPoolTiers } from "#balance/tm-pool-tiers";
 import { getBerryEffectDescription, getBerryName } from "#data/berry";
 import { bseoRewardKeep, bseoRewardOff } from "#data/bseorogue/reward-filter";
+import { bseoSkillRecordTier } from "#data/bseorogue/skill-record";
 import { getDailyEventSeedLuck } from "#data/daily-run";
 import { allMoves, modifierTypes } from "#data/data-lists";
 import { SpeciesFormChangeItemTrigger } from "#data/form-change-triggers";
@@ -1491,7 +1492,8 @@ class TmModifierTypeGenerator extends ModifierTypeGenerator {
       const partyMemberCompatibleTms = party.map(p => (p as PlayerPokemon).getCompatibleTms(true, true, true));
       const tierUniqueCompatibleTms = partyMemberCompatibleTms
         .flat()
-        .filter(tm => tmPoolTiers[tm] === tier)
+        // 블서로그: 실험체 스킬은 Q · W 일반 · E 좋음 · R 희귀 (skill-record.ts)
+        .filter(tm => (bseoSkillRecordTier(tm) ?? tmPoolTiers[tm]) === tier)
         .filter(tm => !allMoves[tm].isUnimplemented)
         .filter((tm, i, array) => array.indexOf(tm) === i);
       if (tierUniqueCompatibleTms.length === 0) {
