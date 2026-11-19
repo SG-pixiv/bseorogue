@@ -14,6 +14,7 @@ AI 가 만든 도트 밑그림 → 블서로그 실험체 도트 규격으로 �
   --no-lock   외곽선 2색 · 피부 3색을 팔레트 색으로 맞추지 않기 (기본은 맞춰요)
   --box       예전 줄이기 (평균). 기본은 큰 그림에서 15색으로 묶고 칸마다 제일 많은 색 (11-19), 어두운 선은 지켜요
   --no-outline 바깥 1px 외곽선(#1a1c2c)을 안 붙이기 (기본은 붙여요, 키는 외곽선까지 포함)
+  --pre-colors 줄이기 전에 묶는 색 수 (기본 48, 마지막은 --colors)
 배경: 투명이면 그대로, 아니면 테두리 색(중간값)을 배경으로 보고 지워요. 가장자리 번짐도 지워요
       (AI 에게 단색 배경을 부탁: 보통 #ff00ff, 보라 · 분홍 옷이면 #00ff00)
 """
@@ -144,7 +145,9 @@ def fit(im: Image.Image, max_w: int, max_h: int, colors: int = 15) -> Image.Imag
     if "--box" in sys.argv:  # 예전 방식: 평균으로 줄이기 (색이 뭉개져요)
         return im.resize(size, Image.BOX)
     # 11-19: 큰 그림에서 먼저 색을 묶고 → 칸마다 제일 많은 색으로 줄이기 (평균이 아니라 색이 또렷해요)
-    return downsample_mode(quantize(im, colors, lone=False), size)
+    # 큰 그림에서 15색으로 바로 묶으면 넓은 옷 색이 색을 다 먹어서 얼굴 · 단추 같은 작은 색이 사라져요 →
+    # 넉넉하게(--pre-colors, 기본 48) 묶어서 줄이고, 마지막에 작은 그림에서 15색으로 (main 의 quantize)
+    return downsample_mode(quantize(im, max(colors, arg("--pre-colors", 48)), lone=False), size)
 
 
 def downsample_mode(im: Image.Image, size) -> Image.Image:
