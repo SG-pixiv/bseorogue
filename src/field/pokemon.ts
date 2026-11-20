@@ -41,6 +41,7 @@ import {
   TarShotTag,
   TrappedTag,
 } from "#data/battler-tags";
+import { drawsOwnShadow } from "#data/bseorogue/placeholder-art";
 import { erCodeOfSpecies } from "#data/bseorogue/roster";
 import { bseoSkillRecordMoves } from "#data/bseorogue/skill-record";
 import { playBseoVoice } from "#data/bseorogue/voice";
@@ -528,7 +529,8 @@ export abstract class Pokemon extends Phaser.GameObjects.Container {
         .setOrigin(0.5, 1)
         .setRenderNodeRole("Submitter", globalScene.spriteSubmitter, {
           tone: [0.0, 0.0, 0.0, 0.0],
-          hasShadow: !!hasShadow,
+          // 블서로그 그림은 발밑 그림자를 그림 안에 그려요 (placeholder-art.ts)
+          hasShadow: !!hasShadow && !drawsOwnShadow(this.species.speciesId),
           teraColor: getTypeRgb(this.getTeraType()),
           isTerastallized: this.isTerastallized,
         })
@@ -1236,6 +1238,40 @@ export abstract class Pokemon extends Phaser.GameObjects.Container {
 
   playAnim(): void {
     this.playSprite(this.getSprite(), this.getTintSprite(), this.getBattleSpriteKey());
+    this.startIdleBreath();
+  }
+
+  /** 블서로그 숨쉬기 (11-20): 발(그림 아래)을 기준으로 세로로 조금 늘었다 줄었다 */
+  private idleBreath: Phaser.Tweens.Tween | undefined;
+
+  /** 서 있는 동안 숨쉬기를 시작해요. 이미 하고 있거나 '기술 연출' 설정이 꺼져 있으면 안 해요 */
+  startIdleBreath(): void {
+    if (this.idleBreath || !settings.display.enableMoveAnimations || !globalScene?.tweens) {
+      return;
+    }
+    const targets = [this.getSprite(), this.getTintSprite()].filter(s => !!s);
+    if (targets.length === 0) {
+      return;
+    }
+    this.idleBreath = globalScene.tweens.add({
+      targets,
+      scaleY: 1.025,
+      duration: 1100,
+      ease: "Sine.easeInOut",
+      yoyo: true,
+      repeat: -1,
+      // 여러 명이 똑같이 움직이지 않게 시작을 조금씩 어긋나게
+      delay: Math.floor(Math.random() * 900),
+    });
+  }
+
+  /** 숨쉬기를 멈추고 원래 키로 */
+  stopIdleBreath(): void {
+    this.idleBreath?.remove();
+    this.idleBreath = undefined;
+    for (const s of [this.getSprite(), this.getTintSprite()]) {
+      s?.setScale(s.scaleX, 1);
+    }
   }
 
   getFieldPositionOffset(): [number, number] {
@@ -5864,6 +5900,7 @@ export abstract class Pokemon extends Phaser.GameObjects.Container {
    * @param hideInfo - Indicates if this should also play the animation to hide the Pokemon's info container
    */
   leaveField(clearEffects = true, hideInfo = true, destroy = false) {
+    this.stopIdleBreath();
     this.resetSprite();
     this.resetTurnData();
     for (const p of inSpeedOrder(ArenaTagSide.BOTH)) {
@@ -5894,6 +5931,8 @@ export abstract class Pokemon extends Phaser.GameObjects.Container {
    * {@linkcode battleInfo} and substitute sprite (as applicable).
    */
   destroy(): void {
+    this.idleBreath?.remove();
+    this.idleBreath = undefined;
     this.battleInfo?.destroy();
     this.destroySubstitute();
     super.destroy();

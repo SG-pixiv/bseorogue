@@ -72,6 +72,18 @@ export class DamageAnimPhase extends PokemonPhase {
     }
 
     if (this.damageResult !== HitResult.INDIRECT && this.amount > 0) {
+      // 블서로그 (11-20): 맞으면 옆으로 짧게 흔들려요 ('기술 연출' 설정이 켜져 있을 때)
+      if (settings.display.enableMoveAnimations) {
+        const sprites = [this.getPokemon().getSprite(), this.getPokemon().getTintSprite()].filter(s => !!s);
+        globalScene.tweens.add({
+          targets: sprites,
+          x: { from: -2, to: 2 },
+          duration: 50,
+          yoyo: true,
+          repeat: 2,
+          onComplete: () => sprites.forEach(s => s.setX(0)),
+        });
+      }
       const flashTimer = globalScene.time.addEvent({
         delay: 100,
         repeat: 5,

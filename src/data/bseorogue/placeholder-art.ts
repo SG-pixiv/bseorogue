@@ -201,28 +201,152 @@ function bseoIconFrame(speciesId: SpeciesId): { sheet: string; at: readonly [num
 }
 
 const ART_SIZE = 96;
-/** 상대 쪽(앞모습) 그림 최대 높이. 상대 자리는 화면 위쪽이라 96 이면 전신 그림 머리가 잘려요 */
+/** 상대 쪽(앞모습) 그림 키. 상대 자리는 화면 위쪽이라 96 이면 전신 그림 머리가 잘려요 */
 const FRONT_MAX_H = 80;
+/** 내 쪽(뒷모습 자리) 그림 키. 앞모습보다 조금 크게 (가까이 있는 느낌) */
+const BACK_MAX_H = 90;
+/** 발이 닿는 줄. 아래 3칸은 발밑 그림자가 보이게 비워요 */
+export const FOOT_Y = ART_SIZE - 3;
+const SHADOW_H = 6;
+const SHADOW_ALPHA = 0.3;
+/** 이 값보다 진한 픽셀만 그림으로 봐요 (가장자리 흐린 픽셀은 빼고 발 위치를 재요) */
+const SOLID_ALPHA = 16;
 
-/** 그림을 캔버스 아래 가운데에 (뒷모습은 좌우를 뒤집어서, 앞모습은 화면 밖으로 안 나가게 조금 작게) */
+/** 그림에서 보이는 부분의 상자와 발 쪽(아래 15%) 왼쪽 · 오른쪽 끝 (원본 그림 좌표) */
+export interface ArtBox {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  footL: number;
+  footR: number;
+}
+
+/**
+ * 그림(RGBA 픽셀)에서 보이는 부분을 재요. 팬키트 그림마다 아래 여백 · 무기 길이가 달라서
+ * 발 위치와 몸 가운데를 맞추려고 써요. 보이는 픽셀이 없으면 그림 전체
+ */
+export function measureArt(data: ArrayLike<number>, width: number, height: number): ArtBox {
+  let x0 = width;
+  let y0 = height;
+  let x1 = -1;
+  let y1 = -1;
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      if (data[(y * width + x) * 4 + 3] > SOLID_ALPHA) {
+        x0 = Math.min(x0, x);
+        x1 = Math.max(x1, x);
+        y0 = Math.min(y0, y);
+        y1 = Math.max(y1, y);
+      }
+    }
+  }
+  if (x1 < 0) {
+    return { x: 0, y: 0, w: width, h: height, footL: 0, footR: width - 1 };
+  }
+  const footTop = y1 - Math.max(1, Math.round((y1 - y0 + 1) * 0.15)) + 1;
+  let footL = x1;
+  let footR = x0;
+  for (let y = footTop; y <= y1; y++) {
+    for (let x = x0; x <= x1; x++) {
+      if (data[(y * width + x) * 4 + 3] > SOLID_ALPHA) {
+        footL = Math.min(footL, x);
+        footR = Math.max(footR, x);
+      }
+    }
+  }
+  return { x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1, footL, footR };
+}
+
+/** 그림을 놓을 자리: 키는 앞 80 · 뒤 90 (넘으면 줄이고 키우지는 않아요), 발은 FOOT_Y, 발 가운데가 칸 가운데 */
+export function layoutArt(
+  box: ArtBox,
+  back: boolean,
+  size = ART_SIZE,
+): { w: number; h: number; dx: number; dy: number; shadowX: number; shadowW: number } {
+  const maxH = back ? BACK_MAX_H : FRONT_MAX_H;
+  const s = Math.min(1, maxH / box.h, (size - 2) / box.w);
+  const w = Math.max(1, Math.round(box.w * s));
+  const h = Math.max(1, Math.round(box.h * s));
+  const footMid = ((box.footL + box.footR + 1) / 2 - box.x) * s;
+  const dx = Math.max(0, Math.min(size - w, Math.round(size / 2 - footMid)));
+  const footW = (box.footR - box.footL + 1) * s;
+  return {
+    w,
+    h,
+    dx,
+    dy: FOOT_Y - h,
+    shadowX: Math.round(dx + footMid),
+    shadowW: Math.round(Math.max(20, Math.min(64, footW + 10))),
+  };
+}
+
+/** 발밑 그림자: 도트처럼 줄마다 끊긴 반투명 타원 */
+function drawShadow(ctx: CanvasRenderingContext2D, cx: number, cy: number, w: number, h: number): void {
+  ctx.fillStyle = `rgba(0, 0, 0, ${SHADOW_ALPHA})`;
+  const rx = w / 2;
+  const ry = h / 2;
+  for (let row = 0; row < h; row++) {
+    const yy = row + 0.5 - ry;
+    const half = Math.round(rx * Math.sqrt(Math.max(0, 1 - (yy * yy) / (ry * ry))));
+    if (half > 0) {
+      ctx.fillRect(cx - half, cy - Math.round(ry) + row, half * 2, 1);
+    }
+  }
+}
+
+const artBoxes = new Map<string, ArtBox>();
+
+/** 불러온 그림의 상자 (한 번 재면 기억해요). 못 재면 그림 전체 */
+function artBoxOf(artKey: string, img: CanvasImageSource & { width: number; height: number }): ArtBox {
+  const known = artBoxes.get(artKey);
+  if (known) {
+    return known;
+  }
+  let box: ArtBox = { x: 0, y: 0, w: img.width, h: img.height, footL: 0, footR: img.width - 1 };
+  try {
+    const c = document.createElement("canvas");
+    c.width = img.width;
+    c.height = img.height;
+    const cctx = c.getContext("2d", { willReadFrequently: true });
+    if (cctx) {
+      cctx.drawImage(img, 0, 0);
+      box = measureArt(cctx.getImageData(0, 0, img.width, img.height).data, img.width, img.height);
+    }
+  } catch {
+    // 못 재면 그림 전체 (예전처럼)
+  }
+  artBoxes.set(artKey, box);
+  return box;
+}
+
+/**
+ * 그림을 캔버스에 놓아요 (11-20 SG: 팬키트 그림으로 갈 때 크기 · 발 위치 · 그림자를 맞춰요).
+ * 보이는 부분만 잘라 키를 맞추고, 발을 같은 줄 · 칸 가운데에, 발밑에 그림자. 뒷모습 자리는 좌우를 뒤집어요
+ */
 function drawArt(
   tex: Phaser.Textures.CanvasTexture,
   img: CanvasImageSource & { width: number; height: number },
   back: boolean,
+  box: ArtBox,
 ): void {
   const ctx = tex.getContext();
   ctx.clearRect(0, 0, tex.width, tex.height);
+  const at = layoutArt(box, back, tex.width);
   ctx.save();
   if (back) {
     ctx.translate(tex.width, 0);
     ctx.scale(-1, 1);
   }
-  const s = back ? 1 : Math.min(1, FRONT_MAX_H / img.height);
-  const w = Math.round(img.width * s);
-  const h = Math.round(img.height * s);
-  ctx.drawImage(img, Math.round((tex.width - w) / 2), tex.height - h, w, h);
+  drawShadow(ctx, at.shadowX, FOOT_Y, at.shadowW, SHADOW_H);
+  ctx.drawImage(img, box.x, box.y, box.w, box.h, at.dx, at.dy, at.w, at.h);
   ctx.restore();
   tex.refresh();
+}
+
+/** 블서로그 그림은 발밑 그림자를 그림 안에 직접 그려요 → 포켓로그 셰이더 그림자는 꺼요 (두 겹 방지) */
+export function drawsOwnShadow(speciesId: SpeciesId): boolean {
+  return !REAL_ART.has(speciesId);
 }
 
 /** 실험체 · 동물 · 보스 전투 그림 (앞 · 뒤). 포켓로그 그림 파일을 쓰는 종이면 false */
@@ -260,7 +384,8 @@ export function ensureBseoSprite(spriteKey: string, speciesId: SpeciesId, back: 
       const artKey = `bseo_art_${file}`;
       const draw = () => {
         try {
-          drawArt(tex, textures.get(artKey).getSourceImage() as HTMLImageElement, back);
+          const img = textures.get(artKey).getSourceImage() as HTMLImageElement;
+          drawArt(tex, img, back, artBoxOf(artKey, img));
         } catch {
           // 그림을 못 그리면 카드 그대로
         }
